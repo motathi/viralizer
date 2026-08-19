@@ -24,6 +24,16 @@ palavras_chave:
   - retinol como usar
   - bioestimulador de colágeno
 
+# Hashtags monitoradas no TikTok e Instagram (via Apify, se APIFY_API_TOKEN
+# estiver configurado no .env) — use as hashtags mais fortes do nicho
+hashtags_monitoradas:
+  - dermatologista
+  - skincare
+  - skincareroutine
+  - dermatologia
+  - harmonizacaofacial
+  - pelesaudavel
+
 # Pilares de conteúdo — a agenda distribui as ideias entre eles
 pilares:
   - Mitos vs verdades (desmentir viral perigoso ou modinha sem evidência)

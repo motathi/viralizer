@@ -18,9 +18,14 @@ Você é um estrategista de conteúdo para redes sociais especializado em nichos
 de saúde, trabalhando para o perfil descrito abaixo. Você cria ideias de
 Reels/TikTok com roteiros completos, sempre com duplo embasamento:
 
-1. EMBASAMENTO DE VIRALIDADE: cada ideia deve ser justificada pelos dados
-   reais dos vídeos virais fornecidos (formato, gancho, tema, métricas).
-   Cite o vídeo de referência e a métrica que sustenta a aposta.
+1. EMBASAMENTO DE VIRALIDADE: cada ideia deve ser justificada por sinais
+   reais de tendência. Você recebe sinais coletados de várias plataformas
+   (TikTok, Instagram, YouTube Shorts) e DEVE também usar a busca web para
+   verificar o que está em alta AGORA no TikTok e no Instagram Reels dentro
+   do nicho (ex.: TikTok Creative Center, matérias recentes sobre trends,
+   áudios em alta). Tendências nascem primeiro no TikTok/Instagram — dê mais
+   peso a esses sinais. Cite a plataforma, o sinal e a métrica que sustentam
+   cada aposta.
 2. EMBASAMENTO CIENTÍFICO: toda afirmação clínica do roteiro deve ter
    referência (diretriz, consenso de sociedade médica ou estudo). Use a
    busca web para localizar e citar as fontes — priorize sociedades
@@ -42,7 +47,8 @@ Responda SOMENTE com um JSON válido no formato:
       "gancho_3s": "a primeira frase/cena que segura a atenção",
       "roteiro": "roteiro completo, fala a fala, com indicação de cena/corte",
       "duracao_estimada_seg": 45,
-      "embasamento_viral": "por que isso tende a performar, citando os dados dos virais analisados",
+      "plataforma_origem_da_tendencia": "tiktok | instagram | youtube | multiplataforma",
+      "embasamento_viral": "por que isso tende a performar, citando os sinais e dados analisados",
       "embasamento_cientifico": ["referência 1 (com fonte e link)", "..."],
       "conformidade_cfm": "nota curta de por que o roteiro está em conformidade",
       "cta": "chamada para ação final",
@@ -61,8 +67,13 @@ def _extrair_json(texto: str) -> dict:
     return json.loads(match.group(0))
 
 
-def gerar_roteiros(config: dict, virais: list[dict]) -> dict:
-    """Gera as ideias/roteiros da semana a partir dos virais do nicho."""
+def gerar_roteiros(config: dict, sinais: dict) -> dict:
+    """Gera as ideias/roteiros da semana a partir dos sinais de tendência.
+
+    `sinais` agrega as fontes coletadas, por exemplo:
+    {"tiktok_creative_center": [...], "tiktok_virais": [...],
+     "instagram_virais": [...], "youtube_virais": [...]}
+    """
     client = anthropic.Anthropic()
 
     pedido = {
@@ -72,16 +83,18 @@ def gerar_roteiros(config: dict, virais: list[dict]) -> dict:
         "restricoes": config["restricoes"],
         "quantidade_de_ideias": config["geracao"]["ideias_por_semana"],
         "duracao_alvo_segundos": config["geracao"]["duracao_alvo_segundos"],
-        "videos_virais_analisados": virais,
+        "sinais_de_tendencia_coletados": sinais,
     }
 
     messages = [
         {
             "role": "user",
             "content": (
-                "Analise os vídeos virais abaixo e gere as ideias com roteiros, "
-                "seguindo exatamente o formato JSON combinado. Use a busca web "
-                "para encontrar as referências científicas reais de cada roteiro.\n\n"
+                "Analise os sinais de tendência abaixo e gere as ideias com "
+                "roteiros, seguindo exatamente o formato JSON combinado. Antes "
+                "de escrever, use a busca web para (1) verificar o que está em "
+                "alta agora no TikTok e no Instagram Reels neste nicho e "
+                "(2) encontrar as referências científicas reais de cada roteiro.\n\n"
                 + json.dumps(pedido, ensure_ascii=False, indent=2)
             ),
         }
