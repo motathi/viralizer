@@ -1,0 +1,52 @@
+# Configuração do nicho: dermatologia estética
+# Para criar outro nicho, copie este arquivo e ajuste os campos.
+
+nome: Dermatologia Estética
+idioma: pt-BR
+
+# Perfil de quem vai publicar — usado para calibrar tom e autoridade dos roteiros
+perfil:
+  descricao: Médica dermatologista com foco em estética
+  tom_de_voz: Acessível e acolhedor, mas com autoridade técnica. Desmistifica sem infantilizar.
+  publico: Mulheres de 25 a 55 anos interessadas em cuidados com a pele e procedimentos estéticos
+
+# Palavras-chave usadas na descoberta de vídeos virais (misture PT e EN:
+# o algoritmo dos Shorts é global e tendências costumam nascer em inglês)
+palavras_chave:
+  - skincare dermatologista
+  - dermatologista responde
+  - botox preenchimento
+  - harmonização facial
+  - acne tratamento
+  - melasma
+  - protetor solar mitos
+  - skincare routine dermatologist
+  - retinol como usar
+  - bioestimulador de colágeno
+
+# Pilares de conteúdo — a agenda distribui as ideias entre eles
+pilares:
+  - Mitos vs verdades (desmentir viral perigoso ou modinha sem evidência)
+  - Educação sobre procedimentos (o que é, para quem é, o que esperar)
+  - Rotina e prevenção (skincare baseado em evidência)
+  - Bastidores e humanização (dia a dia do consultório, sem expor pacientes)
+
+# Restrições que TODO roteiro gerado deve respeitar
+restricoes:
+  - Conformidade com a Resolução CFM nº 2.336/2023 (publicidade médica)
+  - Nunca prometer resultado nem usar superlativos ("o melhor", "garantido")
+  - Antes/depois somente nos termos permitidos pelo CFM, com contexto e responsabilidade
+  - Não citar marcas comerciais de produtos ou equipamentos
+  - Nenhuma imagem ou dado de paciente identificável
+  - Toda afirmação clínica precisa de referência científica (diretriz, consenso ou estudo)
+
+# Parâmetros da descoberta
+descoberta:
+  dias_janela: 30          # buscar vídeos publicados nos últimos N dias
+  max_por_palavra_chave: 10
+  top_n: 15                # quantos virais entram na análise final
+
+# Parâmetros da geração
+geracao:
+  ideias_por_semana: 5     # quantas ideias/roteiros por agenda
+  duracao_alvo_segundos: 45
