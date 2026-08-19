@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar de Conteúdo Viral</title>
+<style>
+  :root {
+    --fundo: #faf8f6; --tinta: #2b2430; --suave: #6f6678;
+    --acento: #b0578d; --acento-claro: #f3e2ed; --card: #ffffff;
+    --borda: #e9e2e5; --ok: #2e7d5b;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--fundo); color: var(--tinta); line-height: 1.6;
+  }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 56px 0 40px; text-align: center; }
+  .selo {
+    display: inline-block; background: var(--acento-claro); color: var(--acento);
+    font-size: .8rem; font-weight: 600; padding: 4px 14px; border-radius: 999px;
+    letter-spacing: .04em; text-transform: uppercase; margin-bottom: 18px;
+  }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; }
+  h1 span { color: var(--acento); }
+  .sub { color: var(--suave); max-width: 560px; margin: 14px auto 0; }
+  .passos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 36px 0 8px; }
+  .passo { background: var(--card); border: 1px solid var(--borda); border-radius: 14px; padding: 20px; text-align: left; }
+  .passo .num { color: var(--acento); font-weight: 700; font-size: .85rem; }
+  .passo h3 { font-size: 1rem; margin: 6px 0 4px; }
+  .passo p { font-size: .88rem; color: var(--suave); }
+  section.agenda { padding: 34px 0 60px; }
+  .agenda-cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .agenda-cab h2 { font-size: 1.5rem; }
+  .agenda-cab .meta { color: var(--suave); font-size: .9rem; }
+  .aviso {
+    background: var(--acento-claro); border-radius: 10px; padding: 10px 16px;
+    font-size: .85rem; color: var(--tinta); margin: 12px 0 26px;
+  }
+  .cartao {
+    background: var(--card); border: 1px solid var(--borda); border-radius: 16px;
+    padding: 26px 26px 20px; margin-bottom: 22px;
+  }
+  .cartao .topo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .chip {
+    font-size: .75rem; font-weight: 600; padding: 3px 11px; border-radius: 999px;
+    background: var(--acento-claro); color: var(--acento);
+  }
+  .chip.dia { background: #e8f2ec; color: var(--ok); }
+  .cartao h3 { font-size: 1.15rem; margin-bottom: 10px; }
+  .rotulo { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--acento); margin: 16px 0 4px; }
+  .gancho { font-style: italic; background: var(--fundo); border-left: 3px solid var(--acento); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+  ul.roteiro, ul.refs { padding-left: 20px; font-size: .93rem; }
+  ul.roteiro li, ul.refs li { margin-bottom: 6px; }
+  .cena { font-weight: 600; color: var(--acento); }
+  .linha-final { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: .88rem; color: var(--suave); }
+  footer { border-top: 1px solid var(--borda); padding: 26px 0 40px; text-align: center; color: var(--suave); font-size: .85rem; }
+  footer strong { color: var(--tinta); }
+</style>
+</head>
+<body>
+
+<header class="container">
+  <div class="selo">Radar de Conteúdo Viral</div>
+  <h1>Do que está <span>viralizando</span> ao seu próximo Reels — com embasamento</h1>
+  <p class="sub">A ferramenta monitora as tendências do nicho no TikTok, Instagram e YouTube,
+  e entrega toda semana uma agenda com roteiros prontos, cientificamente embasados e em
+  conformidade com as normas do CFM.</p>
+
+  <div class="passos">
+    <div class="passo">
+      <div class="num">1 · Descoberta</div>
+      <h3>Sinais de tendência</h3>
+      <p>Hashtags em alta no TikTok Creative Center, vídeos virais de TikTok e Instagram e
+      Shorts com desempenho fora da curva.</p>
+    </div>
+    <div class="passo">
+      <div class="num">2 · Roteiros</div>
+      <h3>Ideias embasadas</h3>
+      <p>Cada roteiro nasce de um sinal real de viralidade e cita referências científicas
+      verificadas para toda afirmação clínica.</p>
+    </div>
+    <div class="passo">
+      <div class="num">3 · Agenda</div>
+      <h3>Semana pronta</h3>
+      <p>Dia, horário sugerido, gancho, roteiro fala a fala, CTA e hashtags — é só gravar.</p>
+    </div>
+  </div>
+</header>
+
+<section class="agenda container">
+  <div class="agenda-cab">
+    <h2>Agenda da semana</h2>
+    <span class="meta">exemplo · Dermatologia Estética · 15 sinais de tendência analisados</span>
+  </div>
+  <div class="aviso">⚕️ Este é um <strong>exemplo ilustrativo</strong> do formato entregue pela ferramenta.
+  Todo conteúdo gerado é um rascunho: a palavra final sobre qualquer afirmação médica é sempre da profissional.</div>
+
+  <article class="cartao">
+    <div class="topo">
+      <span class="chip dia">Segunda · 18h30</span>
+      <span class="chip">Mitos vs verdades</span>
+      <span class="chip">~40s</span>
+      <span class="chip">Tendência: TikTok</span>
+    </div>
+    <h3>“Skincare de 10 passos? Sua pele precisa de 3”</h3>
+
+    <div class="rotulo">Gancho — 3 primeiros segundos</div>
+    <p class="gancho">“Você está gastando dinheiro com 7 produtos que a sua pele nem absorve.”</p>
+
+    <div class="rotulo">Roteiro</div>
+    <ul class="roteiro">
+      <li><span class="cena">[Cena 1 — close, tom direto]</span> “Você está gastando dinheiro com 7 produtos que a sua pele nem absorve.”</li>
+      <li><span class="cena">[Cena 2 — corte, meio corpo]</span> “As rotinas de 10 passos que viralizam por aí não têm respaldo em evidência. O que a ciência sustenta são três pilares:”</li>
+      <li><span class="cena">[Cena 3 — cards na tela]</span> “Um: limpeza adequada pro seu tipo de pele. Dois: hidratação. Três: fotoproteção diária — o passo que mais previne envelhecimento e câncer de pele.”</li>
+      <li><span class="cena">[Cena 4 — close final]</span> “Ativos extras? Podem entrar, mas com indicação individualizada. Mais produto não é mais resultado — é mais chance de irritação.”</li>
+    </ul>
+
+    <div class="rotulo">Por que deve performar</div>
+    <p>O formato “desmentindo trend” foi o padrão mais forte da coleta — 4 dos 10 maiores
+    virais analisados contrariam uma moda de skincare, com desempenho médio 8x acima do
+    histórico dos canais.</p>
+
+    <div class="rotulo">Embasamento científico</div>
+    <ul class="refs">
+      <li>Consenso Brasileiro de Fotoproteção — Sociedade Brasileira de Dermatologia (SBD)</li>
+      <li>Diretrizes da American Academy of Dermatology sobre rotina básica de cuidados com a pele</li>
+    </ul>
+
+    <div class="linha-final">
+      <span>⚖️ Em conformidade com a Resolução CFM nº 2.336/2023</span>
+      <span>📣 CTA: “Salva esse vídeo e me conta quantos produtos tem na sua rotina hoje.”</span>
+      <span>#dermatologista #skincare #pelesaudavel</span>
+    </div>
+  </article>
+
+  <article class="cartao">
+    <div class="topo">
+      <span class="chip dia">Terça · 12h00</span>
+      <span class="chip">Rotina e prevenção</span>
+      <span class="chip">~35s</span>
+      <span class="chip">Tendência: Instagram</span>
+    </div>
+    <h3>O que acontece na sua pele quando você dorme de maquiagem</h3>
+    <div class="rotulo">Gancho — 3 primeiros segundos</div>
+    <p class="gancho">“Uma noite só já muda a sua pele — e dá pra ver no microscópio.”</p>
+    <div class="rotulo">Formato</div>
+    <p>POV com b-roll: narração sobre imagens de rotina noturna, fechando com orientação prática
+    de limpeza em dois tempos.</p>
+    <div class="linha-final">
+      <span>⚖️ Em conformidade com o CFM</span>
+      <span>📣 CTA: “Compartilha com quem vive fazendo isso.”</span>
+    </div>
+  </article>
+
+  <article class="cartao">
+    <div class="topo">
+      <span class="chip dia">Quarta · 19h00</span>
+      <span class="chip">Educação sobre procedimentos</span>
+      <span class="chip">~50s</span>
+      <span class="chip">Tendência: multiplataforma</span>
+    </div>
+    <h3>Bioestimulador de colágeno: pra quem ele NÃO é</h3>
+    <div class="rotulo">Gancho — 3 primeiros segundos</div>
+    <p class="gancho">“Todo mundo fala pra quem é o bioestimulador. Hoje eu vou falar pra quem ele não é.”</p>
+    <div class="rotulo">Formato</div>
+    <p>Talking head com cards na tela listando os perfis em que o procedimento não é indicado,
+    encerrando com a importância da avaliação individual.</p>
+    <div class="linha-final">
+      <span>⚖️ Em conformidade com o CFM</span>
+      <span>📣 CTA: “Dúvidas? Deixa nos comentários que eu respondo em vídeo.”</span>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>Radar de Conteúdo Viral</strong> — pesquisa de tendências, roteiros embasados e agenda semanal.</p>
+    <p>Conteúdo gerado é rascunho profissional; revisão médica final é sempre da especialista.</p>
+  </div>
+</footer>
+
+</body>
+</html>
