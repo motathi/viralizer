@@ -30,6 +30,8 @@ def main() -> None:
     parser.add_argument("--nicho", required=True, help="nome do arquivo em config/nichos/ (sem .yaml)")
     parser.add_argument("--apenas-descoberta", action="store_true",
                         help="só busca os virais, sem gerar roteiros (não gasta tokens de IA)")
+    parser.add_argument("--publicar-site", action="store_true",
+                        help="além da agenda, atualiza web/index.html com o resultado")
     args = parser.parse_args()
 
     caminho_config = RAIZ / "config" / "nichos" / f"{args.nicho}.yaml"
@@ -80,6 +82,12 @@ def main() -> None:
     agenda = montar_agenda(config, roteiros, sinais)
     (saida / "agenda.md").write_text(agenda, encoding="utf-8")
     print(f"✅ Agenda pronta: {saida / 'agenda.md'}")
+
+    if args.publicar_site:
+        from src.publicar.site import publicar_site
+        destino = RAIZ / "web" / "index.html"
+        publicar_site(config, roteiros, sinais, destino)
+        print(f"🌐 Site atualizado: {destino}")
 
 
 if __name__ == "__main__":

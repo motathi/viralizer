@@ -1,0 +1,51 @@
+name: Agenda semanal
+
+on:
+  schedule:
+    # Toda segunda-feira às 03h00 no horário de Brasília (06h00 UTC)
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      nicho:
+        description: "Nicho (arquivo em config/nichos/, sem .yaml)"
+        default: "dermatologia-estetica"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  gerar-e-publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Rodar o pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          python -m src.main --nicho "${{ github.event.inputs.nicho || 'dermatologia-estetica' }}" --publicar-site
+
+      - name: Publicar agenda no site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add web/index.html
+          if git diff --cached --quiet; then
+            echo "Nada a publicar."
+          else
+            git commit -m "chore: agenda semanal de $(date -u +%d/%m/%Y)"
+            git push
+          fi
