@@ -17,7 +17,8 @@ import time
 
 # Respostas internas do TikTok que carregam listas de vídeos
 ROTAS_COM_VIDEOS = ("/api/challenge/item_list", "/api/search/", "/api/post/item_list",
-                    "/api/recommend/item_list", "/api/explore/item_list")
+                    "/api/recommend/item_list", "/api/explore/item_list",
+                    "/api/music/item_list")
 
 
 def _extrair_videos(payload: dict) -> list[dict]:
@@ -57,10 +58,33 @@ def _rolar_pagina(pagina, vezes: int = 3) -> None:
         pagina.wait_for_timeout(random.randint(1200, 2200))
 
 
+def _alvos(config: dict) -> list[tuple[str, str, str]]:
+    """Monta a lista de páginas a visitar: (rótulo, url, tipo).
+
+    Três formas de busca, todas gratuitas:
+    - hashtag: página da tag (#skincare)
+    - palavra: busca por termo, pega vídeos sem hashtag ("protetor solar mito")
+    - perfil: últimos vídeos de um perfil de referência do nicho
+    """
+    from urllib.parse import quote
+
+    alvos = []
+    for h in config.get("hashtags_monitoradas", []):
+        tag = h.lstrip("#")
+        alvos.append((f"#{tag}", f"https://www.tiktok.com/tag/{quote(tag)}", "hashtag"))
+    for termo in config.get("buscas_por_palavra", []):
+        alvos.append((f'"{termo}"',
+                      f"https://www.tiktok.com/search/video?q={quote(termo)}", "palavra"))
+    for perfil in config.get("perfis_referencia", []):
+        u = perfil.lstrip("@")
+        alvos.append((f"@{u}", f"https://www.tiktok.com/@{quote(u)}", "perfil"))
+    return alvos
+
+
 def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
-    """Vídeos virais das hashtags do nicho, coletados pelo navegador local."""
-    hashtags = config.get("hashtags_monitoradas", [])
-    if not hashtags:
+    """Vídeos virais do nicho por hashtag, palavra-chave e perfil de referência."""
+    alvos = _alvos(config)
+    if not alvos:
         return []
     try:
         from playwright.sync_api import sync_playwright
@@ -95,18 +119,19 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
 
             pagina.on("response", interceptar)
 
-            for hashtag in hashtags:
+            for rotulo, url, tipo in alvos:
                 antes = len(coletados)
                 try:
-                    pagina.goto(f"https://www.tiktok.com/tag/{hashtag.lstrip('#')}",
-                                wait_until="domcontentloaded", timeout=45000)
+                    pagina.goto(url, wait_until="domcontentloaded", timeout=45000)
                     pagina.wait_for_timeout(3500)
                     _rolar_pagina(pagina, vezes=2 + por_hashtag // 20)
                 except Exception as e:  # noqa: BLE001
-                    print(f"   (#{hashtag}: {type(e).__name__})")
+                    print(f"   ({rotulo}: {type(e).__name__})")
                     continue
-                print(f"   #{hashtag}: +{len(coletados) - antes} vídeos")
-                time.sleep(random.uniform(2.0, 4.0))  # ritmo humano entre hashtags
+                for v in coletados.values():
+                    v.setdefault("origem_busca", tipo)
+                print(f"   {rotulo} ({tipo}): +{len(coletados) - antes} vídeos")
+                time.sleep(random.uniform(2.0, 4.0))  # ritmo humano entre páginas
 
             navegador.close()
     except Exception as e:  # noqa: BLE001

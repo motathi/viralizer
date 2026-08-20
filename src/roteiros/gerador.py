@@ -27,10 +27,15 @@ METODOLOGIA OBRIGATÓRIA (nesta ordem — os virais vêm primeiro, as ideias
 derivam deles, nunca o contrário):
 
 1. ESTUDE OS VIRAIS COLETADOS: você recebe vídeos e posts virais REAIS do
-   nicho, com URL e métricas. Para cada um que for relevante ao nicho,
-   identifique: o tema, o gancho usado, o formato, e POR QUE viralizou
-   (identificação, polêmica, utilidade salvável, confissão, mito-desmontado,
-   resposta a comentário...). Ignore os que não têm relação com o nicho.
+   nicho, com URL e métricas. Para cada um relevante, identifique: o tema, o
+   gancho usado, o formato, e POR QUE viralizou (identificação, polêmica,
+   utilidade salvável, confissão, mito-desmontado, resposta a comentário...).
+   Ignore os que não têm relação com o nicho.
+   O campo "origem_busca" diz como cada viral foi encontrado: "hashtag" (a
+   comunidade marcou), "palavra" (viralizou sem usar hashtag do nicho —
+   costuma ter alcance mais amplo, fora da bolha) ou "perfil" (referência do
+   nicho). Dê atenção especial aos de origem "palavra": alcançam gente além
+   de quem já segue o assunto.
    Só conta como viral de origem um sinal com desempenho realmente viral
    (dezenas de milhares de views ou milhares de interações) — nunca ancore
    uma pauta em post de alcance baixo, por mais "qualificado" que pareça.
