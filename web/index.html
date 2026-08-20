@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radar de Conteúdo Viral</title>
+<title>Radar de Conteúdo Viral — Dermatologia Estética</title>
 <style>
   :root {
     --fundo: #faf8f6; --tinta: #2b2430; --suave: #6f6678;
@@ -11,175 +11,205 @@
     --borda: #e9e2e5; --ok: #2e7d5b;
   }
   * { box-sizing: border-box; margin: 0; }
-  body {
-    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-    background: var(--fundo); color: var(--tinta); line-height: 1.6;
-  }
+  body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+         background: var(--fundo); color: var(--tinta); line-height: 1.6; }
   .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  header { padding: 56px 0 40px; text-align: center; }
-  .selo {
-    display: inline-block; background: var(--acento-claro); color: var(--acento);
-    font-size: .8rem; font-weight: 600; padding: 4px 14px; border-radius: 999px;
-    letter-spacing: .04em; text-transform: uppercase; margin-bottom: 18px;
-  }
-  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; }
+  header { padding: 48px 0 28px; text-align: center; }
+  .selo { display: inline-block; background: var(--acento-claro); color: var(--acento);
+          font-size: .8rem; font-weight: 600; padding: 4px 14px; border-radius: 999px;
+          letter-spacing: .04em; text-transform: uppercase; margin-bottom: 18px; }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.2; }
   h1 span { color: var(--acento); }
   .sub { color: var(--suave); max-width: 560px; margin: 14px auto 0; }
-  .passos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 36px 0 8px; }
-  .passo { background: var(--card); border: 1px solid var(--borda); border-radius: 14px; padding: 20px; text-align: left; }
-  .passo .num { color: var(--acento); font-weight: 700; font-size: .85rem; }
-  .passo h3 { font-size: 1rem; margin: 6px 0 4px; }
-  .passo p { font-size: .88rem; color: var(--suave); }
-  section.agenda { padding: 34px 0 60px; }
-  .agenda-cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 6px; }
-  .agenda-cab h2 { font-size: 1.5rem; }
-  .agenda-cab .meta { color: var(--suave); font-size: .9rem; }
-  .aviso {
-    background: var(--acento-claro); border-radius: 10px; padding: 10px 16px;
-    font-size: .85rem; color: var(--tinta); margin: 12px 0 26px;
-  }
-  .cartao {
-    background: var(--card); border: 1px solid var(--borda); border-radius: 16px;
-    padding: 26px 26px 20px; margin-bottom: 22px;
-  }
-  .cartao .topo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
-  .chip {
-    font-size: .75rem; font-weight: 600; padding: 3px 11px; border-radius: 999px;
-    background: var(--acento-claro); color: var(--acento);
-  }
+  section.agenda { padding: 10px 0 60px; }
+  .aviso { background: var(--acento-claro); border-radius: 10px; padding: 10px 16px;
+           font-size: .85rem; margin: 12px 0 26px; }
+  .cartao { background: var(--card); border: 1px solid var(--borda); border-radius: 16px;
+            padding: 26px 26px 20px; margin-bottom: 22px; }
+  .topo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .chip { font-size: .75rem; font-weight: 600; padding: 3px 11px; border-radius: 999px;
+          background: var(--acento-claro); color: var(--acento); }
   .chip.dia { background: #e8f2ec; color: var(--ok); }
   .cartao h3 { font-size: 1.15rem; margin-bottom: 10px; }
-  .rotulo { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--acento); margin: 16px 0 4px; }
-  .gancho { font-style: italic; background: var(--fundo); border-left: 3px solid var(--acento); padding: 10px 14px; border-radius: 0 8px 8px 0; }
-  ul.roteiro, ul.refs { padding-left: 20px; font-size: .93rem; }
-  ul.roteiro li, ul.refs li { margin-bottom: 6px; }
-  .cena { font-weight: 600; color: var(--acento); }
-  .linha-final { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: .88rem; color: var(--suave); }
-  footer { border-top: 1px solid var(--borda); padding: 26px 0 40px; text-align: center; color: var(--suave); font-size: .85rem; }
-  footer strong { color: var(--tinta); }
+  .rotulo { font-size: .78rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .05em; color: var(--acento); margin: 16px 0 4px; }
+  .gancho { font-style: italic; background: var(--fundo); border-left: 3px solid var(--acento);
+            padding: 10px 14px; border-radius: 0 8px 8px 0; }
+  .texto { font-size: .93rem; white-space: pre-wrap; }
+  ul.refs { padding-left: 20px; font-size: .93rem; }
+  .linha-final { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px;
+                 font-size: .88rem; color: var(--suave); }
+  footer { border-top: 1px solid var(--borda); padding: 26px 0 40px; text-align: center;
+           color: var(--suave); font-size: .85rem; }
 </style>
 </head>
 <body>
-
 <header class="container">
   <div class="selo">Radar de Conteúdo Viral</div>
-  <h1>Do que está <span>viralizando</span> ao seu próximo Reels — com embasamento</h1>
-  <p class="sub">A ferramenta monitora as tendências do nicho no TikTok, Instagram e YouTube,
-  e entrega toda semana uma agenda com roteiros prontos, cientificamente embasados e em
-  conformidade com as normas do CFM.</p>
-
-  <div class="passos">
-    <div class="passo">
-      <div class="num">1 · Descoberta</div>
-      <h3>Sinais de tendência</h3>
-      <p>Hashtags em alta no TikTok Creative Center, vídeos virais de TikTok e Instagram e
-      Shorts com desempenho fora da curva.</p>
-    </div>
-    <div class="passo">
-      <div class="num">2 · Roteiros</div>
-      <h3>Ideias embasadas</h3>
-      <p>Cada roteiro nasce de um sinal real de viralidade e cita referências científicas
-      verificadas para toda afirmação clínica.</p>
-    </div>
-    <div class="passo">
-      <div class="num">3 · Agenda</div>
-      <h3>Semana pronta</h3>
-      <p>Dia, horário sugerido, gancho, roteiro fala a fala, CTA e hashtags — é só gravar.</p>
-    </div>
-  </div>
+  <h1>Agenda da semana — <span>Dermatologia Estética</span></h1>
+  <p class="sub">Semana de 24/08/2026 · 5 conteúdos ·
+  gerada automaticamente a partir de 0 sinais de tendência
+  (TikTok, Instagram e YouTube), atualizada em 20/08/2026.</p>
 </header>
-
 <section class="agenda container">
-  <div class="agenda-cab">
-    <h2>Agenda da semana</h2>
-    <span class="meta">exemplo · Dermatologia Estética · 15 sinais de tendência analisados</span>
-  </div>
-  <div class="aviso">⚕️ Este é um <strong>exemplo ilustrativo</strong> do formato entregue pela ferramenta.
-  Todo conteúdo gerado é um rascunho: a palavra final sobre qualquer afirmação médica é sempre da profissional.</div>
-
+  <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre
+  qualquer afirmação médica é sempre da profissional.</div>
+  
   <article class="cartao">
     <div class="topo">
-      <span class="chip dia">Segunda · 18h30</span>
-      <span class="chip">Mitos vs verdades</span>
-      <span class="chip">~40s</span>
-      <span class="chip">Tendência: TikTok</span>
+      <span class="chip dia">Segunda-feira · 18h30</span>
+      <span class="chip">Mitos vs verdades (desmentir viral perigoso ou modinha sem evidência)</span>
+      <span class="chip">~45s</span>
+      <span class="chip">Tendência: tiktok</span>
     </div>
-    <h3>“Skincare de 10 passos? Sua pele precisa de 3”</h3>
-
+    <h3>&quot;Protetor solar causa câncer?&quot; — respondendo ao vídeo que está rodando o seu feed</h3>
     <div class="rotulo">Gancho — 3 primeiros segundos</div>
-    <p class="gancho">“Você está gastando dinheiro com 7 produtos que a sua pele nem absorve.”</p>
-
+    <p class="gancho">[Corte seco, close no rosto] &#x27;Chegou de novo aqui: &quot;doutora, é verdade que protetor solar causa câncer?&quot; Vamos por partes — porque essa é a parte perigosa da internet.&#x27;</p>
     <div class="rotulo">Roteiro</div>
-    <ul class="roteiro">
-      <li><span class="cena">[Cena 1 — close, tom direto]</span> “Você está gastando dinheiro com 7 produtos que a sua pele nem absorve.”</li>
-      <li><span class="cena">[Cena 2 — corte, meio corpo]</span> “As rotinas de 10 passos que viralizam por aí não têm respaldo em evidência. O que a ciência sustenta são três pilares:”</li>
-      <li><span class="cena">[Cena 3 — cards na tela]</span> “Um: limpeza adequada pro seu tipo de pele. Dois: hidratação. Três: fotoproteção diária — o passo que mais previne envelhecimento e câncer de pele.”</li>
-      <li><span class="cena">[Cena 4 — close final]</span> “Ativos extras? Podem entrar, mas com indicação individualizada. Mais produto não é mais resultado — é mais chance de irritação.”</li>
-    </ul>
+    <p class="texto">CENA 1 (0-3s) — close, sem trilha alta: &#x27;Chegou de novo aqui: &quot;doutora, é verdade que protetor solar causa câncer?&quot; Vamos por partes.&#x27;
 
+CENA 2 (3-10s) — corte para plano médio, legenda dinâmica &#x27;DE ONDE VEM ISSO?&#x27;: &#x27;Esse boato viralizou junto com o movimento anti-protetor solar. A crítica costuma misturar duas coisas diferentes: a segurança dos filtros e a necessidade de sol para vitamina D.&#x27;
+
+CENA 3 (10-22s) — insert de tela com o título do estudo (sem marca de produto): &#x27;O que a gente tem de evidência: um ensaio clínico randomizado australiano acompanhou adultos por anos e o grupo que usou filtro solar diariamente teve menos sinais de dano solar do que o grupo que usava de forma esporádica. Publicado no Annals of Internal Medicine, o estudo mostrou menos fotoenvelhecimento em quem usava todo dia.&#x27;
+
+CENA 4 (22-33s) — volta ao rosto, tom acolhedor: &#x27;Sobre vitamina D: dá para conversar com o seu médico, dosar e repor quando precisar. Não precisa escolher entre pele protegida e vitamina em dia. E fotoproteção não é só o creme: roupa, chapéu, sombra e horário também entram — é isso que o Consenso Brasileiro de Fotoproteção chama de conjunto de medidas.&#x27;
+
+CENA 5 (33-45s) — plano fechado, sem alarmismo: &#x27;Se você já não usava e ficou insegura, não é sobre culpa. É sobre decidir com informação. Pele, tipo de exposição e rotina mudam de pessoa para pessoa — por isso a orientação individual existe.&#x27;</p>
     <div class="rotulo">Por que deve performar</div>
-    <p>O formato “desmentindo trend” foi o padrão mais forte da coleta — 4 dos 10 maiores
-    virais analisados contrariam uma moda de skincare, com desempenho médio 8x acima do
-    histórico dos canais.</p>
-
+    <p class="texto">Sinal 1 (TikTok/Instagram): o &#x27;movimento anti-protetor solar&#x27; virou pauta de checagem — o Estadão Verifica analisou publicações que amplificam a teoria de que o filtro seria inútil ou causaria câncer (republicado pelo Terra, jan/2026), indicando volume alto e recorrente de conteúdo desinformativo nessas duas plataformas. Sinal 2 (imprensa sobre redes): ISTOÉ (set/2025) registra a popularização do movimento nas redes e a reação de entidades internacionais. Sinal 3 (autoridade do nicho): a coordenadora de Oncologia Cutânea da SBD classificou como &#x27;tendência muito negativa&#x27; a disseminação desses conteúdos em TikTok e Instagram. Sinal 4 (busca): matérias brasileiras de 2025 sobre &#x27;mitos do protetor solar&#x27; apontam Instagram e TikTok como principais vetores. Formato de resposta a comentário/dueto é o que melhor performa em desmentidos porque herda o alcance do vídeo original e gera comentários polarizados (retenção + salvamentos).</p>
     <div class="rotulo">Embasamento científico</div>
-    <ul class="refs">
-      <li>Consenso Brasileiro de Fotoproteção — Sociedade Brasileira de Dermatologia (SBD)</li>
-      <li>Diretrizes da American Academy of Dermatology sobre rotina básica de cuidados com a pele</li>
-    </ul>
-
+    <ul class="refs"><li>Hughes MCB, Williams GM, Baker P, Green AC. Sunscreen and Prevention of Skin Aging: A Randomized Trial. Annals of Internal Medicine. 2013;158(11):781-790. https://www.acpjournals.org/doi/abs/10.7326/0003-4819-158-11-201306040-00002</li><li>Sociedade Brasileira de Dermatologia. Consenso Brasileiro de Fotoproteção. Anais Brasileiros de Dermatologia. http://www.anaisdedermatologia.com.br/detalhe-artigo/102202/Consenso-Brasileiro-de-Fotoprotecao-</li><li>Estadão Verifica / Terra. &#x27;Veja quatro mentiras sobre protetor solar que circulam nas redes&#x27; (checagem, jan/2026) — usada apenas como mapeamento da desinformação, não como fonte clínica. https://www.terra.com.br/noticias/checamos/veja-quatro-mentiras-sobre-protetor-solar-que-circulam-nas-redes-e-entenda-por-que-sao-perigosas,c04ddfbe5920c5966a036d40732bfd01y0pbkm6x.html</li><li>Posicionamento da SBD (Depto. de Oncologia Cutânea) sobre desinformação em fotoproteção nas redes sociais. https://www.jornaldafranca.com.br/protetor-solar-faz-mal-veja-riscos-de-videos-que-acusam-produto-de-causar-cancer/</li></ul>
     <div class="linha-final">
-      <span>⚖️ Em conformidade com a Resolução CFM nº 2.336/2023</span>
-      <span>📣 CTA: “Salva esse vídeo e me conta quantos produtos tem na sua rotina hoje.”</span>
-      <span>#dermatologista #skincare #pelesaudavel</span>
+      <span>⚖️ Não promete resultado, não usa superlativo, não cita marca de filtro solar nem mostra paciente. Corrige desinformação com referência e sem apelo ao medo (&#x27;não é sobre culpa&#x27;), e reforça a necessidade de avaliação individual, em linha com a Resolução CFM 2.336/2023.</span>
+      <span>📣 CTA: Salva esse vídeo para mandar para quem te enviou o print — e me conta nos comentários qual outro boato de skincare você quer que eu revise com estudo na mão.</span>
+      <span>#dermatologia #fotoprotecao #protetorsolar #mitosouverdades #saudedapele #skincarecomciencia #dermatologista</span>
     </div>
   </article>
-
   <article class="cartao">
     <div class="topo">
-      <span class="chip dia">Terça · 12h00</span>
-      <span class="chip">Rotina e prevenção</span>
-      <span class="chip">~35s</span>
-      <span class="chip">Tendência: Instagram</span>
+      <span class="chip dia">Terça-feira · 12h00</span>
+      <span class="chip">Mitos vs verdades (desmentir viral perigoso ou modinha sem evidência)</span>
+      <span class="chip">~45s</span>
+      <span class="chip">Tendência: tiktok</span>
     </div>
-    <h3>O que acontece na sua pele quando você dorme de maquiagem</h3>
+    <h3>Morning shed: por que eu não durmo com 7 camadas (e o problema não é estético)</h3>
     <div class="rotulo">Gancho — 3 primeiros segundos</div>
-    <p class="gancho">“Uma noite só já muda a sua pele — e dá pra ver no microscópio.”</p>
-    <div class="rotulo">Formato</div>
-    <p>POV com b-roll: narração sobre imagens de rotina noturna, fechando com orientação prática
-    de limpeza em dois tempos.</p>
+    <p class="gancho">[Eu de máscara, faixa mandibular e touca, tirando tudo em 2s] &#x27;Se a sua manhã começa assim, a gente precisa conversar sobre uma coisa: a fita na boca.&#x27;</p>
+    <div class="rotulo">Roteiro</div>
+    <p class="texto">CENA 1 (0-4s) — eu &#x27;montada&#x27; no visual da trend, retirando as camadas em cortes rápidos: &#x27;Se a sua manhã começa assim, a gente precisa conversar — principalmente sobre a fita na boca.&#x27;
+
+CENA 2 (4-14s) — plano médio, tom leve: &#x27;O morning shed é divertido de assistir, e nem tudo ali é problema: cachos sem calor, fronha lisa, hidratante oclusivo em pele seca — tudo bem. O problema é somar ativo em cima de ativo em cima de oclusão a noite inteira.&#x27;
+
+CENA 3 (14-26s) — corte, legenda &#x27;SOBRE O MOUTH TAPING&#x27;: &#x27;A fita na boca virou hack de sono. Só que uma revisão sistemática publicada na PLOS One em 2025 avaliou os estudos disponíveis e concluiu que a evidência de benefício é limitada e que há risco real, principalmente em quem tem obstrução nasal ou apneia não diagnosticada. Ronco e sono ruim são caso de avaliação médica, não de fita.&#x27;
+
+CENA 4 (26-38s) — close, tom acolhedor: &#x27;Do lado da pele: quanto mais camadas de ativos diferentes, maior a chance de irritação e de sensibilização — e aí a pessoa acha que &quot;tem pele sensível&quot; quando, na verdade, tem rotina sobrecarregada. Em pele com dermatite ou rosácea, esse acúmulo tende a piorar o quadro.&#x27;
+
+CENA 5 (38-45s): &#x27;Rotina noturna que faz sentido costuma caber em três passos. Não é menos cuidado — é cuidado com critério. E o que serve para mim pode não servir para você.&#x27;</p>
+    <div class="rotulo">Por que deve performar</div>
+    <p class="texto">Sinal 1 (TikTok): a página de descoberta &#x27;Morning Shed&#x27; segue ativa e atualizada (registro de atualização há ~1 semana), com vídeos de dermatologistas reagindo à trend (#dermreacts, #morningshed) — sinal de que o tema ainda gera busca e não saturou. Sinal 2 (métrica): a Healio (ago/2025) reporta um único vídeo da trend com mais de 11 milhões de visualizações, mostrando teto de alcance alto para o tema. Sinal 3 (Instagram): perfis de dermatologia publicam alertas sobre o morning shed, e &#x27;dermatologist reacts&#x27; é um dos formatos recorrentes de Reels no nicho. Sinal 4 (imprensa especializada): HealthCentral (mar/2025) discute o risco da trend para pele sensível, eczema e psoríase — pauta com apelo de utilidade, que puxa salvamento e compartilhamento. Tela dividida e reação são formatos altamente duetáveis, o que multiplica a distribuição.</p>
+    <div class="rotulo">Embasamento científico</div>
+    <ul class="refs"><li>Rhee J, Iansavitchene A, Mannala S, Graham ME, Rotenberg B. Breaking social media fads and uncovering the safety and efficacy of mouth taping in patients with mouth breathing, sleep disordered breathing, or obstructive sleep apnea: a systematic review. PLOS One. 2025;20(5):e0323643. https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0323643</li><li>Versão indexada da mesma revisão sistemática (PMC12094774). https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12094774/</li><li>Cobertura técnica com revisão médica sobre riscos do excesso de camadas e oclusão noturna em peles com dermatoses inflamatórias (HealthCentral, 2025). https://www.healthcentral.com/news/skin-health/why-tiktoks-morning-shed-has-dermatologists-sounding-the-caution-alarm</li></ul>
     <div class="linha-final">
-      <span>⚖️ Em conformidade com o CFM</span>
-      <span>📣 CTA: “Compartilha com quem vive fazendo isso.”</span>
+      <span>⚖️ Não vende procedimento, não usa medo como gatilho comercial, não cita marca de máscara, fita ou produto e não expõe paciente. A recriação da trend é feita pela própria médica. Reforça avaliação individual e encaminhamento médico para queixas de sono.</span>
+      <span>📣 CTA: Me conta nos comentários quantos passos tem a sua rotina da noite hoje — vou responder alguns em vídeo mostrando o que dá para simplificar.</span>
+      <span>#morningshed #dermatologista #barreiracutanea #skincarecomciencia #pelesensivel #mitosdapele</span>
     </div>
   </article>
-
   <article class="cartao">
     <div class="topo">
-      <span class="chip dia">Quarta · 19h00</span>
-      <span class="chip">Educação sobre procedimentos</span>
-      <span class="chip">~50s</span>
+      <span class="chip dia">Quarta-feira · 19h00</span>
+      <span class="chip">Educação sobre procedimentos (o que é, para quem é, o que esperar)</span>
+      <span class="chip">~45s</span>
+      <span class="chip">Tendência: instagram</span>
+    </div>
+    <h3>Bioestimulador de colágeno: o que ele é (e o que ele não é)</h3>
+    <div class="rotulo">Gancho — 3 primeiros segundos</div>
+    <p class="gancho">[Olhando para a câmera, tom de confidência] &#x27;O bioestimulador virou o procedimento mais desejado do Brasil — e é justamente por isso que precisamos falar do que ele NÃO faz.&#x27;</p>
+    <div class="rotulo">Roteiro</div>
+    <p class="texto">CENA 1 (0-4s) — close: &#x27;O bioestimulador virou o procedimento mais desejado do país. E é justamente por isso que a gente precisa falar do que ele não faz.&#x27;
+
+CENA 2 (4-13s) — legenda &#x27;O QUE É&#x27;: &#x27;Bioestimulador é uma substância injetável que age estimulando o próprio organismo a produzir colágeno — existem diferentes tipos, com mecanismos e comportamentos distintos, descritos em revisões e em consenso de especialistas da América Latina.&#x27;
+
+CENA 3 (13-24s) — legenda &#x27;O QUE ELE NÃO É&#x27;: &#x27;Ele não é preenchedor: a proposta principal não é criar volume imediato, é trabalhar qualidade e sustentação da pele ao longo do tempo. Também não é resultado de uma sessão só nem no dia seguinte — a neocolagênese é progressiva.&#x27;
+
+CENA 4 (24-36s) — plano médio, tom técnico e calmo: &#x27;Para quem costuma ser considerado? Depende de avaliação: tipo de pele, grau de flacidez, histórico de saúde e expectativa. Existem contraindicações, e a escolha do tipo de bioestimulador muda conforme fototipo e região tratada — isso está descrito no consenso latino-americano de seleção de pacientes.&#x27;
+
+CENA 5 (36-45s) — close: &#x27;Resposta individual: nenhum procedimento entrega o mesmo resultado em duas pessoas diferentes. O que eu posso te oferecer em consulta é avaliação honesta e explicação dos riscos, não um resultado.&#x27;</p>
+    <div class="rotulo">Por que deve performar</div>
+    <p class="texto">Sinal 1 (demanda que alimenta o conteúdo das redes): pesquisa Behavior Insights &amp; Brazil Panels (campo de 3 a 25/mar/2025) aponta o bioestimulador de colágeno como o procedimento minimamente invasivo mais desejado, com 42% de preferência, à frente da toxina botulínica com 22% — número que já circula como manchete e funciona como gancho de autoridade. Sinal 2 (Instagram): o termo domina posts e reels de clínicas e dermatologistas no Brasil, com alto volume de conteúdo comercial e pouca explicação clara sobre limites do procedimento — há espaço de diferenciação para conteúdo educativo. Sinal 3 (mercado): o Sebrae lista bioestimuladores e biorremoduladores entre as tendências do setor de estética, indicando busca crescente. Vídeos de &#x27;o que é / o que não é&#x27; performam por gerar salvamento (conteúdo de consulta futura) e comentários de dúvida.</p>
+    <div class="rotulo">Embasamento científico</div>
+    <ul class="refs"><li>Optimizing Collagen Biostimulator Choice in LATAM: Expert Consensus on Patient Selection, Ethnic Skin Phenotypes, and Accessibility. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12663610/</li><li>Mechanistic aspects of collagen biostimulators: calcium hydroxyapatite, poly-l-lactic acid and polycaprolactone – A review. Brazilian Journal of Health Review, 2025. https://ojs.brazilianjournals.com.br/ojs/index.php/BJHR/article/view/84742</li><li>Sinal de demanda (não clínico): pesquisa Behavior Insights &amp; Brazil Panels, março/2025, sobre preferência por procedimentos minimamente invasivos no Brasil. https://economiasa.com.br/blog/bioestimulador-de-colageno-supera-botox-como-procedimento-minimamente-invasivo-mais-desejado/</li></ul>
+    <div class="linha-final">
+      <span>⚖️ Descreve o procedimento de forma técnica e genérica, sem citar marca de produto ou equipamento, sem antes/depois, sem promessa de resultado e explicitando variabilidade individual, contraindicações e necessidade de avaliação — alinhado à vedação de promessa de resultado e de mercantilização da medicina na Resolução CFM 2.336/2023.</span>
+      <span>📣 CTA: Se você já ouviu falar desse procedimento e ficou com dúvida, escreve &#x27;colágeno&#x27; nos comentários que eu faço a parte 2 sobre riscos e cuidados pós.</span>
+      <span>#bioestimuladordecolageno #dermatologiaestetica #colageno #procedimentosesteticos #educacaomedica #dermatologista</span>
+    </div>
+  </article>
+  <article class="cartao">
+    <div class="topo">
+      <span class="chip dia">Quinta-feira · 12h00</span>
+      <span class="chip">Mitos vs verdades (desmentir viral perigoso ou modinha sem evidência)</span>
+      <span class="chip">~45s</span>
       <span class="chip">Tendência: multiplataforma</span>
     </div>
-    <h3>Bioestimulador de colágeno: pra quem ele NÃO é</h3>
+    <h3>&quot;Toxina preventiva aos 20&quot;: o que o estudo das gêmeas realmente mostra</h3>
     <div class="rotulo">Gancho — 3 primeiros segundos</div>
-    <p class="gancho">“Todo mundo fala pra quem é o bioestimulador. Hoje eu vou falar pra quem ele não é.”</p>
-    <div class="rotulo">Formato</div>
-    <p>Talking head com cards na tela listando os perfis em que o procedimento não é indicado,
-    encerrando com a importância da avaliação individual.</p>
+    <p class="gancho">[Segurando o celular, cara de quem vai contar um segredo] &#x27;Todo mundo cita o estudo das gêmeas para justificar toxina aos 20 anos. Eu li o estudo. Ele não diz bem isso.&#x27;</p>
+    <div class="rotulo">Roteiro</div>
+    <p class="texto">CENA 1 (0-4s) — close com o print do artigo aparecendo no canto: &#x27;Todo mundo cita o estudo das gêmeas para justificar toxina aos 20. Eu li o estudo — ele não diz bem isso.&#x27;
+
+CENA 2 (4-15s) — legenda &#x27;O QUE FOI O ESTUDO&#x27;: &#x27;É um relato publicado em 2006, com duas irmãs gêmeas idênticas acompanhadas por 13 anos: uma tratou testa e glabela com regularidade, a outra praticamente não tratou. As linhas marcadas em repouso apareceram na que quase não tratou. Nas áreas não tratadas das duas, o envelhecimento foi comparável.&#x27;
+
+CENA 3 (15-27s) — plano médio, tom de professora: &#x27;Repara no detalhe: duas pessoas. Isso é uma observação valiosa, não é um ensaio clínico com centenas de participantes. Em 2025 saiu um estudo de modelagem de 15 anos discutindo frequência de aplicação e idade de início — ou seja, ainda é um campo em construção, não uma regra fechada.&#x27;
+
+CENA 4 (27-38s) — close: &#x27;Então &quot;toxina preventiva&quot; não é sim ou não universal. Depende da força da sua musculatura, do padrão de expressão, se já existe linha em repouso e do que te incomoda de verdade. Idade sozinha nunca foi indicação.&#x27;
+
+CENA 5 (38-45s): &#x27;Não começar não é atraso, e começar não é garantia de nada. É decisão clínica, feita em consulta, com riscos explicados.&#x27;</p>
+    <div class="rotulo">Por que deve performar</div>
+    <p class="texto">Sinal 1 (recirculação recente): o estudo das gêmeas voltou às manchetes com um follow-up de seis anos noticiado em ago/2026 (LADbible), e conteúdo de imprensa recente costuma ser reciclado em massa por criadores de TikTok e Reels nas semanas seguintes — janela boa para entrar na conversa com a leitura correta. Sinal 2 (TikTok/Instagram): o debate &#x27;baby botox / toxina preventiva aos 20&#x27; é recorrente no nicho e gera alta taxa de comentário porque divide opiniões. Sinal 3 (mercado): pesquisa brasileira de mar/2025 mostra a toxina botulínica ainda como segundo procedimento minimamente invasivo mais desejado (22%), confirmando volume de busca pelo tema. O formato &#x27;eu li o estudo que você está citando&#x27; performa por quebra de expectativa e autoridade — puxa retenção até o fim e salvamentos.</p>
+    <div class="rotulo">Embasamento científico</div>
+    <ul class="refs"><li>Binder WJ. Long-Term Effects of Botulinum Toxin Type A on Facial Lines: A Comparison in Identical Twins. Archives of Facial Plastic Surgery. 2006;8(6):426-431. https://journals.sagepub.com/doi/10.1001/archfaci.8.6.426</li><li>A 15-Year Computational Twin Modeling Study of Botulinum Toxin A Frequency and Age-Related Facial Aging. Aesthetic Plastic Surgery, 2025. https://link.springer.com/article/10.1007/s00266-025-05497-1</li></ul>
     <div class="linha-final">
-      <span>⚖️ Em conformidade com o CFM</span>
-      <span>📣 CTA: “Dúvidas? Deixa nos comentários que eu respondo em vídeo.”</span>
+      <span>⚖️ Não promete prevenção nem resultado, explicita a limitação metodológica das evidências, não cita marca comercial de toxina (usa o termo técnico &#x27;toxina botulínica&#x27;), não usa antes/depois e remete à decisão individual em consulta com explicação de riscos.</span>
+      <span>📣 CTA: Comenta &#x27;estudo&#x27; se você quer que eu leia com você o próximo viral de estética — eu mostro a fonte na tela.</span>
+      <span>#toxinabotulinica #dermatologiabaseadaemevidencias #mitosouverdades #dermatologista #estetica #skincarecomciencia</span>
+    </div>
+  </article>
+  <article class="cartao">
+    <div class="topo">
+      <span class="chip dia">Sexta-feira · 17h30</span>
+      <span class="chip">Bastidores e humanização (dia a dia do consultório, sem expor pacientes)</span>
+      <span class="chip">~45s</span>
+      <span class="chip">Tendência: instagram</span>
+    </div>
+    <h3>3 perguntas que eu faço antes de indicar qualquer procedimento</h3>
+    <div class="rotulo">Gancho — 3 primeiros segundos</div>
+    <p class="gancho">[B-roll: eu abrindo a sala vazia, som ambiente] Voz em off: &#x27;A parte do meu trabalho que ninguém filma é essa aqui: a conversa antes do sim.&#x27;</p>
+    <div class="rotulo">Roteiro</div>
+    <p class="texto">CENA 1 (0-4s) — b-roll: abrir a sala, acender a luz, som ambiente. Off: &#x27;A parte do meu trabalho que ninguém filma é a conversa antes do sim.&#x27;
+
+CENA 2 (4-14s) — b-roll: lavando as mãos. Off + legenda &#x27;PERGUNTA 1: o que exatamente te incomoda?&#x27;: &#x27;Muita gente chega pedindo um procedimento que viu na internet. Eu volto uma casa: o que te incomoda quando você se olha? Nem sempre a queixa e a solução da trend combinam.&#x27;
+
+CENA 3 (14-25s) — b-roll: folheando agenda/prontuário em branco. Off + legenda &#x27;PERGUNTA 2: como está a sua base?&#x27;: &#x27;Antes de qualquer coisa injetável ou de tecnologia, eu quero saber da rotina: limpeza, hidratação e fotoproteção. O Consenso Brasileiro de Fotoproteção descreve fotoproteção como um conjunto de medidas — creme, roupa, sombra, horário. Sem essa base, qualquer plano fica frágil.&#x27;
+
+CENA 4 (25-37s) — b-roll: foco na cadeira vazia. Off + legenda &#x27;PERGUNTA 3: o que você espera?&#x27;: &#x27;Essa é a mais importante. Se a expectativa é virar outra pessoa, ou é ter garantia de resultado, o meu papel é dizer com clareza o que a medicina pode e o que não pode oferecer. A resposta biológica varia de pessoa para pessoa.&#x27;
+
+CENA 5 (37-45s) — eu na câmera, primeira vez no vídeo: &#x27;Consulta boa às vezes termina sem procedimento nenhum. E tudo bem.&#x27;</p>
+    <div class="rotulo">Por que deve performar</div>
+    <p class="texto">Sinal 1 (Instagram Reels): conteúdo de bastidor/&#x27;day in the life&#x27; com voz em off e b-roll silencioso é um dos formatos com melhor retenção em perfis de saúde, porque não depende de áudio em alta e envelhece bem (evergreen) — compilações recentes de ideias de Reels para o nicho de beleza/skincare listam bastidores e &#x27;o que o profissional evita&#x27; entre os formatos de maior engajamento. Sinal 2 (TikTok/Instagram): a fadiga com excesso de trends (morning shed, rotinas de 10 passos, K-beauty extremo) abriu espaço para o contramovimento &#x27;menos é mais&#x27; — as próprias páginas de descoberta do TikTok já trazem vídeos sobre trends de skincare que podem prejudicar a pele. Sinal 3 (comportamento): reportagens de 2025-2026 apontam que pessoas cada vez mais jovens iniciam rotinas com ativos por influência de rede social, o que aumenta a busca por conteúdo de autoridade que desacelere o consumo. Bastidor humaniza, aumenta tempo de perfil e é o formato que mais converte seguidor em confiança sem infringir publicidade médica.</p>
+    <div class="rotulo">Embasamento científico</div>
+    <ul class="refs"><li>Sociedade Brasileira de Dermatologia. Consenso Brasileiro de Fotoproteção. Anais Brasileiros de Dermatologia — fotoproteção como conjunto de medidas (filtro, barreiras físicas, comportamento). http://www.anaisdedermatologia.com.br/detalhe-artigo/102202/Consenso-Brasileiro-de-Fotoprotecao-</li><li>Hughes MCB, Williams GM, Baker P, Green AC. Sunscreen and Prevention of Skin Aging: A Randomized Trial. Annals of Internal Medicine. 2013;158(11):781-790 — base para priorizar fotoproteção diária antes de procedimentos. https://www.acpjournals.org/doi/abs/10.7326/0003-4819-158-11-201306040-00002</li><li>Conselho Federal de Medicina. Resolução CFM nº 2.336/2023 — publicidade médica (regras sobre antes/depois, promessa de resultado e exposição de pacientes). https://portal.cfm.org.br/noticias/cfm-atualiza-resolucao-da-publicidade-medica/</li></ul>
+    <div class="linha-final">
+      <span>⚖️ Nenhum paciente, imagem ou dado identificável aparece (agenda e prontuário em branco, sala vazia); não há antes/depois, oferta de procedimento, marca ou promessa de resultado. O roteiro reforça explicitamente que resultado não é garantido e que a consulta pode terminar sem indicação, alinhado à Resolução CFM 2.336/2023.</span>
+      <span>📣 CTA: Se esse tipo de conversa faz sentido para você, me segue — semana que vem eu mostro como monto um plano de cuidado do zero.</span>
+      <span>#bastidores #dermatologista #consultorio #dermatologiaestetica #cuidadocomapele #medicinabaseadaemevidencias</span>
     </div>
   </article>
 </section>
-
 <footer>
   <div class="container">
     <p><strong>Radar de Conteúdo Viral</strong> — pesquisa de tendências, roteiros embasados e agenda semanal.</p>
-    <p>Conteúdo gerado é rascunho profissional; revisão médica final é sempre da especialista.</p>
   </div>
 </footer>
-
 </body>
 </html>
