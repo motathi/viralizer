@@ -2,25 +2,6 @@
 
 from datetime import date, timedelta
 
-# Janelas com bom desempenho médio para conteúdo de saúde/estética no Brasil.
-# São ponto de partida — o desempenho real do perfil deve recalibrar isso.
-SLOTS_SEMANA = [
-    ("Segunda-feira", "18h30"),
-    ("Terça-feira", "12h00"),
-    ("Quarta-feira", "19h00"),
-    ("Quinta-feira", "12h00"),
-    ("Sexta-feira", "17h30"),
-    ("Sábado", "10h00"),
-    ("Domingo", "20h00"),
-]
-
-
-def slot_para(posicao: int) -> tuple[str, str]:
-    """Dia/horário para as 7 primeiras ideias; depois vira banco de ideias."""
-    if posicao < len(SLOTS_SEMANA):
-        return SLOTS_SEMANA[posicao]
-    return ("💡 Banco de ideias", "")
-
 
 def normalizar_ideia(ideia: dict) -> dict:
     """Aceita tanto o esquema novo (ganchos_3s, roteiro_reels, carrossel)
@@ -54,27 +35,25 @@ def montar_agenda(config: dict, roteiros: dict, sinais: dict) -> str:
         "",
         "## Visão geral da semana",
         "",
-        "| Dia | Horário | Conteúdo | Pilar | Formato |",
-        "|---|---|---|---|---|",
+        "| # | Conteúdo | Pilar | Formato |",
+        "|---|---|---|---|",
     ]
 
-    for i, ideia in enumerate(ideias):
-        dia, hora = slot_para(i)
+    for i, ideia in enumerate(ideias, 1):
         linhas.append(
-            f"| {dia} | {hora} | {ideia['titulo']} | {ideia['pilar']} | {ideia['formato']} |"
+            f"| {i} | {ideia['titulo']} | {ideia['pilar']} | {ideia['formato']} |"
         )
 
     linhas += ["", "---", ""]
 
     for i, bruta in enumerate(ideias, 1):
         ideia = normalizar_ideia(bruta)
-        dia, hora = slot_para(i - 1)
         origem = ideia.get("plataforma_origem_da_tendencia", "")
         carrossel = ideia["roteiro_carrossel"]
         linhas += [
             f"## {i}. {ideia['titulo']}",
             "",
-            f"**{dia}, {hora}** · {ideia['pilar']} · ~{ideia['duracao_estimada_seg']}s · "
+            f"**{ideia['pilar']}** · ~{ideia['duracao_estimada_seg']}s · "
             f"{ideia['formato']}" + (f" · tendência vinda de: {origem}" if origem else ""),
             "",
             "**🎣 Opções de gancho (3 primeiros segundos)**",

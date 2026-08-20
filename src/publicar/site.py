@@ -18,7 +18,7 @@ from datetime import date, timedelta
 from html import escape
 from pathlib import Path
 
-from src.agenda.montador import normalizar_ideia, slot_para
+from src.agenda.montador import normalizar_ideia
 
 ESTILO = """  :root {
     /* Design tokens — paleta oficial do Instagram */
@@ -113,7 +113,6 @@ ESTILO = """  :root {
   .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
           border-radius: var(--r-full); background: var(--superficie);
           border: 1px solid var(--borda-leve); color: var(--suave); }
-  .chip.dia { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
   .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
                 letter-spacing: .01em; }
   .descartar { position: absolute; right: 44px; top: 16px; width: 24px; height: 24px;
@@ -503,8 +502,6 @@ def _resumo_metrica(ideia: dict) -> str:
 
 
 def _cartao(ideia: dict, posicao: int) -> str:
-    dia, hora = slot_para(posicao)
-    chip_dia = f"{escape(dia)} · {escape(hora)}" if hora else escape(dia)
     origem = ideia.get("plataforma_origem_da_tendencia", "")
     metrica_resumo = _resumo_metrica(ideia)
     carrossel = ideia["roteiro_carrossel"]
@@ -574,7 +571,6 @@ def _cartao(ideia: dict, posicao: int) -> str:
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">{chip_dia}</span>
         <span class="chip">{escape(ideia.get('pilar', '').split('(')[0].strip())}</span>
         <span class="chip">~{ideia.get('duracao_estimada_seg', '?')}s</span>
         {f'<span class="chip views">🔥 {escape(metrica_resumo)}</span>' if metrica_resumo else ''}

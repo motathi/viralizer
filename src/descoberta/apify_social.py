@@ -11,6 +11,7 @@ Atores usados:
 """
 
 import os
+import time
 
 import requests
 
@@ -18,18 +19,37 @@ API_BASE = "https://api.apify.com/v2/acts"
 TIMEOUT = 300  # scrapers levam alguns minutos
 
 
-def _rodar_ator(ator: str, entrada: dict) -> list[dict]:
+def _rodar_ator(ator: str, entrada: dict, tentativas: int = 3) -> list[dict]:
+    """Executa um ator do Apify, com retentativas em falhas transitórias.
+
+    O serviço devolve 502/503 e derruba conexões com alguma frequência;
+    sem retentativa, uma instabilidade momentânea zera a coleta da semana.
+    """
     token = os.environ.get("APIFY_API_TOKEN")
     if not token:
         return []
-    resp = requests.post(
-        f"{API_BASE}/{ator}/run-sync-get-dataset-items",
-        params={"token": token},
-        json=entrada,
-        timeout=TIMEOUT,
-    )
-    resp.raise_for_status()
-    return resp.json()
+    ultimo_erro = None
+    for tentativa in range(1, tentativas + 1):
+        try:
+            resp = requests.post(
+                f"{API_BASE}/{ator}/run-sync-get-dataset-items",
+                params={"token": token},
+                json=entrada,
+                timeout=TIMEOUT,
+            )
+            resp.raise_for_status()
+            return resp.json()
+        except (requests.HTTPError, requests.ConnectionError, requests.Timeout) as e:
+            status = getattr(getattr(e, "response", None), "status_code", None)
+            if status is not None and status < 500 and status != 429:
+                raise  # erro do nosso lado (token inválido etc.): não adianta insistir
+            ultimo_erro = e
+            if tentativa < tentativas:
+                espera = 10 * tentativa
+                print(f"      Apify instável ({type(e).__name__}); "
+                      f"nova tentativa em {espera}s ({tentativa}/{tentativas - 1})")
+                time.sleep(espera)
+    raise ultimo_erro
 
 
 def virais_tiktok(config: dict) -> list[dict]:
