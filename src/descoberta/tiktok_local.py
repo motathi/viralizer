@@ -202,6 +202,15 @@ def _dos_cards(pagina) -> list[dict]:
     return videos
 
 
+def _contar_cards(pagina) -> int:
+    """Quantos vídeos estão desenhados na tela agora."""
+    try:
+        return pagina.evaluate(
+            "() => document.querySelectorAll('a[href*=\"/video/\"]').length") or 0
+    except Exception:  # noqa: BLE001
+        return 0
+
+
 def _bloqueado(pagina) -> bool:
     """A página pediu captcha/login em vez de mostrar vídeos?"""
     try:
@@ -321,6 +330,7 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
     coletados: dict[str, dict] = {}
     respostas_vistas = 0
     houve_bloqueio = False
+    amostras: list[str] = []  # o que o TikTok respondeu, quando não veio vídeo
 
     try:
         with sync_playwright() as p:
@@ -334,13 +344,21 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
                 if not any(r in resposta.url for r in ROTAS_COM_VIDEOS):
                     return
                 respostas_vistas += 1
+                rota = resposta.url.split("?")[0].replace("https://www.tiktok.com", "")
                 try:
-                    for item in _itens_de(resposta.json()):
-                        v = _normalizar(item)
-                        if v:
-                            coletados.setdefault(v["url"], v)
-                except Exception:  # noqa: BLE001 - resposta não-JSON é esperada
-                    pass
+                    dados = resposta.json()
+                except Exception as e:  # noqa: BLE001 - resposta não-JSON é esperada
+                    if len(amostras) < 6:
+                        amostras.append(f"{rota} [{resposta.status}] corpo ilegível "
+                                        f"({type(e).__name__})")
+                    return
+                achados = [v for v in (_normalizar(i) for i in _itens_de(dados)) if v]
+                for v in achados:
+                    coletados.setdefault(v["url"], v)
+                if not achados and len(amostras) < 6:
+                    campos = (", ".join(list(dados)[:6]) if isinstance(dados, dict)
+                              else type(dados).__name__)
+                    amostras.append(f"{rota} [{resposta.status}] sem vídeo — campos: {campos}")
 
             pagina.on("response", interceptar)
 
@@ -370,7 +388,11 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
 
                 for v in coletados.values():
                     v.setdefault("origem_busca", tipo)
-                print(f"   {rotulo} ({tipo}): +{len(coletados) - antes} vídeos")
+                novos = len(coletados) - antes
+                # sem vídeo, o número de cards na tela diz se a página veio vazia
+                # (bloqueio) ou se veio cheia e a leitura é que falhou
+                extra = "" if novos else f" — {_contar_cards(pagina)} na tela"
+                print(f"   {rotulo} ({tipo}): +{novos} vídeos{extra}")
                 time.sleep(random.uniform(2.0, 4.0))  # ritmo humano entre páginas
 
             contexto.close()
@@ -379,11 +401,13 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
             print("   ⚠️  O navegador da coleta ainda não foi instalado. Rode uma vez:")
             print("       python -m playwright install chromium")
         else:
-            print(f"   (TikTok local indisponível: {type(e).__name__}: {e})")
+            # só a primeira linha: o Playwright anexa páginas de log do navegador
+            print(f"   (TikTok local indisponível: {type(e).__name__}: "
+                  f"{str(e).splitlines()[0]})")
         return []
 
     if not coletados:
-        _explicar_vazio(respostas_vistas, houve_bloqueio, headless)
+        _explicar_vazio(respostas_vistas, houve_bloqueio, headless, amostras)
         return []
 
     videos = [v for v in coletados.values() if v["views"] >= minimo]
@@ -396,7 +420,8 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
     return videos[:60]
 
 
-def _explicar_vazio(respostas: int, bloqueio: bool, headless: bool) -> None:
+def _explicar_vazio(respostas: int, bloqueio: bool, headless: bool,
+                    amostras: list[str] | None = None) -> None:
     """Zero vídeos tem causas diferentes — aponta a certa em vez de um erro genérico."""
     print("   ⚠️  O TikTok não devolveu nenhum vídeo.")
     if bloqueio:
@@ -410,5 +435,12 @@ def _explicar_vazio(respostas: int, bloqueio: bool, headless: bool) -> None:
               "é bloqueio por IP/região — tente de novo em alguns minutos, ou abra "
               "o tiktok.com no seu navegador normal e faça login uma vez.")
     else:
-        print(f"      Recebi {respostas} respostas do TikTok, mas nenhuma trazia vídeo "
-              "— o formato deles pode ter mudado. Me avise que eu ajusto o leitor.")
+        print(f"      Recebi {respostas} respostas do TikTok, mas todas vieram sem vídeo.")
+        print("      Isso acontece quando o navegador da coleta não tem uma sessão do")
+        print("      TikTok. Faça login uma vez — é rápido e fica salvo:")
+        print("          python -m src.descoberta.tiktok_conta")
+        print("      (ou o botão '🔑 Conectar TikTok' no painel)")
+    if amostras:
+        print("\n      Detalhe técnico do que o TikTok respondeu:")
+        for a in amostras:
+            print(f"        · {a}")

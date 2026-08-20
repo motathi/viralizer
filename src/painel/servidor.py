@@ -48,8 +48,11 @@ DICAS = [
      "coleta. Feche esta janela e abra o painel pelo atalho (abrir-painel) — ele instala sozinho."),
     ("O TikTok pediu verificação", "🤖 O TikTok quer confirmar que você não é um robô. "
      "Resolva na janela do navegador que abriu — é uma vez só, depois fica salvo."),
+    ("todas vieram sem vídeo", "🔑 O navegador da coleta não tem uma sessão do TikTok — "
+     "por isso as buscas voltam vazias. Clique em 🔑 Conectar TikTok, faça login uma "
+     "vez, e teste de novo."),
     ("não devolveu nenhum vídeo", "🚫 O TikTok não mostrou nenhum vídeo desta vez. "
-     "Abra o tiktok.com no seu navegador normal, faça login, e tente de novo."),
+     "Clique em 🔑 Conectar TikTok para fazer login e tente de novo."),
     ("Failed to establish a new connection", "🌐 Sem conexão com a internet, ou o serviço "
                                              "está fora do ar. Tente de novo em alguns minutos."),
     ("could not read Username", "🔐 O Git não está autenticado nesta máquina — por isso não "
@@ -223,7 +226,7 @@ PAGINA = """<!DOCTYPE html>
   @keyframes g { to { transform:rotate(360deg) } }
 </style></head><body><div class="wrap">
   <h1>Painel do <span>Radar de Conteúdo Viral</span></h1>
-  <p class="sub">Tudo roda neste computador. Clique no botão e aguarde alguns minutos.<br>Durante a coleta abre uma janela do navegador — deixe ela trabalhar. Se pedir verificação, resolva e volte para cá.</p>
+  <p class="sub">Tudo roda neste computador. Clique no botão e aguarde alguns minutos.<br>Na primeira vez, clique em <b>🔑 Conectar TikTok</b> e faça login — sem isso as buscas voltam vazias. Depois é só gerar.</p>
 
   <div class="banner" id="atualizacao"></div>
   <div class="status" id="status">carregando…</div>
@@ -232,6 +235,7 @@ PAGINA = """<!DOCTYPE html>
     <select id="nicho"></select>
     <button class="principal" id="gerar">▶ Gerar agenda desta semana</button>
     <button id="testar">🧪 Testar coleta (grátis)</button>
+    <button id="conectarTiktok">🔑 Conectar TikTok</button>
     <button id="atualizarPrograma">🔄 Atualizar programa</button>
     <a class="btn" id="abrir" href="/agenda" target="_blank">👀 Abrir agenda</a>
     <button id="publicar">☁️ Publicar no site</button>
@@ -256,6 +260,7 @@ function pintar(e) {
   $('#publicar').disabled = e.rodando;
   $('#testar').disabled = e.rodando;
   $('#atualizarPrograma').disabled = e.rodando;
+  $('#conectarTiktok').disabled = e.rodando;
   const s = $('#status');
   if (e.rodando) {
     s.innerHTML = `<span class="girando"></span> <b>${e.acao}</b> — em andamento…`;
@@ -308,6 +313,10 @@ $('#testar').onclick = async () => {
 };
 $('#publicar').onclick = async () => {
   await fetch('/publicar', {method:'POST'});
+  atualizar();
+};
+$('#conectarTiktok').onclick = async () => {
+  await fetch('/tiktok-login', {method:'POST'});
   atualizar();
 };
 $('#atualizarPrograma').onclick = async () => {
@@ -377,6 +386,10 @@ class Painel(BaseHTTPRequestHandler):
             ok = _iniciar([sys.executable, "-m", "src.main", "--nicho", nicho,
                            "--coleta", "local", "--apenas-descoberta"],
                           "Testando a coleta (sem custo)")
+            self._json({"ok": ok})
+        elif caminho == "/tiktok-login":
+            ok = _iniciar([sys.executable, "-m", "src.descoberta.tiktok_conta"],
+                          "Conectando sua conta do TikTok")
             self._json({"ok": ok})
         elif caminho == "/atualizar":
             ok = _iniciar([sys.executable, "-m", "src.painel.atualizar"],
