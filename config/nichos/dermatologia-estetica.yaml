@@ -50,14 +50,14 @@ pilares:
   - Rotina e prevenção (skincare baseado em evidência)
   - Bastidores e humanização (dia a dia do consultório, sem expor pacientes)
 
-# Restrições que TODO roteiro gerado deve respeitar
+# Linhas vermelhas — só o essencial. Fora disso, liberdade criativa total:
+# ousadia no gancho, opinião, humor e posicionamento são bem-vindos.
 restricoes:
-  - Conformidade com a Resolução CFM nº 2.336/2023 (publicidade médica)
-  - Nunca prometer resultado nem usar superlativos ("o melhor", "garantido")
-  - Antes/depois somente nos termos permitidos pelo CFM, com contexto e responsabilidade
+  - Não prometer nem garantir resultado específico
+  - Não usar superlativo de autopromoção ("o melhor", "o mais moderno")
   - Não citar marcas comerciais de produtos ou equipamentos
   - Nenhuma imagem ou dado de paciente identificável
-  - Toda afirmação clínica precisa de referência científica (diretriz, consenso ou estudo)
+  - Afirmação clínica central precisa de respaldo (diretriz, consenso ou estudo)
 
 # Parâmetros da descoberta
 descoberta:

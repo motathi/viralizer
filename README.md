@@ -1,35 +1,48 @@
 # Radar de Conteúdo Viral
 
-Ferramenta que pesquisa **vídeos virais** de um nicho nas redes sociais, gera **ideias de Reels/TikTok com roteiros completos e embasados**, e monta uma **agenda de conteúdo semanal**.
+Ferramenta que **estuda os vídeos virais de um nicho**, entende o que fez cada um viralizar e, a partir desses padrões, gera **ideias de Reels/TikTok com roteiros prontos** — publicando tudo numa **agenda semanal interativa**, automaticamente, toda segunda-feira.
 
-O primeiro nicho configurado é **dermatologia estética**, mas tudo é parametrizado por arquivo de configuração — basta criar um novo YAML em `config/nichos/` para usar em outra área.
+O primeiro nicho configurado é **dermatologia estética**, mas tudo é parametrizado por arquivo: basta criar um novo YAML em `config/nichos/` para usar em outra área.
 
-## Como funciona
+## Metodologia — os virais vêm primeiro
+
+A ordem importa: as ideias **derivam** dos virais, nunca o contrário.
 
 ```
-1. DESCOBERTA (multi-fonte)      2. ROTEIROS                    3. AGENDA
-TikTok Creative Center      ──►  Claude (com busca web)    ──►  Agenda semanal
-TikTok virais (Apify)            verifica as trends atuais      em Markdown, com
-Instagram top posts (Apify)      de TikTok/Reels na web,        dia, horário e
-YouTube Shorts (API oficial)     analisa os sinais e gera       roteiro pronto
-cada fonte é opcional e          roteiros com embasamento
-falha graciosamente              científico e conformidade CFM
+1. COLETA            2. ANÁLISE (Haiku)        3. ESCRITA (Opus)      4. PUBLICAÇÃO
+virais reais    ──►  estuda cada viral    ──►  aplica o padrão   ──►  agenda interativa
+de TikTok e          (tema, gancho,            vencedor ao             + arquivo da
+Instagram, em        formato, por que          escrever os             semana + histórico
+PT, EN e ES          viralizou) e deriva       roteiros finais         anti-repetição
+                     as pautas com fonte
 ```
 
-**Fontes de tendência** — como as trends nascem primeiro no TikTok e no Instagram, eles são as fontes principais:
+- **Rastreabilidade**: cada ideia mostra o(s) viral(is) de origem com link clicável, métricas e o padrão aplicado — dá para assistir ao vídeo que inspirou antes de gravar.
+- **Filtro de viralidade em 3 camadas**: na coleta (mínimo de views/likes), no prompt e no código (pauta cuja melhor âncora não é viral de verdade é descartada antes da etapa cara).
+- **Importação de virais**: tema que estourou em inglês/espanhol e ainda não tem versão forte em PT-BR é tratado como janela de oportunidade, com adaptação cultural (nunca tradução literal).
+- **Memória anti-repetição**: temas e ganchos já publicados ficam em `dados/historico-<nicho>.json` e são proibidos nas semanas seguintes.
+- **Liberdade criativa**: os roteiros são escritos com ousadia (opinião, humor, provocação). Só quatro linhas vermelhas de publicidade médica são respeitadas: não prometer resultado, não usar superlativo de autopromoção, não citar marca comercial e não expor paciente.
+
+## Fontes de tendência
 
 | Fonte | O que traz | Requisito |
 |---|---|---|
-| TikTok Creative Center | Hashtags em alta publicadas pelo próprio TikTok | `pip install playwright && playwright install chromium` (sem chave) |
-| TikTok — vídeos virais | Vídeos com métricas completas das hashtags do nicho | `APIFY_API_TOKEN` (Apify, tem plano grátis) |
-| Instagram — top posts | Top posts/reels das hashtags do nicho | `APIFY_API_TOKEN` |
-| YouTube Shorts | Vídeos virais do nicho com "outlier score" | `YOUTUBE_API_KEY` (grátis) |
-| Busca web na geração | O Claude confere na hora o que está em alta no TikTok/Reels | já incluso |
+| TikTok — vídeos virais | Vídeos com métricas completas das hashtags do nicho (PT/EN/ES) | `APIFY_API_TOKEN` (plano gratuito) |
+| Instagram — top posts | Posts e reels de melhor desempenho das hashtags | `APIFY_API_TOKEN` |
+| Busca web na análise | Confirma trends e localiza as referências científicas | já incluso |
+| YouTube Shorts | Sinal complementar com "outlier score" | `YOUTUBE_API_KEY` (opcional) |
+| TikTok Creative Center | Hashtags oficiais em alta | `playwright` (opcional; instável em CI) |
 
-Toda fonte é opcional: o pipeline roda com as que estiverem configuradas e informa o que pulou.
+Toda fonte é opcional e falha graciosamente — o pipeline roda com as que estiverem configuradas.
 
-- **Embasamento duplo**: cada ideia vem justificada pelos **sinais reais de tendência** coletados (plataforma, métricas, formato) e com **referências científicas** buscadas na web para as afirmações do roteiro.
-- **Conformidade médica**: os roteiros gerados respeitam as regras de publicidade médica do CFM (Resolução CFM nº 2.336/2023) — sem promessa de resultado, sem sensacionalismo, antes/depois apenas nos termos permitidos.
+## Modelos e custo
+
+Duas etapas para equilibrar qualidade e custo (~US$ 0,60–0,90 por geração semanal):
+
+| Etapa | Modelo | Papel |
+|---|---|---|
+| Pesquisa e curadoria | Claude Haiku 4.5 | Analisa os virais e faz as buscas web (máx. 8) |
+| Escrita dos roteiros | Claude Opus | Escreve os roteiros finais numa passada, sem busca |
 
 ## Instalação
 
@@ -39,43 +52,55 @@ pip install -r requirements.txt
 cp .env.example .env   # e preencha as chaves
 ```
 
-Para habilitar o TikTok Creative Center (recomendado, sem chave):
-
-```bash
-pip install playwright && playwright install chromium
-```
-
-Chaves no `.env`:
-
 | Variável | Onde obter | Obrigatória? |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | [Claude Console](https://console.anthropic.com/) | Sim (gera os roteiros) |
-| `APIFY_API_TOKEN` | [Apify Console](https://console.apify.com/) — plano gratuito com créditos mensais | Recomendada (virais de TikTok e Instagram) |
-| `YOUTUBE_API_KEY` | [Google Cloud Console](https://console.cloud.google.com/apis/library/youtube.googleapis.com) — YouTube Data API v3, gratuita | Opcional |
+| `ANTHROPIC_API_KEY` | [Claude Console](https://console.anthropic.com/) | Sim |
+| `APIFY_API_TOKEN` | [Apify Console](https://console.apify.com/) | Recomendada (virais de TikTok/Instagram) |
+| `YOUTUBE_API_KEY` | [Google Cloud Console](https://console.cloud.google.com/apis/library/youtube.googleapis.com) | Opcional |
 
 ## Uso
 
 ```bash
-# Pipeline completo: descoberta -> roteiros -> agenda
-python -m src.main --nicho dermatologia-estetica
+# Pipeline completo: coleta -> análise -> roteiros -> agenda -> site
+python -m src.main --nicho dermatologia-estetica --publicar-site
 
-# Apenas descobrir os virais (sem gastar tokens de IA)
+# Só a coleta de virais (não gasta tokens de IA)
 python -m src.main --nicho dermatologia-estetica --apenas-descoberta
+
+# Re-renderizar o site após mudar o design (custo zero, usa a última geração)
+python -m src.publicar.rerender --nicho dermatologia-estetica
 ```
 
-A saída fica em `saida/<nicho>/<data>/`:
+Saídas:
 
-- `sinais.json` — todos os sinais de tendência coletados (TikTok, Instagram, YouTube), com métricas
-- `roteiros.json` — as ideias e roteiros gerados
-- `agenda.md` — a agenda semanal pronta para entregar (este é o arquivo para a sua esposa 🙂)
+| Caminho | Conteúdo |
+|---|---|
+| `web/index.html` | Agenda da semana (site publicado na Vercel) |
+| `web/semanas/<data>.html` | Agendas arquivadas, acessíveis pelo seletor no painel |
+| `dados/<nicho>.json` | Última geração, usada pelo `rerender` |
+| `dados/historico-<nicho>.json` | Memória anti-repetição |
+| `saida/<nicho>/<data>/` | `sinais.json`, `roteiros.json` e `agenda.md` da execução |
 
-Um exemplo do resultado final está em [`docs/exemplo-agenda.md`](docs/exemplo-agenda.md).
+## O site
+
+- Cards compactos que expandem ao clicar, com chip de views do viral de origem e logo da plataforma
+- Escolha entre 3 ganchos (troca a abertura do roteiro), alternância **Reels ⇄ Carrossel**
+- Fila de produção: **+ Adicionar à lista** → **Marcar como feita** (a feita sai da fila e vai para "Feitas")
+- **✕ descartar** ideia individualmente, com opção de restaurar
+- Copiar roteiro pronto e link compartilhável de um roteiro só (`#rN`)
+- Aviso automático se a agenda ficar mais de 8 dias sem atualizar (falha na automação)
+- Estado salvo no navegador, por semana
+
+## Automação
+
+`.github/workflows/agenda-semanal.yml` roda toda segunda às 3h (Brasília), ou manualmente pela aba **Actions**. As chaves ficam nos *secrets* do repositório; o commit da agenda dispara o deploy na Vercel.
 
 ## Criando um novo nicho
 
-Copie `config/nichos/dermatologia-estetica.yaml`, ajuste palavras-chave, pilares de conteúdo, tom de voz e restrições, e rode com `--nicho <nome-do-arquivo>`.
+Copie `config/nichos/dermatologia-estetica.yaml`, ajuste palavras-chave, hashtags monitoradas, pilares, tom de voz e limiares de viralidade, e rode com `--nicho <nome-do-arquivo>`.
 
 ## Limitações conhecidas
 
-- TikTok e Instagram não oferecem API pública de busca de tendências. As fontes usadas são as mais estáveis disponíveis: os **dados oficiais do TikTok Creative Center** (via navegador headless — pode quebrar se o TikTok mudar a página) e os **scrapers gerenciados do Apify** (mantidos profissionalmente, mas dependem de plano). A busca web do Claude na geração funciona sempre, como rede de segurança.
+- TikTok e Instagram não têm API pública de tendências: a coleta depende dos scrapers gerenciados do Apify (plano gratuito tem limite mensal de créditos).
+- O TikTok Creative Center não captura dados de forma confiável em runners de CI.
 - O conteúdo gerado é um **rascunho embasado**: a revisão final de qualquer afirmação médica é sempre da profissional.

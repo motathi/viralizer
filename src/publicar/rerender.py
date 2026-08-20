@@ -13,7 +13,7 @@ from pathlib import Path
 
 import yaml
 
-from src.publicar.site import publicar_site
+from src.publicar.site import publicar_agenda
 
 RAIZ = Path(__file__).resolve().parent.parent.parent
 
@@ -29,8 +29,7 @@ def main() -> None:
     dados = json.loads(
         (RAIZ / "dados" / f"{args.nicho}.json").read_text(encoding="utf-8")
     )
-    destino = RAIZ / "web" / "index.html"
-    publicar_site(config, dados["roteiros"], dados["sinais"], destino)
+    destino = publicar_agenda(config, dados["roteiros"], dados["sinais"], RAIZ)
     print(f"🌐 Site re-renderizado: {destino}")
 
 
