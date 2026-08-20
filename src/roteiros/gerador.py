@@ -31,6 +31,9 @@ derivam deles, nunca o contrário):
    identifique: o tema, o gancho usado, o formato, e POR QUE viralizou
    (identificação, polêmica, utilidade salvável, confissão, mito-desmontado,
    resposta a comentário...). Ignore os que não têm relação com o nicho.
+   Só conta como viral de origem um sinal com desempenho realmente viral
+   (dezenas de milhares de views ou milhares de interações) — nunca ancore
+   uma pauta em post de alcance baixo, por mais "qualificado" que pareça.
 2. SINTETIZE OS PADRÕES VENCEDORES da semana: quais mecânicas de gancho,
    temas e formatos se repetem entre os virais de melhor desempenho.
 3. DERIVE AS PAUTAS DOS VIRAIS: cada pauta DEVE nascer de um ou mais virais

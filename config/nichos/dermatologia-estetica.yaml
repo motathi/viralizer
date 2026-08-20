@@ -55,6 +55,10 @@ descoberta:
   dias_janela: 30          # buscar vídeos publicados nos últimos N dias
   max_por_palavra_chave: 10
   top_n: 15                # quantos virais entram na análise final
+  # Filtro de viralidade mínima: sinal abaixo disso não entra na análise
+  # (impede que post fraco vire "viral de origem" de uma ideia)
+  min_views_tiktok: 50000
+  min_likes_instagram: 2000
 
 # Parâmetros da geração
 geracao:
