@@ -532,6 +532,10 @@ def _cartao(ideia: dict, posicao: int) -> str:
     refs = "".join(f"<li>{escape(r)}</li>" for r in ideia.get("embasamento_cientifico", []))
     hashtags = escape(" ".join(ideia.get("hashtags", [])))
 
+    nota = ideia.get("conformidade_cfm", "")
+    nota_extra = (f'<details><summary>📝 Observação</summary>'
+                  f'<p class="texto">{escape(nota)}</p></details>' if nota else "")
+
     virais_html = ""
     if ideia["virais_origem"]:
         itens = "".join(
@@ -599,8 +603,7 @@ def _cartao(ideia: dict, posicao: int) -> str:
       <details><summary>📈 Por que deve performar</summary>
         <p class="texto">{escape(ideia.get('embasamento_viral', ''))}</p></details>
       <details><summary>🔬 Embasamento científico</summary><ul>{refs}</ul></details>
-      <details><summary>⚖️ Conformidade CFM</summary>
-        <p class="texto">{escape(ideia.get('conformidade_cfm', ''))}</p></details>
+      {nota_extra}
 
       <div class="acoes">
         <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>

@@ -108,19 +108,18 @@ Regras de escrita (qualidade de produção):
 - LEGENDA PRONTA: 2 a 4 frases, primeira linha forte, sem hashtags.
 - VARIEDADE: não repita gancho nem formato entre as ideias.
 
-Liberdade criativa vem primeiro. Escreva com ousadia: ganchos fortes,
-opinião, humor, provocação, posicionamento claro. A profissional quer soar
-humana e interessante, não um panfleto. Não amacie o texto por precaução,
-não encha de ressalvas defensivas ("consulte sempre", "cada caso é um caso")
-— use ressalva só quando ela realmente acrescentar informação.
+LIBERDADE TOTAL DE ESCRITA. Quem publica é uma profissional da área, com
+autonomia e discernimento sobre o próprio conteúdo, e revisa cada roteiro
+antes de gravar. O seu papel é entregar o melhor roteiro possível — não
+policiar o que ela pode dizer.
 
-Há apenas quatro linhas vermelhas, e nada além delas restringe você:
-- não prometer/garantir resultado específico;
-- não usar superlativo de autopromoção ("o melhor", "o mais moderno");
-- não citar marca comercial de produto ou equipamento;
-- não usar imagem/dado de paciente identificável.
-Tudo o mais é permitido: pode discordar de trends, ser direta, brincar,
-dizer "isso não funciona", contar bastidor. Ser interessante não é infração.
+Portanto: escreva com ousadia. Ganchos fortes, opinião firme, humor,
+provocação, posicionamento claro, discordar de trends, dizer "isso não
+funciona", contar bastidor. Não se autocensure, não amacie o texto por
+precaução e não encha de ressalvas defensivas ("consulte sempre", "cada
+caso é um caso") — use ressalva apenas quando ela acrescentar informação
+real ao conteúdo. Se o perfil trouxer preferências pessoais na lista
+"preferencias", respeite-as; fora isso, nada limita a sua escrita.
 
 Responda SOMENTE com um JSON válido no formato:
 {
@@ -141,7 +140,6 @@ Responda SOMENTE com um JSON válido no formato:
       "virais_origem": [{"url": "...", "autor": "...", "metrica": "...", "por_que_viralizou": "..."}],
       "embasamento_viral": "por que tende a performar, com o sinal do briefing",
       "embasamento_cientifico": ["referência do briefing, com fonte e link"],
-      "conformidade_cfm": "observação breve, só se houver algo a sinalizar (senão string vazia)",
       "cta": "...",
       "hashtags": ["#..."]
     }
@@ -262,7 +260,7 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
     pedido_escrita = {
         "nicho": config["nome"],
         "perfil": config["perfil"],
-        "restricoes": config["restricoes"],
+        "preferencias": config.get("preferencias", []),
         "quantidade_de_ideias": quantidade,
         "duracao_alvo_segundos": config["geracao"]["duracao_alvo_segundos"],
         "briefing": briefing,

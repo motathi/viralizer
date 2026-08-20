@@ -21,7 +21,7 @@ PT, EN e ES          viralizou) e deriva       roteiros finais         anti-repe
 - **Filtro de viralidade em 3 camadas**: na coleta (mínimo de views/likes), no prompt e no código (pauta cuja melhor âncora não é viral de verdade é descartada antes da etapa cara).
 - **Importação de virais**: tema que estourou em inglês/espanhol e ainda não tem versão forte em PT-BR é tratado como janela de oportunidade, com adaptação cultural (nunca tradução literal).
 - **Memória anti-repetição**: temas e ganchos já publicados ficam em `dados/historico-<nicho>.json` e são proibidos nas semanas seguintes.
-- **Liberdade criativa**: os roteiros são escritos com ousadia (opinião, humor, provocação). Só quatro linhas vermelhas de publicidade médica são respeitadas: não prometer resultado, não usar superlativo de autopromoção, não citar marca comercial e não expor paciente.
+- **Liberdade editorial total**: os roteiros são escritos com ousadia (opinião firme, humor, provocação, discordar de trends), sem autocensura nem ressalvas defensivas. A decisão editorial é de quem publica — a profissional tem autonomia e revisa cada roteiro antes de gravar. Se quiser evitar algum assunto, basta listá-lo em `preferencias` no YAML do nicho.
 
 ## Fontes de tendência
 
@@ -97,7 +97,7 @@ Saídas:
 
 ## Criando um novo nicho
 
-Copie `config/nichos/dermatologia-estetica.yaml`, ajuste palavras-chave, hashtags monitoradas, pilares, tom de voz e limiares de viralidade, e rode com `--nicho <nome-do-arquivo>`.
+Copie `config/nichos/dermatologia-estetica.yaml`, ajuste palavras-chave, hashtags monitoradas, pilares, tom de voz, limiares de viralidade e (se quiser) `preferencias`, e rode com `--nicho <nome-do-arquivo>`.
 
 ## Limitações conhecidas
 
