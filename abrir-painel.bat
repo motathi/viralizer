@@ -17,7 +17,7 @@ if errorlevel 1 (
   exit /b 1
 )
 
-python -m pip install -q -r requirements.txt
+python -m pip install -q --disable-pip-version-check -r requirements.txt
 echo   Preparando o navegador da coleta (so na primeira vez)...
 python -m playwright install chromium >nul 2>&1
 python -m src.painel.servidor

@@ -12,7 +12,7 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
-python3 -m pip install -q -r requirements.txt
+python3 -m pip install -q --disable-pip-version-check -r requirements.txt
 echo "  Preparando o navegador da coleta (so na primeira vez)..."
 python3 -m playwright install chromium >/dev/null 2>&1
 python3 -m src.painel.servidor

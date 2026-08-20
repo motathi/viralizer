@@ -78,7 +78,8 @@ def main() -> int:
         print(f"\n📋 O que chegou:\n{novidades}")
 
     print("\n📦 Conferindo se há novos programas de apoio...")
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements.txt"],
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--disable-pip-version-check",
+                    "-r", "requirements.txt"],
                    cwd=RAIZ, check=False)
 
     print("\n✅ Atualizado! Feche esta janela e abra o painel de novo para usar a versão nova.")
