@@ -15,6 +15,13 @@ SLOTS_SEMANA = [
 ]
 
 
+def slot_para(posicao: int) -> tuple[str, str]:
+    """Dia/horário para as 7 primeiras ideias; depois vira banco de ideias."""
+    if posicao < len(SLOTS_SEMANA):
+        return SLOTS_SEMANA[posicao]
+    return ("💡 Banco de ideias", "")
+
+
 def normalizar_ideia(ideia: dict) -> dict:
     """Aceita tanto o esquema novo (ganchos_3s, roteiro_reels, carrossel)
     quanto o antigo (gancho_3s, roteiro em texto), devolvendo o novo."""
@@ -50,7 +57,7 @@ def montar_agenda(config: dict, roteiros: dict, sinais: dict) -> str:
     ]
 
     for i, ideia in enumerate(ideias):
-        dia, hora = SLOTS_SEMANA[i % len(SLOTS_SEMANA)]
+        dia, hora = slot_para(i)
         linhas.append(
             f"| {dia} | {hora} | {ideia['titulo']} | {ideia['pilar']} | {ideia['formato']} |"
         )
@@ -59,7 +66,7 @@ def montar_agenda(config: dict, roteiros: dict, sinais: dict) -> str:
 
     for i, bruta in enumerate(ideias, 1):
         ideia = normalizar_ideia(bruta)
-        dia, hora = SLOTS_SEMANA[(i - 1) % len(SLOTS_SEMANA)]
+        dia, hora = slot_para(i - 1)
         origem = ideia.get("plataforma_origem_da_tendencia", "")
         carrossel = ideia["roteiro_carrossel"]
         linhas += [
