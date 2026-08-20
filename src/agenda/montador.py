@@ -34,6 +34,8 @@ def normalizar_ideia(ideia: dict) -> dict:
         ]
     n.setdefault("roteiro_carrossel", {"capa": "", "laminas": [], "cta_final": ""})
     n.setdefault("legenda_post", "")
+    n.setdefault("padrao_aplicado", "")
+    n.setdefault("virais_origem", [])
     return n
 
 
@@ -102,6 +104,24 @@ def montar_agenda(config: dict, roteiros: dict, sinais: dict) -> str:
             *(
                 [f"**✍️ Legenda do post:** {ideia['legenda_post']}", ""]
                 if ideia.get("legenda_post")
+                else []
+            ),
+            *(
+                [
+                    "**🎯 Virais que inspiraram**",
+                    "",
+                    *[
+                        f"- [{v.get('autor', 'vídeo')}]({v.get('url', '')}) — "
+                        f"{v.get('metrica', '')} — {v.get('por_que_viralizou', '')}"
+                        for v in ideia["virais_origem"]
+                    ],
+                    *(
+                        [f"- **Padrão aplicado:** {ideia['padrao_aplicado']}"]
+                        if ideia.get("padrao_aplicado") else []
+                    ),
+                    "",
+                ]
+                if ideia["virais_origem"]
                 else []
             ),
             f"**📈 Por que deve performar:** {ideia['embasamento_viral']}",
