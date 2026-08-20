@@ -149,11 +149,30 @@ Responda SOMENTE com um JSON válido no formato:
 
 
 def _extrair_json(texto: str) -> dict:
-    """Extrai o objeto JSON da resposta, tolerando texto ao redor."""
-    match = re.search(r"\{.*\}", texto, re.DOTALL)
-    if not match:
-        raise ValueError(f"Resposta sem JSON válido:\n{texto[:500]}")
-    return json.loads(match.group(0))
+    """Extrai o objeto JSON da resposta, tolerando texto e ruído ao redor.
+
+    O modelo às vezes devolve preâmbulo, cerca de markdown ou mais de um
+    objeto; aqui varremos os candidatos e ficamos com o maior objeto válido
+    que contenha conteúdo útil.
+    """
+    limpo = texto.strip()
+    if limpo.startswith("```"):  # cerca de markdown
+        limpo = re.sub(r"^```[a-z]*\n?|```$", "", limpo, flags=re.MULTILINE).strip()
+
+    decoder = json.JSONDecoder()
+    candidatos = []
+    for i, ch in enumerate(limpo):
+        if ch != "{":
+            continue
+        try:
+            obj, _ = decoder.raw_decode(limpo[i:])
+        except ValueError:
+            continue
+        if isinstance(obj, dict) and obj:
+            candidatos.append(obj)
+    if not candidatos:
+        raise ValueError(f"Resposta sem JSON válido:\n{texto[:800]}")
+    return max(candidatos, key=lambda o: len(json.dumps(o)))
 
 
 def _rodar(client, *, modelo, system, conteudo, tools=None, max_tokens=16000,

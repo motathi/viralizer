@@ -64,10 +64,13 @@ def main() -> None:
     )
     total = sum(len(v) for v in sinais.values())
     print(f"   {total} sinais coletados -> {saida / 'sinais.json'}")
-    if total == 0:
-        print("⚠️  Nenhuma fonte retornou dados. Configure as chaves no .env "
-              "(veja o README); a geração ainda funciona com a pesquisa web do "
-              "Claude, mas com menos embasamento de dados.")
+    if total == 0 and not args.apenas_descoberta:
+        raise SystemExit(
+            "❌ Nenhum sinal coletado — a metodologia exige virais reais como "
+            "origem das ideias, então a geração foi abortada antes de gastar "
+            "com a IA.\n   Causas comuns: instabilidade do Apify (tente de novo "
+            "em alguns minutos) ou APIFY_API_TOKEN ausente/inválido."
+        )
 
     if args.apenas_descoberta:
         return
