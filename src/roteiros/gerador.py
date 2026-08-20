@@ -34,6 +34,12 @@ derivam deles, nunca o contrário):
    Só conta como viral de origem um sinal com desempenho realmente viral
    (dezenas de milhares de views ou milhares de interações) — nunca ancore
    uma pauta em post de alcance baixo, por mais "qualificado" que pareça.
+   VIRAIS EM OUTROS IDIOMAS (inglês, espanhol) são especialmente valiosos:
+   um tema que estourou lá fora e ainda não tem versão forte em português
+   do Brasil é uma janela de oportunidade — a pauta derivada deve ADAPTAR
+   culturalmente o tema e a mecânica para o público brasileiro (nunca
+   traduzir literalmente) e registrar isso no campo por_que_viralizou
+   (ex.: "viral em inglês, 4M views, sem versão BR consolidada").
 2. SINTETIZE OS PADRÕES VENCEDORES da semana: quais mecânicas de gancho,
    temas e formatos se repetem entre os virais de melhor desempenho.
 3. DERIVE AS PAUTAS DOS VIRAIS: cada pauta DEVE nascer de um ou mais virais

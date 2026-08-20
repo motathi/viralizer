@@ -25,14 +25,23 @@ palavras_chave:
   - bioestimulador de colágeno
 
 # Hashtags monitoradas no TikTok e Instagram (via Apify, se APIFY_API_TOKEN
-# estiver configurado no .env) — use as hashtags mais fortes do nicho
+# estiver configurado no .env). Misture PT, EN e ES de propósito: viral
+# estrangeiro ainda sem versão forte em PT-BR é janela de oportunidade —
+# replicado em português, tende a viralizar também.
 hashtags_monitoradas:
+  # Português (Brasil)
   - dermatologista
   - skincare
-  - skincareroutine
-  - dermatologia
   - harmonizacaofacial
   - pelesaudavel
+  # Inglês (onde a maioria das trends nasce)
+  - dermatologist
+  - skincareroutine
+  - dermtok
+  - skintok
+  # Espanhol
+  - dermatologia
+  - cuidadodelapiel
 
 # Pilares de conteúdo — a agenda distribui as ideias entre eles
 pilares:
