@@ -383,7 +383,8 @@ window.addEventListener('hashchange', () => { lerHash(); render(); });
 
 document.addEventListener('click', e => {
   const aba = e.target.closest('.aba');
-  if (aba) { filtro = aba.dataset.filtro; render(); return; }
+  // trocar de aba sempre volta para os cards reduzidos
+  if (aba) { filtro = aba.dataset.filtro; abertas.clear(); render(); return; }
   const c = e.target.closest('.cartao');
   if (!c) return;
   const id = c.dataset.id, s = st(id);
