@@ -113,6 +113,12 @@ ESTILO = """  :root {
   .chip.dia { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
   .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
                 letter-spacing: .01em; }
+  .chip.plataforma { display: inline-flex; align-items: center; gap: 5px;
+                     padding: 4px 10px; background: var(--fundo);
+                     border: 1px solid var(--borda-leve); }
+  .chip.plataforma svg { width: 15px; height: 15px; display: block; }
+  .viral-item .logo { width: 14px; height: 14px; vertical-align: -2px;
+                      margin-right: 5px; display: inline-block; }
   .chip.trend { color: var(--acento); background:
                   linear-gradient(var(--fundo), var(--fundo)) padding-box,
                   var(--grad) border-box; border: 1.5px solid transparent; }
@@ -364,6 +370,71 @@ render();
 """
 
 
+# Ícones das plataformas em SVG inline — o gradiente do Instagram vem do
+# <defs> compartilhado no topo da página (evita ids duplicados por card).
+ICONES = {
+    "instagram": (
+        '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+        '<rect x="2.5" y="2.5" width="19" height="19" rx="5.5" '
+        'stroke="url(#ig-grad)" stroke-width="2.1"/>'
+        '<circle cx="12" cy="12" r="4.3" stroke="url(#ig-grad)" stroke-width="2.1"/>'
+        '<circle cx="17.4" cy="6.6" r="1.35" fill="url(#ig-grad)"/></svg>'
+    ),
+    "tiktok": (
+        '<svg viewBox="0 0 24 24" aria-hidden="true">'
+        '<path d="M16.4 2.6c.55 1.9 1.95 3.15 3.9 3.35v3.05c-1.5.05-2.9-.35-4.1-1.15v6.25'
+        'c0 3.4-2.85 6.05-6.25 5.5-2.6-.42-4.6-2.6-4.7-5.25-.12-3.2 2.45-5.9 5.65-5.8v3.1'
+        'c-1.35-.2-2.6.9-2.6 2.3 0 1.3 1.05 2.35 2.35 2.35s2.35-1.05 2.35-2.35V2.6h3.4z" '
+        'transform="translate(-.9 -.9)" fill="#25F4EE"/>'
+        '<path d="M16.4 2.6c.55 1.9 1.95 3.15 3.9 3.35v3.05c-1.5.05-2.9-.35-4.1-1.15v6.25'
+        'c0 3.4-2.85 6.05-6.25 5.5-2.6-.42-4.6-2.6-4.7-5.25-.12-3.2 2.45-5.9 5.65-5.8v3.1'
+        'c-1.35-.2-2.6.9-2.6 2.3 0 1.3 1.05 2.35 2.35 2.35s2.35-1.05 2.35-2.35V2.6h3.4z" '
+        'transform="translate(.9 .9)" fill="#FE2C55"/>'
+        '<path d="M16.4 2.6c.55 1.9 1.95 3.15 3.9 3.35v3.05c-1.5.05-2.9-.35-4.1-1.15v6.25'
+        'c0 3.4-2.85 6.05-6.25 5.5-2.6-.42-4.6-2.6-4.7-5.25-.12-3.2 2.45-5.9 5.65-5.8v3.1'
+        'c-1.35-.2-2.6.9-2.6 2.3 0 1.3 1.05 2.35 2.35 2.35s2.35-1.05 2.35-2.35V2.6h3.4z" '
+        'fill="#161823"/></svg>'
+    ),
+    "youtube": (
+        '<svg viewBox="0 0 24 24" aria-hidden="true">'
+        '<rect x="1.5" y="4.5" width="21" height="15" rx="4.5" fill="#FF0000"/>'
+        '<path d="M10 8.6l6 3.4-6 3.4V8.6z" fill="#fff"/></svg>'
+    ),
+}
+
+DEFS_SVG = (
+    '<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>'
+    '<linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">'
+    '<stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/>'
+    '<stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/>'
+    '<stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>'
+)
+
+
+def _chip_plataforma(origem: str) -> str:
+    """Chip da plataforma de origem usando o logo em vez do nome."""
+    o = (origem or "").lower()
+    if not o:
+        return ""
+    nomes = [n for n in ("instagram", "tiktok", "youtube") if n in o]
+    if not nomes:
+        nomes = ["instagram", "tiktok"] if "multi" in o else []
+    if not nomes:
+        return ""
+    icones = "".join(ICONES[n] for n in nomes)
+    return (f'<span class="chip plataforma" title="Tendência: {escape(origem)}">'
+            f'{icones}</span>')
+
+
+def _icone_por_url(url: str) -> str:
+    """Logo da plataforma deduzido do domínio do link do viral."""
+    u = (url or "").lower()
+    for nome in ("instagram", "tiktok", "youtube"):
+        if nome in u:
+            return ICONES[nome]
+    return ""
+
+
 def _valor_metrica(metrica: str) -> float:
     """Interpreta '27.7M views' / '120k' / '15 mil' como valor numérico."""
     sufixos = {"m": 1_000_000, "mi": 1_000_000, "k": 1_000, "mil": 1_000}
@@ -417,6 +488,7 @@ def _cartao(ideia: dict, posicao: int) -> str:
         itens = "".join(
             '<div class="viral-item">'
             + (f'<a href="{escape(v["url"], quote=True)}" target="_blank" rel="noopener">'
+               f'<span class="logo">{_icone_por_url(v["url"])}</span>'
                f'{escape(v.get("autor") or "ver vídeo")} ↗</a>' if v.get("url")
                else f'<b>{escape(v.get("autor", ""))}</b>')
             + (f' · <span class="metrica">{escape(v["metrica"])}</span>' if v.get("metrica") else "")
@@ -452,7 +524,7 @@ def _cartao(ideia: dict, posicao: int) -> str:
         <span class="chip">{escape(ideia.get('pilar', '').split('(')[0].strip())}</span>
         <span class="chip">~{ideia.get('duracao_estimada_seg', '?')}s</span>
         {f'<span class="chip views">🔥 {escape(metrica_resumo)}</span>' if metrica_resumo else ''}
-        {f'<span class="chip trend">Tendência: {escape(origem)}</span>' if origem else ''}
+        {_chip_plataforma(origem)}
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -524,6 +596,7 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path) -> 
 <style>{ESTILO}</style>
 </head>
 <body>
+{DEFS_SVG}
 <header class="hero container">
   <div class="selo">Radar de Conteúdo Viral</div>
   <h1>Agenda da semana — <span>{escape(config['nome'])}</span></h1>
