@@ -175,6 +175,42 @@ def _compactar_sinais(sinais: dict, max_por_fonte: int = 12) -> dict:
     return {fonte: itens[:max_por_fonte] for fonte, itens in sinais.items() if itens}
 
 
+def _metrica_forte(metrica: str, minimo: float = 10000) -> bool:
+    """True se a métrica textual indica desempenho viral de verdade.
+
+    Interpreta formatos como "5.7M views", "120k", "2 mil salvamentos",
+    "85000 views". "39 likes" ou "8.9% engajamento" não passam.
+    """
+    if not metrica:
+        return False
+    sufixos = {"m": 1_000_000, "mi": 1_000_000, "k": 1_000, "mil": 1_000}
+    for num, suf in re.findall(r"(\d+(?:[.,]\d+)?)\s*(m\b|mi\b|k\b|mil\b)?",
+                               metrica.lower()):
+        valor = float(num.replace(",", ".")) * sufixos.get((suf or "").strip(), 1)
+        if valor >= minimo:
+            return True
+    return False
+
+
+def _filtrar_pautas_fracas(briefing: dict) -> dict:
+    """Descarta pautas cuja melhor âncora não é viral de verdade.
+
+    Garantia programática além do prompt: nenhuma ideia pode nascer de
+    post de alcance baixo, ainda que o modelo o tenha racionalizado.
+    """
+    fortes, fracas = [], []
+    for pauta in briefing.get("pautas", []):
+        ancoras = pauta.get("virais_origem", [])
+        if any(_metrica_forte(v.get("metrica", "")) for v in ancoras):
+            fortes.append(pauta)
+        else:
+            fracas.append(pauta.get("tema", "?"))
+    if fracas:
+        print(f"       ⚠️  {len(fracas)} pauta(s) descartada(s) por âncora fraca: "
+              + "; ".join(fracas))
+    return {**briefing, "pautas": fortes}
+
+
 def gerar_roteiros(config: dict, sinais: dict) -> dict:
     """Gera as ideias/roteiros da semana em duas etapas (pesquisa + escrita)."""
     client = anthropic.Anthropic()
@@ -199,7 +235,13 @@ def gerar_roteiros(config: dict, sinais: dict) -> dict:
             max_tokens=16000,
         )
     )
-    print(f"       {len(briefing.get('pautas', []))} pautas verificadas")
+    briefing = _filtrar_pautas_fracas(briefing)
+    if not briefing["pautas"]:
+        raise RuntimeError(
+            "Nenhuma pauta com âncora viral forte sobrou após o filtro — "
+            "verifique a coleta de sinais antes de gastar com a escrita."
+        )
+    print(f"       {len(briefing['pautas'])} pautas com âncora viral verificada")
 
     # Etapa 2 — escrita dos roteiros com o modelo forte, sem busca
     pedido_escrita = {
