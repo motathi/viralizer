@@ -49,6 +49,8 @@ Regras de escrita dos roteiros (qualidade de produção):
   (texto enxuto, sem parágrafos), e lâmina final de CTA.
 - LEGENDA PRONTA: escreva a legenda do post (2 a 4 frases, primeira linha
   forte porque é o que aparece antes do "mais"), separada das hashtags.
+- VARIEDADE: distribua as ideias entre todos os pilares do nicho e não
+  repita tema, gancho nem formato — cada ideia precisa ser distinta.
 
 Regras invioláveis (publicidade médica no Brasil — Resolução CFM 2.336/2023):
 - Nunca prometer resultado, nem usar "o melhor", "garantido", "milagroso".
