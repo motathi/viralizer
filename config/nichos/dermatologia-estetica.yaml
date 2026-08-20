@@ -24,24 +24,36 @@ palavras_chave:
   - retinol como usar
   - bioestimulador de colágeno
 
-# Hashtags monitoradas no TikTok e Instagram (via Apify, se APIFY_API_TOKEN
-# estiver configurado no .env). Misture PT, EN e ES de propósito: viral
-# estrangeiro ainda sem versão forte em PT-BR é janela de oportunidade —
-# replicado em português, tende a viralizar também.
+# ── Formas de busca (coleta local, gratuita e ilimitada) ─────────────────
+# 1) Hashtags — o que a comunidade marca. Misture PT, EN e ES de propósito:
+# viral estrangeiro sem versão forte em PT-BR é janela de oportunidade.
 hashtags_monitoradas:
-  # Português (Brasil)
   - dermatologista
   - skincare
   - harmonizacaofacial
   - pelesaudavel
-  # Inglês (onde a maioria das trends nasce)
-  - dermatologist
+  - dermatologist      # inglês: onde a maioria das trends nasce
   - skincareroutine
   - dermtok
   - skintok
-  # Espanhol
-  - dermatologia
+  - dermatologia       # espanhol
   - cuidadodelapiel
+
+# 2) Palavras-chave — pega vídeos que viralizaram SEM usar hashtag do nicho
+# (a maioria dos virais grandes não marca hashtag). Use termos que as pessoas
+# realmente falam/pesquisam.
+buscas_por_palavra:
+  - protetor solar mito
+  - dermatologista responde
+  - melasma tratamento
+  - acne adulta
+  - retinol como usar
+  - skin barrier repair      # inglês
+  - dermatologist reacts
+
+# 3) Perfis de referência — os melhores vídeos de quem é forte no nicho.
+# Preencha com perfis que ela acompanha (sem o @). Vazio = ignora.
+perfis_referencia: []
 
 # Pilares de conteúdo — a agenda distribui as ideias entre eles
 pilares:

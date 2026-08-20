@@ -33,6 +33,16 @@ PT, EN e ES          viralizou) e deriva       roteiros finais         anti-repe
 | YouTube Shorts | Sinal complementar com "outlier score" | `YOUTUBE_API_KEY` (opcional) |
 | TikTok Creative Center | Hashtags oficiais em alta | `playwright` (opcional; instável em CI) |
 
+**Três formas de busca** (todas na coleta local gratuita), configuradas no YAML do nicho:
+
+| Forma | O que encontra | Campo |
+|---|---|---|
+| **Hashtag** | O que a comunidade marca com a tag do nicho | `hashtags_monitoradas` |
+| **Palavra-chave** | Virais que **não usam hashtag** do nicho — costumam ter o maior alcance, fora da bolha | `buscas_por_palavra` |
+| **Perfil de referência** | Os melhores vídeos de quem já é forte no nicho | `perfis_referencia` |
+
+Cada viral coletado carrega o campo `origem_busca`, e a análise dá peso extra aos encontrados por palavra-chave — são os que alcançam público além de quem já segue o assunto.
+
 **Estratégia de coleta** (`--coleta`):
 
 - `auto` (padrão): tenta a **coleta local gratuita** primeiro; se trouxer pouca coisa e houver token do Apify, usa o Apify como reserva
