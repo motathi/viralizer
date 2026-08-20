@@ -7,6 +7,7 @@ abre o navegador com um painel de botões:
 - 🧪 Testar coleta — só busca os virais, sem gastar nada de IA
 - 👀 Abrir agenda — abre o resultado no navegador
 - ☁️ Publicar no site — envia para o GitHub (a Vercel publica sozinha)
+- 🔄 Atualizar agora — aparece sozinho quando há versão nova do programa
 
 Uso: dê um duplo clique em abrir-painel.bat (Windows), abrir-painel.command
 (Mac) ou abrir-painel.sh (Linux). Ou rode: python -m src.painel.servidor
@@ -101,6 +102,32 @@ def _iniciar(comando: list[str], acao: str) -> bool:
     return True
 
 
+def _versao() -> dict:
+    """Diz se a cópia local é um clone do Git e se há versão nova publicada."""
+    if not (RAIZ / ".git").exists():
+        return {"git": False, "atras": 0,
+                "aviso": "Esta pasta foi baixada como ZIP, então não recebe atualizações. "
+                         "Para atualizar com um clique daqui em diante, baixe uma única vez "
+                         "com o comando: git clone <endereço do repositório>"}
+    try:
+        subprocess.run(["git", "fetch", "--quiet"], cwd=RAIZ, timeout=25,
+                       capture_output=True, check=False)
+        r = subprocess.run(["git", "rev-list", "--count", "HEAD..@{u}"], cwd=RAIZ,
+                           capture_output=True, text=True, timeout=10, check=False)
+        atras = int(r.stdout.strip() or 0) if r.returncode == 0 else 0
+    except Exception:  # noqa: BLE001 - sem rede, segue sem avisar
+        return {"git": True, "atras": 0, "aviso": ""}
+    return {"git": True, "atras": atras, "aviso": ""}
+
+
+# a verificação de versão roda em segundo plano, para não travar a abertura
+versao_cache = {"git": True, "atras": 0, "aviso": ""}
+
+
+def _atualizar_versao_cache() -> None:
+    versao_cache.update(_versao())
+
+
 def _nichos() -> list[str]:
     return sorted(p.stem for p in (RAIZ / "config" / "nichos").glob("*.yaml"))
 
@@ -137,6 +164,12 @@ PAGINA = """<!DOCTYPE html>
   h1 span { background:var(--grad); -webkit-background-clip:text; background-clip:text;
             -webkit-text-fill-color:transparent }
   .sub { color:var(--suave); font-size:.92rem; margin-top:6px }
+  .banner { display:none; align-items:center; justify-content:space-between; gap:12px;
+            flex-wrap:wrap; border-radius:14px; padding:14px 18px; margin-top:22px;
+            font-size:.9rem }
+  .banner.visivel { display:flex }
+  .banner.nova { background:#f3f0ff; border:1px solid #ddd0ff; color:#4a2b8c }
+  .banner.zip { background:#fff6e6; border:1px solid #ffe0a3; color:#7a5200 }
   .status { display:flex; gap:10px; align-items:center; background:#fafafa;
             border:1px solid var(--borda); border-radius:14px; padding:14px 18px; margin:22px 0 }
   .status b { color:var(--tinta) }
@@ -164,6 +197,7 @@ PAGINA = """<!DOCTYPE html>
   <h1>Painel do <span>Radar de Conteúdo Viral</span></h1>
   <p class="sub">Tudo roda neste computador. Clique no botão e aguarde alguns minutos.</p>
 
+  <div class="banner" id="atualizacao"></div>
   <div class="status" id="status">carregando…</div>
 
   <div class="botoes">
@@ -210,6 +244,27 @@ function pintar(e) {
   }
 }
 
+async function conferirVersao() {
+  try {
+    const v = await (await fetch('/versao')).json();
+    const el = $('#atualizacao');
+    if (!v.git && v.aviso) {
+      el.className = 'banner visivel zip';
+      el.innerHTML = `<span>📦 ${v.aviso}</span>`;
+    } else if (v.atras > 0) {
+      el.className = 'banner visivel nova';
+      el.innerHTML = `<span>✨ Tem versão nova do programa (${v.atras} melhoria${v.atras>1?'s':''}).</span>` +
+                     `<button id="btn-atualizar">🔄 Atualizar agora</button>`;
+      $('#btn-atualizar').onclick = async () => {
+        await fetch('/atualizar', {method:'POST'});
+        atualizar();
+      };
+    } else {
+      el.className = 'banner';
+    }
+  } catch (_) {}
+}
+
 async function atualizar() {
   try { pintar(await (await fetch('/status')).json()); } catch (_) {}
 }
@@ -228,6 +283,8 @@ $('#publicar').onclick = async () => {
 };
 
 carregarNichos();
+conferirVersao();
+setInterval(conferirVersao, 60000);
 atualizar();
 setInterval(atualizar, 1500);
 </script></body></html>
@@ -253,6 +310,8 @@ class Painel(BaseHTTPRequestHandler):
             self._responder(PAGINA.encode("utf-8"))
         elif caminho == "/nichos":
             self._json({"nichos": _nichos()})
+        elif caminho == "/versao":
+            self._json(versao_cache)
         elif caminho == "/status":
             with trava:
                 self._json({**estado, "agenda": _info_agenda()})
@@ -285,6 +344,10 @@ class Painel(BaseHTTPRequestHandler):
                            "--coleta", "local", "--apenas-descoberta"],
                           "Testando a coleta (sem custo)")
             self._json({"ok": ok})
+        elif caminho == "/atualizar":
+            ok = _iniciar([sys.executable, "-m", "src.painel.atualizar"],
+                          "Atualizando o programa")
+            self._json({"ok": ok})
         elif caminho == "/publicar":
             ok = _iniciar([sys.executable, "-m", "src.painel.publicar"], "Publicando no site")
             self._json({"ok": ok})
@@ -312,6 +375,7 @@ def _conferir_dependencias() -> bool:
 
 def main() -> None:
     _conferir_dependencias()
+    threading.Thread(target=_atualizar_versao_cache, daemon=True).start()
     servidor = ThreadingHTTPServer(("127.0.0.1", PORTA), Painel)
     url = f"http://127.0.0.1:{PORTA}"
     print(f"\n  🎬 Painel do Radar de Conteúdo Viral")

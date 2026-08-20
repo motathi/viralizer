@@ -76,6 +76,19 @@ cp .env.example .env   # e preencha as chaves
 | `APIFY_API_TOKEN` | [Apify Console](https://console.apify.com/) | Recomendada (virais de TikTok/Instagram) |
 | `YOUTUBE_API_KEY` | [Google Cloud Console](https://console.cloud.google.com/apis/library/youtube.googleapis.com) | Opcional |
 
+## Instalação na sua máquina (uma vez só)
+
+Baixe o projeto **com o Git** — assim ele se mantém atualizado sozinho depois:
+
+```bash
+git clone https://github.com/motathi/Projeto-NFT.git
+```
+
+Depois copie o `.env.example` para `.env` e preencha a chave da Anthropic.
+
+> Baixar o ZIP também funciona, mas aí você perde as atualizações automáticas —
+> o painel avisa quando detecta esse caso.
+
 ## Uso simples: painel com um clique
 
 Para gerar a agenda sem mexer em terminal, use o painel local — ele roda **na sua
@@ -93,6 +106,11 @@ máquina, pelo seu IP**:
 
 O painel instala sozinho o que falta e traduz os erros técnicos para linguagem
 simples (créditos acabando, chave faltando, sem internet).
+
+**Atualizações automáticas**: sempre que houver uma versão nova do programa, o
+painel mostra a faixa *"✨ Tem versão nova"* com o botão **🔄 Atualizar agora** —
+um clique baixa as melhorias e instala o que for preciso, preservando as agendas
+que você já gerou (mesmo as ainda não publicadas).
 
 ## Uso pelo terminal
 
