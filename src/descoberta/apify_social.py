@@ -66,6 +66,8 @@ def virais_tiktok(config: dict) -> list[dict]:
                 "taxa_engajamento": round(engajamento, 4),
             }
         )
+    minimo = config.get("descoberta", {}).get("min_views_tiktok", 50000)
+    videos = [v for v in videos if v["views"] >= minimo]
     videos.sort(key=lambda x: x["views"] * (1 + 10 * x["taxa_engajamento"]), reverse=True)
     return videos[:20]
 
@@ -100,5 +102,8 @@ def virais_instagram(config: dict) -> list[dict]:
                 "eh_video": p.get("type") == "Video",
             }
         )
+    minimo = config.get("descoberta", {}).get("min_likes_instagram", 2000)
+    posts = [p for p in posts
+             if (p.get("views") or 0) >= 10 * minimo or (p.get("likes") or 0) >= minimo]
     posts.sort(key=lambda x: (x.get("views") or x.get("likes") or 0), reverse=True)
     return posts[:20]
