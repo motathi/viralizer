@@ -99,7 +99,6 @@
   .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
           border-radius: var(--r-full); background: var(--superficie);
           border: 1px solid var(--borda-leve); color: var(--suave); }
-  .chip.dia { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
   .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
                 letter-spacing: .01em; }
   .descartar { position: absolute; right: 44px; top: 16px; width: 24px; height: 24px;
@@ -284,7 +283,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">Segunda-feira · 18h30</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 27.7M views</span>
@@ -328,7 +326,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">Terça-feira · 12h00</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 11.4M views</span>
@@ -372,7 +369,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">Quarta-feira · 19h00</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 7.7M views</span>
@@ -416,7 +412,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">Quinta-feira · 12h00</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 8.5M views</span>
@@ -460,7 +455,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">Sexta-feira · 17h30</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 4.4M views</span>
@@ -504,7 +498,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">Sábado · 10h00</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 10.7M views</span>
@@ -548,7 +541,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">Domingo · 20h00</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 6.9M views</span>
@@ -592,7 +584,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">💡 Banco de ideias</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 3.8M views</span>
@@ -636,7 +627,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">💡 Banco de ideias</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 8.4M views</span>
@@ -680,7 +670,6 @@
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
-        <span class="chip dia">💡 Banco de ideias</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 4.4M views</span>
@@ -853,7 +842,8 @@ window.addEventListener('hashchange', () => { lerHash(); render(); });
 
 document.addEventListener('click', e => {
   const aba = e.target.closest('.aba');
-  if (aba) { filtro = aba.dataset.filtro; render(); return; }
+  // trocar de aba sempre volta para os cards reduzidos
+  if (aba) { filtro = aba.dataset.filtro; abertas.clear(); render(); return; }
   const c = e.target.closest('.cartao');
   if (!c) return;
   const id = c.dataset.id, s = st(id);
