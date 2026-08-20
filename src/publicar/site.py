@@ -10,6 +10,7 @@ A página renderiza os roteiros da semana com:
 """
 
 import json
+import re
 from datetime import date, timedelta
 from html import escape
 from pathlib import Path
@@ -110,6 +111,8 @@ ESTILO = """  :root {
           border-radius: var(--r-full); background: var(--superficie);
           border: 1px solid var(--borda-leve); color: var(--suave); }
   .chip.dia { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
+  .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
+                letter-spacing: .01em; }
   .chip.trend { color: var(--acento); background:
                   linear-gradient(var(--fundo), var(--fundo)) padding-box,
                   var(--grad) border-box; border: 1.5px solid transparent; }
@@ -361,10 +364,29 @@ render();
 """
 
 
+def _valor_metrica(metrica: str) -> float:
+    """Interpreta '27.7M views' / '120k' / '15 mil' como valor numérico."""
+    sufixos = {"m": 1_000_000, "mi": 1_000_000, "k": 1_000, "mil": 1_000}
+    valores = [
+        float(n.replace(",", ".")) * sufixos.get((s or "").strip(), 1)
+        for n, s in re.findall(r"(\d+(?:[.,]\d+)?)\s*(m\b|mi\b|k\b|mil\b)?", metrica.lower())
+    ]
+    return max(valores, default=0.0)
+
+
+def _resumo_metrica(ideia: dict) -> str:
+    """A métrica da âncora mais forte, resumida para o card compacto
+    (ex.: '27.7M views, 8.8% engajamento' -> '27.7M views')."""
+    metricas = [v.get("metrica", "").split(",")[0].strip()
+                for v in ideia.get("virais_origem", []) if v.get("metrica")]
+    return max(metricas, key=_valor_metrica, default="")
+
+
 def _cartao(ideia: dict, posicao: int) -> str:
     dia, hora = slot_para(posicao)
     chip_dia = f"{escape(dia)} · {escape(hora)}" if hora else escape(dia)
     origem = ideia.get("plataforma_origem_da_tendencia", "")
+    metrica_resumo = _resumo_metrica(ideia)
     carrossel = ideia["roteiro_carrossel"]
 
     ganchos = "".join(
@@ -429,6 +451,7 @@ def _cartao(ideia: dict, posicao: int) -> str:
         <span class="chip dia">{chip_dia}</span>
         <span class="chip">{escape(ideia.get('pilar', '').split('(')[0].strip())}</span>
         <span class="chip">~{ideia.get('duracao_estimada_seg', '?')}s</span>
+        {f'<span class="chip views">🔥 {escape(metrica_resumo)}</span>' if metrica_resumo else ''}
         {f'<span class="chip trend">Tendência: {escape(origem)}</span>' if origem else ''}
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
