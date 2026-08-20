@@ -31,6 +31,25 @@ Reels/TikTok com roteiros completos, sempre com duplo embasamento:
    busca web para localizar e citar as fontes — priorize sociedades
    brasileiras (SBD, CFM) e revistas indexadas. Nunca invente referência.
 
+Regras de escrita dos roteiros (qualidade de produção):
+- LINGUAGEM FALADA: escreva como a pessoa fala em voz alta — frases curtas,
+  contrações ("pra", "tá"), ritmo de conversa. Leia mentalmente em voz alta:
+  se soa como texto de blog, reescreva. Nada de jargão sem tradução.
+- BLOCOS DE TEMPO: divida o roteiro de vídeo em blocos com marcação de
+  segundos (0-3s, 3-15s, ...), pensando em retenção: gancho, desenvolvimento
+  com um insight por bloco, fechamento com CTA.
+- DIREÇÃO DE GRAVAÇÃO: para cada bloco, uma instrução curta de como gravar
+  (enquadramento, corte, texto que aparece na tela), para gravar sem precisar
+  interpretar o roteiro.
+- 3 GANCHOS: proponha três opções diferentes de gancho para os 3 primeiros
+  segundos (ângulos distintos: pergunta, afirmação contraintuitiva, resposta
+  a comentário/trend), para a profissional escolher o que soa como ela.
+- VERSÃO CARROSSEL: além do vídeo, adapte a mesma ideia para carrossel de
+  Instagram: capa com gancho curto, 5 a 7 lâminas com UMA ideia por lâmina
+  (texto enxuto, sem parágrafos), e lâmina final de CTA.
+- LEGENDA PRONTA: escreva a legenda do post (2 a 4 frases, primeira linha
+  forte porque é o que aparece antes do "mais"), separada das hashtags.
+
 Regras invioláveis (publicidade médica no Brasil — Resolução CFM 2.336/2023):
 - Nunca prometer resultado, nem usar "o melhor", "garantido", "milagroso".
 - Não sensacionalizar nem induzir ao medo para vender procedimento.
@@ -43,9 +62,17 @@ Responda SOMENTE com um JSON válido no formato:
     {
       "titulo": "...",
       "pilar": "...",
-      "formato": "ex.: talking head com legenda dinâmica, POV, duetável...",
-      "gancho_3s": "a primeira frase/cena que segura a atenção",
-      "roteiro": "roteiro completo, fala a fala, com indicação de cena/corte",
+      "formato": "ex.: talking head com legenda dinâmica, POV, resposta a comentário...",
+      "ganchos_3s": ["opção 1", "opção 2", "opção 3"],
+      "roteiro_reels": [
+        {"tempo": "0-3s", "fala": "o que dizer, em linguagem falada", "direcao": "como gravar: enquadramento, corte, texto na tela"}
+      ],
+      "roteiro_carrossel": {
+        "capa": "texto da capa (gancho curto)",
+        "laminas": ["lâmina 1", "lâmina 2", "..."],
+        "cta_final": "texto da última lâmina"
+      },
+      "legenda_post": "legenda pronta do post, sem hashtags",
       "duracao_estimada_seg": 45,
       "plataforma_origem_da_tendencia": "tiktok | instagram | youtube | multiplataforma",
       "embasamento_viral": "por que isso tende a performar, citando os sinais e dados analisados",

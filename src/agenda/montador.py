@@ -15,6 +15,21 @@ SLOTS_SEMANA = [
 ]
 
 
+def normalizar_ideia(ideia: dict) -> dict:
+    """Aceita tanto o esquema novo (ganchos_3s, roteiro_reels, carrossel)
+    quanto o antigo (gancho_3s, roteiro em texto), devolvendo o novo."""
+    n = dict(ideia)
+    if "ganchos_3s" not in n:
+        n["ganchos_3s"] = [n.get("gancho_3s", "")]
+    if "roteiro_reels" not in n:
+        n["roteiro_reels"] = [
+            {"tempo": "", "fala": n.get("roteiro", ""), "direcao": ""}
+        ]
+    n.setdefault("roteiro_carrossel", {"capa": "", "laminas": [], "cta_final": ""})
+    n.setdefault("legenda_post", "")
+    return n
+
+
 def montar_agenda(config: dict, roteiros: dict, sinais: dict) -> str:
     """Gera o Markdown da agenda semanal a partir dos roteiros e sinais."""
     ideias = roteiros["ideias"]
@@ -42,21 +57,46 @@ def montar_agenda(config: dict, roteiros: dict, sinais: dict) -> str:
 
     linhas += ["", "---", ""]
 
-    for i, ideia in enumerate(ideias, 1):
+    for i, bruta in enumerate(ideias, 1):
+        ideia = normalizar_ideia(bruta)
         dia, hora = SLOTS_SEMANA[(i - 1) % len(SLOTS_SEMANA)]
         origem = ideia.get("plataforma_origem_da_tendencia", "")
+        carrossel = ideia["roteiro_carrossel"]
         linhas += [
             f"## {i}. {ideia['titulo']}",
             "",
             f"**{dia}, {hora}** · {ideia['pilar']} · ~{ideia['duracao_estimada_seg']}s · "
             f"{ideia['formato']}" + (f" · tendência vinda de: {origem}" if origem else ""),
             "",
-            f"**🎣 Gancho (3 primeiros segundos):** {ideia['gancho_3s']}",
+            "**🎣 Opções de gancho (3 primeiros segundos)**",
             "",
-            "**🎬 Roteiro**",
+            *[f"{n}. {g}" for n, g in enumerate(ideia["ganchos_3s"], 1)],
             "",
-            ideia["roteiro"],
+            "**🎬 Roteiro (Reels/TikTok)**",
             "",
+            *[
+                f"- **[{b.get('tempo', '')}]** {b.get('fala', '')}"
+                + (f"\n  - 🎥 {b['direcao']}" if b.get("direcao") else "")
+                for b in ideia["roteiro_reels"]
+            ],
+            "",
+            *(
+                [
+                    "**🖼️ Versão carrossel**",
+                    "",
+                    f"- **Capa:** {carrossel.get('capa', '')}",
+                    *[f"- Lâmina {n}: {l}" for n, l in enumerate(carrossel.get("laminas", []), 1)],
+                    f"- **CTA final:** {carrossel.get('cta_final', '')}",
+                    "",
+                ]
+                if carrossel.get("laminas")
+                else []
+            ),
+            *(
+                [f"**✍️ Legenda do post:** {ideia['legenda_post']}", ""]
+                if ideia.get("legenda_post")
+                else []
+            ),
             f"**📈 Por que deve performar:** {ideia['embasamento_viral']}",
             "",
             "**🔬 Embasamento científico**",
