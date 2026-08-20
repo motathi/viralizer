@@ -55,6 +55,10 @@ def tendencias_tiktok(config: dict) -> list[dict]:
         print(f"   (TikTok Creative Center indisponível: {type(e).__name__}: {e})")
         return []
 
+    if not capturas:
+        print("   (TikTok Creative Center: página carregou mas nenhuma tendência "
+              "foi capturada — possível tela de consentimento ou mudança no site)")
+
     vistos, tendencias = set(), []
     for item in capturas:
         nome = item.get("hashtag_name")
