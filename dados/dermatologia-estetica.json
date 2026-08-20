@@ -1,0 +1,817 @@
+{
+  "roteiros": {
+    "ideias": [
+      {
+        "titulo": "Água micelar: o que são as tais micelas (e por que a sua pode não servir pra sua pele)",
+        "pilar": "Educação sobre procedimentos",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Você usa água micelar todo dia e não sabe o que é uma micela, né? Tudo bem, eu explico.",
+          "Água micelar não é 'água com sabão fraquinho'. É física básica agindo na sua pele.",
+          "Recebi esse comentário: 'água micelar limpa de verdade ou é marketing?' Vamos por partes.",
+          "Se a sua água micelar deixa a pele repuxada, o problema pode não ser você."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Você usa água micelar todo dia e não sabe o que é uma micela, né? Tudo bem, eu explico.",
+            "direcao": "Close no rosto, olhando pra câmera, algodão na mão. Texto na tela: 'O QUE É ÁGUA MICELAR?'"
+          },
+          {
+            "tempo": "3-12s",
+            "fala": "Micela é uma bolinha microscópica. Por fora ela ama água, por dentro ela ama gordura. Quando encosta na sua pele, o miolo dela captura sebo e maquiagem e leva embora no algodão.",
+            "direcao": "Corte pra animação simples ou desenho no papel de um círculo com 'água fora / gordura dentro'. Zoom in."
+          },
+          {
+            "tempo": "12-25s",
+            "fala": "Só que existe mais de um tipo. Tem versão pra pele oleosa, versão pra pele sensível e versão pra pele seca. Muda o tipo de tensoativo e muda o quanto ela remove.",
+            "direcao": "Talking head com três dedos na contagem. Texto na tela: 'oleosa / sensível / seca'."
+          },
+          {
+            "tempo": "25-38s",
+            "fala": "Então: ardeu, repuxou, deixou a pele áspera? Não é 'limpeza profunda', é sinal de que aquela fórmula não é a sua. E em pele oleosa ou com maquiagem pesada, ela geralmente é o primeiro passo, não o único.",
+            "direcao": "Corte seco, câmera mais próxima, tom de conversa. Texto: 'repuxou ≠ limpou melhor'."
+          },
+          {
+            "tempo": "38-45s",
+            "fala": "Comenta aqui qual é o seu tipo de pele que eu te digo o que observar no rótulo — sem citar marca, combinado?",
+            "direcao": "Sorriso, mão apontando pros comentários. Texto: 'Qual é o seu tipo de pele?'"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "O que é, de verdade, uma micela?",
+          "laminas": [
+            "Micela = bolinha microscópica com 'lado que ama água' por fora e 'lado que ama gordura' por dentro.",
+            "Ela captura sebo, poluição e maquiagem no miolo e sai com o algodão.",
+            "Não é uma fórmula universal: o tipo de tensoativo muda conforme a proposta do produto.",
+            "Pele oleosa, pele sensível e pele seca pedem versões diferentes.",
+            "Ardência, repuxamento e aspereza não são sinal de 'limpou mais fundo'.",
+            "Em rostos com maquiagem pesada, costuma ser o primeiro passo — não o passo único."
+          ],
+          "cta_final": "Salva pra consultar antes da próxima compra e comenta seu tipo de pele."
+        },
+        "legenda_post": "Micela não é magia: é química de superfície trabalhando a favor da sua pele. Por fora ela se liga à água, por dentro captura sebo e maquiagem — e é por isso que existem versões diferentes para peles diferentes. Se a sua deixa a pele repuxada, vale rever a fórmula, não a sua rotina inteira. Avaliação individual sempre em consulta.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "tiktok",
+        "padrao_aplicado": "Educação descomplicada sobre ingredientes (formato 'O QUÊ É / PARA QUÊ SERVE'). Replicar o sucesso de @simonscarano (5.7M views) com estrutura clara: definição → mecanismo → 3 tipos principais → como escolher o SEU",
+        "virais_origem": [
+          {
+            "url": "https://www.tiktok.com/@simonscarano/video/7259967227892370694",
+            "autor": "simonscarano",
+            "metrica": "5.7M views, 8.87% engajamento",
+            "por_que_viralizou": "Pergunta simples que 90% das pessoas não consegue responder; resposta prática + validação dermatológica. Identificação imediata."
+          }
+        ],
+        "embasamento_viral": "O sinal do briefing mostra que 'definição prática' de um produto que todo mundo usa mas ninguém sabe explicar gera identificação imediata (5.7M views). A versão médica agrega a camada que faltava no viral: escolher conforme o tipo de pele.",
+        "embasamento_cientifico": [
+          "Água micelar: mecanismo de limpeza e seleção conforme tipo de pele — Journal of Cosmetic Dermatology (2019); Sociedade Brasileira de Dermatologia — https://onlinelibrary.wiley.com/doi/abs/10.1111/jocd.12891"
+        ],
+        "conformidade_cfm": "Conteúdo educativo, sem marcas, sem promessa de resultado e com indicação de avaliação individual (Res. CFM 2.336/2023).",
+        "cta": "Micela não é magia: é química de superfície trabalhando a favor da sua pele. Por fora ela se liga à água, por dentro cap",
+        "hashtags": [
+          "#dermatologia",
+          "#skincare",
+          "#aguamicelar",
+          "#peleoleosa",
+          "#pelesensivel",
+          "#cuidadoscomapele"
+        ]
+      },
+      {
+        "titulo": "A ordem do skincare importa mais que a quantidade de passos",
+        "pilar": "Rotina e prevenção",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Rotina de 12 passos não é sinal de pele bem cuidada. É sinal de que ninguém te explicou a ordem.",
+          "Você pode estar usando os produtos certos na sequência errada — e anulando metade deles.",
+          "POV: eu assistindo mais uma rotina matinal com dez frascos antes do protetor solar."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Rotina de 12 passos não é sinal de pele bem cuidada. Muitas vezes é sinal de que ninguém explicou a ordem.",
+            "direcao": "Plano médio na bancada com vários frascos sem rótulo visível. Texto: 'ORDEM > QUANTIDADE'."
+          },
+          {
+            "tempo": "3-13s",
+            "fala": "A lógica é simples: do mais fluido pro mais denso. Limpeza, depois o ativo aquoso, depois o hidratante, e o protetor solar fechando de manhã.",
+            "direcao": "Corte a cada etapa, mão pegando o produto. Texto acompanhando: 'limpeza → ativo → hidratante → protetor'."
+          },
+          {
+            "tempo": "13-26s",
+            "fala": "Se você joga o creme espesso antes do sérum, você cria uma barreira e dificulta a absorção do que veio depois. Não é que 'não funciona', é que você reduz a chance de funcionar.",
+            "direcao": "Talking head, gesto de camadas com as mãos. Texto: 'camada oclusiva antes = menos absorção'."
+          },
+          {
+            "tempo": "26-38s",
+            "fala": "E o erro mais comum que eu vejo: empilhar três ativos potentes na mesma manhã. Mais produto não é mais resultado — costuma ser mais irritação e barreira comprometida.",
+            "direcao": "Corte seco, expressão de 'calma lá'. Texto: 'mais ativo ≠ mais efeito'."
+          },
+          {
+            "tempo": "38-45s",
+            "fala": "Três passos bem feitos superam doze passos aleatórios. Salva esse aqui e me conta quantos passos tem a sua.",
+            "direcao": "Close final, sorriso. Texto: 'quantos passos tem a sua rotina?'"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "A ordem do seu skincare está sabotando ele?",
+          "laminas": [
+            "Regra base: do mais fluido para o mais denso.",
+            "Manhã: limpeza → ativo aquoso → hidratante → protetor solar.",
+            "Creme espesso antes do sérum cria uma camada que dificulta a absorção seguinte.",
+            "Protetor solar é o fechamento da rotina da manhã, não o meio dela.",
+            "Empilhar vários ativos potentes no mesmo turno tende a irritar a barreira.",
+            "Três passos consistentes costumam render mais que doze passos aleatórios.",
+            "Rotina se ajusta ao seu tipo de pele — o que serve pra uma pessoa pode não servir pra você."
+          ],
+          "cta_final": "Salva pra montar a sua sequência e comenta quantos passos você faz hoje."
+        },
+        "legenda_post": "Rotina longa não é rotina eficiente. A sequência dos produtos interfere na absorção dos ativos — e empilhar potência não substitui consistência. Se a sua pele está irritada com uma rotina cheia, o problema pode estar na ordem e no excesso. A montagem ideal vem de avaliação individual.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "multiplataforma",
+        "padrao_aplicado": "Rotinas visuais com passo a passo, mas CORRIGIDO para educação. Inspirar-se em @tenishaward1 (visual, dinâmico) e @dermangelo (crítico) — combinar: mostrar a rotina eficiente, depois comentar erros comuns.",
+        "virais_origem": [
+          {
+            "url": "https://www.tiktok.com/@tenishaward1/video/7664674479871659278",
+            "autor": "tenishaward1",
+            "metrica": "4.4M views, 8.14% engajamento",
+            "por_que_viralizou": "Visual bonito + nomeação de marcas (FOMO) + sensação de 'receita pronta'. Aspiracional."
+          },
+          {
+            "url": "https://www.tiktok.com/@dermangelo/video/7665898795682598175",
+            "autor": "dermangelo",
+            "metrica": "855k views, 3.83% engajamento",
+            "por_que_viralizou": "Postura crítica; hashtag #dermreacts indica reação especializada a conteúdo errado. Autoridade."
+          }
+        ],
+        "embasamento_viral": "Combina os dois formatos que performaram no briefing: o apelo visual da rotina passo a passo (4.4M views) com a camada de reação crítica especializada (@dermangelo), que gera comentário e compartilhamento.",
+        "embasamento_cientifico": [
+          "A ordem correta do skincare e seu impacto na absorção de ativos — Academia Americana de Dermatologia (AAD) — https://www.paulinelyrio.com.br/post/ordem-correta-do-skincare",
+          "Três pilares fundamentais de dermatologia baseada em evidência — Sociedade Brasileira de Dermatologia — https://ricavida.pt/rotina-de-skincare-dicas-para-uma-pele-radiante/"
+        ],
+        "conformidade_cfm": "Sem marcas, sem promessa de resultado, orienta avaliação individual (Res. CFM 2.336/2023).",
+        "cta": "Rotina longa não é rotina eficiente. A sequência dos produtos interfere na absorção dos ativos — e empilhar potência não",
+        "hashtags": [
+          "#skincare",
+          "#rotinadeskincare",
+          "#dermatologia",
+          "#protetorsolar",
+          "#cuidadoscomapele"
+        ]
+      },
+      {
+        "titulo": "Depois dos 40 a pele muda de biologia — e o cuidado precisa mudar junto",
+        "pilar": "Rotina e prevenção",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Depois dos 40 não é 'a pele piorou'. É a biologia dela que mudou.",
+          "Se o creme que sempre funcionou parou de funcionar, tem uma explicação hormonal por trás.",
+          "Cuidar da pele aos 40 não é vaidade: é saúde da barreira cutânea."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Depois dos 40 não é que a pele 'piorou'. É que a biologia dela mudou.",
+            "direcao": "Plano médio, luz suave, sem maquiagem pesada. Texto: 'A PELE MUDA. O CUIDADO TAMBÉM.'"
+          },
+          {
+            "tempo": "3-14s",
+            "fala": "A partir dos 30 a gente já perde em torno de 1% de colágeno por ano. Isso é lento, silencioso, e um dia aparece tudo junto no espelho.",
+            "direcao": "Corte, gesto de linha descendente com a mão. Texto: '≈1% de colágeno ao ano a partir dos 30'."
+          },
+          {
+            "tempo": "14-26s",
+            "fala": "Some a isso a queda do estrogênio na perimenopausa e na menopausa: a pele fica mais seca, mais fina, e a gordura do rosto se redistribui. O contorno muda.",
+            "direcao": "Talking head, tom acolhedor. Texto: 'estrogênio ↓ → hidratação e espessura ↓'."
+          },
+          {
+            "tempo": "26-38s",
+            "fala": "Por isso a rotina precisa mudar de foco: reforçar barreira, hidratação de verdade, fotoproteção diária e ativos escolhidos com critério. Não é fazer mais, é fazer diferente.",
+            "direcao": "Corte, contagem nos dedos. Texto: 'barreira / hidratação / fotoproteção'."
+          },
+          {
+            "tempo": "38-45s",
+            "fala": "Isso não é vaidade. É saúde da pele. Manda pra alguém que tá nessa fase.",
+            "direcao": "Close, olhar direto. Texto: 'compartilha com quem precisa ouvir isso'."
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Aos 40, sua pele não piorou — ela mudou",
+          "laminas": [
+            "A partir dos 30, a produção de colágeno cai cerca de 1% ao ano.",
+            "Na perimenopausa e menopausa, a queda de estrogênio impacta hidratação e espessura da pele.",
+            "A gordura facial se redistribui: o contorno muda antes das rugas incomodarem.",
+            "Pele mais fina reage diferente aos mesmos produtos de sempre.",
+            "O foco passa a ser: reforço de barreira, hidratação e fotoproteção diária.",
+            "Ativos existem e ajudam, mas a escolha precisa de critério e acompanhamento."
+          ],
+          "cta_final": "Compartilha com uma amiga nessa fase e agende sua avaliação dermatológica."
+        },
+        "legenda_post": "Aos 40, a pele não 'piorou' — ela mudou de biologia. Queda progressiva de colágeno, menos estrogênio e redistribuição da gordura facial explicam por que a rotina de sempre parece não dar mais conta. Não é fazer mais passos: é fazer escolhas diferentes, com avaliação individual.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "instagram",
+        "padrao_aplicado": "Autoridade médica com humanização. Inspirar-se em posts Instagram educativos (@dermato_carolmayana, @martinha_r._amorim) que falam de 'cuidados essenciais' SEM dramatizar, mas deixando clara a MUDANÇA necessária.",
+        "virais_origem": [
+          {
+            "url": "https://www.instagram.com/p/DcPWEYBn2L4/",
+            "autor": "dermato_carolmayana",
+            "metrica": "8 likes, mas nicho altamente qualificado (médicos, pacientes 40+)",
+            "por_que_viralizou": "Mensagem clara: 'após os 40, a pele MUDA, e o cuidado também.' Ressonância com faixa etária."
+          },
+          {
+            "url": "https://www.instagram.com/p/DcP0RJZR_6a/",
+            "autor": "martinha_r._amorim",
+            "metrica": "3 likes, foco em educação não viral mas confiável",
+            "por_que_viralizou": "Formato educativo simples: mudanças cutâneas + 3 cuidados essenciais. Claridade."
+          }
+        ],
+        "embasamento_viral": "O briefing mostra que esse recorte gera ressonância direta com a faixa 40+, público central do perfil. Nomear a causa biológica (em vez de culpar a paciente) tende a gerar salvamento e compartilhamento entre amigas.",
+        "embasamento_cientifico": [
+          "Alterações na produção de colágeno a partir dos 40 anos — Sociedade Brasileira de Dermatologia; revisão clínica Dra. Adriana Lima Gürtler — https://www.inspirednews.com.br/dicas-essenciais-para-cuidados-com-a-pele-madura-aos-40-e-50-anos",
+          "Papel do estrogênio e fatores hormonais no envelhecimento cutâneo pós-menopausa — Revista de Dermatologia Clínica — https://vidasimples.co/saude-do-corpo/dicas-para-cuidar-da-pele-apos-os-40-anos-com-leveza-e-proposito/"
+        ],
+        "conformidade_cfm": "Educativo, sem dramatização, sem promessa e sem oferta de procedimento específico (Res. CFM 2.336/2023).",
+        "cta": "Aos 40, a pele não 'piorou' — ela mudou de biologia. Queda progressiva de colágeno, menos estrogênio e redistribuição da",
+        "hashtags": [
+          "#pelemadura",
+          "#dermatologia",
+          "#colageno",
+          "#menopausa",
+          "#cuidadoscomapele"
+        ]
+      },
+      {
+        "titulo": "A anatomia vem antes da seringa",
+        "pilar": "Educação sobre procedimentos",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "A anatomia vem antes da seringa. Sempre.",
+          "Harmonização facial não começa escolhendo o produto. Começa olhando o seu rosto.",
+          "Me perguntam qual preenchedor eu uso. A pergunta certa é outra."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "A anatomia vem antes da seringa. Sempre.",
+            "direcao": "Close, tom firme. Texto: 'ANATOMIA > SERINGA'."
+          },
+          {
+            "tempo": "3-14s",
+            "fala": "Todo mundo chega perguntando qual produto vai usar. Mas o que define o plano é a análise: proporções do seu rosto, estrutura óssea, músculos, trajeto de vasos e nervos.",
+            "direcao": "Corte pra desenho esquemático de rosto em papel, apontando terços faciais. Texto: 'proporções / osso / músculo / vasos'."
+          },
+          {
+            "tempo": "14-27s",
+            "fala": "Quando a análise é feita nas pressas, o resultado sai desproporcional. Não porque o produto era ruim — porque o volume foi colocado onde aquele rosto não pedia.",
+            "direcao": "Talking head, gesto de 'errado de lugar'. Texto: 'volume no lugar errado ≠ produto ruim'."
+          },
+          {
+            "tempo": "27-38s",
+            "fala": "E tem uma parte que ninguém posta: às vezes a conduta é não preencher. Existem critérios de indicação e de contraindicação — e dizer 'não' também é parte do trabalho.",
+            "direcao": "Corte, expressão séria e acolhedora. Texto: 'às vezes a conduta é NÃO fazer'."
+          },
+          {
+            "tempo": "38-45s",
+            "fala": "Se na sua avaliação ninguém falou de anatomia, faltou etapa. Salva esse vídeo.",
+            "direcao": "Close final. Texto: 'faltou etapa'."
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Antes da seringa, a anatomia",
+          "laminas": [
+            "Harmonização não começa no produto — começa na análise do seu rosto.",
+            "Proporções faciais, estrutura óssea e musculatura definem o plano.",
+            "Trajeto de vasos e nervos é o que orienta a segurança da técnica.",
+            "Resultado desproporcional costuma vir de análise incompleta, não do produto.",
+            "Existem critérios claros de indicação e de contraindicação.",
+            "Em alguns casos, a conduta correta é não indicar preenchimento."
+          ],
+          "cta_final": "Salva e leve essas perguntas para sua próxima avaliação."
+        },
+        "legenda_post": "A pergunta não é 'qual produto', é 'o que o seu rosto precisa'. A análise anatômica — proporções, estrutura óssea, musculatura, trajeto de vasos e nervos — é o que orienta indicação, técnica e segurança. E sim: existem critérios de contraindicação, e dizer não faz parte da conduta médica.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "instagram",
+        "padrao_aplicado": "Autoridade médica com humanização. Post @lordocheclinic ('A anatomia vem antes da seringa') é exatamente o gancho — expandir: mostrar como uma análise errônea leva a resultados ruins.",
+        "virais_origem": [
+          {
+            "url": "https://www.instagram.com/p/DcP9bThM0YO/",
+            "autor": "lordocheclinic",
+            "metrica": "39 likes, 0 comentários — conteúdo niche mas autoritário",
+            "por_que_viralizou": "Frase provocadora: 'anatomia vem antes da seringa.' Rejeita ordem comum (produto first). Respeito por conceito clínico."
+          }
+        ],
+        "embasamento_viral": "Frase-conceito curta e contraintuitiva, que inverte a ordem esperada pelo público (produto primeiro). O briefing aponta esse gancho como o motor do post original; o vídeo expande com o 'por quê'.",
+        "embasamento_cientifico": [
+          "Anatomia facial aplicada à harmonização: músculos, nervos e estrutura óssea — Clinics in Dermatology (2014); Tania Marur, Yakup Tuna, Selman Demirci, Universidade de Istambul — https://www.facialacademy.com.br/news/anatomia-facial-para-preenchedores-o-guia-definitivo",
+          "Indicações e contraindicações para preenchedores: quando preenchimento NÃO é a melhor escolha — Dra. Rafaela Salvato, Dermatologia — https://rafaelasalvato.med.br/indicacoes-contraindicacoes/criterios-indicacao-injetaveis"
+        ],
+        "conformidade_cfm": "Sem antes/depois, sem marcas, sem promessa de resultado; reforça critério clínico e possibilidade de não indicação (Res. CFM 2.336/2023).",
+        "cta": "A pergunta não é 'qual produto', é 'o que o seu rosto precisa'. A análise anatômica — proporções, estrutura óssea, muscu",
+        "hashtags": [
+          "#harmonizacaofacial",
+          "#dermatologia",
+          "#anatomiafacial",
+          "#preenchimento",
+          "#medicinabaseadaemevidencias"
+        ]
+      },
+      {
+        "titulo": "Alergia ao sol? Provavelmente é PMLE — e não é queimadura",
+        "pilar": "Mitos vs verdades",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Aquelas bolinhas que aparecem no primeiro dia de sol não são queimadura.",
+          "Mito: 'sou alérgica ao sol'. Verdade: existe um nome e um mecanismo pra isso.",
+          "Se toda vez que você pega o primeiro sol do verão a pele coça e empola, presta atenção aqui."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Aquelas bolinhas que coçam no primeiro dia de sol não são queimadura.",
+            "direcao": "Close, expressão de 'você já viveu isso'. Texto: 'NÃO É QUEIMADURA'."
+          },
+          {
+            "tempo": "3-14s",
+            "fala": "Tem nome: erupção polimorfa à luz, a PMLE. É uma reação imune anormal da pele à exposição solar — não é a alergia clássica que a gente imagina.",
+            "direcao": "Cartela: 'PMLE — erupção polimorfa à luz'. Corte pra talking head."
+          },
+          {
+            "tempo": "14-26s",
+            "fala": "Ela costuma aparecer nas primeiras exposições da estação, em áreas que ficaram cobertas no inverno. Atinge cerca de 10 a 20% da população, com mais frequência em mulheres jovens e peles claras.",
+            "direcao": "Texto na tela: '10–20% da população'. Gesto apontando colo e braços."
+          },
+          {
+            "tempo": "26-38s",
+            "fala": "Queimadura arde e vem de dose alta de sol. A PMLE coça, aparece em surto e pode voltar todo ano. Por isso o diagnóstico é clínico, com apoio da dermatoscopia — não é chute.",
+            "direcao": "Split de texto: 'QUEIMADURA: arde | PMLE: coça e repete'. Corte seco."
+          },
+          {
+            "tempo": "38-45s",
+            "fala": "Se isso acontece com você todo verão, marca uma consulta antes do próximo. Comenta 'sol' que eu falo mais sobre prevenção.",
+            "direcao": "Close final, sorriso leve. Texto: 'comenta SOL'."
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "'Alergia ao sol' tem nome: PMLE",
+          "laminas": [
+            "Mito: são sempre queimaduras solares. Verdade: pode ser erupção polimorfa à luz.",
+            "PMLE é uma reação imune anormal à exposição solar — não a alergia clássica.",
+            "Surge nas primeiras exposições da estação, em áreas antes cobertas.",
+            "Estima-se que atinja de 10 a 20% da população.",
+            "Mais frequente em mulheres jovens e peles claras.",
+            "Diagnóstico é clínico, com apoio da dermatoscopia — autodiagnóstico atrasa o cuidado."
+          ],
+          "cta_final": "Salva e procure avaliação dermatológica antes da próxima temporada de sol."
+        },
+        "legenda_post": "Nem toda reação ao sol é queimadura. A erupção polimorfa à luz (PMLE) é uma resposta imune anormal à exposição solar, costuma aparecer nas primeiras exposições da estação e é estimada em 10 a 20% da população — com mais frequência em mulheres jovens e peles claras. O diagnóstico é clínico e conta com a dermatoscopia.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "instagram",
+        "padrao_aplicado": "Mitos vs verdades — replicar formato crítico. Post @mondosanita ('ALLERGIA AL SOLE: NON È SEMPRE UNA SCOTTATURA') aborda a confusão entre PMLE e queimadura solar.",
+        "virais_origem": [
+          {
+            "url": "https://www.instagram.com/p/DcQZIFplDq7/",
+            "autor": "mondosanita",
+            "metrica": "4 likes, conteúdo técnico altamente segmentado",
+            "por_que_viralizou": "Tira dúvida comum: 'é alergia ou queimadura?' Educação em italiano sugere expertise europeia (PMLE é mais prevalente lá)."
+          }
+        ],
+        "embasamento_viral": "Resolve uma dúvida recorrente e com alto grau de autoidentificação ('acontece comigo todo verão'), no formato mito x verdade que o briefing aponta como forte no Instagram.",
+        "embasamento_cientifico": [
+          "PMLE (Polymorphous Light Eruption): epidemiologia, fisiopatologia e diagnóstico clínico — Medscape; Mayo Clinic — https://www.eucerin.com.br/sobre-pele/indicacoes/eps-alergias-solares",
+          "Prevalência de PMLE em mulheres jovens (20-40 anos) com pele clara — DermNet NZ; dados de prevalência por latitude — https://dermnetnz.org/topics/polymorphic-light-eruption"
+        ],
+        "conformidade_cfm": "Informação de saúde sem induzir medo e sem vender procedimento; orienta consulta para diagnóstico (Res. CFM 2.336/2023).",
+        "cta": "Nem toda reação ao sol é queimadura. A erupção polimorfa à luz (PMLE) é uma resposta imune anormal à exposição solar, co",
+        "hashtags": [
+          "#pmle",
+          "#alergiaaosol",
+          "#dermatologia",
+          "#fotoprotecao",
+          "#mitosxverdades"
+        ]
+      },
+      {
+        "titulo": "Peptídeo de cobre (GHK-Cu): a ciência por trás do hype das animações",
+        "pilar": "Rotina e prevenção",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Essas animações de peptídeo de cobre estão fora de controle. Vamos ao que existe de ciência.",
+          "Peptídeo de cobre não é modismo de 2024. A pesquisa começou em 1973.",
+          "Você tem esse peptídeo no corpo desde que nasceu — e ele vai caindo com a idade."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Essas animações de peptídeo de cobre estão fora de controle. Vamos separar hype de ciência.",
+            "direcao": "Talking head, sobrancelha erguida. Texto: 'GHK-Cu: hype x ciência'."
+          },
+          {
+            "tempo": "3-14s",
+            "fala": "Primeiro: GHK-Cu não é lançamento. Ele foi descrito em 1973 pelo Loren Pickart e tem décadas de pesquisa acumulada.",
+            "direcao": "Cartela: '1973 — Loren Pickart'. Corte seco."
+          },
+          {
+            "tempo": "14-27s",
+            "fala": "Segundo: ele é um peptídeo do nosso próprio organismo, e ele declina com a idade. Os dados citam cerca de 200 nanogramas por mililitro aos 20 anos e por volta de 80 aos 60.",
+            "direcao": "Gráfico simples descendente na tela: '200 ng/mL aos 20 → 80 ng/mL aos 60'."
+          },
+          {
+            "tempo": "27-38s",
+            "fala": "A pesquisa relaciona o GHK-Cu à regeneração tecidual, ao colágeno e à expressão de genes ligados a reparo. Isso é real — o que não é real é a animação prometendo transformação em uma semana.",
+            "direcao": "Corte, tom firme e acolhedor. Texto: 'ciência ≠ animação 3D'."
+          },
+          {
+            "tempo": "38-45s",
+            "fala": "Ativo bom sem contexto e sem indicação vira dinheiro jogado fora. Comenta se quer o vídeo sobre como encaixar peptídeos na rotina.",
+            "direcao": "Close final, apontando pros comentários. Texto: 'quer a parte 2?'"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Peptídeo de cobre: hype ou ciência?",
+          "laminas": [
+            "GHK-Cu não é lançamento: foi descrito em 1973, por Loren Pickart.",
+            "É um peptídeo presente no nosso próprio organismo.",
+            "Os níveis declinam com a idade: cerca de 200 ng/mL aos 20 e por volta de 80 ng/mL aos 60.",
+            "A pesquisa o relaciona a regeneração tecidual, colágeno e expressão gênica ligada a reparo.",
+            "Animação 3D não é evidência clínica — cuidado com o que promete transformação rápida.",
+            "Ativo com boa literatura ainda precisa de indicação, concentração e contexto de rotina."
+          ],
+          "cta_final": "Salva e comenta se quer a parte 2 sobre peptídeos na rotina."
+        },
+        "legenda_post": "Peptídeo de cobre virou trend, mas a pesquisa é antiga: o GHK-Cu foi descrito em 1973 e é um peptídeo do próprio organismo, com níveis que declinam ao longo da vida — cerca de 200 ng/mL aos 20 anos e por volta de 80 ng/mL aos 60. A literatura o associa a regeneração e expressão de genes ligados a reparo. Animação bonita não substitui indicação individual.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "tiktok",
+        "padrao_aplicado": "Autoridade com educação descomplicada. Post @dermdoctor ('These animations are out of control #ghkcu #copperpeptides', 1.5M views) mostra interesse viral no tópico — expandir: validar a CIÊNCIA por trás, não apenas animações.",
+        "virais_origem": [
+          {
+            "url": "https://www.tiktok.com/@dermdoctor/video/7663530773294648606",
+            "autor": "dermdoctor",
+            "metrica": "1.5M views, 3.66% engajamento, 7.3k compartilhamentos",
+            "por_que_viralizou": "Polêmica visual: animações 'fora de controle' sugerem hype sem base. Gancho: rebater com ciência, não ficção."
+          }
+        ],
+        "embasamento_viral": "Pega carona num tema com 1.5M de views e 7.3k compartilhamentos, mas entrega o que faltava: dado numérico e origem histórica. Conteúdo com número específico tende a ser salvo e citado nos comentários.",
+        "embasamento_cientifico": [
+          "GHK-Cu: peptídeo de cobre e sua ação na regeneração de colágeno e expressão gênica — International Journal of Molecular Sciences; pesquisas de Loren Pickart (1973) — https://smartgr.com.br/blogs/blog-smart-gr/ghk-cu-o-peptideo-que-estimula-colageno-e-regeneracao-da-pele",
+          "Declínio de GHK-Cu com a idade: de 200 ng/mL aos 20 para 80 ng/mL aos 60 — estudos clínicos; revisão Instituto FC — https://www.fcinstituto.com/post/pept%C3%ADdeo-de-cobre-ghk-cu-firmeza-cicatriza%C3%A7%C3%A3o-e-regenera%C3%A7%C3%A3o-profunda-da-pele"
+        ],
+        "conformidade_cfm": "Explica mecanismo sem prometer resultado, sem superlativo e sem citar marcas (Res. CFM 2.336/2023).",
+        "cta": "Peptídeo de cobre virou trend, mas a pesquisa é antiga: o GHK-Cu foi descrito em 1973 e é um peptídeo do próprio organis",
+        "hashtags": [
+          "#peptideodecobre",
+          "#ghkcu",
+          "#dermatologia",
+          "#skincarecomciencia",
+          "#antienvelhecimento"
+        ]
+      },
+      {
+        "titulo": "Ácido hialurônico tópico não penetra fundo — e ainda assim vale a pena",
+        "pilar": "Rotina e prevenção",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Seu ácido hialurônico não chega nas camadas profundas da pele. E tá tudo bem.",
+          "Comprou o sérum de hialurônico esperando efeito de preenchimento? Precisamos conversar.",
+          "POV: rotina pós-banho tranquila… até eu explicar o que o hialurônico realmente faz."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Seu ácido hialurônico tópico não chega nas camadas profundas da pele. E tá tudo bem.",
+            "direcao": "POV pós-banho, toalha no cabelo, luz do banheiro. Texto: 'ele não penetra fundo'."
+          },
+          {
+            "tempo": "3-13s",
+            "fala": "A molécula é grande demais pra atravessar a barreira. Então esquece a ideia de sérum que preenche por dentro — isso é outra coisa, é injetável, é procedimento médico.",
+            "direcao": "Corte, gesto de 'não passa'. Texto: 'tópico ≠ injetável'."
+          },
+          {
+            "tempo": "13-26s",
+            "fala": "O que ele faz de verdade: age como umectante na superfície, segurando água na camada mais externa. Pele hidratada fica mais lisa, mais confortável e reflete melhor a luz.",
+            "direcao": "Aplicação do sérum em frasco sem rótulo, close nas mãos. Texto: 'umectante = segura água'."
+          },
+          {
+            "tempo": "26-38s",
+            "fala": "E tem um detalhe que quase ninguém fala: ele ajuda a preparar o terreno pra outros ativos, como vitamina C e retinol, na sequência certa. Ah, e aplique com a pele ainda úmida e sele com hidratante.",
+            "direcao": "Corte, dedo indicador em alerta. Texto: 'pele úmida + selar depois'."
+          },
+          {
+            "tempo": "38-45s",
+            "fala": "Expectativa certa é meio caminho pra pele feliz. Salva e me conta se você aplicava na pele seca.",
+            "direcao": "Close final, sorriso. Texto: 'você aplicava na pele seca?'"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Seu hialurônico não penetra fundo (e não precisa)",
+          "laminas": [
+            "O ácido hialurônico tópico tem moléculas grandes para atravessar a barreira cutânea.",
+            "Sérum tópico e preenchedor injetável são coisas diferentes, com mecanismos diferentes.",
+            "Na superfície, ele age como umectante: segura água na camada mais externa.",
+            "Pele bem hidratada tende a ficar mais lisa e confortável.",
+            "Ele também ajuda a preparar a pele para outros ativos, como vitamina C e retinol.",
+            "Aplique com a pele levemente úmida e finalize com hidratante para selar.",
+            "Expectativa realista é parte do tratamento."
+          ],
+          "cta_final": "Salva pra ajustar o passo do seu hialurônico hoje à noite."
+        },
+        "legenda_post": "Ácido hialurônico tópico não age nas camadas profundas — o tamanho da molécula não permite. O que ele faz, e faz bem, é atuar como umectante na superfície e apoiar a absorção de outros ativos, como vitamina C e retinol. Tópico e injetável são universos diferentes: expectativa alinhada é parte do cuidado.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "tiktok",
+        "padrao_aplicado": "Rotinas visuais educadas. Viral @fatimavsb (3M views, 14.66% engaj., 'after shower routine') cita 'TORRIDEN Dive In 5D Hyaluronic Acid Intensive' — contexto perfeito para esclarecer mito.",
+        "virais_origem": [
+          {
+            "url": "https://www.tiktok.com/@fatimavsb/video/7665359015995657504",
+            "autor": "fatimavsb",
+            "metrica": "3M views, 14.66% engajamento, 7.3k compartilhamentos",
+            "por_que_viralizou": "Confessional (after-shower ritual como autocuidado), cita marca específica com HYPE, engajamento alto (15%). Aspecto humanizado."
+          }
+        ],
+        "embasamento_viral": "Usa o formato pós-banho de altíssimo engajamento (14,66%) como embalagem e entrega uma correção técnica no meio — o tipo de 'plot twist' informativo que segura retenção e gera comentário.",
+        "embasamento_cientifico": [
+          "Mecanismo de ação do ácido hialurônico tópico: umectância versus penetração e influência do peso molecular — https://www.galdermaaesthetics.com.br/pele-hidratada-como-melhorar",
+          "Combinação sinérgica: ácido hialurônico com vitamina C e retinol para potencializar absorção — Sociedade Brasileira de Dermatologia — https://www.natura.com.br/blog/pele/acido-hialuronico"
+        ],
+        "conformidade_cfm": "Corrige expectativa sem prometer resultado e sem citar marcas; diferencia tópico de procedimento médico (Res. CFM 2.336/2023).",
+        "cta": "Ácido hialurônico tópico não age nas camadas profundas — o tamanho da molécula não permite. O que ele faz, e faz bem, é ",
+        "hashtags": [
+          "#acidohialuronico",
+          "#skincare",
+          "#hidratacao",
+          "#dermatologia",
+          "#rotinanoturna"
+        ]
+      },
+      {
+        "titulo": "Hanseníase não acabou: os sinais que aparecem antes das sequelas",
+        "pilar": "Mitos vs verdades",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Mito: hanseníase é doença do passado. Ela continua aqui — inclusive em capitais.",
+          "Uma mancha que não coça e não dói pode ser mais séria do que uma que arde.",
+          "Se você beliscar essa mancha e não sentir direito, isso precisa ser avaliado."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Mito: hanseníase acabou. Verdade: ela continua entre a gente, inclusive em grandes cidades.",
+            "direcao": "Talking head, jaleco, tom sério. Texto: 'MITO x VERDADE'."
+          },
+          {
+            "tempo": "3-14s",
+            "fala": "O problema quase nunca é a doença em si. É o diagnóstico tardio, porque os primeiros sinais são discretos e passam batido.",
+            "direcao": "Corte, olhar direto pra câmera. Texto: 'o problema é o atraso'."
+          },
+          {
+            "tempo": "14-28s",
+            "fala": "Presta atenção nisso: mancha na pele com alteração de sensibilidade — que não dói, não coça, e onde você sente menos toque, calor ou dor. E nervos espessados, com formigamento ou fraqueza nas mãos e nos pés.",
+            "direcao": "Cartelas sequenciais: 'mancha com sensibilidade alterada' / 'nervo espessado, formigamento, fraqueza'. Sem imagens de paciente."
+          },
+          {
+            "tempo": "28-40s",
+            "fala": "Quando esses sinais são identificados cedo, o tratamento existe e é disponível no SUS. As sequelas graves são consequência da demora, não do destino.",
+            "direcao": "Talking head, tom acolhedor. Texto: 'diagnóstico precoce muda o curso'."
+          },
+          {
+            "tempo": "40-45s",
+            "fala": "Conhece alguém com uma mancha assim? Manda esse vídeo. Pode encurtar um caminho.",
+            "direcao": "Close final. Texto: 'compartilhe'."
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Hanseníase não é doença do passado",
+          "laminas": [
+            "Mito: foi erradicada. Verdade: continua presente, inclusive em grandes centros urbanos.",
+            "O maior risco é o diagnóstico tardio — os sinais iniciais são discretos.",
+            "Sinal-chave: mancha na pele com alteração de sensibilidade (toque, calor, dor).",
+            "Outro sinal: nervos espessados, com formigamento ou fraqueza em mãos e pés.",
+            "Manchas que não coçam e não doem também merecem avaliação.",
+            "Há tratamento disponível na rede pública; as sequelas se relacionam à demora no diagnóstico."
+          ],
+          "cta_final": "Compartilhe e procure avaliação dermatológica diante de qualquer mancha com alteração de sensibilidade."
+        },
+        "legenda_post": "Hanseníase não é doença do passado. Os sinais iniciais são discretos — manchas com alteração de sensibilidade e nervos espessados com formigamento ou fraqueza — e por isso muita gente demora a procurar avaliação. Diagnóstico precoce muda o curso da história. Informação aqui não substitui consulta.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "instagram",
+        "padrao_aplicado": "Mitos vs verdades com seriedade médica. Post @dr.fredbernardes documenta deformidades pós-diagnóstico tardio — replicar: alertar sobre SINAIS PRECOCES para prevenir.",
+        "virais_origem": [
+          {
+            "url": "https://www.instagram.com/p/DcQePodR0ql/",
+            "autor": "dr.fredbernardes",
+            "metrica": "6 likes, conteúdo especializado e crítico de saúde pública",
+            "por_que_viralizou": "Urgência: 'diagnóstico tardio = consequências graves.' Educação com impacto emocional, sem sensacionalismo."
+          }
+        ],
+        "embasamento_viral": "Conteúdo de saúde pública com utilidade imediata é o tipo que gera compartilhamento privado (o briefing registra 35,7k compartilhamentos em @denverskindoc tratando condição séria com linguagem acessível).",
+        "embasamento_cientifico": [
+          "Hanseníase: sinais clínicos precoces e diagnóstico diferencial — Sociedade Brasileira de Dermatologia; OMS — https://www.who.int/news-room/fact-sheets/detail/leprosy"
+        ],
+        "conformidade_cfm": "Alerta educativo de saúde pública, sem imagens de paciente, sem sensacionalismo e sem oferta de procedimento (Res. CFM 2.336/2023).",
+        "cta": "Hanseníase não é doença do passado. Os sinais iniciais são discretos — manchas com alteração de sensibilidade e nervos e",
+        "hashtags": [
+          "#hanseniase",
+          "#dermatologia",
+          "#saudepublica",
+          "#diagnosticoprecoce",
+          "#mitosxverdades"
+        ]
+      },
+      {
+        "titulo": "Pele tratada não é pele perfeita",
+        "pilar": "Bastidores e humanização",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Pele tratada não é pele perfeita. E eu preciso falar isso mais vezes.",
+          "Nenhuma paciente minha sai daqui com a pele do filtro. Nem eu tenho.",
+          "'Doutora, quero uma pele sem nenhum poro.' Vamos conversar sobre isso com carinho."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Pele tratada não é pele perfeita. E eu preciso falar isso mais vezes.",
+            "direcao": "Talking head sem filtro, luz natural, câmera na altura dos olhos. Texto: 'PELE TRATADA ≠ PELE PERFEITA'."
+          },
+          {
+            "tempo": "3-14s",
+            "fala": "Chega muita gente aqui com a foto de uma pele que não existe fora da tela. Poro, textura, marca de expressão: isso é pele humana, não é falha.",
+            "direcao": "Corte, mostrando a própria pele de perto, sem retoque. Texto: 'poro existe. textura existe.'"
+          },
+          {
+            "tempo": "14-27s",
+            "fala": "O que a gente busca em consultório é outra coisa: barreira íntegra, menos inflamação, menos ardência, pele confortável. Isso a gente consegue acompanhar e medir ao longo do tempo.",
+            "direcao": "Talking head, tom mais baixo e calmo. Texto: 'barreira / conforto / saúde'."
+          },
+          {
+            "tempo": "27-39s",
+            "fala": "E quando a pele tá saudável, acontece uma coisa engraçada: você usa menos maquiagem porque quer, não porque precisa esconder. A confiança vem daí.",
+            "direcao": "Corte com sorriso, gesto de leveza. Texto: 'menos por vontade, não por vergonha'."
+          },
+          {
+            "tempo": "39-45s",
+            "fala": "Dermatologista não é mágico. É parceiro de longo prazo. Comenta aqui se você precisava ouvir isso hoje.",
+            "direcao": "Close final, olhar direto. Texto: 'você precisava ouvir isso?'"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Pele tratada não é pele perfeita",
+          "laminas": [
+            "Poro, textura e linhas de expressão são pele humana — não são defeito.",
+            "A referência que muita gente traz para a consulta não existe fora da tela.",
+            "O objetivo clínico é barreira íntegra, menos inflamação e mais conforto.",
+            "Progresso em pele se acompanha ao longo do tempo, não em uma semana.",
+            "Pele saudável costuma pedir menos camuflagem — por escolha, não por vergonha.",
+            "Dermatologista é parceiro de longo prazo, não mágico."
+          ],
+          "cta_final": "Comenta se você precisava ouvir isso hoje — e salva pra lembrar depois."
+        },
+        "legenda_post": "Pele tratada não é pele perfeita. Poro, textura e linha de expressão fazem parte de uma pele viva. O que a gente persegue em consultório é barreira íntegra, menos inflamação e mais conforto — isso sim se acompanha ao longo do tempo. A referência do filtro não é meta clínica.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "instagram",
+        "padrao_aplicado": "Bastidores e humanização — replicar tom confessional. Post @draluisaferrari ('Pele tratada não é pele perfeita') é PERFEITO: quebra expectativa falsa com autoridade + empatia.",
+        "virais_origem": [
+          {
+            "url": "https://www.instagram.com/p/DcPVWI0lvUR/",
+            "autor": "draluisaferrari",
+            "metrica": "64 likes, 7 comentários — baixo alcance mas HIGH ENGAGEMENT (10.9% taxa)",
+            "por_que_viralizou": "Mensagem profunda: rejeita perfeccionismo. Libertadora para seguidoras. Authenticity de médica."
+          }
+        ],
+        "embasamento_viral": "O briefing mostra taxa de engajamento de 10,9% nesse tipo de mensagem: conteúdo que alivia pressão estética gera comentário emocional e salvamento, além de fortalecer vínculo com o público 25-55.",
+        "embasamento_cientifico": [],
+        "conformidade_cfm": "Sem antes/depois, sem promessa, sem oferta de procedimento; reforça relação médico-paciente de longo prazo (Res. CFM 2.336/2023).",
+        "cta": "Pele tratada não é pele perfeita. Poro, textura e linha de expressão fazem parte de uma pele viva. O que a gente persegu",
+        "hashtags": [
+          "#pelereal",
+          "#dermatologia",
+          "#autoestima",
+          "#skincare",
+          "#semfiltro"
+        ]
+      },
+      {
+        "titulo": "As 3 perguntas que eu faço antes de indicar (ou não indicar) qualquer procedimento",
+        "pilar": "Bastidores e humanização",
+        "formato": "talking head",
+        "ganchos_3s": [
+          "Nem toda pessoa que senta na minha cadeira sai com procedimento marcado.",
+          "Antes de qualquer agulha, eu faço três perguntas. A terceira derruba muito plano.",
+          "'Doutora, quero fazer o que fulana fez.' Aí começa a nossa conversa de verdade."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Nem toda pessoa que senta na minha cadeira sai com procedimento marcado. E isso é bom sinal.",
+            "direcao": "POV do consultório vazio, cadeira em foco. Texto: 'as 3 perguntas'."
+          },
+          {
+            "tempo": "3-14s",
+            "fala": "Primeira pergunta: o que incomoda você, com as suas palavras? Não a foto que você trouxe. O incômodo real, no seu rosto.",
+            "direcao": "Cartela '1'. Talking head, tom de escuta. Texto: 'o que incomoda VOCÊ?'"
+          },
+          {
+            "tempo": "14-26s",
+            "fala": "Segunda: o que a anatomia do seu rosto está me mostrando? Proporções, estrutura óssea, musculatura, trajeto de vasos e nervos. É isso que orienta a técnica e a segurança.",
+            "direcao": "Cartela '2'. Corte pra desenho esquemático em papel. Texto: 'anatomia antes da técnica'."
+          },
+          {
+            "tempo": "26-39s",
+            "fala": "Terceira: existe alguma contraindicação aqui? Porque sim, existem critérios claros pra não indicar. E dizer 'não' também é conduta médica.",
+            "direcao": "Cartela '3'. Talking head sério e acolhedor. Texto: 'existe critério pra NÃO fazer'."
+          },
+          {
+            "tempo": "39-45s",
+            "fala": "Se ninguém te fez essas perguntas, faltou consulta. Salva pra lembrar disso.",
+            "direcao": "Close final. Texto: 'faltou consulta'."
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "3 perguntas antes de qualquer procedimento",
+          "laminas": [
+            "1. O que incomoda VOCÊ — com as suas palavras, não a foto de referência.",
+            "2. O que a anatomia do seu rosto mostra: proporções, osso, músculo, vasos e nervos.",
+            "3. Existe contraindicação? Há critérios objetivos para não indicar.",
+            "Plano de tratamento nasce da avaliação, não do catálogo.",
+            "Tendência estética muda; a sua anatomia continua sendo sua.",
+            "Consulta que não faz essas perguntas está incompleta."
+          ],
+          "cta_final": "Salva e leve essas perguntas para a sua próxima avaliação."
+        },
+        "legenda_post": "Consulta boa começa com perguntas, não com catálogo. O que incomoda você, o que a sua anatomia mostra e se existe alguma contraindicação: é daí que sai um plano — inclusive o plano de não fazer nada agora. Dizer não também é conduta médica.",
+        "duracao_estimada_seg": 45,
+        "plataforma_origem_da_tendencia": "instagram",
+        "padrao_aplicado": "Autoridade médica com humanização (dia a dia do consultório, validação científica): mostrar bastidores da decisão clínica, no espírito de 'atitude antes da técnica' dos posts de dermatologistas no Instagram.",
+        "virais_origem": [
+          {
+            "url": "https://www.instagram.com/p/DcP9bThM0YO/",
+            "autor": "lordocheclinic",
+            "metrica": "39 likes, 0 comentários — conteúdo niche mas autoritário",
+            "por_que_viralizou": "Frase provocadora: 'anatomia vem antes da seringa.' Rejeita ordem comum (produto first). Respeito por conceito clínico."
+          },
+          {
+            "url": "https://www.instagram.com/p/DcPVWI0lvUR/",
+            "autor": "draluisaferrari",
+            "metrica": "64 likes, 7 comentários — baixo alcance mas HIGH ENGAGEMENT (10.9% taxa)",
+            "por_que_viralizou": "Mensagem profunda: rejeita perfeccionismo. Libertadora para seguidoras. Authenticity de médica."
+          }
+        ],
+        "embasamento_viral": "Junta os dois sinais de maior engajamento qualitativo do briefing: bastidor de consultório com humanização e a inversão de expectativa ('nem sempre a resposta é fazer'), que costuma render comentário e salvamento.",
+        "embasamento_cientifico": [
+          "Indicações e contraindicações para preenchedores: quando preenchimento NÃO é a melhor escolha — Dra. Rafaela Salvato, Dermatologia — https://rafaelasalvato.med.br/indicacoes-contraindicacoes/criterios-indicacao-injetaveis",
+          "Anatomia facial aplicada à harmonização: músculos, nervos e estrutura óssea — Clinics in Dermatology (2014); Tania Marur, Yakup Tuna, Selman Demirci, Universidade de Istambul — https://www.facialacademy.com.br/news/anatomia-facial-para-preenchedores-o-guia-definitivo"
+        ],
+        "conformidade_cfm": "Não oferta procedimento, não promete resultado, não usa imagem de paciente e valoriza o critério clínico (Res. CFM 2.336/2023).",
+        "cta": "Consulta boa começa com perguntas, não com catálogo. O que incomoda você, o que a sua anatomia mostra e se existe alguma",
+        "hashtags": [
+          "#consultadermatologica",
+          "#harmonizacaofacial",
+          "#dermatologia",
+          "#bastidores",
+          "#eticamedica"
+        ]
+      }
+    ]
+  },
+  "sinais": {
+    "sinais_da_geracao": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ]
+  }
+}

@@ -5,163 +5,222 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radar de Conteúdo Viral — Dermatologia Estética</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --fundo: #ffffff; --tinta: #1d1a20; --suave: #6f6a76;
-    --acento: #b0578d; --acento-forte: #93446f; --acento-claro: #faeef5;
-    --card: #ffffff; --borda: #e8e5ea; --ok: #2e7d5b; --ok-claro: #e9f4ee;
-    --sombra: 0 1px 3px rgba(35, 20, 35, .06);
-    --sombra-alta: 0 12px 34px -14px rgba(35, 20, 35, .22);
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>  :root {
+    /* Design tokens — paleta oficial do Instagram */
+    --ig-blue: #405DE6; --ig-purple: #833AB4; --ig-magenta: #C13584;
+    --ig-pink: #E1306C; --ig-orange: #F77737; --ig-yellow: #FCAF45;
+    --grad: linear-gradient(45deg, #405DE6 0%, #833AB4 30%, #C13584 50%, #E1306C 70%, #F77737 100%);
+    --grad-suave: linear-gradient(45deg, #f5f1fe, #fdeef5, #fff4ec);
+
+    /* Neutros (escala do Instagram) */
+    --fundo: #ffffff; --superficie: #fafafa; --tinta: #262626;
+    --suave: #737373; --borda: #dbdbdb; --borda-leve: #efefef;
+    --acento: #C13584; --ok: #1f9d63; --ok-claro: #e8f6ef;
+
+    /* Elevação e forma */
+    --r-lg: 20px; --r-md: 14px; --r-full: 999px;
+    --sombra-1: 0 1px 2px rgba(0,0,0,.05);
+    --sombra-2: 0 8px 24px -8px rgba(131, 58, 180, .16);
+    --sombra-3: 0 18px 44px -16px rgba(131, 58, 180, .28);
   }
   * { box-sizing: border-box; margin: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: "Sora", "Segoe UI", system-ui, sans-serif;
-         background: var(--fundo); color: var(--tinta); line-height: 1.6; }
+  body { font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+         background: var(--fundo); color: var(--tinta); line-height: 1.6;
+         -webkit-font-smoothing: antialiased; }
   .container { max-width: 1020px; margin: 0 auto; padding: 0 18px; }
-  header.hero { padding: 40px 0 16px; text-align: center; }
-  .selo { display: inline-block; background: var(--acento-claro); color: var(--acento);
-          font-size: .76rem; font-weight: 600; padding: 4px 14px; border-radius: 999px;
-          letter-spacing: .05em; text-transform: uppercase; margin-bottom: 14px; }
-  h1 { font-size: clamp(1.4rem, 4.5vw, 2rem); line-height: 1.25; font-weight: 700; }
-  h1 span { color: var(--acento); }
-  .sub { color: var(--suave); max-width: 620px; margin: 10px auto 0; font-size: .92rem; }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--ig-purple); outline-offset: 2px; border-radius: 4px; }
 
-  .painel { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.92);
-            backdrop-filter: blur(8px); padding: 10px 0; border-bottom: 1px solid var(--borda); }
+  header.hero { padding: 44px 0 18px; text-align: center; }
+  .selo { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem;
+          font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+          padding: 6px 16px; border-radius: var(--r-full); margin-bottom: 16px;
+          color: var(--tinta); position: relative; background:
+            linear-gradient(var(--fundo), var(--fundo)) padding-box,
+            var(--grad) border-box; border: 2px solid transparent; }
+  .selo::before { content: ""; width: 10px; height: 10px; border-radius: 50%;
+                  background: var(--grad); }
+  h1 { font-size: clamp(1.5rem, 4.5vw, 2.2rem); line-height: 1.22;
+       font-weight: 800; letter-spacing: -.02em; }
+  h1 span { background: var(--grad); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { color: var(--suave); max-width: 640px; margin: 12px auto 0; font-size: .93rem; }
+
+  .painel { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.86);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            padding: 10px 0; border-bottom: 1px solid var(--borda-leve); }
   .painel-linha { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
                   justify-content: space-between; }
-  .abas { display: flex; gap: 4px; background: #f4f2f5; border-radius: 999px; padding: 4px; }
-  .aba { border: 0; background: transparent; color: var(--suave); font: inherit;
-         font-size: .84rem; font-weight: 600; padding: 6px 14px; border-radius: 999px;
-         cursor: pointer; transition: all .18s; }
-  .aba.ativa { background: var(--acento); color: #fff; }
+  .abas { display: flex; gap: 4px; background: var(--superficie);
+          border: 1px solid var(--borda-leve); border-radius: var(--r-full); padding: 4px; }
+  .aba { border: 0; background: transparent; color: var(--suave); font-size: .84rem;
+         font-weight: 600; padding: 7px 15px; border-radius: var(--r-full);
+         cursor: pointer; transition: all .2s; }
+  .aba:hover { color: var(--tinta); }
+  .aba.ativa { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
   .progresso { font-size: .84rem; color: var(--suave); font-weight: 600; }
-  .progresso b { color: var(--ok); }
+  .progresso b { background: var(--grad); -webkit-background-clip: text;
+                 background-clip: text; -webkit-text-fill-color: transparent;
+                 font-weight: 800; }
 
-  #banner-foco { display: none; background: var(--acento-claro); border-radius: 12px;
-                 padding: 12px 16px; margin: 18px 0 0; font-size: .9rem;
-                 align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  #banner-foco { display: none; border-radius: var(--r-md); padding: 14px 18px;
+                 margin: 18px 0 0; font-size: .9rem; align-items: center;
+                 justify-content: space-between; gap: 10px; flex-wrap: wrap;
+                 background: var(--grad-suave); border: 1px solid var(--borda-leve); }
   body.em-foco #banner-foco { display: flex; }
   body.em-foco .painel, body.em-foco .aviso { display: none; }
 
-  section.agenda { padding: 20px 0 70px; }
-  .aviso { background: var(--acento-claro); border-radius: 12px; padding: 10px 16px;
-           font-size: .83rem; margin-bottom: 20px; }
+  section.agenda { padding: 22px 0 70px; }
+  .aviso { background: var(--grad-suave); border-radius: var(--r-md);
+           padding: 11px 16px; font-size: .83rem; margin-bottom: 22px; }
 
   .lista-cartoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                   gap: 14px; align-items: start; }
+                   gap: 16px; align-items: start; }
 
-  .cartao { background: var(--card); border: 1px solid var(--borda); border-radius: 16px;
-            box-shadow: var(--sombra); transition: box-shadow .2s, border-color .2s; }
+  .cartao { background: var(--fundo); border: 1px solid var(--borda);
+            border-radius: var(--r-lg); box-shadow: var(--sombra-1);
+            transition: box-shadow .25s, transform .25s, border-color .25s;
+            position: relative; overflow: hidden; }
+  .cartao::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+                    background: var(--grad); opacity: 0; transition: opacity .25s; }
+  .cartao:hover { transform: translateY(-2px); box-shadow: var(--sombra-2); }
+  .cartao:hover::before, .cartao.aberta::before { opacity: 1; }
   .cartao.oculta { display: none; }
-  .cartao.aberta { grid-column: 1 / -1; box-shadow: var(--sombra-alta); }
-  .cartao.feita .cab { opacity: .55; }
+  .cartao.aberta { grid-column: 1 / -1; box-shadow: var(--sombra-3);
+                   border-color: transparent; transform: none; }
+  .cartao.feita .cab { opacity: .5; }
   .cartao.feita .cab h3 { text-decoration: line-through; }
 
-  .cab { padding: 16px 18px 14px; cursor: pointer; position: relative; }
-  .cab:hover { background: #fdfbfc; border-radius: 16px; }
-  .topo { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px;
-          padding-right: 26px; }
-  .chip { font-size: .7rem; font-weight: 600; padding: 2px 10px; border-radius: 999px;
-          background: var(--acento-claro); color: var(--acento); }
-  .chip.dia { background: var(--ok-claro); color: var(--ok); }
+  .cab { padding: 18px 18px 15px; cursor: pointer; position: relative; }
+  .topo { display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+          margin-bottom: 9px; padding-right: 28px; }
+  .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
+          border-radius: var(--r-full); background: var(--superficie);
+          border: 1px solid var(--borda-leve); color: var(--suave); }
+  .chip.dia { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
+  .chip.trend { color: var(--acento); background:
+                  linear-gradient(var(--fundo), var(--fundo)) padding-box,
+                  var(--grad) border-box; border: 1.5px solid transparent; }
   .chip-status { display: none; }
-  .cartao.na-lista .chip-status.lista { display: inline-block; background: var(--acento); color: #fff; }
-  .cartao.feita .chip-status.feito { display: inline-block; background: var(--ok); color: #fff; }
-  .cab h3 { font-size: 1.02rem; line-height: 1.4; font-weight: 600; }
-  .previa { color: var(--suave); font-size: .84rem; margin-top: 6px; font-style: italic;
+  .cartao.na-lista .chip-status.lista { display: inline-block; background: var(--grad);
+                                        border: 0; color: #fff; }
+  .cartao.feita .chip-status.feito { display: inline-block; background: var(--ok);
+                                     border: 0; color: #fff; }
+  .cab h3 { font-size: 1.03rem; line-height: 1.4; font-weight: 700; letter-spacing: -.01em; }
+  .previa { color: var(--suave); font-size: .84rem; margin-top: 7px; font-style: italic;
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
             overflow: hidden; }
-  .seta { position: absolute; right: 16px; top: 16px; color: var(--suave);
-          transition: transform .25s; font-size: .8rem; }
+  .seta { position: absolute; right: 18px; top: 18px; color: var(--suave);
+          transition: transform .3s cubic-bezier(.34,1.56,.64,1); font-size: .8rem; }
   .cartao.aberta .seta { transform: rotate(180deg); }
   .cartao.aberta .previa { display: none; }
 
-  .detalhe { display: none; padding: 0 20px 18px; border-top: 1px solid var(--borda); }
-  .cartao.aberta .detalhe { display: block; }
+  .detalhe { display: none; padding: 0 22px 20px; border-top: 1px solid var(--borda-leve); }
+  .cartao.aberta .detalhe { display: block; animation: abrir .3s ease; }
+  @keyframes abrir { from { opacity: 0; transform: translateY(-6px); }
+                     to { opacity: 1; transform: none; } }
 
-  .rotulo { font-size: .72rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: .06em; color: var(--acento); margin: 16px 0 8px; }
+  .rotulo { font-size: .72rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: .08em; margin: 20px 0 9px;
+            background: var(--grad); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; }
   .ganchos { display: flex; flex-direction: column; gap: 8px; }
-  .gancho-opcao { display: flex; gap: 10px; align-items: flex-start; background: #faf9fb;
-                  border: 1.5px solid var(--borda); border-radius: 12px; padding: 10px 14px;
-                  cursor: pointer; font-size: .88rem; transition: border-color .18s; }
-  .gancho-opcao:hover { border-color: var(--acento); }
-  .gancho-opcao.sel { border-color: var(--acento); background: var(--acento-claro); }
-  .gancho-opcao input { accent-color: var(--acento); margin-top: 4px; }
+  .gancho-opcao { display: flex; gap: 10px; align-items: flex-start;
+                  background: var(--superficie); border: 1.5px solid var(--borda-leve);
+                  border-radius: var(--r-md); padding: 11px 14px; cursor: pointer;
+                  font-size: .89rem; transition: all .2s; }
+  .gancho-opcao:hover { border-color: var(--borda); transform: translateX(2px); }
+  .gancho-opcao.sel { background:
+                        linear-gradient(var(--fundo), var(--fundo)) padding-box,
+                        var(--grad) border-box; border: 1.5px solid transparent;
+                      box-shadow: var(--sombra-1); }
+  .gancho-opcao input { accent-color: var(--ig-magenta); margin-top: 4px; }
 
-  .segmentos { display: inline-flex; background: #f4f2f5; border-radius: 999px;
-               padding: 3px; margin: 2px 0 10px; }
-  .seg { border: 0; background: transparent; color: var(--suave); font: inherit;
-         font-size: .82rem; font-weight: 600; padding: 6px 16px; border-radius: 999px;
-         cursor: pointer; transition: all .18s; }
-  .seg.ativa { background: var(--acento); color: #fff; }
+  .segmentos { display: inline-flex; background: var(--superficie);
+               border: 1px solid var(--borda-leve); border-radius: var(--r-full);
+               padding: 3px; margin: 2px 0 12px; }
+  .seg { border: 0; background: transparent; color: var(--suave); font-size: .83rem;
+         font-weight: 600; padding: 7px 17px; border-radius: var(--r-full);
+         cursor: pointer; transition: all .2s; }
+  .seg.ativa { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
 
-  .bloco-tempo { display: grid; grid-template-columns: 62px 1fr; gap: 12px;
-                 padding: 9px 0; border-bottom: 1px dashed var(--borda); font-size: .9rem; }
+  .bloco-tempo { display: grid; grid-template-columns: 64px 1fr; gap: 13px;
+                 padding: 10px 0; border-bottom: 1px dashed var(--borda-leve);
+                 font-size: .9rem; }
   .bloco-tempo:last-child { border-bottom: 0; }
-  .tempo { font-size: .74rem; font-weight: 700; color: var(--acento);
-           background: var(--acento-claro); border-radius: 8px; padding: 4px 6px;
-           height: fit-content; text-align: center; }
+  .tempo { font-size: .73rem; font-weight: 800; color: #fff; background: var(--grad);
+           border-radius: 9px; padding: 4px 6px; height: fit-content; text-align: center;
+           letter-spacing: .02em; }
   .direcao { color: var(--suave); font-size: .8rem; margin-top: 3px; }
   .direcao::before { content: "🎥 "; }
 
   .laminas { counter-reset: lam; display: flex; flex-direction: column; gap: 8px; }
-  .lamina { background: #faf9fb; border-radius: 12px; padding: 10px 14px 10px 44px;
-            position: relative; font-size: .88rem; }
+  .lamina { background: var(--superficie); border-radius: var(--r-md);
+            padding: 11px 14px 11px 46px; position: relative; font-size: .89rem; }
   .lamina::before { counter-increment: lam; content: counter(lam);
-                    position: absolute; left: 12px; top: 10px; width: 22px; height: 22px;
-                    border-radius: 50%; background: var(--acento); color: #fff;
-                    font-size: .73rem; font-weight: 700; display: flex;
+                    position: absolute; left: 12px; top: 10px; width: 24px; height: 24px;
+                    border-radius: 50%; background: var(--grad); color: #fff;
+                    font-size: .73rem; font-weight: 800; display: flex;
                     align-items: center; justify-content: center; }
   .lamina.capa::before { content: "★"; }
   .lamina.cta::before { content: "➤"; }
 
-  .legenda { background: #faf9fb; border-radius: 12px; padding: 12px 14px;
-             font-size: .88rem; white-space: pre-wrap; }
-  .hashtags { color: var(--acento); font-size: .84rem; margin-top: 6px; }
+  .legenda { background: var(--superficie); border-radius: var(--r-md);
+             padding: 13px 15px; font-size: .89rem; white-space: pre-wrap; }
+  .hashtags { font-size: .85rem; margin-top: 7px; font-weight: 600;
+              background: var(--grad); -webkit-background-clip: text;
+              background-clip: text; -webkit-text-fill-color: transparent; }
 
   .virais-origem { display: flex; flex-direction: column; gap: 8px; }
-  .viral-item { background: #faf9fb; border-radius: 12px; padding: 10px 14px;
-                font-size: .86rem; }
-  .viral-item a { color: var(--acento); font-weight: 600; text-decoration: none; }
+  .viral-item { background: var(--superficie); border-radius: var(--r-md);
+                padding: 11px 15px; font-size: .86rem;
+                border: 1px solid var(--borda-leve);
+                border-left: 3px solid var(--ig-magenta); }
+  .viral-item a { color: var(--ig-magenta); font-weight: 700; text-decoration: none; }
   .viral-item a:hover { text-decoration: underline; }
-  .viral-item .metrica { color: var(--ok); font-weight: 600; }
+  .viral-item .metrica { color: var(--ok); font-weight: 700; }
   .viral-item .motivo { color: var(--suave); display: block; margin-top: 2px; }
-  .padrao { background: var(--acento-claro); border-radius: 12px; padding: 10px 14px;
-            font-size: .86rem; margin-top: 8px; }
+  .padrao { background: var(--grad-suave); border-radius: var(--r-md);
+            padding: 11px 15px; font-size: .86rem; margin-top: 8px; }
 
-  details { margin-top: 12px; border: 1px solid var(--borda); border-radius: 12px;
-            padding: 10px 14px; font-size: .88rem; }
-  details summary { cursor: pointer; font-weight: 600; font-size: .83rem; color: var(--suave); }
+  details { margin-top: 12px; border: 1px solid var(--borda-leve);
+            border-radius: var(--r-md); padding: 11px 15px; font-size: .88rem;
+            background: var(--fundo); transition: background .2s; }
+  details:hover { background: var(--superficie); }
+  details summary { cursor: pointer; font-weight: 700; font-size: .83rem; color: var(--suave); }
   details[open] summary { margin-bottom: 8px; }
   details ul { padding-left: 18px; }
   details li { margin-bottom: 6px; overflow-wrap: anywhere; }
   .texto { white-space: pre-wrap; }
 
-  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
-           padding-top: 14px; border-top: 1px solid var(--borda); }
-  .btn { border: 1.5px solid var(--borda); background: #fff; color: var(--tinta);
-         font: inherit; font-size: .83rem; font-weight: 600; padding: 8px 14px;
-         border-radius: 999px; cursor: pointer; transition: all .18s; }
-  .btn:hover { border-color: var(--acento); color: var(--acento); }
-  .btn.primario { background: var(--acento); border-color: var(--acento); color: #fff; }
-  .btn.primario:hover { background: var(--acento-forte); color: #fff; }
-  .btn.na-lista-btn { background: var(--acento-claro); border-color: var(--acento); color: var(--acento); }
+  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
+           padding-top: 16px; border-top: 1px solid var(--borda-leve); }
+  .btn { border: 1.5px solid var(--borda); background: var(--fundo); color: var(--tinta);
+         font-size: .84rem; font-weight: 700; padding: 9px 16px;
+         border-radius: var(--r-full); cursor: pointer; transition: all .2s; }
+  .btn:hover { border-color: var(--ig-magenta); color: var(--ig-magenta);
+               transform: translateY(-1px); }
+  .btn.primario { background: var(--grad); border-color: transparent; color: #fff;
+                  box-shadow: var(--sombra-2); }
+  .btn.primario:hover { color: #fff; filter: brightness(1.06); box-shadow: var(--sombra-3); }
+  .btn.na-lista-btn { background: var(--grad-suave); border: 1.5px solid transparent;
+                      background-origin: border-box; color: var(--ig-magenta); }
   .btn.feito-btn.marcado { background: var(--ok-claro); border-color: var(--ok); color: var(--ok); }
 
-  .vazio { text-align: center; color: var(--suave); padding: 40px 0; display: none; }
+  .vazio { text-align: center; color: var(--suave); padding: 44px 0; display: none; }
 
-  #toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(80px);
+  #toast { position: fixed; left: 50%; bottom: 28px;
+           transform: translateX(-50%) translateY(80px);
            background: var(--tinta); color: #fff; font-size: .87rem; font-weight: 600;
-           padding: 10px 20px; border-radius: 999px; opacity: 0; transition: all .3s;
-           z-index: 50; pointer-events: none; max-width: 90vw; }
+           padding: 12px 22px; border-radius: var(--r-full); opacity: 0;
+           transition: all .35s cubic-bezier(.34,1.3,.64,1); z-index: 50;
+           pointer-events: none; max-width: 90vw; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
   #toast.mostrar { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-  footer { border-top: 1px solid var(--borda); padding: 24px 0 40px; text-align: center;
-           color: var(--suave); font-size: .83rem; }
-</style>
+  footer { border-top: 1px solid var(--borda-leve); padding: 26px 0 42px;
+           text-align: center; color: var(--suave); font-size: .83rem; }</style>
 </head>
 <body>
 <header class="hero container">
@@ -197,7 +256,7 @@
         <span class="chip dia">Segunda-feira · 18h30</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: tiktok</span>
+        <span class="chip trend">Tendência: tiktok</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -240,7 +299,7 @@
         <span class="chip dia">Terça-feira · 12h00</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: multiplataforma</span>
+        <span class="chip trend">Tendência: multiplataforma</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -283,7 +342,7 @@
         <span class="chip dia">Quarta-feira · 19h00</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: instagram</span>
+        <span class="chip trend">Tendência: instagram</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -326,7 +385,7 @@
         <span class="chip dia">Quinta-feira · 12h00</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: instagram</span>
+        <span class="chip trend">Tendência: instagram</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -369,7 +428,7 @@
         <span class="chip dia">Sexta-feira · 17h30</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: instagram</span>
+        <span class="chip trend">Tendência: instagram</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -412,7 +471,7 @@
         <span class="chip dia">Sábado · 10h00</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: tiktok</span>
+        <span class="chip trend">Tendência: tiktok</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -455,7 +514,7 @@
         <span class="chip dia">Domingo · 20h00</span>
         <span class="chip">Rotina e prevenção</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: tiktok</span>
+        <span class="chip trend">Tendência: tiktok</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -498,7 +557,7 @@
         <span class="chip dia">💡 Banco de ideias</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: instagram</span>
+        <span class="chip trend">Tendência: instagram</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -541,7 +600,7 @@
         <span class="chip dia">💡 Banco de ideias</span>
         <span class="chip">Bastidores e humanização</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: instagram</span>
+        <span class="chip trend">Tendência: instagram</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
@@ -584,7 +643,7 @@
         <span class="chip dia">💡 Banco de ideias</span>
         <span class="chip">Bastidores e humanização</span>
         <span class="chip">~45s</span>
-        <span class="chip">Tendência: instagram</span>
+        <span class="chip trend">Tendência: instagram</span>
         <span class="chip chip-status lista">📌 na lista</span>
         <span class="chip chip-status feito">✓ feita</span>
       </div>
