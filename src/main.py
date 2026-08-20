@@ -87,6 +87,15 @@ def main() -> None:
         from src.publicar.site import publicar_site
         destino = RAIZ / "web" / "index.html"
         publicar_site(config, roteiros, sinais, destino)
+        # persiste a geração para permitir re-render (mudança de design)
+        # sem custo de IA — ver src/publicar/rerender.py
+        dados_dir = RAIZ / "dados"
+        dados_dir.mkdir(exist_ok=True)
+        (dados_dir / f"{args.nicho}.json").write_text(
+            json.dumps({"roteiros": roteiros, "sinais": sinais},
+                       ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
         print(f"🌐 Site atualizado: {destino}")
 
 
