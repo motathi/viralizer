@@ -4,6 +4,7 @@ Sobe um servidor em http://127.0.0.1:8777 (só acessível neste computador) e
 abre o navegador com um painel de botões:
 
 - ▶ Gerar agenda desta semana — roda o pipeline completo aqui, pelo seu IP
+- 🧪 Testar coleta — só busca os virais, sem gastar nada de IA
 - 👀 Abrir agenda — abre o resultado no navegador
 - ☁️ Publicar no site — envia para o GitHub (a Vercel publica sozinha)
 
@@ -41,6 +42,8 @@ DICAS = [
                           ".env na pasta do projeto."),
     ("Nenhuma pauta com âncora viral", "🔍 A coleta não encontrou virais suficientes hoje. "
                                        "Tente de novo mais tarde — nada foi cobrado."),
+    ("navegador da coleta ainda não foi instalado", "🌐 Falta instalar o navegador que faz a "
+     "coleta. Feche esta janela e abra o painel pelo atalho (abrir-painel) — ele instala sozinho."),
     ("Failed to establish a new connection", "🌐 Sem conexão com a internet, ou o serviço "
                                              "está fora do ar. Tente de novo em alguns minutos."),
     ("could not read Username", "🔐 O Git não está autenticado nesta máquina — por isso não "
@@ -166,6 +169,7 @@ PAGINA = """<!DOCTYPE html>
   <div class="botoes">
     <select id="nicho"></select>
     <button class="principal" id="gerar">▶ Gerar agenda desta semana</button>
+    <button id="testar">🧪 Testar coleta (grátis)</button>
     <a class="btn" id="abrir" href="/agenda" target="_blank">👀 Abrir agenda</a>
     <button id="publicar">☁️ Publicar no site</button>
   </div>
@@ -187,6 +191,7 @@ function pintar(e) {
   rodando = e.rodando;
   $('#gerar').disabled = e.rodando;
   $('#publicar').disabled = e.rodando;
+  $('#testar').disabled = e.rodando;
   const s = $('#status');
   if (e.rodando) {
     s.innerHTML = `<span class="girando"></span> <b>${e.acao}</b> — em andamento…`;
@@ -211,6 +216,10 @@ async function atualizar() {
 
 $('#gerar').onclick = async () => {
   await fetch('/gerar?nicho=' + encodeURIComponent($('#nicho').value), {method:'POST'});
+  atualizar();
+};
+$('#testar').onclick = async () => {
+  await fetch('/testar?nicho=' + encodeURIComponent($('#nicho').value), {method:'POST'});
   atualizar();
 };
 $('#publicar').onclick = async () => {
@@ -266,6 +275,15 @@ class Painel(BaseHTTPRequestHandler):
                 return
             ok = _iniciar([sys.executable, "-m", "src.main", "--nicho", nicho,
                            "--publicar-site"], "Gerando a agenda")
+            self._json({"ok": ok})
+        elif caminho == "/testar":
+            nicho = dict(x.split("=", 1) for x in consulta.split("&") if "=" in x).get("nicho", "")
+            if nicho not in _nichos():
+                self._json({"ok": False, "erro": "nicho inválido"})
+                return
+            ok = _iniciar([sys.executable, "-m", "src.main", "--nicho", nicho,
+                           "--coleta", "local", "--apenas-descoberta"],
+                          "Testando a coleta (sem custo)")
             self._json({"ok": ok})
         elif caminho == "/publicar":
             ok = _iniciar([sys.executable, "-m", "src.painel.publicar"], "Publicando no site")

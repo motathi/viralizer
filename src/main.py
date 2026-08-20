@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from src.agenda.montador import montar_agenda
 from src.historico import carregar_historico, registrar_historico
 from src.descoberta.apify_social import virais_instagram, virais_tiktok
-from src.descoberta.tiktok_creative_center import tendencias_tiktok
+from src.descoberta.tiktok_local import virais_tiktok_local
 from src.descoberta.youtube import descobrir_virais
 from src.roteiros.gerador import gerar_roteiros
 
@@ -33,6 +33,9 @@ def main() -> None:
                         help="só busca os virais, sem gerar roteiros (não gasta tokens de IA)")
     parser.add_argument("--publicar-site", action="store_true",
                         help="além da agenda, atualiza web/index.html com o resultado")
+    parser.add_argument("--coleta", choices=("auto", "local", "apify"), default="auto",
+                        help="auto: tenta a coleta local (grátis) e usa o Apify se faltar; "
+                             "local: só o navegador desta máquina; apify: só o serviço pago")
     args = parser.parse_args()
 
     caminho_config = RAIZ / "config" / "nichos" / f"{args.nicho}.yaml"
@@ -46,17 +49,22 @@ def main() -> None:
 
     print(f"🔎 Coletando sinais de tendência do nicho '{config['nome']}'...")
     sinais = {}
+    tem_apify = bool(os.environ.get("APIFY_API_TOKEN"))
 
-    print("   TikTok Creative Center (hashtags em alta)...")
-    sinais["tiktok_creative_center"] = tendencias_tiktok(config)
+    if args.coleta in ("auto", "local"):
+        print("   TikTok — coleta local pelo seu navegador (grátis, sem cota)...")
+        sinais["tiktok_virais"] = virais_tiktok_local(config)
+        print(f"   → {len(sinais['tiktok_virais'])} vídeos coletados localmente")
 
-    print("   TikTok — vídeos virais das hashtags do nicho (via Apify)...")
-    sinais["tiktok_virais"] = virais_tiktok(config)
+    poucos = len(sinais.get("tiktok_virais", [])) < 5
+    if args.coleta == "apify" or (args.coleta == "auto" and poucos and tem_apify):
+        if poucos and args.coleta == "auto":
+            print("   Coleta local trouxe pouca coisa — usando o Apify como reserva...")
+        sinais["tiktok_virais"] = virais_tiktok(config) or sinais.get("tiktok_virais", [])
+        print("   Instagram — top posts das hashtags do nicho (via Apify)...")
+        sinais["instagram_virais"] = virais_instagram(config)
 
-    print("   Instagram — top posts das hashtags do nicho (via Apify)...")
-    sinais["instagram_virais"] = virais_instagram(config)
-
-    print("   YouTube Shorts — vídeos virais do nicho...")
+    print("   YouTube Shorts — vídeos virais do nicho (API oficial, grátis)...")
     sinais["youtube_virais"] = descobrir_virais(config) if os.environ.get("YOUTUBE_API_KEY") else []
 
     (saida / "sinais.json").write_text(

@@ -18,6 +18,8 @@ if errorlevel 1 (
 )
 
 python -m pip install -q -r requirements.txt
+echo   Preparando o navegador da coleta (so na primeira vez)...
+python -m playwright install chromium >nul 2>&1
 python -m src.painel.servidor
 
 pause
