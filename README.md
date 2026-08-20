@@ -58,7 +58,24 @@ cp .env.example .env   # e preencha as chaves
 | `APIFY_API_TOKEN` | [Apify Console](https://console.apify.com/) | Recomendada (virais de TikTok/Instagram) |
 | `YOUTUBE_API_KEY` | [Google Cloud Console](https://console.cloud.google.com/apis/library/youtube.googleapis.com) | Opcional |
 
-## Uso
+## Uso simples: painel com um clique
+
+Para gerar a agenda sem mexer em terminal, use o painel local — ele roda **na sua
+máquina, pelo seu IP**:
+
+1. Dê um duplo clique no atalho da sua plataforma:
+   - **Windows**: `abrir-painel.bat`
+   - **Mac**: `abrir-painel.command`
+   - **Linux**: `abrir-painel.sh`
+2. O navegador abre em `http://127.0.0.1:8777` (só acessível neste computador)
+3. Clique em **▶ Gerar agenda desta semana** e acompanhe o progresso ao vivo
+4. Ao terminar, use **👀 Abrir agenda** para ver o resultado e **☁️ Publicar no site**
+   para enviar ao GitHub (a Vercel publica em ~1 minuto)
+
+O painel instala sozinho o que falta e traduz os erros técnicos para linguagem
+simples (créditos acabando, chave faltando, sem internet).
+
+## Uso pelo terminal
 
 ```bash
 # Pipeline completo: coleta -> análise -> roteiros -> agenda -> site
@@ -80,6 +97,8 @@ Saídas:
 | `dados/<nicho>.json` | Última geração, usada pelo `rerender` |
 | `dados/historico-<nicho>.json` | Memória anti-repetição |
 | `saida/<nicho>/<data>/` | `sinais.json`, `roteiros.json` e `agenda.md` da execução |
+
+O painel local fica em `src/painel/` e não precisa de nenhuma dependência extra.
 
 ## O site
 
