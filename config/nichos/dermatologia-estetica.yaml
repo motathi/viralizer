@@ -58,6 +58,6 @@ descoberta:
 
 # Parâmetros da geração
 geracao:
-  ideias_por_semana: 20    # quantas ideias/roteiros por agenda (as 7 primeiras
+  ideias_por_semana: 10    # quantas ideias/roteiros por agenda (as 7 primeiras
                            # ganham dia/horário; o restante vira banco de ideias)
   duracao_alvo_segundos: 45
