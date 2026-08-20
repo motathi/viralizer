@@ -18,6 +18,7 @@ import os
 import subprocess
 import sys
 import threading
+import time
 import webbrowser
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -113,23 +114,46 @@ def _versao() -> dict:
                 "aviso": "Esta pasta foi baixada como ZIP, então não recebe atualizações. "
                          "Para atualizar com um clique daqui em diante, baixe uma única vez "
                          "com o comando: git clone <endereço do repositório>"}
+    # GIT_TERMINAL_PROMPT=0: sem isso, um repositório privado sem credencial
+    # salva trava esperando uma senha que ninguém vai digitar aqui.
+    ambiente = {**os.environ, "GIT_TERMINAL_PROMPT": "0"}
     try:
-        subprocess.run(["git", "fetch", "--quiet"], cwd=RAIZ, timeout=25,
-                       capture_output=True, check=False)
+        f = subprocess.run(["git", "fetch", "--quiet"], cwd=RAIZ, timeout=40,
+                           capture_output=True, text=True, check=False, env=ambiente)
+        if f.returncode != 0:
+            return {"git": True, "atras": 0, "aviso": "",
+                    "falha": _motivo_falha(f.stderr or "")}
         r = subprocess.run(["git", "rev-list", "--count", "HEAD..@{u}"], cwd=RAIZ,
                            capture_output=True, text=True, timeout=10, check=False)
-        atras = int(r.stdout.strip() or 0) if r.returncode == 0 else 0
+        if r.returncode != 0:  # branch local sem par no servidor
+            return {"git": True, "atras": 0, "aviso": "",
+                    "falha": "Esta cópia está numa ramificação que não existe no servidor."}
+        atras = int(r.stdout.strip() or 0)
     except Exception:  # noqa: BLE001 - sem rede, segue sem avisar
-        return {"git": True, "atras": 0, "aviso": ""}
-    return {"git": True, "atras": atras, "aviso": ""}
+        return {"git": True, "atras": 0, "aviso": "", "falha": ""}
+    return {"git": True, "atras": atras, "aviso": "", "falha": ""}
+
+
+def _motivo_falha(erro: str) -> str:
+    e = erro.lower()
+    if "authentication" in e or "could not read" in e or "403" in e:
+        return ("O Git não conseguiu entrar na sua conta do GitHub. "
+                "O botão de atualizar ainda funciona — ele pede o login.")
+    if "could not resolve host" in e or "unable to access" in e:
+        return "Sem conexão com a internet para conferir se há versão nova."
+    return ""
 
 
 # a verificação de versão roda em segundo plano, para não travar a abertura
-versao_cache = {"git": True, "atras": 0, "aviso": ""}
+versao_cache = {"git": True, "atras": 0, "aviso": "", "falha": ""}
 
 
 def _atualizar_versao_cache() -> None:
-    versao_cache.update(_versao())
+    """Reconfere de tempos em tempos: quem deixa o painel aberto por horas
+    precisa ver a versão nova sem ter que fechar e abrir de novo."""
+    while True:
+        versao_cache.update(_versao())
+        time.sleep(180)
 
 
 def _nichos() -> list[str]:
@@ -208,6 +232,7 @@ PAGINA = """<!DOCTYPE html>
     <select id="nicho"></select>
     <button class="principal" id="gerar">▶ Gerar agenda desta semana</button>
     <button id="testar">🧪 Testar coleta (grátis)</button>
+    <button id="atualizarPrograma">🔄 Atualizar programa</button>
     <a class="btn" id="abrir" href="/agenda" target="_blank">👀 Abrir agenda</a>
     <button id="publicar">☁️ Publicar no site</button>
   </div>
@@ -230,6 +255,7 @@ function pintar(e) {
   $('#gerar').disabled = e.rodando;
   $('#publicar').disabled = e.rodando;
   $('#testar').disabled = e.rodando;
+  $('#atualizarPrograma').disabled = e.rodando;
   const s = $('#status');
   if (e.rodando) {
     s.innerHTML = `<span class="girando"></span> <b>${e.acao}</b> — em andamento…`;
@@ -257,12 +283,11 @@ async function conferirVersao() {
       el.innerHTML = `<span>📦 ${v.aviso}</span>`;
     } else if (v.atras > 0) {
       el.className = 'banner visivel nova';
-      el.innerHTML = `<span>✨ Tem versão nova do programa (${v.atras} melhoria${v.atras>1?'s':''}).</span>` +
-                     `<button id="btn-atualizar">🔄 Atualizar agora</button>`;
-      $('#btn-atualizar').onclick = async () => {
-        await fetch('/atualizar', {method:'POST'});
-        atualizar();
-      };
+      el.innerHTML = `<span>✨ Tem versão nova do programa (${v.atras} melhoria${v.atras>1?'s':''}) — ` +
+                     `clique em <b>🔄 Atualizar programa</b>.</span>`;
+    } else if (v.falha) {
+      el.className = 'banner visivel zip';
+      el.innerHTML = `<span>⚠️ ${v.falha}</span>`;
     } else {
       el.className = 'banner';
     }
@@ -284,6 +309,11 @@ $('#testar').onclick = async () => {
 $('#publicar').onclick = async () => {
   await fetch('/publicar', {method:'POST'});
   atualizar();
+};
+$('#atualizarPrograma').onclick = async () => {
+  await fetch('/atualizar', {method:'POST'});
+  atualizar();
+  setTimeout(conferirVersao, 20000);
 };
 
 carregarNichos();
