@@ -6,6 +6,9 @@ A página renderiza os roteiros da semana com:
   (o gancho escolhido substitui o bloco de abertura do roteiro);
 - "minha lista" de ideias selecionadas e marcação de feitas (estado salvo
   no navegador, por semana), com filtros e contador;
+- fila de produção: ideias marcadas como feitas saem da lista;
+- descarte individual (✕) com restauração;
+- histórico das semanas anteriores no painel e aviso de agenda desatualizada;
 - copiar roteiro e link compartilhável de um roteiro só (#r<n>).
 """
 
@@ -113,6 +116,23 @@ ESTILO = """  :root {
   .chip.dia { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
   .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
                 letter-spacing: .01em; }
+  .descartar { position: absolute; right: 44px; top: 16px; width: 24px; height: 24px;
+               border: 0; background: transparent; color: var(--borda); font-size: 1rem;
+               line-height: 1; cursor: pointer; border-radius: 50%; transition: all .2s; }
+  .descartar:hover { background: #fdeef2; color: var(--ig-pink); }
+  .cartao.descartada { display: none; }
+  .banner-aviso { display: none; border-radius: var(--r-md); padding: 12px 16px;
+                  margin-bottom: 16px; font-size: .86rem; align-items: center; gap: 10px;
+                  justify-content: space-between; flex-wrap: wrap; }
+  .banner-aviso.visivel { display: flex; }
+  #aviso-antiga { background: #fff6e6; border: 1px solid #ffe0a3; color: #7a5200; }
+  #barra-descartadas { background: var(--superficie); border: 1px solid var(--borda-leve);
+                       color: var(--suave); }
+  .semanas { display: flex; align-items: center; gap: 6px; font-size: .82rem;
+             color: var(--suave); }
+  .semanas select { font: inherit; font-size: .82rem; color: var(--tinta);
+                    border: 1px solid var(--borda-leve); background: var(--superficie);
+                    border-radius: var(--r-full); padding: 6px 12px; cursor: pointer; }
   .chip.plataforma { display: inline-flex; align-items: center; gap: 5px;
                      padding: 4px 10px; background: var(--fundo);
                      border: 1px solid var(--borda-leve); }
@@ -250,7 +270,7 @@ let filtro = 'todas';
 let foco = null;
 
 function salvar() { localStorage.setItem(CHAVE, JSON.stringify(estado)); }
-function st(id) { return estado[id] || (estado[id] = {lista: false, feito: false, formato: 'reels', gancho: 0}); }
+function st(id) { return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false, formato: 'reels', gancho: 0}); }
 
 function toast(msg) {
   const t = document.getElementById('toast');
@@ -266,11 +286,13 @@ function lerHash() {
 }
 
 function render() {
-  let naLista = 0, feitas = 0, visiveis = 0;
+  let naLista = 0, feitas = 0, visiveis = 0, descartadas = 0;
   document.querySelectorAll('.cartao').forEach(c => {
     const id = c.dataset.id, s = st(id), d = DADOS.ideias[id];
-    if (s.lista) naLista++;
-    if (s.feito) feitas++;
+    if (s.descartada) descartadas++;
+    if (s.lista && !s.feito && !s.descartada) naLista++;
+    if (s.feito && !s.descartada) feitas++;
+    c.classList.toggle('descartada', !!s.descartada);
     c.classList.toggle('feita', s.feito);
     c.classList.toggle('na-lista', s.lista);
     c.classList.toggle('aberta', abertas.has(id));
@@ -293,13 +315,20 @@ function render() {
     const pr = c.querySelector('.painel-reels'), pc = c.querySelector('.painel-carrossel');
     if (pr) pr.style.display = s.formato === 'reels' ? '' : 'none';
     if (pc) pc.style.display = s.formato === 'carrossel' ? '' : 'none';
-    const passaFiltro = filtro === 'todas' || (filtro === 'lista' && s.lista) || (filtro === 'feitas' && s.feito);
+    // "Minha lista" = fila de produção: o que foi feito sai dela e vai para "Feitas"
+    const passaFiltro = filtro === 'todas' ? !s.descartada
+      : filtro === 'lista' ? (s.lista && !s.feito && !s.descartada)
+      : (s.feito && !s.descartada);
     const mostra = foco !== null ? id === foco : passaFiltro;
     c.classList.toggle('oculta', !mostra);
     if (mostra) visiveis++;
   });
   document.getElementById('contagem').innerHTML =
-    `<b>${naLista}</b> na lista · <b>${feitas}</b> feita${feitas === 1 ? '' : 's'}`;
+    `<b>${naLista}</b> na fila · <b>${feitas}</b> feita${feitas === 1 ? '' : 's'}`;
+  const barra = document.getElementById('barra-descartadas');
+  barra.classList.toggle('visivel', descartadas > 0);
+  barra.querySelector('span').textContent =
+    `${descartadas} ideia${descartadas === 1 ? '' : 's'} descartada${descartadas === 1 ? '' : 's'}`;
   document.querySelectorAll('.aba').forEach(a => a.classList.toggle('ativa', a.dataset.filtro === filtro));
   document.getElementById('vazio').style.display = visiveis ? 'none' : 'block';
   salvar();
@@ -330,6 +359,23 @@ function copiar(texto, msgOk) {
     .catch(() => window.prompt('Copie manualmente:', texto));
 }
 
+document.getElementById('restaurar').addEventListener('click', () => {
+  Object.values(estado).forEach(e => { e.descartada = false; });
+  toast('Ideias restauradas');
+  render();
+});
+
+// Aviso quando a agenda não é atualizada há mais de 8 dias (falha na automação)
+(function avisarSeAntiga() {
+  const dias = Math.floor((Date.now() - new Date(DADOS.gerado_em + 'T12:00:00')) / 86400000);
+  if (dias > 8) {
+    const el = document.getElementById('aviso-antiga');
+    el.querySelector('span').textContent =
+      `⚠️ Esta agenda foi gerada há ${dias} dias — a atualização automática de segunda pode ter falhado.`;
+    el.classList.add('visivel');
+  }
+})();
+
 document.getElementById('sair-foco').addEventListener('click', () => {
   history.replaceState(null, '', location.pathname);
   lerHash(); render();
@@ -342,7 +388,10 @@ document.addEventListener('click', e => {
   const c = e.target.closest('.cartao');
   if (!c) return;
   const id = c.dataset.id, s = st(id);
-  if (e.target.closest('.cab')) {
+  if (e.target.closest('.descartar')) {
+    s.descartada = true; abertas.delete(id);
+    toast('Ideia descartada — dá pra restaurar no topo');
+  } else if (e.target.closest('.cab')) {
     abertas.has(id) ? abertas.delete(id) : abertas.add(id);
   } else if (e.target.closest('.na-lista-btn2')) {
     s.lista = !s.lista;
@@ -518,6 +567,7 @@ def _cartao(ideia: dict, posicao: int) -> str:
     return f"""
   <article class="cartao" data-id="{posicao}" id="r{posicao}">
     <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
         <span class="chip dia">{chip_dia}</span>
@@ -562,8 +612,35 @@ def _cartao(ideia: dict, posicao: int) -> str:
   </article>"""
 
 
-def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path) -> None:
-    """Escreve a agenda da semana como web/index.html."""
+def _seletor_semanas(semanas: list[str], semana_atual: str | None, prefixo: str) -> str:
+    """Histórico no painel: dropdown na página atual, volta nas arquivadas."""
+    def rotulo(iso: str) -> str:
+        a, m, d = iso.split("-")
+        return f"Semana de {d}/{m}/{a}"
+
+    if semana_atual is not None:  # página de uma semana anterior
+        return ('<div class="semanas"><a class="btn" href="../index.html">'
+                "← Voltar para a semana atual</a></div>")
+    if not semanas:
+        return ""
+    opcoes = ['<option value="">📅 Semana atual</option>'] + [
+        f'<option value="{prefixo}semanas/{iso}.html">{rotulo(iso)}</option>'
+        for iso in semanas
+    ]
+    return ('<div class="semanas"><select id="sel-semana" aria-label="Escolher semana" '
+            'onchange="if(this.value) location.href=this.value">'
+            f'{"".join(opcoes)}</select></div>')
+
+
+def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
+                  semanas: list[str] | None = None, semana_atual: str | None = None,
+                  prefixo: str = "") -> None:
+    """Escreve a agenda da semana como web/index.html.
+
+    `semanas` são as agendas arquivadas (mais recente primeiro) exibidas no
+    seletor do painel; `semana_atual` marca qual está aberta (None = a atual);
+    `prefixo` ajusta os links quando a página é escrita em web/semanas/.
+    """
     ideias = [normalizar_ideia(i) for i in roteiros["ideias"]]
     total_sinais = sum(len(v) for v in sinais.values())
     inicio = date.today() + timedelta(days=(7 - date.today().weekday()) % 7 or 7)
@@ -571,6 +648,7 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path) -> 
 
     dados = {
         "semana": inicio.isoformat(),
+        "gerado_em": date.today().isoformat(),
         "ideias": [
             {
                 "titulo": i["titulo"],
@@ -612,6 +690,7 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path) -> 
       <button class="aba" data-filtro="feitas">✓ Feitas</button>
     </div>
     <div class="progresso" id="contagem"></div>
+    {_seletor_semanas(semanas or [], semana_atual, prefixo)}
   </div>
 </div>
 
@@ -620,6 +699,9 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path) -> 
     <span>🔗 Você está vendo um roteiro compartilhado.</span>
     <button class="btn" id="sair-foco">Ver a agenda completa</button>
   </div>
+  <div class="banner-aviso" id="aviso-antiga"><span></span></div>
+  <div class="banner-aviso" id="barra-descartadas"><span></span>
+    <button class="btn" id="restaurar">Restaurar descartadas</button></div>
   <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre
   qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.</div>
   <div class="lista-cartoes">{cartoes}</div>
@@ -640,3 +722,26 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path) -> 
 """
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(html, encoding="utf-8")
+
+
+def publicar_agenda(config: dict, roteiros: dict, sinais: dict, raiz: Path) -> Path:
+    """Publica a agenda da semana e a arquiva, mantendo o histórico no painel.
+
+    Escreve web/index.html (com o seletor de semanas anteriores) e uma cópia
+    imutável em web/semanas/<semana>.html, para que agendas passadas sigam
+    acessíveis com seus roteiros.
+    """
+    web = raiz / "web"
+    pasta_semanas = web / "semanas"
+    pasta_semanas.mkdir(parents=True, exist_ok=True)
+
+    inicio = date.today() + timedelta(days=(7 - date.today().weekday()) % 7 or 7)
+    semana = inicio.isoformat()
+
+    arquivadas = sorted(
+        (p.stem for p in pasta_semanas.glob("*.html") if p.stem != semana), reverse=True
+    )
+    publicar_site(config, roteiros, sinais, web / "index.html", semanas=arquivadas)
+    publicar_site(config, roteiros, sinais, pasta_semanas / f"{semana}.html",
+                  semana_atual=semana, prefixo="../")
+    return web / "index.html"

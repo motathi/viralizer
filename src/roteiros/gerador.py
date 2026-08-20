@@ -73,6 +73,12 @@ Responda SOMENTE com um JSON válido:
   ]
 }
 Distribua as pautas entre os pilares, sem repetir tema.
+
+MEMÓRIA (anti-repetição): o campo "ja_publicado" traz temas e ganchos já
+usados em semanas anteriores. É PROIBIDO repetir ou apenas reformular
+qualquer um deles — inclusive versões próximas da mesma tese (ex.: se já
+houve "a ordem do skincare importa", não proponha "a ordem tem ciência").
+Na dúvida sobre semelhança, descarte e escolha outro ângulo.
 """
 
 PROMPT_ESCRITA = """\
@@ -102,11 +108,19 @@ Regras de escrita (qualidade de produção):
 - LEGENDA PRONTA: 2 a 4 frases, primeira linha forte, sem hashtags.
 - VARIEDADE: não repita gancho nem formato entre as ideias.
 
-Regras invioláveis (publicidade médica — Resolução CFM 2.336/2023):
-- Nunca prometer resultado, nem usar "o melhor", "garantido", "milagroso".
-- Não sensacionalizar nem induzir ao medo para vender procedimento.
-- Não citar marcas comerciais.
-- Respeitar todas as restrições adicionais do nicho fornecidas.
+Liberdade criativa vem primeiro. Escreva com ousadia: ganchos fortes,
+opinião, humor, provocação, posicionamento claro. A profissional quer soar
+humana e interessante, não um panfleto. Não amacie o texto por precaução,
+não encha de ressalvas defensivas ("consulte sempre", "cada caso é um caso")
+— use ressalva só quando ela realmente acrescentar informação.
+
+Há apenas quatro linhas vermelhas, e nada além delas restringe você:
+- não prometer/garantir resultado específico;
+- não usar superlativo de autopromoção ("o melhor", "o mais moderno");
+- não citar marca comercial de produto ou equipamento;
+- não usar imagem/dado de paciente identificável.
+Tudo o mais é permitido: pode discordar de trends, ser direta, brincar,
+dizer "isso não funciona", contar bastidor. Ser interessante não é infração.
 
 Responda SOMENTE com um JSON válido no formato:
 {
@@ -127,7 +141,7 @@ Responda SOMENTE com um JSON válido no formato:
       "virais_origem": [{"url": "...", "autor": "...", "metrica": "...", "por_que_viralizou": "..."}],
       "embasamento_viral": "por que tende a performar, com o sinal do briefing",
       "embasamento_cientifico": ["referência do briefing, com fonte e link"],
-      "conformidade_cfm": "nota curta",
+      "conformidade_cfm": "observação breve, só se houver algo a sinalizar (senão string vazia)",
       "cta": "...",
       "hashtags": ["#..."]
     }
@@ -211,7 +225,7 @@ def _filtrar_pautas_fracas(briefing: dict) -> dict:
     return {**briefing, "pautas": fortes}
 
 
-def gerar_roteiros(config: dict, sinais: dict) -> dict:
+def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) -> dict:
     """Gera as ideias/roteiros da semana em duas etapas (pesquisa + escrita)."""
     client = anthropic.Anthropic()
     quantidade = config["geracao"]["ideias_por_semana"]
@@ -222,6 +236,7 @@ def gerar_roteiros(config: dict, sinais: dict) -> dict:
         "pilares": config["pilares"],
         "quantidade_de_pautas": quantidade,
         "sinais_coletados": _compactar_sinais(sinais),
+        "ja_publicado": historico or [],
     }
     print(f"   [1/2] Pesquisa e curadoria ({MODELO_PESQUISA})...")
     briefing = _extrair_json(

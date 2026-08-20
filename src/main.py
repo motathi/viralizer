@@ -15,6 +15,7 @@ import yaml
 from dotenv import load_dotenv
 
 from src.agenda.montador import montar_agenda
+from src.historico import carregar_historico, registrar_historico
 from src.descoberta.apify_social import virais_instagram, virais_tiktok
 from src.descoberta.tiktok_creative_center import tendencias_tiktok
 from src.descoberta.youtube import descobrir_virais
@@ -71,8 +72,11 @@ def main() -> None:
     if args.apenas_descoberta:
         return
 
+    historico = carregar_historico(RAIZ, args.nicho)
+    if historico:
+        print(f"🧠 Memória: {len(historico)} ideias já publicadas — não serão repetidas")
     print("✍️  Gerando ideias e roteiros embasados (isso leva alguns minutos)...")
-    roteiros = gerar_roteiros(config, sinais)
+    roteiros = gerar_roteiros(config, sinais, historico)
     (saida / "roteiros.json").write_text(
         json.dumps(roteiros, ensure_ascii=False, indent=2), encoding="utf-8"
     )
@@ -84,9 +88,8 @@ def main() -> None:
     print(f"✅ Agenda pronta: {saida / 'agenda.md'}")
 
     if args.publicar_site:
-        from src.publicar.site import publicar_site
-        destino = RAIZ / "web" / "index.html"
-        publicar_site(config, roteiros, sinais, destino)
+        from src.publicar.site import publicar_agenda
+        destino = publicar_agenda(config, roteiros, sinais, RAIZ)
         # persiste a geração para permitir re-render (mudança de design)
         # sem custo de IA — ver src/publicar/rerender.py
         dados_dir = RAIZ / "dados"
@@ -96,6 +99,8 @@ def main() -> None:
                        ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
+        total_hist = registrar_historico(RAIZ, args.nicho, roteiros)
+        print(f"🧠 Histórico atualizado ({total_hist} ideias acumuladas)")
         print(f"🌐 Site atualizado: {destino}")
 
 
