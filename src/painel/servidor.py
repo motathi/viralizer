@@ -183,84 +183,164 @@ PAGINA = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Painel — Radar de Conteúdo Viral</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root { --grad: linear-gradient(45deg,#405DE6,#833AB4 30%,#C13584 50%,#E1306C 70%,#F77737);
-          --tinta:#262626; --suave:#737373; --borda:#efefef; --ok:#1f9d63; }
+          --tinta:#1c1b1f; --suave:#6f6b76; --borda:#eceaef; --fundo:#fff;
+          --painel:#fbfafc; --rosa:#C13584; }
   * { box-sizing:border-box; margin:0 }
-  body { font-family:Inter,"Segoe UI",system-ui,sans-serif; background:#fff; color:var(--tinta);
-         line-height:1.6; padding:32px 18px; }
-  .wrap { max-width:760px; margin:0 auto }
-  h1 { font-size:1.6rem; font-weight:800; letter-spacing:-.02em }
+  body { font-family:Inter,"Segoe UI",system-ui,sans-serif; background:var(--fundo);
+         color:var(--tinta); line-height:1.55; padding:36px 18px 56px; }
+  .wrap { max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:26px }
+  h1 { font-size:1.55rem; font-weight:800; letter-spacing:-.025em }
   h1 span { background:var(--grad); -webkit-background-clip:text; background-clip:text;
             -webkit-text-fill-color:transparent }
-  .sub { color:var(--suave); font-size:.92rem; margin-top:6px }
-  .banner { display:none; align-items:center; justify-content:space-between; gap:12px;
-            flex-wrap:wrap; border-radius:14px; padding:14px 18px; margin-top:22px;
-            font-size:.9rem }
-  .banner.visivel { display:flex }
-  .banner.nova { background:#f3f0ff; border:1px solid #ddd0ff; color:#4a2b8c }
-  .banner.zip { background:#fff6e6; border:1px solid #ffe0a3; color:#7a5200 }
-  .status { display:flex; gap:10px; align-items:center; background:#fafafa;
-            border:1px solid var(--borda); border-radius:14px; padding:14px 18px; margin:22px 0 }
-  .status b { color:var(--tinta) }
-  .botoes { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px }
-  button, a.btn { font:inherit; font-size:.95rem; font-weight:700; padding:14px 22px;
-                  border-radius:999px; border:1.5px solid var(--borda); background:#fff;
-                  color:var(--tinta); cursor:pointer; transition:all .2s; text-decoration:none;
-                  display:inline-block }
-  button:hover:not(:disabled), a.btn:hover { border-color:#C13584; color:#C13584 }
+  .sub { color:var(--suave); font-size:.9rem; margin-top:4px }
+  h2 { font-size:.75rem; font-weight:700; letter-spacing:.11em; text-transform:uppercase;
+       color:var(--suave); margin-bottom:10px }
+
+  .banner { display:none; border-radius:14px; padding:13px 16px; font-size:.88rem }
+  .banner.visivel { display:block }
+  .banner.nova { background:#f4f0ff; border:1px solid #ded0ff; color:#4a2b8c }
+  .banner.zip { background:#fff7e8; border:1px solid #ffe2ab; color:#7a5200 }
+
+  .status { background:var(--painel); border:1px solid var(--borda); border-radius:14px;
+            padding:15px 18px; font-size:.92rem }
+
+  .lista { list-style:none; display:flex; flex-direction:column; gap:10px; padding:0 }
+  .item { display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:center;
+          border:1px solid var(--borda); border-radius:16px; padding:16px 18px;
+          background:var(--fundo) }
+  .item .n, .item .icone { align-self:start; margin-top:1px }
+  .item .n { width:26px; height:26px; border-radius:50%; background:var(--grad); color:#fff;
+             font-size:.8rem; font-weight:700; display:grid; place-items:center }
+  .item .icone { font-size:1.15rem; width:26px; text-align:center }
+  .item b { font-size:.98rem; font-weight:700; display:block }
+  .item p { color:var(--suave); font-size:.85rem; margin-top:2px }
+  .item select { margin-top:9px }
+
+  button, a.btn { font:inherit; font-size:.9rem; font-weight:700; padding:11px 20px;
+                  border-radius:999px; border:1.5px solid var(--borda); background:var(--fundo);
+                  color:var(--tinta); cursor:pointer; transition:border-color .18s,color .18s;
+                  text-decoration:none; white-space:nowrap; text-align:center }
+  button:hover:not(:disabled), a.btn:hover { border-color:var(--rosa); color:var(--rosa) }
   button.principal { background:var(--grad); border-color:transparent; color:#fff;
-                     box-shadow:0 8px 24px -8px rgba(131,58,180,.4) }
+                     box-shadow:0 8px 22px -10px rgba(131,58,180,.55) }
   button.principal:hover:not(:disabled) { filter:brightness(1.07); color:#fff }
-  button:disabled { opacity:.5; cursor:not-allowed }
-  select { font:inherit; padding:13px 18px; border-radius:999px; border:1.5px solid var(--borda);
-           background:#fafafa; cursor:pointer }
-  #log { background:#1d1a20; color:#f0eaf2; font-family:ui-monospace,Menlo,Consolas,monospace;
-         font-size:.82rem; line-height:1.55; border-radius:14px; padding:16px 18px;
-         white-space:pre-wrap; max-height:420px; overflow-y:auto; display:none }
+  button:disabled { opacity:.45; cursor:not-allowed }
+  button:focus-visible, a.btn:focus-visible, select:focus-visible {
+    outline:2px solid var(--rosa); outline-offset:2px }
+  select { font:inherit; font-size:.85rem; padding:9px 14px; border-radius:999px;
+           border:1.5px solid var(--borda); background:var(--painel); color:var(--tinta);
+           cursor:pointer }
+
+  #log { background:#1b191e; color:#efe9f1; font-family:ui-monospace,Menlo,Consolas,monospace;
+         font-size:.8rem; line-height:1.55; border-radius:14px; padding:16px 18px;
+         white-space:pre-wrap; max-height:400px; overflow:auto; display:none }
   #log.visivel { display:block }
-  .dica { color:var(--suave); font-size:.85rem; margin-top:18px }
-  .girando { display:inline-block; width:14px; height:14px; border:2px solid #ddd;
-             border-top-color:#C13584; border-radius:50%; animation:g .8s linear infinite }
+  .rodape { color:var(--suave); font-size:.82rem }
+  .girando { display:inline-block; width:13px; height:13px; border:2px solid #e2dfe6;
+             border-top-color:var(--rosa); border-radius:50%; animation:g .8s linear infinite;
+             margin-right:8px; vertical-align:-1px }
   @keyframes g { to { transform:rotate(360deg) } }
+  @media (prefers-reduced-motion:reduce) { .girando { animation:none } }
+  @media (max-width:560px) {
+    .item { grid-template-columns:auto 1fr; row-gap:12px }
+    .item button, .item a.btn { grid-column:1 / -1 }
+  }
 </style></head><body><div class="wrap">
-  <h1>Painel do <span>Radar de Conteúdo Viral</span></h1>
-  <p class="sub">Tudo roda neste computador. Clique no botão e aguarde alguns minutos.<br>Na primeira vez, clique em <b>🔑 Conectar TikTok</b> e faça login — sem isso as buscas voltam vazias. Depois é só gerar.</p>
+  <header>
+    <h1>Radar de <span>Conteúdo Viral</span></h1>
+    <p class="sub">Tudo roda neste computador. Nada sai daqui até você mandar publicar.</p>
+  </header>
 
   <div class="banner" id="atualizacao"></div>
   <div class="status" id="status">carregando…</div>
 
-  <div class="botoes">
-    <select id="nicho"></select>
-    <button class="principal" id="gerar">▶ Gerar agenda desta semana</button>
-    <button id="testar">🧪 Testar coleta (grátis)</button>
-    <button id="conectarTiktok">🔑 Conectar TikTok</button>
-    <button id="atualizarPrograma">🔄 Atualizar programa</button>
-    <a class="btn" id="abrir" href="/agenda" target="_blank">👀 Abrir agenda</a>
-    <button id="publicar">☁️ Publicar no site</button>
-  </div>
+  <section>
+    <h2>Toda semana</h2>
+    <ol class="lista">
+      <li class="item">
+        <span class="n">1</span>
+        <div>
+          <b>Gerar a agenda</b>
+          <p>Busca os vídeos que viralizaram no nicho e escreve 10 ideias com roteiro
+             pronto. Leva de 5 a 10 minutos e consome créditos da IA.</p>
+          <select id="nicho" aria-label="Nicho"></select>
+        </div>
+        <button class="principal" id="gerar">Gerar agenda</button>
+      </li>
+      <li class="item">
+        <span class="n">2</span>
+        <div>
+          <b>Conferir o resultado</b>
+          <p>Abre a agenda aqui no computador, com os roteiros e os vídeos virais que
+             serviram de base para cada ideia.</p>
+        </div>
+        <a class="btn" id="abrir" href="/agenda" target="_blank" rel="noopener">Abrir agenda</a>
+      </li>
+      <li class="item">
+        <span class="n">3</span>
+        <div>
+          <b>Publicar no site</b>
+          <p>Envia a agenda para o site na internet, para abrir do celular e compartilhar
+             o link. Só depois disso ela sai deste computador.</p>
+        </div>
+        <button id="publicar">Publicar</button>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Quando precisar</h2>
+    <ul class="lista">
+      <li class="item">
+        <span class="icone">🔑</span>
+        <div>
+          <b>Conectar TikTok</b>
+          <p>Login no TikTok, uma vez só. Sem sessão, o TikTok responde as buscas com
+             lista vazia e a agenda não tem de onde sair.</p>
+        </div>
+        <button id="conectarTiktok">Conectar</button>
+      </li>
+      <li class="item">
+        <span class="icone">🧪</span>
+        <div>
+          <b>Testar coleta</b>
+          <p>Faz só a busca de vídeos e para por aí — não escreve roteiro, não usa a IA,
+             não custa nada. Serve para conferir se o TikTok está respondendo.</p>
+        </div>
+        <button id="testar">Testar</button>
+      </li>
+      <li class="item">
+        <span class="icone">🔄</span>
+        <div>
+          <b>Atualizar programa</b>
+          <p>Baixa a versão mais recente, com as correções e melhorias.</p>
+        </div>
+        <button id="atualizarPrograma">Atualizar</button>
+      </li>
+    </ul>
+  </section>
 
   <div id="log"></div>
-  <p class="dica">💡 A geração leva de 5 a 10 minutos. Pode deixar esta aba aberta —
-  o progresso aparece aqui embaixo.</p>
+  <p class="rodape">💡 Pode deixar esta aba aberta enquanto trabalha — o progresso
+     aparece aqui. A janela preta precisa continuar aberta: é ela que faz o trabalho.</p>
 </div>
 <script>
 const $ = s => document.querySelector(s);
-let rodando = false;
+const ACOES = { gerar:'/gerar', testar:'/testar', publicar:'/publicar',
+                conectarTiktok:'/tiktok-login', atualizarPrograma:'/atualizar' };
 
 async function carregarNichos() {
   const r = await (await fetch('/nichos')).json();
-  $('#nicho').innerHTML = r.nichos.map(n => `<option value="${n}">${n.replace(/-/g,' ')}</option>`).join('');
+  $('#nicho').innerHTML = r.nichos.map(n =>
+    `<option value="${n}">${n.replace(/-/g,' ')}</option>`).join('');
 }
 
 function pintar(e) {
-  rodando = e.rodando;
-  $('#gerar').disabled = e.rodando;
-  $('#publicar').disabled = e.rodando;
-  $('#testar').disabled = e.rodando;
-  $('#atualizarPrograma').disabled = e.rodando;
-  $('#conectarTiktok').disabled = e.rodando;
+  for (const id of Object.keys(ACOES)) $('#' + id).disabled = e.rodando;
   const s = $('#status');
   if (e.rodando) {
     s.innerHTML = `<span class="girando"></span> <b>${e.acao}</b> — em andamento…`;
@@ -268,7 +348,7 @@ function pintar(e) {
     const fim = e.fim ? ` · última ação às ${e.fim}${e.erro ? ' (com erro)' : ''}` : '';
     s.innerHTML = `📅 Agenda com <b>${e.agenda.ideias} ideias</b>, gerada em <b>${e.agenda.quando}</b>${fim}`;
   } else {
-    s.innerHTML = 'Nenhuma agenda gerada ainda — clique em <b>Gerar agenda</b>.';
+    s.innerHTML = 'Nenhuma agenda ainda — comece pelo passo 1.';
   }
   if (e.log.length) {
     const l = $('#log');
@@ -285,14 +365,14 @@ async function conferirVersao() {
     const el = $('#atualizacao');
     if (!v.git && v.aviso) {
       el.className = 'banner visivel zip';
-      el.innerHTML = `<span>📦 ${v.aviso}</span>`;
+      el.innerHTML = `📦 ${v.aviso}`;
     } else if (v.atras > 0) {
       el.className = 'banner visivel nova';
-      el.innerHTML = `<span>✨ Tem versão nova do programa (${v.atras} melhoria${v.atras>1?'s':''}) — ` +
-                     `clique em <b>🔄 Atualizar programa</b>.</span>`;
+      el.innerHTML = `✨ Tem versão nova do programa (${v.atras} melhoria${v.atras>1?'s':''}) — ` +
+                     `use <b>Atualizar programa</b> aqui embaixo.`;
     } else if (v.falha) {
       el.className = 'banner visivel zip';
-      el.innerHTML = `<span>⚠️ ${v.falha}</span>`;
+      el.innerHTML = `⚠️ ${v.falha}`;
     } else {
       el.className = 'banner';
     }
@@ -303,27 +383,15 @@ async function atualizar() {
   try { pintar(await (await fetch('/status')).json()); } catch (_) {}
 }
 
-$('#gerar').onclick = async () => {
-  await fetch('/gerar?nicho=' + encodeURIComponent($('#nicho').value), {method:'POST'});
-  atualizar();
-};
-$('#testar').onclick = async () => {
-  await fetch('/testar?nicho=' + encodeURIComponent($('#nicho').value), {method:'POST'});
-  atualizar();
-};
-$('#publicar').onclick = async () => {
-  await fetch('/publicar', {method:'POST'});
-  atualizar();
-};
-$('#conectarTiktok').onclick = async () => {
-  await fetch('/tiktok-login', {method:'POST'});
-  atualizar();
-};
-$('#atualizarPrograma').onclick = async () => {
-  await fetch('/atualizar', {method:'POST'});
-  atualizar();
-  setTimeout(conferirVersao, 20000);
-};
+for (const [id, rota] of Object.entries(ACOES)) {
+  $('#' + id).onclick = async () => {
+    const alvo = id === 'gerar' || id === 'testar'
+      ? rota + '?nicho=' + encodeURIComponent($('#nicho').value) : rota;
+    await fetch(alvo, {method:'POST'});
+    atualizar();
+    if (id === 'atualizarPrograma') setTimeout(conferirVersao, 20000);
+  };
+}
 
 carregarNichos();
 conferirVersao();
