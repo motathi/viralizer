@@ -27,11 +27,19 @@ PT, EN e ES          viralizou) e deriva       roteiros finais         anti-repe
 
 | Fonte | O que traz | Requisito |
 |---|---|---|
-| TikTok — vídeos virais | Vídeos com métricas completas das hashtags do nicho (PT/EN/ES) | `APIFY_API_TOKEN` (plano gratuito) |
-| Instagram — top posts | Posts e reels de melhor desempenho das hashtags | `APIFY_API_TOKEN` |
+| **TikTok — coleta local** | Vídeos virais das hashtags (PT/EN/ES) pelo seu navegador, **sem cota e sem custo** | `playwright` (instalado pelo painel) |
+| TikTok/Instagram via Apify | Mesmos dados, mas de servidor — usado como reserva | `APIFY_API_TOKEN` (plano gratuito) |
 | Busca web na análise | Confirma trends e localiza as referências científicas | já incluso |
 | YouTube Shorts | Sinal complementar com "outlier score" | `YOUTUBE_API_KEY` (opcional) |
 | TikTok Creative Center | Hashtags oficiais em alta | `playwright` (opcional; instável em CI) |
+
+**Estratégia de coleta** (`--coleta`):
+
+- `auto` (padrão): tenta a **coleta local gratuita** primeiro; se trouxer pouca coisa e houver token do Apify, usa o Apify como reserva
+- `local`: só o navegador desta máquina — ilimitado e sem custo
+- `apify`: só o serviço, útil em servidor
+
+A coleta local funciona porque roda **pelo seu IP residencial**: o TikTok trata como navegação normal. Em servidores de datacenter (GitHub Actions) ela é bloqueada — por isso o Apify segue como reserva na nuvem. Volume baixo é essencial: uma coleta por semana em algumas hashtags é indistinguível de uso comum.
 
 Toda fonte é opcional e falha graciosamente — o pipeline roda com as que estiverem configuradas.
 
@@ -68,8 +76,9 @@ máquina, pelo seu IP**:
    - **Mac**: `abrir-painel.command`
    - **Linux**: `abrir-painel.sh`
 2. O navegador abre em `http://127.0.0.1:8777` (só acessível neste computador)
-3. Clique em **▶ Gerar agenda desta semana** e acompanhe o progresso ao vivo
-4. Ao terminar, use **👀 Abrir agenda** para ver o resultado e **☁️ Publicar no site**
+3. Clique em **🧪 Testar coleta (grátis)** para conferir se a busca de virais funciona aí — não gasta nada
+4. Clique em **▶ Gerar agenda desta semana** e acompanhe o progresso ao vivo
+5. Ao terminar, use **👀 Abrir agenda** para ver o resultado e **☁️ Publicar no site**
    para enviar ao GitHub (a Vercel publica em ~1 minuto)
 
 O painel instala sozinho o que falta e traduz os erros técnicos para linguagem
@@ -120,6 +129,7 @@ Copie `config/nichos/dermatologia-estetica.yaml`, ajuste palavras-chave, hashtag
 
 ## Limitações conhecidas
 
-- TikTok e Instagram não têm API pública de tendências: a coleta depende dos scrapers gerenciados do Apify (plano gratuito tem limite mensal de créditos).
-- O TikTok Creative Center não captura dados de forma confiável em runners de CI.
+- TikTok e Instagram não têm API pública de tendências. A coleta local resolve isso rodando pelo seu IP, mas depende do seu computador estar ligado; na nuvem, o Apify (com cota mensal) é a reserva.
+- Coletar dados públicos contraria os termos de uso das plataformas. Em volume baixo e sem login, o risco prático é um bloqueio temporário do IP. Não faça login na coleta.
+- O TikTok Creative Center saiu do fluxo — nunca funcionou de forma confiável e a coleta local o substitui com vantagem.
 - O conteúdo gerado é um **rascunho embasado**: a revisão final de qualquer afirmação médica é sempre da profissional.
