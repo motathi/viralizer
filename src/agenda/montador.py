@@ -130,7 +130,8 @@ def montar_agenda(config: dict, roteiros: dict, sinais: dict) -> str:
             "",
             *[f"- {ref}" for ref in ideia["embasamento_cientifico"]],
             "",
-            f"**⚖️ Conformidade CFM:** {ideia['conformidade_cfm']}",
+            *([f"**📝 Observação:** {ideia['conformidade_cfm']}"]
+              if ideia.get("conformidade_cfm") else []),
             "",
             f"**📣 CTA:** {ideia['cta']}",
             "",
