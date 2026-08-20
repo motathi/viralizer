@@ -45,6 +45,10 @@ DICAS = [
                                        "Tente de novo mais tarde — nada foi cobrado."),
     ("navegador da coleta ainda não foi instalado", "🌐 Falta instalar o navegador que faz a "
      "coleta. Feche esta janela e abra o painel pelo atalho (abrir-painel) — ele instala sozinho."),
+    ("O TikTok pediu verificação", "🤖 O TikTok quer confirmar que você não é um robô. "
+     "Resolva na janela do navegador que abriu — é uma vez só, depois fica salvo."),
+    ("não devolveu nenhum vídeo", "🚫 O TikTok não mostrou nenhum vídeo desta vez. "
+     "Abra o tiktok.com no seu navegador normal, faça login, e tente de novo."),
     ("Failed to establish a new connection", "🌐 Sem conexão com a internet, ou o serviço "
                                              "está fora do ar. Tente de novo em alguns minutos."),
     ("could not read Username", "🔐 O Git não está autenticado nesta máquina — por isso não "
@@ -195,7 +199,7 @@ PAGINA = """<!DOCTYPE html>
   @keyframes g { to { transform:rotate(360deg) } }
 </style></head><body><div class="wrap">
   <h1>Painel do <span>Radar de Conteúdo Viral</span></h1>
-  <p class="sub">Tudo roda neste computador. Clique no botão e aguarde alguns minutos.</p>
+  <p class="sub">Tudo roda neste computador. Clique no botão e aguarde alguns minutos.<br>Durante a coleta abre uma janela do navegador — deixe ela trabalhar. Se pedir verificação, resolva e volte para cá.</p>
 
   <div class="banner" id="atualizacao"></div>
   <div class="status" id="status">carregando…</div>
