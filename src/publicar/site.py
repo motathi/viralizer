@@ -132,6 +132,16 @@ ESTILO = """
              font-size: .88rem; white-space: pre-wrap; }
   .hashtags { color: var(--acento); font-size: .84rem; margin-top: 6px; }
 
+  .virais-origem { display: flex; flex-direction: column; gap: 8px; }
+  .viral-item { background: #faf9fb; border-radius: 12px; padding: 10px 14px;
+                font-size: .86rem; }
+  .viral-item a { color: var(--acento); font-weight: 600; text-decoration: none; }
+  .viral-item a:hover { text-decoration: underline; }
+  .viral-item .metrica { color: var(--ok); font-weight: 600; }
+  .viral-item .motivo { color: var(--suave); display: block; margin-top: 2px; }
+  .padrao { background: var(--acento-claro); border-radius: 12px; padding: 10px 14px;
+            font-size: .86rem; margin-top: 8px; }
+
   details { margin-top: 12px; border: 1px solid var(--borda); border-radius: 12px;
             padding: 10px 14px; font-size: .88rem; }
   details summary { cursor: pointer; font-weight: 600; font-size: .83rem; color: var(--suave); }
@@ -321,6 +331,27 @@ def _cartao(ideia: dict, posicao: int) -> str:
     refs = "".join(f"<li>{escape(r)}</li>" for r in ideia.get("embasamento_cientifico", []))
     hashtags = escape(" ".join(ideia.get("hashtags", [])))
 
+    virais_html = ""
+    if ideia["virais_origem"]:
+        itens = "".join(
+            '<div class="viral-item">'
+            + (f'<a href="{escape(v["url"], quote=True)}" target="_blank" rel="noopener">'
+               f'{escape(v.get("autor") or "ver vídeo")} ↗</a>' if v.get("url")
+               else f'<b>{escape(v.get("autor", ""))}</b>')
+            + (f' · <span class="metrica">{escape(v["metrica"])}</span>' if v.get("metrica") else "")
+            + (f'<span class="motivo">{escape(v["por_que_viralizou"])}</span>'
+               if v.get("por_que_viralizou") else "")
+            + "</div>"
+            for v in ideia["virais_origem"]
+        )
+        padrao = (f'<div class="padrao">🧩 <b>Padrão aplicado:</b> '
+                  f'{escape(ideia["padrao_aplicado"])}</div>'
+                  if ideia.get("padrao_aplicado") else "")
+        virais_html = (
+            '<div class="rotulo">🎯 Virais que inspiraram esta ideia</div>'
+            f'<div class="virais-origem">{itens}</div>{padrao}'
+        )
+
     seletor_formato = (
         '<div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button>'
         '<button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>'
@@ -354,6 +385,8 @@ def _cartao(ideia: dict, posicao: int) -> str:
       {seletor_formato}
       <div class="painel-reels">{blocos}</div>
       {painel_carrossel}
+
+      {virais_html}
 
       <div class="rotulo">Legenda pronta</div>
       <div class="legenda">{escape(ideia.get('legenda_post', '')) or escape(ideia.get('cta', ''))}</div>

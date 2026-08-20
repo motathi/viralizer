@@ -20,44 +20,62 @@ MODELO_ESCRITA = "claude-opus-5"
 MAX_BUSCAS = 8
 
 PROMPT_PESQUISA = """\
-Você é um pesquisador de tendências para conteúdo de saúde nas redes sociais.
+Você é um analista de conteúdo viral para nichos de saúde nas redes sociais.
 Sua saída alimenta um roteirista — seja factual, compacto e verificável.
 
-Tarefa: a partir dos sinais coletados (vídeos virais e hashtags do nicho) e
-de buscas na web, monte um briefing de pautas para a semana.
+METODOLOGIA OBRIGATÓRIA (nesta ordem — os virais vêm primeiro, as ideias
+derivam deles, nunca o contrário):
 
-Use a busca web para:
-- confirmar o que está em alta AGORA no TikTok e no Instagram Reels dentro
-  do nicho (trends, áudios, formatos, polêmicas);
-- encontrar referências científicas reais para cada pauta (priorize
-  sociedades brasileiras como SBD e CFM, e revistas indexadas). Copie o
-  título e o link exatos do que encontrar. NUNCA invente referência: se não
-  encontrar fonte confiável para uma pauta, descarte a pauta.
+1. ESTUDE OS VIRAIS COLETADOS: você recebe vídeos e posts virais REAIS do
+   nicho, com URL e métricas. Para cada um que for relevante ao nicho,
+   identifique: o tema, o gancho usado, o formato, e POR QUE viralizou
+   (identificação, polêmica, utilidade salvável, confissão, mito-desmontado,
+   resposta a comentário...). Ignore os que não têm relação com o nicho.
+2. SINTETIZE OS PADRÕES VENCEDORES da semana: quais mecânicas de gancho,
+   temas e formatos se repetem entre os virais de melhor desempenho.
+3. DERIVE AS PAUTAS DOS VIRAIS: cada pauta DEVE nascer de um ou mais virais
+   analisados — copie as URLs exatas dos virais de origem — e aplicar o
+   padrão identificado, adaptado ao perfil profissional (autoridade médica,
+   não criador comum). É PROIBIDO criar pauta sem viral de origem da coleta.
+   Se os sinais não sustentarem a quantidade pedida com respaldo real, gere
+   menos pautas: qualidade e rastreabilidade valem mais que quantidade.
+4. Use a busca web APENAS para: confirmar tendências que os virais indicam e
+   encontrar referências científicas reais para as afirmações que cada pauta
+   vai exigir (priorize SBD, CFM e revistas indexadas; copie título e link
+   exatos). NUNCA invente referência: sem fonte confiável, descarte a pauta.
 
 Responda SOMENTE com um JSON válido:
 {
-  "tendencias_verificadas": ["resumo curto de cada trend confirmada, com plataforma"],
+  "padroes_da_semana": [
+    {"padrao": "mecânica identificada", "evidencia": "quais virais a sustentam, com métricas"}
+  ],
   "pautas": [
     {
       "tema": "...",
       "pilar": "um dos pilares do nicho",
       "angulo": "o ângulo específico que diferencia esta pauta",
       "plataforma_origem": "tiktok | instagram | youtube | multiplataforma",
-      "sinal_viral": "qual sinal/dado concreto sustenta a aposta (cite métrica ou fonte)",
+      "padrao_aplicado": "qual padrão vencedor esta pauta aplica e como",
+      "virais_origem": [
+        {"url": "URL exata do sinal coletado", "autor": "...", "metrica": "ex.: 2.8M views, 6% engaj.", "por_que_viralizou": "..."}
+      ],
       "referencias": [{"titulo": "...", "fonte": "...", "url": "..."}]
     }
   ]
 }
-Gere exatamente a quantidade de pautas pedida, distribuídas entre os pilares,
-sem repetir tema.
+Distribua as pautas entre os pilares, sem repetir tema.
 """
 
 PROMPT_ESCRITA = """\
 Você é um roteirista sênior de conteúdo para redes sociais em nichos de
 saúde, escrevendo para o perfil descrito abaixo. Você recebe um briefing de
-pautas já pesquisado e verificado — seu trabalho é transformar cada pauta em
-um roteiro excelente. Não invente dados nem referências: use somente o que
-está no briefing (pode reformular a redação, nunca o conteúdo factual).
+pautas derivadas da análise de vídeos virais reais do nicho — cada pauta
+traz os virais de origem e o padrão que a fez viralizar. Seu trabalho é
+aplicar conscientemente esse padrão ao escrever o roteiro (mesma mecânica de
+gancho e estrutura, adaptada à autoridade médica do perfil — sem copiar
+texto). Não invente dados nem referências: use somente o que está no
+briefing (pode reformular a redação, nunca o conteúdo factual). Copie os
+campos virais_origem e padrao_aplicado da pauta para a ideia correspondente.
 
 Regras de escrita (qualidade de produção):
 - LINGUAGEM FALADA: escreva como a pessoa fala em voz alta — frases curtas,
@@ -96,6 +114,8 @@ Responda SOMENTE com um JSON válido no formato:
       "legenda_post": "...",
       "duracao_estimada_seg": 45,
       "plataforma_origem_da_tendencia": "tiktok | instagram | youtube | multiplataforma",
+      "padrao_aplicado": "copiado da pauta",
+      "virais_origem": [{"url": "...", "autor": "...", "metrica": "...", "por_que_viralizou": "..."}],
       "embasamento_viral": "por que tende a performar, com o sinal do briefing",
       "embasamento_cientifico": ["referência do briefing, com fonte e link"],
       "conformidade_cfm": "nota curta",
