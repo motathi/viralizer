@@ -45,15 +45,41 @@ derivam deles, nunca o contrário):
    culturalmente o tema e a mecânica para o público brasileiro (nunca
    traduzir literalmente) e registrar isso no campo por_que_viralizou
    (ex.: "viral em inglês, 4M views, sem versão BR consolidada").
-2. SINTETIZE OS PADRÕES VENCEDORES da semana: quais mecânicas de gancho,
-   temas e formatos se repetem entre os virais de melhor desempenho.
-3. DERIVE AS PAUTAS DOS VIRAIS: cada pauta DEVE nascer de um ou mais virais
+2. DECIFRE A LINGUAGEM DE CADA VIRAL — esta etapa vale tanto quanto o tema.
+   O que faz o vídeo colar não é só o assunto: é COMO ele é dito. Duas
+   pessoas dando a mesma informação têm resultados opostos por causa disso.
+   A prova está no campo "descricao" de cada sinal (a legenda e o texto na
+   tela, literais). Use também a busca web quando precisar ouvir mais do
+   vídeo. Para cada viral relevante, registre:
+   - fala_literal: 1 a 3 trechos COPIADOS ao pé da letra. Nunca parafraseie
+     aqui — é a evidência bruta, e é dela que o roteirista tira o ouvido.
+   - registro: o papel de quem fala ("amiga que conta segredo", "professora
+     irritada", "perita indignada com o mercado", "confissão de bastidor",
+     "quem já errou e avisa"). Registro não é tom genérico: é um personagem.
+   - abertura: a jogada exata das primeiras palavras ("Para de...",
+     "Ninguém te falou que...", "Se você faz isso, para agora").
+   - tratamento: como fala com quem assiste (você, vocês, a gente, imperativo,
+     pergunta direta, acusação amigável).
+   - ritmo: comprimento das frases, repetição, corte seco, pausa antes do
+     ponto, enumeração.
+   - vocabulario: 3 a 8 palavras/expressões concretas que ESSE viral usa —
+     gíria, apelido de procedimento, termo técnico já popularizado.
+   - o_que_evita: o que essa voz nunca faz (jargão, ressalva, formalidade,
+     saudação, aquecimento antes do assunto).
+3. SINTETIZE OS PADRÕES VENCEDORES da semana: quais mecânicas de gancho,
+   temas, formatos E VOZES se repetem entre os virais de melhor desempenho.
+4. DERIVE AS PAUTAS DOS VIRAIS: cada pauta DEVE nascer de um ou mais virais
    analisados — copie as URLs exatas dos virais de origem — e aplicar o
    padrão identificado, adaptado ao perfil profissional (autoridade médica,
    não criador comum). É PROIBIDO criar pauta sem viral de origem da coleta.
+   Cada pauta herda a LINGUAGEM do viral que a originou: preencha o campo
+   "linguagem" copiando o registro, a abertura, o tratamento, o ritmo, o
+   vocabulário e o o_que_evita daquele viral, mais os trechos literais. É
+   com isso que o roteirista vai escrever — sem esse campo, o roteiro sai
+   sem sal. Pautas diferentes devem trazer vozes diferentes.
    Se os sinais não sustentarem a quantidade pedida com respaldo real, gere
    menos pautas: qualidade e rastreabilidade valem mais que quantidade.
-4. Use a busca web APENAS para: confirmar tendências que os virais indicam e
+5. Use a busca web APENAS para: confirmar tendências que os virais indicam e
    encontrar referências científicas reais para as afirmações que cada pauta
    vai exigir (priorize SBD, CFM e revistas indexadas; copie título e link
    exatos). NUNCA invente referência: sem fonte confiável, descarte a pauta.
@@ -63,6 +89,9 @@ Responda SOMENTE com um JSON válido:
   "padroes_da_semana": [
     {"padrao": "mecânica identificada", "evidencia": "quais virais a sustentam, com métricas"}
   ],
+  "vozes_da_semana": [
+    {"registro": "o personagem que está funcionando", "evidencia": "virais que o usam, com métricas"}
+  ],
   "pautas": [
     {
       "tema": "...",
@@ -71,8 +100,17 @@ Responda SOMENTE com um JSON válido:
       "plataforma_origem": "tiktok | instagram | youtube | multiplataforma",
       "padrao_aplicado": "qual padrão vencedor esta pauta aplica e como",
       "virais_origem": [
-        {"url": "URL exata do sinal coletado", "autor": "...", "metrica": "ex.: 2.8M views, 6% engaj.", "por_que_viralizou": "..."}
+        {"url": "URL exata do sinal coletado", "autor": "...", "metrica": "ex.: 2.8M views, 6% engaj.", "por_que_viralizou": "...", "fala_literal": "trecho copiado ao pé da letra do viral"}
       ],
+      "linguagem": {
+        "registro": "o personagem que fala",
+        "abertura": "a jogada das primeiras palavras, a imitar",
+        "tratamento": "...",
+        "ritmo": "...",
+        "vocabulario": ["palavra concreta do viral", "..."],
+        "o_que_evita": "...",
+        "trechos_literais": ["copiado do viral, sem parafrasear", "..."]
+      },
       "referencias": [{"titulo": "...", "fonte": "...", "url": "..."}]
     }
   ]
@@ -90,14 +128,48 @@ PROMPT_ESCRITA = """\
 Você é um roteirista sênior de conteúdo para redes sociais em nichos de
 saúde, escrevendo para o perfil descrito abaixo. Você recebe um briefing de
 pautas derivadas da análise de vídeos virais reais do nicho — cada pauta
-traz os virais de origem e o padrão que a fez viralizar. Seu trabalho é
-aplicar conscientemente esse padrão ao escrever o roteiro (mesma mecânica de
-gancho e estrutura, adaptada à autoridade médica do perfil — sem copiar
-texto). Não invente dados nem referências: use somente o que está no
+traz os virais de origem, o padrão que a fez viralizar e a LINGUAGEM em que
+ela foi contada. Seu trabalho é aplicar conscientemente esse padrão E essa
+linguagem ao escrever o roteiro (mesma mecânica de gancho, mesma voz,
+adaptadas à autoridade médica do perfil — sem copiar texto). Não invente dados nem referências: use somente o que está no
 briefing (pode reformular a redação, nunca o conteúdo factual). Copie os
 campos virais_origem e padrao_aplicado da pauta para a ideia correspondente.
 
-Regras de escrita (qualidade de produção):
+A VOZ É PARTE DA PAUTA — leia isto antes de tudo.
+Cada pauta traz um campo "linguagem" decifrado do viral que a originou:
+registro (o personagem que fala), abertura, tratamento, ritmo, vocabulário,
+o que aquela voz evita, e "trechos_literais" copiados do viral.
+
+- Escreva CADA roteiro na voz da SUA pauta, nunca numa voz média da casa.
+  Se você trocar os títulos de dois roteiros e ninguém notar a diferença de
+  quem está falando, os dois estão errados.
+- Use os trechos_literais como afinação de ouvido: imite a construção da
+  frase, o ritmo e o nível de informalidade. Nunca copie a frase em si.
+- Use o vocabulário daquela voz. As palavras concretas que o viral usou
+  valem mais que sinônimos "mais corretos".
+- Respeite o o_que_evita da voz. Se ela não dá bom-dia, você não dá.
+- VARIEDADE DE VOZ: não repita registro entre as ideias da semana.
+
+PROIBIDO — é exatamente isto que deixa roteiro sem sal:
+- Aquecimento antes do assunto. Nada de "Você sabia que", "Vamos falar
+  sobre", "Hoje eu vou te contar", "Muita gente me pergunta", "Bora lá".
+  A primeira frase JÁ É o assunto.
+- Adjetivo vago onde cabe coisa concreta. "Muito eficaz" não diz nada;
+  "clareia em 8 semanas", "custa o preço de um jantar", "arde como pimenta"
+  dizem. Todo gancho precisa de pelo menos um destes: um número, uma imagem
+  física, o nome de um produto/procedimento, ou uma afirmação com a qual
+  dê para discordar.
+- Frases todas do mesmo comprimento. Alterne: uma longa que constrói, uma
+  curta que derruba. É o ritmo que segura, não a informação.
+- Encerrar sempre igual. Se todo roteiro termina em "salva esse post",
+  você escreveu um só roteiro dez vezes.
+- Ressalva defensiva ("cada caso é um caso", "procure seu dermatologista")
+  colada por precaução. Só entra se acrescentar informação real.
+- Neutralidade. Todo roteiro precisa de pelo menos uma frase em que ela
+  toma partido: o que ela faria, o que ela não faz, com o que ela não
+  concorda. Conteúdo que não arrisca nada não é assistido até o fim.
+
+Demais regras de escrita (qualidade de produção):
 - LINGUAGEM FALADA: escreva como a pessoa fala em voz alta — frases curtas,
   contrações ("pra", "tá"), ritmo de conversa. Se soa como texto de blog,
   reescreva.
@@ -107,7 +179,8 @@ Regras de escrita (qualidade de produção):
 - DIREÇÃO DE GRAVAÇÃO: para cada bloco, uma instrução curta de como gravar
   (enquadramento, corte, texto que aparece na tela).
 - 3 GANCHOS por ideia, com ângulos distintos (pergunta, afirmação
-  contraintuitiva, resposta a comentário/trend).
+  contraintuitiva, resposta a comentário/trend) — todos na voz da pauta,
+  e pelo menos um deles usando a jogada de abertura do campo "linguagem".
 - VERSÃO CARROSSEL: capa com gancho curto, 5 a 7 lâminas com UMA ideia por
   lâmina, e lâmina final de CTA.
 - LEGENDA PRONTA: 2 a 4 frases, primeira linha forte, sem hashtags.
@@ -142,6 +215,8 @@ Responda SOMENTE com um JSON válido no formato:
       "duracao_estimada_seg": 45,
       "plataforma_origem_da_tendencia": "tiktok | instagram | youtube | multiplataforma",
       "padrao_aplicado": "copiado da pauta",
+      "voz": {"registro": "o personagem em que este roteiro foi escrito",
+              "de_onde_veio": "qual viral de origem ditou essa voz e o que dele você imitou"},
       "virais_origem": [{"url": "...", "autor": "...", "metrica": "...", "por_que_viralizou": "..."}],
       "embasamento_viral": "por que tende a performar, com o sinal do briefing",
       "embasamento_cientifico": ["referência do briefing, com fonte e link"],
@@ -247,6 +322,43 @@ def _filtrar_pautas_fracas(briefing: dict) -> dict:
     return {**briefing, "pautas": fortes}
 
 
+# Aberturas de aquecimento: a frase gasta antes de o assunto começar.
+ABERTURAS_MORTAS = re.compile(
+    r"^\s*(você sabia|voce sabia|vamos falar|hoje eu vou|hoje vou|bora lá|bora la|"
+    r"muita gente me pergunta|se liga|oi, gente|olá, pessoal|ola, pessoal|"
+    r"eu vou te contar|deixa eu te contar|vem comigo)", re.IGNORECASE)
+
+
+def _conferir_voz(roteiros: dict) -> None:
+    """Avisa quando a escrita caiu na voz média da casa.
+
+    O prompt pede voz distinta por ideia; aqui conferimos o resultado, para
+    a falha aparecer no painel em vez de virar dez roteiros sem sal.
+    """
+    ideias = roteiros.get("ideias", [])
+    registros, mortas, sem_voz = [], [], 0
+    for ideia in ideias:
+        voz = (ideia.get("voz") or {}).get("registro", "").strip().lower()
+        if voz:
+            registros.append(voz)
+        else:
+            sem_voz += 1
+        for gancho in ideia.get("ganchos_3s", []):
+            if gancho and ABERTURAS_MORTAS.match(gancho):
+                mortas.append(gancho[:60])
+
+    repetidos = len(registros) - len(set(registros))
+    if repetidos:
+        print(f"       ⚠️  {repetidos} ideia(s) repetem o mesmo registro de voz")
+    if sem_voz:
+        print(f"       ⚠️  {sem_voz} ideia(s) sem voz declarada")
+    if mortas:
+        print(f"       ⚠️  {len(mortas)} gancho(s) com abertura de aquecimento: "
+              + "; ".join(mortas[:3]))
+    if registros and not (repetidos or sem_voz or mortas):
+        print(f"       {len(set(registros))} vozes distintas nas {len(ideias)} ideias")
+
+
 def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) -> dict:
     """Gera as ideias/roteiros da semana em duas etapas (pesquisa + escrita)."""
     client = anthropic.Anthropic()
@@ -278,6 +390,10 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
             "Nenhuma pauta com âncora viral forte sobrou após o filtro — "
             "verifique a coleta de sinais antes de gastar com a escrita."
         )
+    sem_linguagem = [p["tema"] for p in briefing["pautas"] if not p.get("linguagem")]
+    if sem_linguagem:
+        print(f"       ⚠️  {len(sem_linguagem)} pauta(s) sem linguagem decifrada — "
+              "o roteiro delas tende a sair sem sal")
     print(f"       {len(briefing['pautas'])} pautas com âncora viral verificada")
 
     # Etapa 2 — escrita dos roteiros com o modelo forte, sem busca
@@ -290,7 +406,7 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
         "briefing": briefing,
     }
     print(f"   [2/2] Escrita dos roteiros ({MODELO_ESCRITA})...")
-    return _extrair_json(
+    roteiros = _extrair_json(
         _rodar(
             client,
             modelo=MODELO_ESCRITA,
@@ -300,3 +416,5 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
             max_tokens=64000,
         )
     )
+    _conferir_voz(roteiros)
+    return roteiros

@@ -102,7 +102,7 @@ def descobrir_virais(config: dict) -> list[dict]:
                 "video_id": v["id"],
                 "url": f"https://www.youtube.com/watch?v={v['id']}",
                 "titulo": snippet["title"],
-                "descricao": snippet.get("description", "")[:300],
+                "descricao": snippet.get("description", "")[:600],
                 "canal": snippet["channelTitle"],
                 "publicado_em": snippet["publishedAt"],
                 "views": views,

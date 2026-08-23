@@ -77,7 +77,7 @@ def virais_tiktok(config: dict) -> list[dict]:
             {
                 "fonte": "tiktok",
                 "url": v.get("webVideoUrl"),
-                "descricao": (v.get("text") or "")[:300],
+                "descricao": (v.get("text") or "")[:600],
                 "autor": (v.get("authorMeta") or {}).get("name"),
                 "views": views,
                 "likes": v.get("diggCount"),
@@ -114,7 +114,7 @@ def virais_instagram(config: dict) -> list[dict]:
             {
                 "fonte": "instagram",
                 "url": p.get("url"),
-                "descricao": (p.get("caption") or "")[:300],
+                "descricao": (p.get("caption") or "")[:600],
                 "autor": p.get("ownerUsername"),
                 "views": p.get("videoViewCount"),
                 "likes": p.get("likesCount"),

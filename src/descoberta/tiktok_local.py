@@ -120,7 +120,7 @@ def _normalizar(item: dict) -> dict | None:
     return {
         "fonte": "tiktok",
         "url": f"https://www.tiktok.com/@{autor}/video/{item['id']}",
-        "descricao": (item.get("desc") or "")[:300],
+        "descricao": (item.get("desc") or "")[:600],
         "autor": autor,
         "views": views,
         "likes": likes,
@@ -155,7 +155,7 @@ JS_CARDS = """
     saida.push({
       url: a.href,
       views: v ? v.textContent : '',
-      descricao: (a.getAttribute('title') || (caixa ? caixa.innerText : '') || '').slice(0, 300)
+      descricao: (a.getAttribute('title') || (caixa ? caixa.innerText : '') || '').slice(0, 600)
     });
   });
   return saida;
@@ -193,7 +193,7 @@ def _dos_cards(pagina) -> list[dict]:
             autor = url.split("/@")[-1].split("/")[0] if "/@" in url else ""
             videos.append({
                 "fonte": "tiktok", "url": url, "autor": autor,
-                "descricao": (card.get("descricao") or "").strip()[:300],
+                "descricao": (card.get("descricao") or "").strip()[:600],
                 "views": views, "likes": 0, "comentarios": 0,
                 "compartilhamentos": 0, "taxa_engajamento": 0.0, "parcial": True,
             })

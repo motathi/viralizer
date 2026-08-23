@@ -220,6 +220,8 @@ ESTILO = """  :root {
   .viral-item a:hover { text-decoration: underline; }
   .viral-item .metrica { color: var(--ok); font-weight: 700; }
   .viral-item .motivo { color: var(--suave); display: block; margin-top: 2px; }
+  .viral-item .fala { display: block; margin-top: 4px; padding-left: 9px;
+    border-left: 2px solid var(--borda); color: var(--tinta); font-style: italic; }
   .padrao { background: var(--grad-suave); border-radius: var(--r-md);
             padding: 11px 15px; font-size: .86rem; margin-top: 8px; }
 
@@ -545,15 +547,23 @@ def _cartao(ideia: dict, posicao: int) -> str:
             + (f' · <span class="metrica">{escape(v["metrica"])}</span>' if v.get("metrica") else "")
             + (f'<span class="motivo">{escape(v["por_que_viralizou"])}</span>'
                if v.get("por_que_viralizou") else "")
+            + (f'<span class="fala">“{escape(v["fala_literal"])}”</span>'
+               if v.get("fala_literal") else "")
             + "</div>"
             for v in ideia["virais_origem"]
         )
         padrao = (f'<div class="padrao">🧩 <b>Padrão aplicado:</b> '
                   f'{escape(ideia["padrao_aplicado"])}</div>'
                   if ideia.get("padrao_aplicado") else "")
+        voz = ideia.get("voz") or {}
+        voz_html = (f'<div class="padrao">🗣️ <b>Voz deste roteiro:</b> '
+                    f'{escape(voz["registro"])}'
+                    + (f' — {escape(voz["de_onde_veio"])}'
+                       if voz.get("de_onde_veio") else "")
+                    + '</div>') if voz.get("registro") else ""
         virais_html = (
             '<div class="rotulo">🎯 Virais que inspiraram esta ideia</div>'
-            f'<div class="virais-origem">{itens}</div>{padrao}'
+            f'<div class="virais-origem">{itens}</div>{padrao}{voz_html}'
         )
 
     seletor_formato = (
