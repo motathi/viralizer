@@ -446,7 +446,9 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
               f"{melhor:,} views — abaixo do mínimo de {minimo:,}.".replace(",", "."))
         print("      Baixe 'min_views_tiktok' no arquivo do nicho se quiser aceitá-los.")
     videos.sort(key=lambda v: v["views"] * (1 + 10 * v["taxa_engajamento"]), reverse=True)
-    return videos[:60]
+    # margem larga de propósito: quem afunila é a seleção por variedade
+    # em src/roteiros/gerador.py, que precisa de material para escolher
+    return videos[:150]
 
 
 def _explicar_vazio(respostas: int, bloqueio: bool, headless: bool,

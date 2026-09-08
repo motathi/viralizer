@@ -12,6 +12,7 @@ Pipeline em duas etapas para equilibrar custo e qualidade:
 
 import json
 import re
+from collections import Counter
 
 import anthropic
 
@@ -116,6 +117,14 @@ Responda SOMENTE com um JSON válido:
   ]
 }
 Distribua as pautas entre os pilares, sem repetir tema.
+
+DIVERSIDADE DE ASSUNTO (regra dura): no máximo 2 pautas podem girar em torno
+do mesmo assunto central — mesmo ativo, mesmo procedimento, mesma condição.
+Dez ângulos do peróxido de benzoíla é uma agenda ruim, ainda que ele seja o
+viral da semana. Se os sinais estiverem dominados por um único assunto, use
+os sinais dos demais assuntos mesmo que tenham métrica menor (desde que
+ainda virais), ou entregue menos pautas. Variedade de assunto vale mais que
+métrica bruta.
 
 MEMÓRIA (anti-repetição): o campo "ja_publicado" traz temas e ganchos já
 usados em semanas anteriores. É PROIBIDO repetir ou apenas reformular
@@ -281,9 +290,69 @@ def _rodar(client, *, modelo, system, conteudo, tools=None, max_tokens=16000,
         return "".join(b.text for b in response.content if b.type == "text")
 
 
-def _compactar_sinais(sinais: dict, max_por_fonte: int = 12) -> dict:
-    """Limita o volume de sinais enviado à etapa de pesquisa."""
-    return {fonte: itens[:max_por_fonte] for fonte, itens in sinais.items() if itens}
+# Palavras que aparecem em qualquer legenda e não distinguem assunto nenhum
+PALAVRAS_VAZIAS = {
+    "para", "como", "isso", "esse", "essa", "seus", "suas", "mais", "menos",
+    "você", "voce", "vocês", "voces", "então", "entao", "porque", "quando",
+    "sobre", "todos", "todas", "muito", "muita", "pode", "posso", "fazer",
+    "aqui", "agora", "hoje", "dica", "dicas", "vídeo", "video", "gente",
+    "with", "this", "that", "your", "from", "have", "what", "when", "will",
+    "para", "pero", "como", "esto", "esta", "todo", "toda", "muy",
+}
+
+
+def _tokens(texto: str) -> set[str]:
+    """Palavras significativas de um texto, para comparar assunto."""
+    return {p for p in re.findall(r"[a-zà-ú]{4,}", texto.lower())
+            if p not in PALAVRAS_VAZIAS}
+
+
+def _mesmo_assunto(a: set, b: set, limite: float) -> bool:
+    return bool(a and b) and len(a & b) / len(a | b) > limite
+
+
+def _selecionar_variado(itens: list, limite: int, max_por_autor: int = 2,
+                        sobreposicao: float = 0.34) -> list:
+    """Escolhe sinais variados, não só os mais vistos.
+
+    Cortar pelo topo puro entrega uma agenda inteira sobre a trend da
+    semana — dez ângulos do mesmo assunto. Aqui cada sinal escolhido
+    precisa trazer assunto novo em relação aos já escolhidos, e nenhum
+    perfil ocupa a lista sozinho. A segunda passada preenche a cota sem a
+    exigência de novidade, para nunca devolver menos do que cabe.
+    """
+    candidatos = [(v, _tokens(v.get("descricao", ""))) for v in itens]
+    escolhidos: list[tuple[dict, set]] = []
+    usados: set = set()
+    por_autor: Counter = Counter()
+
+    for exigir_novidade in (True, False):
+        for video, toks in candidatos:
+            if len(escolhidos) >= limite:
+                break
+            chave = video.get("url") or id(video)
+            if chave in usados:
+                continue
+            autor = video.get("autor", "")
+            if autor and por_autor[autor] >= max_por_autor:
+                continue
+            if exigir_novidade and any(_mesmo_assunto(toks, t, sobreposicao)
+                                       for _, t in escolhidos):
+                continue
+            escolhidos.append((video, toks))
+            usados.add(chave)
+            por_autor[autor] += 1
+    return [v for v, _ in escolhidos]
+
+
+def _compactar_sinais(sinais: dict, max_por_fonte: int = 45) -> dict:
+    """Escolhe quais sinais vão para a etapa de pesquisa.
+
+    O limite é de orçamento (entrada do modelo barato), mas o critério é
+    de variedade: sem isso a agenda inteira sai sobre um assunto só.
+    """
+    return {fonte: _selecionar_variado(itens, max_por_fonte)
+            for fonte, itens in sinais.items() if itens}
 
 
 def _metrica_forte(metrica: str, minimo: float = 10000) -> bool:
@@ -359,6 +428,26 @@ def _conferir_voz(roteiros: dict) -> None:
         print(f"       {len(set(registros))} vozes distintas nas {len(ideias)} ideias")
 
 
+def _conferir_variedade(briefing: dict) -> None:
+    """Avisa quando a semana virou monotema.
+
+    O prompt limita a 2 pautas por assunto; aqui conferimos o resultado,
+    para a falha aparecer no painel em vez de virar dez variações da
+    mesma ideia.
+    """
+    pautas = [(p.get("tema", ""), _tokens(p.get("tema", "")))
+              for p in briefing.get("pautas", [])]
+    grupos: Counter = Counter()
+    for i, (_, toks) in enumerate(pautas):
+        for j, (_, outros) in enumerate(pautas):
+            if i < j and _mesmo_assunto(toks, outros, 0.25):
+                grupos[i] += 1
+    repetidas = sum(1 for n in grupos.values() if n)
+    if repetidas > 2:
+        print(f"       ⚠️  {repetidas} pautas giram em torno do mesmo assunto — "
+              "a coleta desta semana pode ter vindo dominada por uma trend só")
+
+
 def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) -> dict:
     """Gera as ideias/roteiros da semana em duas etapas (pesquisa + escrita)."""
     client = anthropic.Anthropic()
@@ -394,6 +483,7 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
     if sem_linguagem:
         print(f"       ⚠️  {len(sem_linguagem)} pauta(s) sem linguagem decifrada — "
               "o roteiro delas tende a sair sem sal")
+    _conferir_variedade(briefing)
     print(f"       {len(briefing['pautas'])} pautas com âncora viral verificada")
 
     # Etapa 2 — escrita dos roteiros com o modelo forte, sem busca
