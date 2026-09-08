@@ -324,8 +324,14 @@ def _abrir_navegador(p, headless: bool):
     raise erro
 
 
-def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
-    """Vídeos virais do nicho por hashtag, palavra-chave e perfil de referência."""
+def virais_tiktok_local(config: dict, por_hashtag: int = 20,
+                        estatisticas: dict | None = None) -> list[dict]:
+    """Vídeos virais do nicho por hashtag, palavra-chave e perfil de referência.
+
+    Se `estatisticas` vier, recebe quanto cada termo coletou de bruto — o
+    histórico precisa separar "trouxe muito, nada viral" de "não trouxe
+    nada", que são problemas diferentes.
+    """
     alvos = _alvos(config)
     if not alvos:
         return []
@@ -419,6 +425,8 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
                     v.setdefault("origem_busca", tipo)
                     v.setdefault("origem_termo", rotulo)  # qual termo trouxe
                 novos = len(coletados) - antes
+                if estatisticas is not None:
+                    estatisticas[rotulo] = novos
                 # sem vídeo, o número de cards na tela diz se a página veio vazia
                 # (bloqueio) ou se veio cheia e a leitura é que falhou
                 extra = "" if novos else f" — {_contar_cards(pagina)} na tela"

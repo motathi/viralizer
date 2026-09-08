@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 saida/
 .navegador-coleta/
+dados/*.yaml.anterior
+config/nichos/*.anterior

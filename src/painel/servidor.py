@@ -46,6 +46,8 @@ DICAS = [
                                        "Tente de novo mais tarde — nada foi cobrado."),
     ("navegador da coleta ainda não foi instalado", "🌐 Falta instalar o navegador que faz a "
      "coleta. Feche esta janela e abra o painel pelo atalho (abrir-painel) — ele instala sozinho."),
+    ("não há histórico suficiente", "📊 Ainda faltam coletas para comparar. Gere a "
+     "agenda mais uma ou duas vezes e o otimizador terá dados para decidir."),
     ("O TikTok pediu verificação", "🤖 O TikTok quer confirmar que você não é um robô. "
      "Resolva na janela do navegador que abriu — é uma vez só, depois fica salvo."),
     ("todas vieram sem vídeo", "🔑 O navegador da coleta não tem uma sessão do TikTok — "
@@ -352,6 +354,16 @@ PAGINA = """<!DOCTYPE html>
         <button id="testar">Testar</button>
       </li>
       <li class="item">
+        <span class="icone">🎯</span>
+        <div>
+          <b>Otimizar termos de busca</b>
+          <p>Olha o desempenho de cada termo nas últimas coletas, tira os que
+             nunca trouxeram viral e propõe outros a partir do que os virais do
+             nicho estão usando. Precisa de pelo menos 2 coletas no histórico.</p>
+        </div>
+        <button id="otimizarTermos">Otimizar</button>
+      </li>
+      <li class="item">
         <span class="icone">🔄</span>
         <div>
           <b>Atualizar programa</b>
@@ -369,7 +381,9 @@ PAGINA = """<!DOCTYPE html>
 <script>
 const $ = s => document.querySelector(s);
 const ACOES = { gerar:'/gerar', testar:'/testar', publicar:'/publicar',
-                conectarTiktok:'/tiktok-login', atualizarPrograma:'/atualizar' };
+                conectarTiktok:'/tiktok-login', atualizarPrograma:'/atualizar',
+                otimizarTermos:'/otimizar' };
+const COM_NICHO = ['gerar', 'testar', 'otimizarTermos'];
 let semChave = false;
 
 async function carregarNichos() {
@@ -459,7 +473,7 @@ async function atualizar() {
 
 for (const [id, rota] of Object.entries(ACOES)) {
   $('#' + id).onclick = async () => {
-    const alvo = id === 'gerar' || id === 'testar'
+    const alvo = COM_NICHO.includes(id)
       ? rota + '?nicho=' + encodeURIComponent($('#nicho').value) : rota;
     await fetch(alvo, {method:'POST'});
     atualizar();
@@ -531,6 +545,15 @@ class Painel(BaseHTTPRequestHandler):
             ok = _iniciar([sys.executable, "-m", "src.main", "--nicho", nicho,
                            "--coleta", "local", "--apenas-descoberta"],
                           "Testando a coleta (sem custo)")
+            self._json({"ok": ok})
+        elif caminho == "/otimizar":
+            nicho = dict(x.split("=", 1) for x in consulta.split("&")
+                         if "=" in x).get("nicho", "")
+            if nicho not in _nichos():
+                self._json({"ok": False, "erro": "nicho inválido"})
+                return
+            ok = _iniciar([sys.executable, "-m", "src.painel.otimizar",
+                           "--nicho", nicho], "Otimizando os termos de busca")
             self._json({"ok": ok})
         elif caminho == "/chave":
             tamanho = int(self.headers.get("Content-Length") or 0)

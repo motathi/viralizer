@@ -89,7 +89,8 @@ def termos_sugeridos(videos: list[dict], config: dict, quantos: int = 8) -> list
     return sugestoes[:quantos]
 
 
-def relatorio(videos: list[dict], config: dict) -> None:
+def relatorio(videos: list[dict], config: dict) -> list[str]:
+    """Imprime os três relatórios e devolve os termos sugeridos, para o histórico."""
     rendimento_por_termo(videos)
     termos_improdutivos(videos, config)
-    termos_sugeridos(videos, config)
+    return termos_sugeridos(videos, config)
