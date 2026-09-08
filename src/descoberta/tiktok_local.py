@@ -417,6 +417,7 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
 
                 for v in coletados.values():
                     v.setdefault("origem_busca", tipo)
+                    v.setdefault("origem_termo", rotulo)  # qual termo trouxe
                 novos = len(coletados) - antes
                 # sem vídeo, o número de cards na tela diz se a página veio vazia
                 # (bloqueio) ou se veio cheia e a leitura é que falhou

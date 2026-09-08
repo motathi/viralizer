@@ -40,16 +40,41 @@ hashtags_monitoradas:
   - cuidadodelapiel
 
 # 2) Palavras-chave — pega vídeos que viralizaram SEM usar hashtag do nicho
-# (a maioria dos virais grandes não marca hashtag). Use termos que as pessoas
-# realmente falam/pesquisam.
+# (a maioria dos virais grandes não marca hashtag).
+#
+# Como escolher um bom termo:
+#   • Frase, não palavra solta. "pele" sozinho traz de tudo — inclusive o
+#     Pelé, porque a busca ignora acento — e "harmonização" sozinho traz
+#     harmonização de cores e de música. A intenção mora na frase inteira.
+#   • Prefira o que carrega conflito, dúvida, dinheiro, medo ou
+#     arrependimento. É disso que viral é feito. "acne" é um assunto;
+#     "acne adulta o que fazer" é uma pessoa procurando ajuda.
+#   • Escreva como a pessoa fala, não como o consultório escreve.
+#     Ninguém digita "hipercromia pós-inflamatória".
+#   • Misture idiomas: em inglês nasce a trend, e sem versão forte em
+#     PT-BR ela vira janela de oportunidade.
+#
+# Não precisa acertar de primeira: ao fim de cada coleta o programa mostra
+# quanto cada termo rendeu e quais não trouxeram nada — troque os fracos.
 buscas_por_palavra:
+  # Dúvida real, do jeito que se digita
   - protetor solar mito
   - dermatologista responde
   - melasma tratamento
   - acne adulta
   - retinol como usar
-  - skin barrier repair      # inglês
+  # Conflito e arrependimento — o combustível mais confiável
+  - harmonização facial arrependimento
+  - preenchimento deu errado
+  # Dinheiro
+  - quanto custa preenchimento labial
+  - skincare caro vale a pena
+  # Inglês: onde a trend costuma nascer
+  - skin barrier repair
   - dermatologist reacts
+  - dermatologist explains
+  # Espanhol
+  - dermatóloga explica
 
 # 3) Perfis de referência — os melhores vídeos de quem é forte no nicho.
 # Preencha com perfis que ela acompanha (sem o @). Vazio = ignora.

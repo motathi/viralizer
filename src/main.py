@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 from src.agenda.montador import montar_agenda
 from src.historico import carregar_historico, registrar_historico
 from src.descoberta.apify_social import virais_instagram, virais_tiktok
+from src.descoberta.rendimento import relatorio
 from src.descoberta.tiktok_local import virais_tiktok_local
 from src.descoberta.youtube import descobrir_virais
 from src.roteiros.gerador import gerar_roteiros
@@ -91,6 +92,7 @@ def main() -> None:
         print("   TikTok — coleta local pelo seu navegador (grátis, sem cota)...")
         sinais["tiktok_virais"] = virais_tiktok_local(config)
         print(f"   → {len(sinais['tiktok_virais'])} vídeos coletados localmente")
+        relatorio(sinais["tiktok_virais"], config)
 
     poucos = len(sinais.get("tiktok_virais", [])) < 5
     if args.coleta == "apify" or (args.coleta == "auto" and poucos and tem_apify):
