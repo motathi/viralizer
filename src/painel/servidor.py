@@ -110,6 +110,38 @@ def _iniciar(comando: list[str], acao: str) -> bool:
     return True
 
 
+def _tem_chave() -> bool:
+    return bool(os.environ.get("ANTHROPIC_API_KEY", "").strip())
+
+
+def _salvar_chave(valor: str) -> tuple[bool, str]:
+    """Grava a chave no .env, sem passar pelo Bloco de Notas.
+
+    No Windows, salvar ".env" pelo Bloco de Notas produz ".env.txt" sem
+    aviso, e o programa não acha a chave. Escrevendo daqui, o nome sai
+    certo. As demais linhas do arquivo são preservadas.
+    """
+    valor = valor.strip().strip('"').strip("'")
+    if not valor:
+        return False, "Cole a chave antes de salvar."
+    if not valor.startswith("sk-"):
+        return False, "Isso não parece uma chave da Anthropic — ela começa com sk-ant-."
+    if len(valor) < 20:
+        return False, "A chave veio cortada. Copie de novo, inteira."
+
+    env = RAIZ / ".env"
+    linhas = env.read_text(encoding="utf-8").splitlines() if env.exists() else []
+    for i, linha in enumerate(linhas):
+        if linha.strip().startswith("ANTHROPIC_API_KEY"):
+            linhas[i] = f"ANTHROPIC_API_KEY={valor}"
+            break
+    else:
+        linhas.append(f"ANTHROPIC_API_KEY={valor}")
+    env.write_text("\n".join(linhas) + "\n", encoding="utf-8")
+    os.environ["ANTHROPIC_API_KEY"] = valor  # vale já, sem reabrir o painel
+    return True, "Chave salva."
+
+
 def _versao() -> dict:
     """Diz se a cópia local é um clone do Git e se há versão nova publicada."""
     if not (RAIZ / ".git").exists():
@@ -204,6 +236,11 @@ PAGINA = """<!DOCTYPE html>
   .banner.visivel { display:block }
   .banner.nova { background:#f4f0ff; border:1px solid #ded0ff; color:#4a2b8c }
   .banner.zip { background:#fff7e8; border:1px solid #ffe2ab; color:#7a5200 }
+  .linha-chave { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap }
+  .linha-chave input { flex:1 1 260px; font:inherit; font-size:.88rem; padding:10px 14px;
+                       border-radius:999px; border:1.5px solid #e8d9b4; background:#fff;
+                       color:var(--tinta) }
+  .erro-chave { display:block; margin-top:8px; font-weight:600 }
 
   .status { background:var(--painel); border:1px solid var(--borda); border-radius:14px;
             padding:15px 18px; font-size:.92rem }
@@ -255,6 +292,7 @@ PAGINA = """<!DOCTYPE html>
     <p class="sub">Tudo roda neste computador. Nada sai daqui até você mandar publicar.</p>
   </header>
 
+  <div class="banner" id="avisoChave"></div>
   <div class="banner" id="atualizacao"></div>
   <div class="status" id="status">carregando…</div>
 
@@ -332,6 +370,7 @@ PAGINA = """<!DOCTYPE html>
 const $ = s => document.querySelector(s);
 const ACOES = { gerar:'/gerar', testar:'/testar', publicar:'/publicar',
                 conectarTiktok:'/tiktok-login', atualizarPrograma:'/atualizar' };
+let semChave = false;
 
 async function carregarNichos() {
   const r = await (await fetch('/nichos')).json();
@@ -341,6 +380,12 @@ async function carregarNichos() {
 
 function pintar(e) {
   for (const id of Object.keys(ACOES)) $('#' + id).disabled = e.rodando;
+  if (semChave) {
+    $('#gerar').disabled = true;
+    $('#gerar').title = 'Cole a chave da Anthropic no aviso acima para liberar';
+  } else {
+    $('#gerar').removeAttribute('title');
+  }
   const s = $('#status');
   if (e.rodando) {
     s.innerHTML = `<span class="girando"></span> <b>${e.acao}</b> — em andamento…`;
@@ -357,6 +402,35 @@ function pintar(e) {
     l.classList.add('visivel');
     if (colado) l.scrollTop = l.scrollHeight;
   }
+}
+
+async function conferirChave() {
+  let temChave;
+  try { temChave = (await (await fetch('/chaves')).json()).anthropic; }
+  catch (_) { return; }
+  semChave = !temChave;
+  const el = $('#avisoChave');
+  if (temChave) { el.className = 'banner'; el.innerHTML = ''; el.dataset.pedindo = ''; return; }
+  if (el.dataset.pedindo === 'sim') return;   // não apagar o que já está sendo digitado
+  el.dataset.pedindo = 'sim';
+  el.className = 'banner visivel zip';
+  el.innerHTML = `<b>Falta a chave da Anthropic.</b> Sem ela o programa encontra os
+    virais, mas não escreve os roteiros. Pegue em console.anthropic.com →
+    Settings → API keys e cole aqui:
+    <div class="linha-chave">
+      <input type="password" id="chaveValor" placeholder="sk-ant-..." autocomplete="off"
+             aria-label="Chave da Anthropic">
+      <button id="salvarChave">Salvar chave</button>
+    </div>
+    <span class="erro-chave" id="chaveErro"></span>`;
+  const salvar = async () => {
+    const r = await fetch('/chave', {method:'POST', body: $('#chaveValor').value});
+    const d = await r.json();
+    if (d.ok) { el.dataset.pedindo = ''; conferirChave(); atualizar(); }
+    else { $('#chaveErro').textContent = '⚠️ ' + d.recado; }
+  };
+  $('#salvarChave').onclick = salvar;
+  $('#chaveValor').onkeydown = ev => { if (ev.key === 'Enter') salvar(); };
 }
 
 async function conferirVersao() {
@@ -394,6 +468,7 @@ for (const [id, rota] of Object.entries(ACOES)) {
 }
 
 carregarNichos();
+conferirChave();
 conferirVersao();
 setInterval(conferirVersao, 60000);
 atualizar();
@@ -423,6 +498,8 @@ class Painel(BaseHTTPRequestHandler):
             self._json({"nichos": _nichos()})
         elif caminho == "/versao":
             self._json(versao_cache)
+        elif caminho == "/chaves":
+            self._json({"anthropic": _tem_chave()})
         elif caminho == "/status":
             with trava:
                 self._json({**estado, "agenda": _info_agenda()})
@@ -455,6 +532,11 @@ class Painel(BaseHTTPRequestHandler):
                            "--coleta", "local", "--apenas-descoberta"],
                           "Testando a coleta (sem custo)")
             self._json({"ok": ok})
+        elif caminho == "/chave":
+            tamanho = int(self.headers.get("Content-Length") or 0)
+            corpo = self.rfile.read(tamanho).decode("utf-8", "ignore")
+            ok, recado = _salvar_chave(corpo)
+            self._json({"ok": ok, "recado": recado})
         elif caminho == "/tiktok-login":
             ok = _iniciar([sys.executable, "-m", "src.descoberta.tiktok_conta"],
                           "Conectando sua conta do TikTok")

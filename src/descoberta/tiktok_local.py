@@ -246,6 +246,21 @@ def _aceitar_cookies(pagina) -> None:
             continue
 
 
+def _estabilizar(pagina) -> None:
+    """Isola cada alvo do fracasso do anterior.
+
+    Quando uma navegação falha, o Chrome ainda está a caminho da própria
+    página de erro. Começar a próxima em cima disso interrompe as duas —
+    um alvo que falha derruba todos os seguintes em cascata. Parar em
+    about:blank antes de seguir corta essa corrente.
+    """
+    try:
+        pagina.wait_for_timeout(800)
+        pagina.goto("about:blank", timeout=10000)
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def _rolar_pagina(pagina, vezes: int = 3) -> None:
     """Rola devagar, como uma pessoa, para carregar mais vídeos."""
     for _ in range(vezes):
@@ -362,13 +377,25 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
 
             pagina.on("response", interceptar)
 
-            for indice, (rotulo, url, tipo) in enumerate(alvos):
+            # Aquecimento: a primeira página costuma vir vazia porque a sessão
+            # ainda não foi estabelecida. Passar pela home antes evita perder
+            # os dois primeiros alvos da lista.
+            try:
+                pagina.goto("https://www.tiktok.com/", wait_until="domcontentloaded",
+                            timeout=45000)
+                pagina.wait_for_timeout(3000)
+                _aceitar_cookies(pagina)
+                if _bloqueado(pagina) and not headless:
+                    houve_bloqueio = True
+                    _aguardar_liberacao(pagina)
+            except Exception:  # noqa: BLE001 - seguir mesmo sem o aquecimento
+                _estabilizar(pagina)
+
+            for rotulo, url, tipo in alvos:
                 antes = len(coletados)
                 try:
                     pagina.goto(url, wait_until="domcontentloaded", timeout=45000)
                     pagina.wait_for_timeout(3500)
-                    if indice == 0:
-                        _aceitar_cookies(pagina)
                     if _bloqueado(pagina):
                         houve_bloqueio = True
                         if not headless:
@@ -377,7 +404,9 @@ def virais_tiktok_local(config: dict, por_hashtag: int = 20) -> list[dict]:
                             pagina.wait_for_timeout(3000)
                     _rolar_pagina(pagina, vezes=2 + por_hashtag // 20)
                 except Exception as e:  # noqa: BLE001
-                    print(f"   ({rotulo}: {type(e).__name__})")
+                    print(f"   ({rotulo}: {type(e).__name__}: "
+                          f"{str(e).splitlines()[0][:120]})")
+                    _estabilizar(pagina)
                     continue
 
                 for v in _do_json_embutido(pagina):
