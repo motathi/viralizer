@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estúdio — Dermatologia Estética</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>  :root {
+    /* Design tokens — paleta oficial do Instagram */
+    --ig-blue: #405DE6; --ig-purple: #833AB4; --ig-magenta: #C13584;
+    --ig-pink: #E1306C; --ig-orange: #F77737; --ig-yellow: #FCAF45;
+    --grad: linear-gradient(45deg, #405DE6 0%, #833AB4 30%, #C13584 50%, #E1306C 70%, #F77737 100%);
+    --grad-suave: linear-gradient(45deg, #f5f1fe, #fdeef5, #fff4ec);
+
+    /* Neutros (escala do Instagram) */
+    --fundo: #ffffff; --superficie: #fafafa; --tinta: #262626;
+    --suave: #737373; --borda: #dbdbdb; --borda-leve: #efefef;
+    --acento: #C13584; --ok: #1f9d63; --ok-claro: #e8f6ef;
+    --alerta-fundo: #fff6e6; --alerta-borda: #ffe0a3; --alerta-tinta: #7a5200;
+    --erro-fundo: #fff0f0; --erro-borda: #ffc9c9; --erro-tinta: #8a1c1c;
+
+    /* Elevação e forma */
+    --r-lg: 20px; --r-md: 14px; --r-full: 999px;
+    --sombra-1: 0 1px 2px rgba(0,0,0,.05);
+    --sombra-2: 0 8px 24px -8px rgba(131, 58, 180, .16);
+    --sombra-3: 0 18px 44px -16px rgba(131, 58, 180, .28);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+         background: var(--fundo); color: var(--tinta); line-height: 1.6;
+         -webkit-font-smoothing: antialiased; }
+  .container { max-width: 1020px; margin: 0 auto; padding: 0 18px; }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--ig-purple); outline-offset: 2px; border-radius: 4px; }
+  [hidden] { display: none !important; }
+
+  /* ── Navegação do site ─────────────────────────────────────────── */
+  nav.nav { border-bottom: 1px solid var(--borda-leve); background: var(--fundo); }
+  .nav-linha { display: flex; align-items: center; gap: 18px; min-height: 58px; }
+  .marca { font-weight: 800; letter-spacing: -.02em; text-decoration: none; color: var(--tinta);
+           font-size: .98rem; white-space: nowrap; }
+  .marca span { background: var(--grad); -webkit-background-clip: text;
+                background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-links { display: flex; gap: 2px; margin-left: auto; overflow-x: auto;
+               scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { color: var(--suave); text-decoration: none; font-size: .86rem; font-weight: 600;
+                 padding: 8px 13px; border-radius: var(--r-full); white-space: nowrap;
+                 transition: all .2s; }
+  .nav-links a:hover { color: var(--tinta); background: var(--superficie); }
+  .nav-links a.ativo { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
+  @media (max-width: 640px) {
+    .nav-linha { flex-wrap: wrap; padding-bottom: 8px; }
+    .nav-links { margin-left: -18px; margin-right: -18px; padding: 0 18px; width: calc(100% + 36px); }
+  }
+
+  header.hero { padding: 44px 0 18px; text-align: center; }
+  .selo { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem;
+          font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+          padding: 6px 16px; border-radius: var(--r-full); margin-bottom: 16px;
+          color: var(--tinta); position: relative; background:
+            linear-gradient(var(--fundo), var(--fundo)) padding-box,
+            var(--grad) border-box; border: 2px solid transparent; }
+  .selo::before { content: ""; width: 10px; height: 10px; border-radius: 50%;
+                  background: var(--grad); }
+  h1 { font-size: clamp(1.5rem, 4.5vw, 2.2rem); line-height: 1.22;
+       font-weight: 800; letter-spacing: -.02em; }
+  h1 span { background: var(--grad); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { color: var(--suave); max-width: 640px; margin: 12px auto 0; font-size: .93rem; }
+
+  .painel { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.86);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            padding: 10px 0; border-bottom: 1px solid var(--borda-leve); }
+  .painel-linha { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+                  justify-content: space-between; }
+  .abas { display: flex; gap: 4px; background: var(--superficie);
+          border: 1px solid var(--borda-leve); border-radius: var(--r-full); padding: 4px; }
+  .aba { border: 0; background: transparent; color: var(--suave); font-size: .84rem;
+         font-weight: 600; padding: 7px 15px; border-radius: var(--r-full);
+         cursor: pointer; transition: all .2s; }
+  .aba:hover { color: var(--tinta); }
+  .aba.ativa { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
+  .progresso { font-size: .84rem; color: var(--suave); font-weight: 600; }
+  .progresso b { background: var(--grad); -webkit-background-clip: text;
+                 background-clip: text; -webkit-text-fill-color: transparent;
+                 font-weight: 800; }
+
+  section.agenda { padding: 22px 0 70px; }
+  .aviso { background: var(--grad-suave); border-radius: var(--r-md);
+           padding: 11px 16px; font-size: .83rem; margin-bottom: 22px; }
+  .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
+          border-radius: var(--r-full); background: var(--superficie);
+          border: 1px solid var(--borda-leve); color: var(--suave); }
+  .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
+                letter-spacing: .01em; }
+  .chip.ok { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
+  .chip.trend { color: var(--acento); background:
+                  linear-gradient(var(--fundo), var(--fundo)) padding-box,
+                  var(--grad) border-box; border: 1.5px solid transparent; }
+  .banner-aviso { display: none; border-radius: var(--r-md); padding: 12px 16px;
+                  margin-bottom: 16px; font-size: .86rem; align-items: center; gap: 10px;
+                  justify-content: space-between; flex-wrap: wrap; }
+  .banner-aviso.visivel { display: flex; }
+  .banner-aviso.alerta { background: var(--alerta-fundo); border: 1px solid var(--alerta-borda);
+                         color: var(--alerta-tinta); }
+  .banner-aviso.neutro { background: var(--superficie); border: 1px solid var(--borda-leve);
+                         color: var(--suave); }
+  .semanas { display: flex; align-items: center; gap: 6px; font-size: .82rem;
+             color: var(--suave); }
+  .semanas select { font: inherit; font-size: .82rem; color: var(--tinta);
+                    border: 1px solid var(--borda-leve); background: var(--superficie);
+                    border-radius: var(--r-full); padding: 6px 12px; cursor: pointer; }
+
+  .rotulo { font-size: .72rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: .08em; margin: 20px 0 9px;
+            background: var(--grad); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; }
+  .legenda { background: var(--superficie); border-radius: var(--r-md);
+             padding: 13px 15px; font-size: .89rem; white-space: pre-wrap; }
+  .hashtags { font-size: .85rem; margin-top: 7px; font-weight: 600;
+              background: var(--grad); -webkit-background-clip: text;
+              background-clip: text; -webkit-text-fill-color: transparent; }
+  .texto { white-space: pre-wrap; }
+
+  .btn { border: 1.5px solid var(--borda); background: var(--fundo); color: var(--tinta);
+         font-size: .84rem; font-weight: 700; padding: 9px 16px; text-decoration: none;
+         border-radius: var(--r-full); cursor: pointer; transition: all .2s;
+         display: inline-block; line-height: 1.4; }
+  .btn:hover { border-color: var(--ig-magenta); color: var(--ig-magenta);
+               transform: translateY(-1px); }
+  .btn.primario { background: var(--grad); border-color: transparent; color: #fff;
+                  box-shadow: var(--sombra-2); }
+  .btn.primario:hover { color: #fff; filter: brightness(1.06); box-shadow: var(--sombra-3); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+  .btn.pequeno { font-size: .78rem; padding: 6px 12px; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
+           padding-top: 16px; border-top: 1px solid var(--borda-leve); }
+
+  /* ── Blocos de formulário e cartões das ferramentas ────────────── */
+  .cartao-ferramenta { background: var(--fundo); border: 1px solid var(--borda);
+                       border-radius: var(--r-lg); box-shadow: var(--sombra-1);
+                       padding: 20px 22px; margin-bottom: 14px; }
+  .cartao-ferramenta h2 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.01em;
+                          display: flex; align-items: center; gap: 8px; }
+  .cartao-ferramenta h2 .icone { font-size: 1.15rem; }
+  .cartao-ferramenta > p { color: var(--suave); font-size: .88rem; margin-top: 4px; }
+  .cartao-ferramenta .acoes { margin-top: 14px; padding-top: 0; border-top: 0; }
+  .grade-ferramentas { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                       gap: 14px; }
+  .grade-ferramentas .cartao-ferramenta { margin-bottom: 0; display: flex; flex-direction: column; }
+  .grade-ferramentas .cartao-ferramenta > p { flex: 1; }
+  .titulo-secao { font-size: .75rem; font-weight: 700; letter-spacing: .11em;
+                  text-transform: uppercase; color: var(--suave); margin: 30px 0 12px; }
+  .titulo-secao:first-child { margin-top: 0; }
+  label.campo { display: block; font-size: .8rem; font-weight: 600; color: var(--suave); margin-bottom: 5px; }
+  select, textarea, input[type=text], input[type=password] {
+    font: inherit; font-size: .92rem; padding: 10px 14px; border-radius: 12px;
+    border: 1.5px solid var(--borda); background: var(--superficie); color: var(--tinta); width: 100%; }
+  textarea { min-height: 96px; resize: vertical; }
+  .linha-campos { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .linha-campos input { flex: 1 1 260px; }
+  .mensagem { border-radius: var(--r-md); padding: 12px 16px; font-size: .88rem; margin-top: 12px; }
+  .mensagem.erro { background: var(--erro-fundo); border: 1px solid var(--erro-borda); color: var(--erro-tinta); }
+  .mensagem.ok { background: var(--ok-claro); border: 1px solid #bfe8cf; color: #146a3f; }
+  .mensagem.alerta { background: var(--alerta-fundo); border: 1px solid var(--alerta-borda); color: var(--alerta-tinta); }
+  .mensagem a { color: inherit; font-weight: 700; }
+  .vazio-suave { color: var(--suave); background: var(--superficie); border: 1px solid var(--borda-leve);
+                 border-radius: var(--r-md); padding: 18px 20px; font-size: .9rem; }
+  .girando { display: inline-block; width: 13px; height: 13px; border: 2px solid #e2dfe6;
+             border-top-color: var(--ig-magenta); border-radius: 50%; animation: g .8s linear infinite;
+             margin-right: 8px; vertical-align: -1px; }
+  @keyframes g { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .girando { animation: none; } }
+  table.tabela { width: 100%; border-collapse: collapse; font-size: .86rem; margin-top: 10px; }
+  table.tabela th, table.tabela td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--borda-leve); }
+  table.tabela th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--suave); }
+  table.tabela td.num, table.tabela th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rolagem { overflow-x: auto; }
+
+  /* ── Roteiro do estúdio/galeria (blocos rotulados) ─────────────── */
+  .bloco { padding: 10px 0; border-bottom: 1px dashed var(--borda-leve); font-size: .9rem; }
+  .bloco:last-child { border-bottom: 0; }
+  .bloco .rotulo-bloco { font-size: .72rem; font-weight: 800; letter-spacing: .08em;
+                         text-transform: uppercase; color: var(--ig-magenta); }
+  .bloco .fala { margin: 3px 0; }
+  .bloco .direcao { color: var(--suave); font-size: .8rem; margin-top: 3px; }
+  .bloco .direcao::before { content: "🎥 "; }
+  .gancho-gal { font-weight: 600; margin: 0 0 12px; }
+
+  #toast { position: fixed; left: 50%; bottom: 28px;
+           transform: translateX(-50%) translateY(80px);
+           background: var(--tinta); color: #fff; font-size: .87rem; font-weight: 600;
+           padding: 12px 22px; border-radius: var(--r-full); opacity: 0;
+           transition: all .35s cubic-bezier(.34,1.3,.64,1); z-index: 50;
+           pointer-events: none; max-width: 90vw; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+  #toast.mostrar { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  footer { border-top: 1px solid var(--borda-leve); padding: 26px 0 42px;
+           text-align: center; color: var(--suave); font-size: .83rem; }
+  footer a { color: var(--suave); }
+
+  .etapas { display: flex; gap: 8px; margin: 0 0 22px; flex-wrap: wrap; justify-content: center; }
+  .etapa { font-size: .78rem; font-weight: 600; color: var(--suave); padding: 6px 12px;
+           border-radius: var(--r-full); border: 1px solid var(--borda-leve); }
+  .etapa.ativa { color: #fff; background: var(--grad); border-color: transparent; }
+  .cartao-estudio { border: 1px solid var(--borda); border-radius: var(--r-lg); padding: 20px; background: var(--fundo);
+                    box-shadow: var(--sombra-1); }
+  .form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form .larga { grid-column: 1 / -1; }
+  .form-acoes { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; align-items: center; font-size: .88rem; color: var(--suave); }
+  .opcoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .opcao { display: flex; flex-direction: column; }
+  .opcao .chip { align-self: flex-start; }
+  .opcao h3 { font-size: 1rem; margin: 8px 0 4px; }
+  .opcao .angulo { color: var(--suave); font-size: .86rem; margin-bottom: 10px; }
+  .opcao .previa { flex: 1; max-height: 340px; overflow: auto; padding-right: 4px; }
+  .opcao .por-que { font-size: .82rem; color: var(--suave); margin: 10px 0; }
+  .editor { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; align-items: start; }
+  .chat { display: flex; flex-direction: column; max-height: 78vh; }
+  .mensagens { flex: 1; overflow: auto; display: flex; flex-direction: column; gap: 10px; padding: 4px 2px 12px; }
+  .msg { max-width: 92%; padding: 10px 14px; border-radius: 16px; font-size: .92rem; white-space: pre-wrap; }
+  .msg.eu { align-self: flex-end; background: var(--grad); color: #fff; border-bottom-right-radius: 4px; }
+  .msg.ia { align-self: flex-start; background: var(--superficie); border: 1px solid var(--borda-leve); border-bottom-left-radius: 4px; }
+  .entrada { display: flex; gap: 8px; border-top: 1px solid var(--borda-leve); padding-top: 12px; }
+  .entrada input { flex: 1; }
+  .sugestoes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .sugestoes .btn { font-size: .78rem; padding: 6px 11px; font-weight: 600; }
+  .titulo-roteiro { margin: 10px 0 4px; font-size: 1.05rem; }
+  .angulo-roteiro { color: var(--suave); font-size: .86rem; margin-bottom: 12px; }
+  section.estudio { padding: 0 0 60px; }
+  @media (max-width: 820px) {
+    .form, .opcoes, .editor { grid-template-columns: 1fr; }
+    .opcao .previa { max-height: none; }
+    .chat { max-height: none; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/><stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>
+<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html">📅 Agenda</a><a href="estudio.html" class="ativo" aria-current="page">✨ Estúdio</a><a href="galeria.html">💡 Galeria</a><a href="manual.html">📘 Manual</a><a href="ferramentas.html">🧰 Ferramentas</a></div></div></nav>
+
+<header class="hero container">
+  <div class="selo">Estúdio de roteiros</div>
+  <h1>Sua ideia, <span>três roteiros</span></h1>
+  <p class="sub">Você dá a ideia e escolhe formato, estilo e tom. A IA escreve três opções em ângulos
+  diferentes; você escolhe uma, ajusta conversando e salva na galeria. Roda aqui no navegador, com a sua chave.</p>
+</header>
+<section class="estudio container">
+  <div class="banner-aviso alerta" id="aviso-chave"><span>🔑 Falta a chave da Anthropic. Sem ela o estúdio não escreve.</span>
+    <a class="btn" href="ferramentas.html#chave">Guardar a chave</a></div>
+
+  <div class="etapas">
+    <span class="etapa ativa" id="et1">1 · Ideia e formato</span>
+    <span class="etapa" id="et2">2 · Escolha uma opção</span>
+    <span class="etapa" id="et3">3 · Ajuste e salve</span>
+  </div>
+
+  <section id="passo1" class="cartao-estudio">
+    <div class="form">
+      <div class="larga"><label class="campo" for="ideia">Sua ideia</label>
+        <textarea id="ideia" placeholder="Ex.: explicar por que protetor solar dentro de casa faz diferença, usando a luz da janela do consultório como prova"></textarea></div>
+      <div><label class="campo" for="formato">Formato</label><select id="formato"></select></div>
+      <div><label class="campo" for="tamanho">Tamanho</label><select id="tamanho"></select></div>
+      <div><label class="campo" for="estilo">Estilo</label><select id="estilo"></select></div>
+      <div><label class="campo" for="tom">Tom</label><select id="tom"></select></div>
+      <div class="larga"><label class="campo" for="obs">Observações (opcional)</label>
+        <input type="text" id="obs" placeholder="Ex.: mencionar que atendo em Curitiba; não usar a palavra 'milagre'"></div>
+    </div>
+    <div class="form-acoes">
+      <button class="btn primario" id="gerar">Escrever 3 opções</button>
+      <span id="estado1"></span>
+    </div>
+    <div class="mensagem erro" id="erro1" hidden></div>
+  </section>
+
+  <section id="passo2" hidden>
+    <div class="titulo-secao">Três ângulos para a mesma ideia — escolha um</div>
+    <div class="opcoes" id="opcoes"></div>
+    <div class="form-acoes"><button class="btn" id="voltar1">← Mudar a ideia ou os parâmetros</button></div>
+  </section>
+
+  <section id="passo3" hidden>
+    <div class="editor">
+      <div class="cartao-estudio" id="roteiro"></div>
+      <div class="cartao-estudio chat">
+        <div class="titulo-secao">Ajuste conversando</div>
+        <div class="sugestoes" id="sugestoes"></div>
+        <div class="mensagens" id="mensagens"></div>
+        <div class="entrada">
+          <input type="text" id="pedido" placeholder="Ex.: deixa o gancho mais provocador" aria-label="O que mudar">
+          <button class="btn primario" id="enviar">Enviar</button>
+        </div>
+        <div class="mensagem erro" id="erro3" hidden></div>
+        <div class="acoes">
+          <button class="btn primario" id="salvar">💾 Salvar na galeria</button>
+          <button class="btn" id="copiar">📋 Copiar</button>
+          <button class="btn" id="voltar2">← Ver as 3 opções</button>
+        </div>
+        <div class="mensagem ok" id="salvo" hidden></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<footer>
+  <div class="container">
+    <p><strong>Radar de Conteúdo Viral</strong> — pesquisa de tendências, roteiros embasados e agenda semanal.</p>
+  </div>
+</footer>
+<div id="toast"></div>
+<script id="dados-pagina" type="application/json">{"nicho": "dermatologia-estetica", "nome": "Dermatologia Estética", "menus": {"formatos": {"video": "🎬 Vídeo (Reels/TikTok)", "carrossel": "🖼️ Carrossel", "stories": "📱 Sequência de stories"}, "estilos": ["Educativo direto", "Mito vs verdade", "Resposta a comentário", "Bastidor / humanizado", "História de caso (sem expor paciente)", "Lista / ranking", "Polêmica com posicionamento", "Antes e depois explicado"], "tons": ["Acolhedor", "Direto e firme", "Bem-humorado", "Indignado / opinativo", "Técnico acessível", "Confidente (amiga que conta)"], "tamanhos": {"video": ["30s", "45s", "60s", "90s"], "carrossel": ["5 lâminas", "7 lâminas", "10 lâminas"], "stories": ["3 stories", "5 stories", "7 stories"]}}, "modelo": "claude-opus-5", "max_tokens": 16000, "prompts": {"opcoes": "Você é um roteirista sênior de conteúdo para redes sociais em nichos de\nsaúde, escrevendo para o perfil descrito. A pessoa te dá UMA ideia e os\nparâmetros: formato, estilo, tom e tamanho. Você devolve TRÊS opções de\nroteiro em ângulos claramente diferentes entre si — se der para trocar os\ntítulos e ninguém notar, refaça. Todas obedecem ao estilo e ao tom pedidos;\no que muda é o ângulo, a estrutura e a jogada de abertura.\n\nFORMATO define a estrutura dos blocos:\n- video: blocos por tempo (\"0-3s\", \"3-12s\", ...) até a duração pedida. Cada\n  bloco tem a fala (como se diz em voz alta) e a direção de gravação\n  (enquadramento, corte, texto na tela). Gancho nos 3 primeiros segundos.\n- carrossel: blocos são lâminas. \"Capa\" com gancho curto que cabe na\n  imagem, depois \"Lâmina 2\"..\"Lâmina N\" com UMA ideia por lâmina em texto\n  curto, e a última \"CTA\". A direção é a sugestão visual da lâmina.\n- stories: blocos são stories em sequência, \"Story 1\"..\"Story N\". Cada um\n  diz o que falar ou escrever na tela e a direção: sticker (enquete, caixa\n  de pergunta, quiz, deslizante), corte de bastidor, texto grande, cara na\n  câmera. O primeiro story tem que segurar quem passa o dedo; o último\n  fecha com uma ação (responder, salvar, mandar mensagem).\n\nMANUAL DO NICHO (se vier em \"manual_do_nicho\"): conhecimento acumulado de\nvirais deste nicho — estruturas comprovadas, vozes, aberturas, vocabulário.\nUse-o. PREFERÊNCIAS (se vier em \"preferencias_reveladas\"): o que ela\ncostuma escolher e descartar; pese a favor do que ela escolhe.\n\nPROIBIDO — é exatamente isto que deixa roteiro sem sal:\n- Aquecimento antes do assunto. Nada de \"Você sabia que\", \"Vamos falar\n  sobre\", \"Hoje eu vou te contar\", \"Muita gente me pergunta\", \"Bora lá\".\n  A primeira frase JÁ É o assunto.\n- Adjetivo vago onde cabe coisa concreta. \"Muito eficaz\" não diz nada;\n  \"clareia em 8 semanas\", \"custa o preço de um jantar\", \"arde como pimenta\"\n  dizem. Todo gancho precisa de pelo menos um destes: um número, uma imagem\n  física, o nome de um produto/procedimento, ou uma afirmação com a qual\n  dê para discordar.\n- Frases todas do mesmo comprimento. Alterne: uma longa que constrói, uma\n  curta que derruba. É o ritmo que segura, não a informação.\n- Encerrar sempre igual. Se todo roteiro termina em \"salva esse post\",\n  você escreveu um só roteiro dez vezes.\n- Ressalva defensiva (\"cada caso é um caso\", \"procure seu dermatologista\")\n  colada por precaução. Só entra se acrescentar informação real.\n- Neutralidade. Todo roteiro precisa de pelo menos uma frase em que ela\n  toma partido: o que ela faria, o que ela não faz, com o que ela não\n  concorda. Conteúdo que não arrisca nada não é assistido até o fim.\n\nLIBERDADE TOTAL DE ESCRITA. Quem publica é uma profissional da área, com\nautonomia e discernimento sobre o próprio conteúdo, e revisa cada roteiro\nantes de gravar. O seu papel é entregar o melhor roteiro possível — não\npoliciar o que ela pode dizer.\n\nPortanto: escreva com ousadia. Ganchos fortes, opinião firme, humor,\nprovocação, posicionamento claro, discordar de trends, dizer \"isso não\nfunciona\", contar bastidor. Não se autocensure, não amacie o texto por\nprecaução e não encha de ressalvas defensivas (\"consulte sempre\", \"cada\ncaso é um caso\") — use ressalva apenas quando ela acrescentar informação\nreal ao conteúdo. Se o perfil trouxer preferências pessoais na lista\n\"preferencias\", respeite-as; fora isso, nada limita a sua escrita.\n\nResponda SOMENTE com JSON válido:\n{\n  \"opcoes\": [\n    {\n      \"titulo\": \"nome curto da opção\",\n      \"angulo\": \"em uma frase, o que diferencia esta opção das outras\",\n      \"gancho\": \"a primeira frase / a capa / o primeiro story\",\n      \"blocos\": [{\"rotulo\": \"0-3s | Capa | Story 1\", \"texto\": \"...\", \"direcao\": \"...\"}],\n      \"legenda\": \"2 a 4 frases, primeira linha forte, sem hashtags\",\n      \"hashtags\": [\"#...\"],\n      \"por_que_funciona\": \"1 a 2 frases, citando o manual quando se aplicar\"\n    }\n  ]\n}\nExatamente 3 opções.\n", "refinar": "Você é o mesmo roteirista, agora refinando UM roteiro em conversa com a\npessoa que vai publicá-lo. Você recebe o roteiro atual, os parâmetros\n(formato, estilo, tom, tamanho), o histórico da conversa e o pedido novo.\n\n- Faça exatamente o que foi pedido. Não \"melhore\" o que não foi pedido.\n- Mantenha formato, estilo e tom, a menos que o pedido mude isso.\n- Se o pedido for ambíguo, escolha a interpretação mais provável e diga\n  qual foi na resposta.\n- Se o pedido for uma pergunta (e não uma mudança), responda e devolva o\n  roteiro sem alteração.\n- Mantenha a estrutura de blocos coerente com o formato.\n\nPROIBIDO — é exatamente isto que deixa roteiro sem sal:\n- Aquecimento antes do assunto. Nada de \"Você sabia que\", \"Vamos falar\n  sobre\", \"Hoje eu vou te contar\", \"Muita gente me pergunta\", \"Bora lá\".\n  A primeira frase JÁ É o assunto.\n- Adjetivo vago onde cabe coisa concreta. \"Muito eficaz\" não diz nada;\n  \"clareia em 8 semanas\", \"custa o preço de um jantar\", \"arde como pimenta\"\n  dizem. Todo gancho precisa de pelo menos um destes: um número, uma imagem\n  física, o nome de um produto/procedimento, ou uma afirmação com a qual\n  dê para discordar.\n- Frases todas do mesmo comprimento. Alterne: uma longa que constrói, uma\n  curta que derruba. É o ritmo que segura, não a informação.\n- Encerrar sempre igual. Se todo roteiro termina em \"salva esse post\",\n  você escreveu um só roteiro dez vezes.\n- Ressalva defensiva (\"cada caso é um caso\", \"procure seu dermatologista\")\n  colada por precaução. Só entra se acrescentar informação real.\n- Neutralidade. Todo roteiro precisa de pelo menos uma frase em que ela\n  toma partido: o que ela faria, o que ela não faz, com o que ela não\n  concorda. Conteúdo que não arrisca nada não é assistido até o fim.\n\nLIBERDADE TOTAL DE ESCRITA. Quem publica é uma profissional da área, com\nautonomia e discernimento sobre o próprio conteúdo, e revisa cada roteiro\nantes de gravar. O seu papel é entregar o melhor roteiro possível — não\npoliciar o que ela pode dizer.\n\nPortanto: escreva com ousadia. Ganchos fortes, opinião firme, humor,\nprovocação, posicionamento claro, discordar de trends, dizer \"isso não\nfunciona\", contar bastidor. Não se autocensure, não amacie o texto por\nprecaução e não encha de ressalvas defensivas (\"consulte sempre\", \"cada\ncaso é um caso\") — use ressalva apenas quando ela acrescentar informação\nreal ao conteúdo. Se o perfil trouxer preferências pessoais na lista\n\"preferencias\", respeite-as; fora isso, nada limita a sua escrita.\n\nResponda SOMENTE com JSON válido:\n{\n  \"resposta\": \"1 a 3 frases, na sua voz, dizendo o que mudou e por quê\",\n  \"roteiro\": {\"titulo\": \"...\", \"angulo\": \"...\", \"gancho\": \"...\",\n               \"blocos\": [{\"rotulo\": \"...\", \"texto\": \"...\", \"direcao\": \"...\"}],\n               \"legenda\": \"...\", \"hashtags\": [\"#...\"], \"por_que_funciona\": \"...\"}\n}\n"}, "contexto": {"nicho": "Dermatologia Estética", "perfil": {"descricao": "Médica dermatologista com foco em estética", "tom_de_voz": "Acessível e acolhedor, mas com autoridade técnica. Desmistifica sem infantilizar.", "publico": "Mulheres de 25 a 55 anos interessadas em cuidados com a pele e procedimentos estéticos"}, "preferencias_do_perfil": []}, "galeria_publicada": []}</script>
+<script>
+const Radar = (() => {
+  const ler = (chave, padrao) => {
+    try { const v = localStorage.getItem(chave); return v ? JSON.parse(v) : padrao; }
+    catch (_) { return padrao; }
+  };
+  const gravar = (chave, valor) => {
+    try { localStorage.setItem(chave, JSON.stringify(valor)); return true; }
+    catch (_) { return false; }
+  };
+  const escapar = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg; t.classList.add('mostrar');
+    clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('mostrar'), 2400);
+  }
+  function copiar(texto, msgOk) {
+    return navigator.clipboard.writeText(texto)
+      .then(() => toast(msgOk || 'Copiado 📋'))
+      .catch(() => window.prompt('Copie manualmente:', texto));
+  }
+  function baixar(nome, conteudo) {
+    const blob = new Blob([conteudo], {type: 'application/json;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = nome;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function lerArquivo(arquivo) {
+    return new Promise((ok, falha) => {
+      const r = new FileReader();
+      r.onload = () => { try { ok(JSON.parse(r.result)); } catch (e) { falha(new Error('O arquivo não é um JSON válido.')); } };
+      r.onerror = () => falha(new Error('Não deu para ler o arquivo.'));
+      r.readAsText(arquivo);
+    });
+  }
+
+  // ── chave da Anthropic (fica só neste navegador) ─────────────────
+  const CHAVE = 'radar-chave-anthropic';
+  const chave = () => { try { return (localStorage.getItem(CHAVE) || '').trim(); } catch (_) { return ''; } };
+  function salvarChave(valor) {
+    valor = String(valor || '').trim().replace(/^["']|["']$/g, '');
+    if (!valor) return {ok: false, recado: 'Cole a chave antes de salvar.'};
+    if (!valor.startsWith('sk-')) return {ok: false, recado: 'Isso não parece uma chave da Anthropic — ela começa com sk-ant-.'};
+    if (valor.length < 20) return {ok: false, recado: 'A chave veio cortada. Copie de novo, inteira.'};
+    try { localStorage.setItem(CHAVE, valor); } catch (_) { return {ok: false, recado: 'O navegador não deixou guardar a chave.'}; }
+    return {ok: true, recado: 'Chave guardada neste navegador.'};
+  }
+  const apagarChave = () => { try { localStorage.removeItem(CHAVE); } catch (_) {} };
+
+  // ── escolhas na agenda (feedback) ─────────────────────────────────
+  const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
+  function registrarFeedback(nicho, semana, ideias) {
+    const dados = ler(chaveFeedback(nicho), {});
+    const bloco = dados[semana] || (dados[semana] = {});
+    const agora = new Date().toISOString().slice(0, 16);
+    for (const i of ideias) {
+      const titulo = String(i.titulo || '').trim();
+      if (!titulo) continue;
+      if (['feita', 'lista', 'descartada'].includes(i.estado)) {
+        bloco[titulo] = {estado: i.estado, pilar: i.pilar || '', registro: i.registro || '', quando: agora};
+      } else {
+        delete bloco[titulo];
+      }
+    }
+    gravar(chaveFeedback(nicho), dados);
+    return dados;
+  }
+  const feedback = nicho => ler(chaveFeedback(nicho), {});
+  function preferencias(nicho) {
+    const dados = feedback(nicho);
+    const esc = {}, desc = {}, vozSim = {}, vozNao = {}, descartados = [];
+    let total = 0;
+    for (const semana of Object.keys(dados).sort()) {
+      for (const [titulo, info] of Object.entries(dados[semana])) {
+        total++;
+        const pilar = (info.pilar || '').split('(')[0].trim();
+        const voz = info.registro || '';
+        if (info.estado === 'feita' || info.estado === 'lista') {
+          esc[pilar] = (esc[pilar] || 0) + 1; if (voz) vozSim[voz] = (vozSim[voz] || 0) + 1;
+        } else {
+          desc[pilar] = (desc[pilar] || 0) + 1; if (voz) vozNao[voz] = (vozNao[voz] || 0) + 1;
+          descartados.push(titulo);
+        }
+      }
+    }
+    if (!total) return null;
+    const top = (o, n) => Object.fromEntries(Object.entries(o).sort((a, b) => b[1] - a[1]).slice(0, n));
+    return {ideias_avaliadas: total, pilares_que_ela_escolhe: top(esc, 4), pilares_que_ela_descarta: top(desc, 4),
+            vozes_que_ela_escolhe: top(vozSim, 4), vozes_que_ela_descarta: top(vozNao, 4),
+            assuntos_descartados: descartados.slice(-12)};
+  }
+
+  // ── galeria guardada neste navegador ──────────────────────────────
+  const chaveGaleria = nicho => 'radar-galeria:' + (nicho || 'padrao');
+  const galeriaLocal = nicho => (ler(chaveGaleria(nicho), {itens: []}).itens || []);
+  function galeriaSalvar(nicho, dados) {
+    const itens = galeriaLocal(nicho);
+    const agora = new Date().toISOString().slice(0, 16);
+    const id = String(dados.id || Math.random().toString(16).slice(2, 12));
+    const novo = {id, atualizado_em: agora, ideia: String(dados.ideia || '').slice(0, 500),
+                  formato: dados.formato || 'video', estilo: String(dados.estilo || ''),
+                  tom: String(dados.tom || ''), tamanho: String(dados.tamanho || ''),
+                  roteiro: limparRoteiro(dados.roteiro || {}), origem: 'navegador'};
+    const i = itens.findIndex(x => x.id === id);
+    if (i >= 0) { novo.criado_em = itens[i].criado_em || agora; itens[i] = novo; }
+    else { novo.criado_em = agora; itens.push(novo); }
+    gravar(chaveGaleria(nicho), {itens});
+    return id;
+  }
+  function galeriaApagar(nicho, id) {
+    const itens = galeriaLocal(nicho).filter(x => x.id !== id);
+    gravar(chaveGaleria(nicho), {itens});
+  }
+  function galeriaImportar(nicho, dados) {
+    const novos = Array.isArray(dados) ? dados : (dados && dados.itens) || [];
+    const itens = galeriaLocal(nicho);
+    let n = 0;
+    for (const item of novos) {
+      if (!item || typeof item !== 'object' || !item.roteiro) continue;
+      const id = String(item.id || Math.random().toString(16).slice(2, 12));
+      const i = itens.findIndex(x => x.id === id);
+      const limpo = {...item, id, roteiro: limparRoteiro(item.roteiro), origem: 'navegador'};
+      if (i >= 0) itens[i] = limpo; else itens.push(limpo);
+      n++;
+    }
+    gravar(chaveGaleria(nicho), {itens});
+    return n;
+  }
+  function galeriaTodos(nicho, publicados) {
+    const locais = galeriaLocal(nicho);
+    const ids = new Set(locais.map(i => i.id));
+    const todos = [...locais, ...(publicados || []).filter(i => !ids.has(i.id)).map(i => ({...i, origem: 'site'}))];
+    return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
+  }
+
+  function limparRoteiro(r) {
+    return {
+      titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
+      gancho: String(r.gancho || '').trim(),
+      blocos: (r.blocos || []).filter(b => b && typeof b === 'object').map(b => ({
+        rotulo: String(b.rotulo || ''), texto: String(b.texto || ''), direcao: String(b.direcao || '')})),
+      legenda: String(r.legenda || '').trim(),
+      hashtags: (r.hashtags || []).map(String).slice(0, 12),
+      por_que_funciona: String(r.por_que_funciona || '').trim(),
+    };
+  }
+  function blocosHtml(r) {
+    return (r.blocos || []).map(b => `<div class="bloco"><div class="rotulo-bloco">${escapar(b.rotulo)}</div>
+      <p class="fala">${escapar(b.texto)}</p>${b.direcao ? `<p class="direcao">${escapar(b.direcao)}</p>` : ''}</div>`).join('');
+  }
+  function roteiroHtml(r, completo) {
+    return `${r.gancho ? `<p class="gancho-gal">🪝 ${escapar(r.gancho)}</p>` : ''}${blocosHtml(r)}` +
+      (completo ? `<div class="rotulo">Legenda</div><div class="legenda">${escapar(r.legenda)}</div>
+        <div class="hashtags">${(r.hashtags || []).map(escapar).join(' ')}</div>` : '');
+  }
+  function textoRoteiro(r) {
+    const linhas = [r.titulo, '', r.gancho ? 'GANCHO: ' + r.gancho : ''];
+    (r.blocos || []).forEach(b => { linhas.push('', String(b.rotulo || '').toUpperCase(), b.texto); if (b.direcao) linhas.push('  🎬 ' + b.direcao); });
+    linhas.push('', 'LEGENDA', r.legenda, '', (r.hashtags || []).join(' '));
+    return linhas.filter(l => l !== undefined).join('\n');
+  }
+
+  // ── backup de tudo o que está neste navegador ─────────────────────
+  function exportarTudo() {
+    const saida = {formato: 'radar-backup', versao: 1, exportado_em: new Date().toISOString(), chaves: {}};
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('radar-') && k !== CHAVE) saida.chaves[k] = ler(k, null);
+      }
+    } catch (_) {}
+    return saida;
+  }
+  function importarTudo(dados) {
+    if (!dados || dados.formato !== 'radar-backup' || !dados.chaves) throw new Error('Isso não é um backup do Radar.');
+    let n = 0;
+    for (const [k, v] of Object.entries(dados.chaves)) {
+      if (!k.startsWith('radar-') || k === CHAVE) continue;
+      if (gravar(k, v)) n++;
+    }
+    return n;
+  }
+
+  // ── IA direto do navegador ────────────────────────────────────────
+  function traduzirErroIA(status, mensagem) {
+    const m = (mensagem || '').toLowerCase();
+    if (status === 401 || m.includes('invalid x-api-key') || m.includes('authentication')) return 'A chave da Anthropic não foi aceita. Confira em Ferramentas → Chave da IA.';
+    if (m.includes('credit balance')) return 'Os créditos da Anthropic acabaram. Recarregue em console.anthropic.com (Plans & Billing).';
+    if (status === 429) return 'A Anthropic pediu para esperar um pouco (limite de uso). Tente de novo em um minuto.';
+    if (status === 529 || status === 503) return 'A Anthropic está sobrecarregada agora. Tente de novo em instantes.';
+    if (status === 404 && m.includes('model')) return 'O modelo configurado não está disponível para esta chave.';
+    return mensagem ? `A IA respondeu com erro: ${mensagem.slice(0, 200)}` : `A IA respondeu com erro (${status}).`;
+  }
+  async function chamarIA({modelo, system, messages, maxTokens, thinking, aoProgresso}) {
+    const k = chave();
+    if (!k) { const e = new Error('Falta a chave da Anthropic. Guarde a sua em Ferramentas → Chave da IA.'); e.semChave = true; throw e; }
+    const corpo = {model: modelo, max_tokens: maxTokens || 16000, system, messages, stream: true};
+    if (thinking) corpo.thinking = thinking;
+    let r;
+    try {
+      r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {'content-type': 'application/json', 'x-api-key': k, 'anthropic-version': '2023-06-01',
+                  'anthropic-dangerous-direct-browser-access': 'true'},
+        body: JSON.stringify(corpo),
+      });
+    } catch (_) {
+      throw new Error('Não consegui falar com a Anthropic — sem internet, ou um bloqueador impediu a chamada.');
+    }
+    if (!r.ok) {
+      let msg = '';
+      try { msg = (await r.json()).error?.message || ''; } catch (_) {}
+      throw new Error(traduzirErroIA(r.status, msg));
+    }
+    const leitor = r.body.getReader(), dec = new TextDecoder();
+    let sobra = '', texto = '', parada = '';
+    while (true) {
+      const {value, done} = await leitor.read();
+      if (done) break;
+      sobra += dec.decode(value, {stream: true});
+      const linhas = sobra.split('\n'); sobra = linhas.pop();
+      for (const linha of linhas) {
+        if (!linha.startsWith('data:')) continue;
+        let ev; try { ev = JSON.parse(linha.slice(5).trim()); } catch (_) { continue; }
+        if (ev.type === 'content_block_delta' && ev.delta && ev.delta.type === 'text_delta') {
+          texto += ev.delta.text; if (aoProgresso) aoProgresso(texto.length);
+        } else if (ev.type === 'message_delta' && ev.delta && ev.delta.stop_reason) {
+          parada = ev.delta.stop_reason;
+        } else if (ev.type === 'error') {
+          throw new Error(traduzirErroIA(0, ev.error && ev.error.message));
+        }
+      }
+    }
+    if (parada === 'refusal') throw new Error('O modelo recusou a solicitação.');
+    if (parada === 'max_tokens') throw new Error('A resposta ficou longa demais e foi cortada. Tente um tamanho menor.');
+    return texto;
+  }
+  // Extrai o maior objeto JSON válido de uma resposta com ruído ao redor
+  function extrairJson(texto) {
+    let limpo = String(texto || '').trim();
+    if (limpo.startsWith('```')) limpo = limpo.replace(/^```[a-z]*\n?/i, '').replace(/```$/, '').trim();
+    let melhor = null, tamanho = 0;
+    for (let i = 0; i < limpo.length; i++) {
+      if (limpo[i] !== '{') continue;
+      let prof = 0, emStr = false, esc = false;
+      for (let j = i; j < limpo.length; j++) {
+        const c = limpo[j];
+        if (emStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') emStr = false; continue; }
+        if (c === '"') emStr = true;
+        else if (c === '{') prof++;
+        else if (c === '}') { prof--; if (prof === 0) {
+          const trecho = limpo.slice(i, j + 1);
+          try { const obj = JSON.parse(trecho); if (obj && typeof obj === 'object' && trecho.length > tamanho) { melhor = obj; tamanho = trecho.length; } } catch (_) {}
+          break; } }
+      }
+    }
+    if (!melhor) throw new Error('A IA respondeu fora do formato. Tente de novo.');
+    return melhor;
+  }
+
+  return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
+          chave, salvarChave, apagarChave,
+          registrarFeedback, feedback, preferencias,
+          galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
+          limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
+          exportarTudo, importarTudo, chamarIA, extrairJson};
+})();
+
+
+const CFG = JSON.parse(document.getElementById('dados-pagina').textContent);
+const $ = s => document.querySelector(s);
+const escapar = Radar.escapar;
+let opcoes = [], roteiro = null, conversa = [], idSalvo = null, params = {};
+
+function conferirChave() { $('#aviso-chave').classList.toggle('visivel', !Radar.chave()); }
+function contexto() {
+  const ctx = {...CFG.contexto};
+  const prefs = Radar.preferencias(CFG.nicho);
+  if (prefs) ctx.preferencias_reveladas = prefs;
+  return ctx;
+}
+function etapa(n) {
+  [1, 2, 3].forEach(i => { $('#et' + i).classList.toggle('ativa', i === n); $('#passo' + i).hidden = i !== n; });
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function montarMenus() {
+  const opt = (lista, rot) => lista.map(v => `<option value="${escapar(v)}">${escapar(rot ? rot(v) : v)}</option>`).join('');
+  $('#formato').innerHTML = opt(Object.keys(CFG.menus.formatos), k => CFG.menus.formatos[k]);
+  $('#estilo').innerHTML = opt(CFG.menus.estilos);
+  $('#tom').innerHTML = opt(CFG.menus.tons);
+  atualizarTamanhos();
+  $('#formato').onchange = atualizarTamanhos;
+}
+function atualizarTamanhos() {
+  const f = $('#formato').value;
+  $('#tamanho').innerHTML = (CFG.menus.tamanhos[f] || []).map(v => `<option>${escapar(v)}</option>`).join('');
+  if (f === 'video') $('#tamanho').value = '45s';
+}
+function lerParams() {
+  params = {nicho: CFG.nicho, ideia: $('#ideia').value.trim(), formato: $('#formato').value,
+            tamanho: $('#tamanho').value, estilo: $('#estilo').value, tom: $('#tom').value,
+            observacoes: $('#obs').value.trim().slice(0, 800)};
+  return params;
+}
+function mostrarErro(sel, e) {
+  const el = $(sel); el.innerHTML = '⚠️ ' + escapar(e.message || e) +
+    (e.semChave ? ' <a href="ferramentas.html#chave">Guardar a chave</a>' : '');
+  el.hidden = false;
+}
+
+$('#gerar').onclick = async () => {
+  lerParams();
+  $('#erro1').hidden = true;
+  if (params.ideia.length < 5) { mostrarErro('#erro1', new Error('Escreva a ideia com um pouco mais de detalhe.')); return; }
+  $('#gerar').disabled = true;
+  const estado = $('#estado1');
+  estado.innerHTML = '<span class="girando"></span>Escrevendo três opções — leva por volta de um minuto…';
+  try {
+    const conteudo = {...contexto(), pedido: {ideia: params.ideia, formato: params.formato, estilo: params.estilo,
+                      tom: params.tom, tamanho: params.tamanho, observacoes: params.observacoes}};
+    const texto = await Radar.chamarIA({modelo: CFG.modelo, maxTokens: CFG.max_tokens, thinking: {type: 'adaptive'},
+      system: CFG.prompts.opcoes,
+      messages: [{role: 'user', content: JSON.stringify(conteudo, null, 2)}],
+      aoProgresso: n => { estado.innerHTML = `<span class="girando"></span>Escrevendo… ${Math.round(n / 1000)} mil caracteres`; }});
+    const lista = (Radar.extrairJson(texto).opcoes || []).filter(o => o && typeof o === 'object').map(Radar.limparRoteiro);
+    if (!lista.length) throw new Error('A IA não devolveu opções. Tente de novo.');
+    opcoes = lista.slice(0, 3); idSalvo = null;
+    mostrarOpcoes();
+  } catch (e) { mostrarErro('#erro1', e); }
+  $('#gerar').disabled = false; estado.textContent = '';
+};
+function mostrarOpcoes() {
+  $('#opcoes').innerHTML = opcoes.map((o, i) => `<div class="cartao-estudio opcao">
+    <span class="chip">Opção ${i + 1}</span><h3>${escapar(o.titulo)}</h3><p class="angulo">${escapar(o.angulo)}</p>
+    <div class="previa">${Radar.roteiroHtml(o, false)}</div>
+    <p class="por-que">📈 ${escapar(o.por_que_funciona)}</p>
+    <button class="btn primario" data-i="${i}">Escolher esta</button></div>`).join('');
+  $('#opcoes').querySelectorAll('button[data-i]').forEach(b => b.onclick = () => escolher(+b.dataset.i));
+  etapa(2);
+}
+function escolher(i) {
+  roteiro = JSON.parse(JSON.stringify(opcoes[i])); conversa = [];
+  $('#mensagens').innerHTML = ''; $('#salvo').hidden = true;
+  bolha('ia', `Vamos com "${roteiro.titulo}". Me diga o que ajustar — ou salve como está.`);
+  renderRoteiro(); etapa(3);
+}
+function renderRoteiro() {
+  $('#roteiro').innerHTML = `<span class="chip">${escapar(CFG.menus.formatos[params.formato] || params.formato)}</span>
+    <span class="chip">${escapar(params.tom || '')}</span> <span class="chip">${escapar(params.tamanho || '')}</span>
+    <h3 class="titulo-roteiro">${escapar(roteiro.titulo)}</h3><p class="angulo-roteiro">${escapar(roteiro.angulo)}</p>
+    ${Radar.roteiroHtml(roteiro, true)}`;
+  const sug = {video: ['Gancho mais provocador', 'Encurta pra 30s', 'Menos técnico', 'Fecha com pergunta'],
+               carrossel: ['Capa mais curta', 'Uma lâmina a menos', 'Menos texto por lâmina', 'CTA pra salvar'],
+               stories: ['Põe uma enquete no 2º', 'Primeiro story mais forte', 'Mais bastidor', 'Fecha pedindo DM']}[params.formato] || [];
+  $('#sugestoes').innerHTML = sug.map(s => `<button type="button" class="btn">${escapar(s)}</button>`).join('');
+  $('#sugestoes').querySelectorAll('button').forEach(b => b.onclick = () => { $('#pedido').value = b.textContent; enviar(); });
+}
+function bolha(quem, texto) {
+  const el = document.createElement('div'); el.className = 'msg ' + (quem === 'eu' ? 'eu' : 'ia'); el.textContent = texto;
+  $('#mensagens').appendChild(el); $('#mensagens').scrollTop = $('#mensagens').scrollHeight;
+  return el;
+}
+function mensagensRefinar(mensagem) {
+  const ctx = {...contexto(), parametros: params, roteiro_atual: roteiro};
+  const msgs = [{role: 'user', content: 'Contexto e roteiro atual:\n' + JSON.stringify(ctx, null, 2)},
+                {role: 'assistant', content: 'Entendido. O que você quer mudar?'}];
+  for (const turno of conversa.slice(-12)) {
+    const papel = turno.papel === 'usuario' ? 'user' : 'assistant';
+    const texto = String(turno.texto || '').trim();
+    if (texto && msgs[msgs.length - 1].role !== papel) msgs.push({role: papel, content: texto});
+  }
+  if (msgs[msgs.length - 1].role === 'user') msgs.push({role: 'assistant', content: 'Certo.'});
+  msgs.push({role: 'user', content: mensagem});
+  return msgs;
+}
+async function enviar() {
+  const msg = $('#pedido').value.trim(); if (!msg) return;
+  $('#pedido').value = ''; $('#erro3').hidden = true; bolha('eu', msg);
+  $('#enviar').disabled = true;
+  const pensando = bolha('ia', ''); pensando.innerHTML = '<span class="girando"></span>reescrevendo…';
+  try {
+    const texto = await Radar.chamarIA({modelo: CFG.modelo, maxTokens: CFG.max_tokens, thinking: {type: 'adaptive'},
+      system: CFG.prompts.refinar, messages: mensagensRefinar(msg)});
+    const dados = Radar.extrairJson(texto);
+    pensando.remove();
+    const resposta = String(dados.resposta || '').trim() || 'Feito.';
+    conversa.push({papel: 'usuario', texto: msg}, {papel: 'ia', texto: resposta});
+    roteiro = Radar.limparRoteiro(dados.roteiro || roteiro);
+    renderRoteiro(); bolha('ia', resposta); $('#salvo').hidden = true;
+  } catch (e) { pensando.remove(); mostrarErro('#erro3', e); }
+  $('#enviar').disabled = false;
+}
+$('#enviar').onclick = enviar;
+$('#pedido').onkeydown = e => { if (e.key === 'Enter') enviar(); };
+$('#salvar').onclick = () => {
+  idSalvo = Radar.galeriaSalvar(CFG.nicho, {id: idSalvo, ideia: params.ideia, formato: params.formato,
+    estilo: params.estilo, tom: params.tom, tamanho: params.tamanho, roteiro});
+  $('#salvo').innerHTML = '✅ Salvo na galeria deste navegador. <a href="galeria.html">Ver galeria</a> · <a href="estudio.html">Nova ideia</a>';
+  $('#salvo').hidden = false;
+};
+$('#copiar').onclick = () => Radar.copiar(Radar.textoRoteiro(roteiro), 'Roteiro copiado 📋');
+$('#voltar1').onclick = () => etapa(1);
+$('#voltar2').onclick = () => (opcoes.length ? etapa(2) : etapa(1));
+function reabrir(id) {
+  const item = Radar.galeriaTodos(CFG.nicho, CFG.galeria_publicada).find(i => i.id === id);
+  if (!item) return;
+  $('#ideia').value = item.ideia || ''; $('#formato').value = item.formato || 'video'; atualizarTamanhos();
+  $('#tamanho').value = item.tamanho || ''; $('#estilo').value = item.estilo || ''; $('#tom').value = item.tom || '';
+  lerParams(); roteiro = Radar.limparRoteiro(item.roteiro || {}); opcoes = []; conversa = [];
+  idSalvo = item.origem === 'navegador' ? id : null;
+  $('#mensagens').innerHTML = '';
+  bolha('ia', item.origem === 'navegador' ? 'Reabri da galeria. O que você quer mudar?'
+        : 'Reabri um roteiro publicado. Ao salvar, ele vira uma cópia sua neste navegador.');
+  renderRoteiro(); etapa(3);
+}
+montarMenus();
+conferirChave();
+window.addEventListener('focus', conferirChave);
+const idInicial = new URLSearchParams(location.search).get('id');
+if (idInicial) reabrir(idInicial);
+</script>
+</body>
+</html>

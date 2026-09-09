@@ -110,14 +110,17 @@ def main() -> None:
     print(f"✅ Agenda pronta: {saida / 'agenda.md'}")
 
     if args.publicar_site:
-        from src.publicar.site import publicar_agenda
-        destino = publicar_agenda(config, roteiros, sinais, RAIZ, nicho=args.nicho)
+        from src.publicar.site import publicar_agenda, semana_seguinte
+        semana, gerado_em = semana_seguinte(), date.today().isoformat()
+        destino = publicar_agenda(config, roteiros, sinais, RAIZ, nicho=args.nicho,
+                                  semana=semana, gerado_em=gerado_em)
         # persiste a geração para permitir re-render (mudança de design)
         # sem custo de IA — ver src/publicar/rerender.py
         dados_dir = RAIZ / "dados"
         dados_dir.mkdir(exist_ok=True)
         (dados_dir / f"{args.nicho}.json").write_text(
-            json.dumps({"roteiros": roteiros, "sinais": sinais},
+            json.dumps({"semana": semana, "gerado_em": gerado_em,
+                        "roteiros": roteiros, "sinais": sinais},
                        ensure_ascii=False, indent=2),
             encoding="utf-8",
         )

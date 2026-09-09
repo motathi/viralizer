@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radar de Conteúdo Viral — Dermatologia Estética</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>  :root {
     /* Design tokens — paleta oficial do Instagram */
     --ig-blue: #405DE6; --ig-purple: #833AB4; --ig-magenta: #C13584;
@@ -17,6 +17,8 @@
     --fundo: #ffffff; --superficie: #fafafa; --tinta: #262626;
     --suave: #737373; --borda: #dbdbdb; --borda-leve: #efefef;
     --acento: #C13584; --ok: #1f9d63; --ok-claro: #e8f6ef;
+    --alerta-fundo: #fff6e6; --alerta-borda: #ffe0a3; --alerta-tinta: #7a5200;
+    --erro-fundo: #fff0f0; --erro-borda: #ffc9c9; --erro-tinta: #8a1c1c;
 
     /* Elevação e forma */
     --r-lg: 20px; --r-md: 14px; --r-full: 999px;
@@ -32,6 +34,27 @@
   .container { max-width: 1020px; margin: 0 auto; padding: 0 18px; }
   button { font-family: inherit; }
   :focus-visible { outline: 2px solid var(--ig-purple); outline-offset: 2px; border-radius: 4px; }
+  [hidden] { display: none !important; }
+
+  /* ── Navegação do site ─────────────────────────────────────────── */
+  nav.nav { border-bottom: 1px solid var(--borda-leve); background: var(--fundo); }
+  .nav-linha { display: flex; align-items: center; gap: 18px; min-height: 58px; }
+  .marca { font-weight: 800; letter-spacing: -.02em; text-decoration: none; color: var(--tinta);
+           font-size: .98rem; white-space: nowrap; }
+  .marca span { background: var(--grad); -webkit-background-clip: text;
+                background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-links { display: flex; gap: 2px; margin-left: auto; overflow-x: auto;
+               scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { color: var(--suave); text-decoration: none; font-size: .86rem; font-weight: 600;
+                 padding: 8px 13px; border-radius: var(--r-full); white-space: nowrap;
+                 transition: all .2s; }
+  .nav-links a:hover { color: var(--tinta); background: var(--superficie); }
+  .nav-links a.ativo { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
+  @media (max-width: 640px) {
+    .nav-linha { flex-wrap: wrap; padding-bottom: 8px; }
+    .nav-links { margin-left: -18px; margin-right: -18px; padding: 0 18px; width: calc(100% + 36px); }
+  }
 
   header.hero { padding: 44px 0 18px; text-align: center; }
   .selo { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem;
@@ -65,17 +88,126 @@
                  background-clip: text; -webkit-text-fill-color: transparent;
                  font-weight: 800; }
 
+  section.agenda { padding: 22px 0 70px; }
+  .aviso { background: var(--grad-suave); border-radius: var(--r-md);
+           padding: 11px 16px; font-size: .83rem; margin-bottom: 22px; }
+  .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
+          border-radius: var(--r-full); background: var(--superficie);
+          border: 1px solid var(--borda-leve); color: var(--suave); }
+  .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
+                letter-spacing: .01em; }
+  .chip.ok { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
+  .chip.trend { color: var(--acento); background:
+                  linear-gradient(var(--fundo), var(--fundo)) padding-box,
+                  var(--grad) border-box; border: 1.5px solid transparent; }
+  .banner-aviso { display: none; border-radius: var(--r-md); padding: 12px 16px;
+                  margin-bottom: 16px; font-size: .86rem; align-items: center; gap: 10px;
+                  justify-content: space-between; flex-wrap: wrap; }
+  .banner-aviso.visivel { display: flex; }
+  .banner-aviso.alerta { background: var(--alerta-fundo); border: 1px solid var(--alerta-borda);
+                         color: var(--alerta-tinta); }
+  .banner-aviso.neutro { background: var(--superficie); border: 1px solid var(--borda-leve);
+                         color: var(--suave); }
+  .semanas { display: flex; align-items: center; gap: 6px; font-size: .82rem;
+             color: var(--suave); }
+  .semanas select { font: inherit; font-size: .82rem; color: var(--tinta);
+                    border: 1px solid var(--borda-leve); background: var(--superficie);
+                    border-radius: var(--r-full); padding: 6px 12px; cursor: pointer; }
+
+  .rotulo { font-size: .72rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: .08em; margin: 20px 0 9px;
+            background: var(--grad); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; }
+  .legenda { background: var(--superficie); border-radius: var(--r-md);
+             padding: 13px 15px; font-size: .89rem; white-space: pre-wrap; }
+  .hashtags { font-size: .85rem; margin-top: 7px; font-weight: 600;
+              background: var(--grad); -webkit-background-clip: text;
+              background-clip: text; -webkit-text-fill-color: transparent; }
+  .texto { white-space: pre-wrap; }
+
+  .btn { border: 1.5px solid var(--borda); background: var(--fundo); color: var(--tinta);
+         font-size: .84rem; font-weight: 700; padding: 9px 16px; text-decoration: none;
+         border-radius: var(--r-full); cursor: pointer; transition: all .2s;
+         display: inline-block; line-height: 1.4; }
+  .btn:hover { border-color: var(--ig-magenta); color: var(--ig-magenta);
+               transform: translateY(-1px); }
+  .btn.primario { background: var(--grad); border-color: transparent; color: #fff;
+                  box-shadow: var(--sombra-2); }
+  .btn.primario:hover { color: #fff; filter: brightness(1.06); box-shadow: var(--sombra-3); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+  .btn.pequeno { font-size: .78rem; padding: 6px 12px; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
+           padding-top: 16px; border-top: 1px solid var(--borda-leve); }
+
+  /* ── Blocos de formulário e cartões das ferramentas ────────────── */
+  .cartao-ferramenta { background: var(--fundo); border: 1px solid var(--borda);
+                       border-radius: var(--r-lg); box-shadow: var(--sombra-1);
+                       padding: 20px 22px; margin-bottom: 14px; }
+  .cartao-ferramenta h2 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.01em;
+                          display: flex; align-items: center; gap: 8px; }
+  .cartao-ferramenta h2 .icone { font-size: 1.15rem; }
+  .cartao-ferramenta > p { color: var(--suave); font-size: .88rem; margin-top: 4px; }
+  .cartao-ferramenta .acoes { margin-top: 14px; padding-top: 0; border-top: 0; }
+  .grade-ferramentas { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                       gap: 14px; }
+  .grade-ferramentas .cartao-ferramenta { margin-bottom: 0; display: flex; flex-direction: column; }
+  .grade-ferramentas .cartao-ferramenta > p { flex: 1; }
+  .titulo-secao { font-size: .75rem; font-weight: 700; letter-spacing: .11em;
+                  text-transform: uppercase; color: var(--suave); margin: 30px 0 12px; }
+  .titulo-secao:first-child { margin-top: 0; }
+  label.campo { display: block; font-size: .8rem; font-weight: 600; color: var(--suave); margin-bottom: 5px; }
+  select, textarea, input[type=text], input[type=password] {
+    font: inherit; font-size: .92rem; padding: 10px 14px; border-radius: 12px;
+    border: 1.5px solid var(--borda); background: var(--superficie); color: var(--tinta); width: 100%; }
+  textarea { min-height: 96px; resize: vertical; }
+  .linha-campos { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .linha-campos input { flex: 1 1 260px; }
+  .mensagem { border-radius: var(--r-md); padding: 12px 16px; font-size: .88rem; margin-top: 12px; }
+  .mensagem.erro { background: var(--erro-fundo); border: 1px solid var(--erro-borda); color: var(--erro-tinta); }
+  .mensagem.ok { background: var(--ok-claro); border: 1px solid #bfe8cf; color: #146a3f; }
+  .mensagem.alerta { background: var(--alerta-fundo); border: 1px solid var(--alerta-borda); color: var(--alerta-tinta); }
+  .mensagem a { color: inherit; font-weight: 700; }
+  .vazio-suave { color: var(--suave); background: var(--superficie); border: 1px solid var(--borda-leve);
+                 border-radius: var(--r-md); padding: 18px 20px; font-size: .9rem; }
+  .girando { display: inline-block; width: 13px; height: 13px; border: 2px solid #e2dfe6;
+             border-top-color: var(--ig-magenta); border-radius: 50%; animation: g .8s linear infinite;
+             margin-right: 8px; vertical-align: -1px; }
+  @keyframes g { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .girando { animation: none; } }
+  table.tabela { width: 100%; border-collapse: collapse; font-size: .86rem; margin-top: 10px; }
+  table.tabela th, table.tabela td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--borda-leve); }
+  table.tabela th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--suave); }
+  table.tabela td.num, table.tabela th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rolagem { overflow-x: auto; }
+
+  /* ── Roteiro do estúdio/galeria (blocos rotulados) ─────────────── */
+  .bloco { padding: 10px 0; border-bottom: 1px dashed var(--borda-leve); font-size: .9rem; }
+  .bloco:last-child { border-bottom: 0; }
+  .bloco .rotulo-bloco { font-size: .72rem; font-weight: 800; letter-spacing: .08em;
+                         text-transform: uppercase; color: var(--ig-magenta); }
+  .bloco .fala { margin: 3px 0; }
+  .bloco .direcao { color: var(--suave); font-size: .8rem; margin-top: 3px; }
+  .bloco .direcao::before { content: "🎥 "; }
+  .gancho-gal { font-weight: 600; margin: 0 0 12px; }
+
+  #toast { position: fixed; left: 50%; bottom: 28px;
+           transform: translateX(-50%) translateY(80px);
+           background: var(--tinta); color: #fff; font-size: .87rem; font-weight: 600;
+           padding: 12px 22px; border-radius: var(--r-full); opacity: 0;
+           transition: all .35s cubic-bezier(.34,1.3,.64,1); z-index: 50;
+           pointer-events: none; max-width: 90vw; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+  #toast.mostrar { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  footer { border-top: 1px solid var(--borda-leve); padding: 26px 0 42px;
+           text-align: center; color: var(--suave); font-size: .83rem; }
+  footer a { color: var(--suave); }
+
   #banner-foco { display: none; border-radius: var(--r-md); padding: 14px 18px;
                  margin: 18px 0 0; font-size: .9rem; align-items: center;
                  justify-content: space-between; gap: 10px; flex-wrap: wrap;
                  background: var(--grad-suave); border: 1px solid var(--borda-leve); }
   body.em-foco #banner-foco { display: flex; }
   body.em-foco .painel, body.em-foco .aviso { display: none; }
-
-  section.agenda { padding: 22px 0 70px; }
-  .aviso { background: var(--grad-suave); border-radius: var(--r-md);
-           padding: 11px 16px; font-size: .83rem; margin-bottom: 22px; }
-
   .lista-cartoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
                    gap: 16px; align-items: start; }
 
@@ -96,37 +228,17 @@
   .cab { padding: 18px 18px 15px; cursor: pointer; position: relative; }
   .topo { display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
           margin-bottom: 9px; padding-right: 28px; }
-  .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
-          border-radius: var(--r-full); background: var(--superficie);
-          border: 1px solid var(--borda-leve); color: var(--suave); }
-  .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
-                letter-spacing: .01em; }
   .descartar { position: absolute; right: 44px; top: 16px; width: 24px; height: 24px;
                border: 0; background: transparent; color: var(--borda); font-size: 1rem;
                line-height: 1; cursor: pointer; border-radius: 50%; transition: all .2s; }
   .descartar:hover { background: #fdeef2; color: var(--ig-pink); }
   .cartao.descartada { display: none; }
-  .banner-aviso { display: none; border-radius: var(--r-md); padding: 12px 16px;
-                  margin-bottom: 16px; font-size: .86rem; align-items: center; gap: 10px;
-                  justify-content: space-between; flex-wrap: wrap; }
-  .banner-aviso.visivel { display: flex; }
-  #aviso-antiga { background: #fff6e6; border: 1px solid #ffe0a3; color: #7a5200; }
-  #barra-descartadas { background: var(--superficie); border: 1px solid var(--borda-leve);
-                       color: var(--suave); }
-  .semanas { display: flex; align-items: center; gap: 6px; font-size: .82rem;
-             color: var(--suave); }
-  .semanas select { font: inherit; font-size: .82rem; color: var(--tinta);
-                    border: 1px solid var(--borda-leve); background: var(--superficie);
-                    border-radius: var(--r-full); padding: 6px 12px; cursor: pointer; }
   .chip.plataforma { display: inline-flex; align-items: center; gap: 5px;
                      padding: 4px 10px; background: var(--fundo);
                      border: 1px solid var(--borda-leve); }
   .chip.plataforma svg { width: 15px; height: 15px; display: block; }
   .viral-item .logo { width: 14px; height: 14px; vertical-align: -2px;
                       margin-right: 5px; display: inline-block; }
-  .chip.trend { color: var(--acento); background:
-                  linear-gradient(var(--fundo), var(--fundo)) padding-box,
-                  var(--grad) border-box; border: 1.5px solid transparent; }
   .chip-status { display: none; }
   .cartao.na-lista .chip-status.lista { display: inline-block; background: var(--grad);
                                         border: 0; color: #fff; }
@@ -145,11 +257,6 @@
   .cartao.aberta .detalhe { display: block; animation: abrir .3s ease; }
   @keyframes abrir { from { opacity: 0; transform: translateY(-6px); }
                      to { opacity: 1; transform: none; } }
-
-  .rotulo { font-size: .72rem; font-weight: 800; text-transform: uppercase;
-            letter-spacing: .08em; margin: 20px 0 9px;
-            background: var(--grad); -webkit-background-clip: text;
-            background-clip: text; -webkit-text-fill-color: transparent; }
   .ganchos { display: flex; flex-direction: column; gap: 8px; }
   .gancho-opcao { display: flex; gap: 10px; align-items: flex-start;
                   background: var(--superficie); border: 1.5px solid var(--borda-leve);
@@ -190,13 +297,6 @@
                     align-items: center; justify-content: center; }
   .lamina.capa::before { content: "★"; }
   .lamina.cta::before { content: "➤"; }
-
-  .legenda { background: var(--superficie); border-radius: var(--r-md);
-             padding: 13px 15px; font-size: .89rem; white-space: pre-wrap; }
-  .hashtags { font-size: .85rem; margin-top: 7px; font-weight: 600;
-              background: var(--grad); -webkit-background-clip: text;
-              background-clip: text; -webkit-text-fill-color: transparent; }
-
   .virais-origem { display: flex; flex-direction: column; gap: 8px; }
   .viral-item { background: var(--superficie); border-radius: var(--r-md);
                 padding: 11px 15px; font-size: .86rem;
@@ -220,38 +320,19 @@
   details ul { padding-left: 18px; }
   details li { margin-bottom: 6px; overflow-wrap: anywhere; }
   .texto { white-space: pre-wrap; }
-
-  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
-           padding-top: 16px; border-top: 1px solid var(--borda-leve); }
-  .btn { border: 1.5px solid var(--borda); background: var(--fundo); color: var(--tinta);
-         font-size: .84rem; font-weight: 700; padding: 9px 16px;
-         border-radius: var(--r-full); cursor: pointer; transition: all .2s; }
-  .btn:hover { border-color: var(--ig-magenta); color: var(--ig-magenta);
-               transform: translateY(-1px); }
-  .btn.primario { background: var(--grad); border-color: transparent; color: #fff;
-                  box-shadow: var(--sombra-2); }
-  .btn.primario:hover { color: #fff; filter: brightness(1.06); box-shadow: var(--sombra-3); }
   .btn.na-lista-btn { background: var(--grad-suave); border: 1.5px solid transparent;
                       background-origin: border-box; color: var(--ig-magenta); }
   .btn.feito-btn.marcado { background: var(--ok-claro); border-color: var(--ok); color: var(--ok); }
 
   .vazio { text-align: center; color: var(--suave); padding: 44px 0; display: none; }
-
-  #toast { position: fixed; left: 50%; bottom: 28px;
-           transform: translateX(-50%) translateY(80px);
-           background: var(--tinta); color: #fff; font-size: .87rem; font-weight: 600;
-           padding: 12px 22px; border-radius: var(--r-full); opacity: 0;
-           transition: all .35s cubic-bezier(.34,1.3,.64,1); z-index: 50;
-           pointer-events: none; max-width: 90vw; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
-  #toast.mostrar { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-  footer { border-top: 1px solid var(--borda-leve); padding: 26px 0 42px;
-           text-align: center; color: var(--suave); font-size: .83rem; }</style>
+</style>
 </head>
 <body>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/><stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>
+<nav class="nav"><div class="container nav-linha"><a class="marca" href="../index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="../index.html" class="ativo" aria-current="page">📅 Agenda</a><a href="../estudio.html">✨ Estúdio</a><a href="../galeria.html">💡 Galeria</a><a href="../manual.html">📘 Manual</a><a href="../ferramentas.html">🧰 Ferramentas</a></div></div></nav>
+
 <header class="hero container">
-  <div class="selo">Radar de Conteúdo Viral</div>
+  <div class="selo">Agenda da semana</div>
   <h1>Agenda da semana — <span>Dermatologia Estética</span></h1>
   <p class="sub">Semana de 24/08/2026 · 10 ideias ·
   20 sinais de tendência analisados · atualizada em 23/08/2026</p>
@@ -274,11 +355,12 @@
     <span>🔗 Você está vendo um roteiro compartilhado.</span>
     <button class="btn" id="sair-foco">Ver a agenda completa</button>
   </div>
-  <div class="banner-aviso" id="aviso-antiga"><span></span></div>
-  <div class="banner-aviso" id="barra-descartadas"><span></span>
+  <div class="banner-aviso alerta" id="aviso-antiga"><span></span></div>
+  <div class="banner-aviso neutro" id="barra-descartadas"><span></span>
     <button class="btn" id="restaurar">Restaurar descartadas</button></div>
   <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre
-  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.</div>
+  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.
+  Quer um roteiro a partir de uma ideia sua? Use o <a href="../estudio.html">estúdio</a>.</div>
   <div class="lista-cartoes">
   <article class="cartao" data-id="0" id="r0">
     <div class="cab">
@@ -718,10 +800,280 @@
     <p><strong>Radar de Conteúdo Viral</strong> — pesquisa de tendências, roteiros embasados e agenda semanal.</p>
   </div>
 </footer>
-
 <div id="toast"></div>
-<script id="dados-agenda" type="application/json">{"semana": "2026-08-24", "gerado_em": "2026-08-23", "ideias": [{"titulo": "Vaselina ao redor dos olhos: o que o viral não te contou", "ganchos": ["Passar vaselina em volta dos olhos todo dia? Calma, deixa eu te explicar uma coisa.", "A vaselina não hidrata a sua pele. Sério. Ela faz outra coisa.", "Chegou nos comentários: 'dermato, vaselina no olho some com olheira?' Vamos por partes."], "reels": [{"tempo": "0-3s", "fala": "Passar vaselina em volta dos olhos todo dia? Calma, deixa eu te explicar uma coisa.", "direcao": "Close no rosto, sem edição, olhando na câmera. Texto na tela: 'VASELINA NOS OLHOS?'"}, {"tempo": "3-12s", "fala": "Primeiro: vaselina não hidrata. Ela é oclusiva. Ou seja, ela sela a água que já tá na pele. Se a pele tá seca embaixo, você tá selando o nada.", "direcao": "Corte seco. Mão fazendo gesto de 'tampa' sobre o dorso da outra mão. Texto: 'oclusivo ≠ hidratante'"}, {"tempo": "12-25s", "fala": "Segundo: a região dos olhos é fina e cheia de glândulas na borda dos cílios. Dermatologistas da Sociedade Brasileira de Dermatologia já alertaram sobre passar vaselina nos cílios justamente por isso: pode obstruir essas glândulas e favorecer pontinhos brancos, aquelas mílias.", "direcao": "Plano médio, apontando pra própria pálpebra sem tocar. Texto: 'borda dos cílios = zona de glândulas'"}, {"tempo": "25-38s", "fala": "Então o jeito mais coerente é: creme com água e ativos primeiro, na pele levemente úmida. Se quiser selar, uma camada bem fininha por cima, longe da linha dos cílios. E olheira genética ou vascular não muda com oclusivo, tá?", "direcao": "Demonstra a ordem com dois potes sem rótulo visível. Texto: 'hidrata → depois sela'"}, {"tempo": "38-45s", "fala": "Se você já teve pontinhos brancos ali, comenta 'MÍLIA' que eu faço um vídeo só disso.", "direcao": "Volta pro close, sorriso. Texto: 'comenta MÍLIA'"}], "carrossel": {"capa": "Vaselina em volta dos olhos: o que ninguém te falou", "laminas": ["Vaselina não hidrata. Ela é oclusiva — sela o que já está na pele.", "Se a pele estiver seca embaixo, você está selando pele seca.", "A borda dos cílios tem glândulas. A SBD-RS já alertou sobre o uso de vaselina nessa região.", "Oclusão em excesso ali pode favorecer mílias, aqueles pontinhos brancos.", "Ordem que faz mais sentido: pele levemente úmida → creme com água e ativos → camada fininha oclusiva por cima, longe da linha dos cílios.", "Olheira de fundo genético ou vascular não se resolve com oclusivo."], "cta_final": "Antes de copiar tendência, entenda a sua pele. Salva pra consultar e leva a dúvida pra sua consulta."}, "legenda": "Vaselina não hidrata — ela sela. E isso muda tudo na região dos olhos. A SBD-RS já alertou sobre o uso na linha dos cílios, onde existem glândulas que podem ser obstruídas. Cada pele tem um contexto: avalie o seu com quem te acompanha.", "hashtags": ["#dermatologia", "#skincare", "#cuidadoscomapele", "#olheiras", "#mitosdaskincare"]}, {"titulo": "Tônico facial: necessário ou dinheiro jogado fora?", "ganchos": ["'Tônico é enrolação pra vender mais produto?' Depende — e eu vou te falar de quê.", "Tônico não é obrigatório pra todo mundo. Mas pra algumas peles, ele muda a rotina.", "Se o seu tônico arde, você comprou o errado. Ponto."], "reels": [{"tempo": "0-3s", "fala": "'Tônico é enrolação pra vender mais produto?' Depende — e eu vou te falar de quê.", "direcao": "Print de comentário na tela por 2s, depois corta pra rosto em plano médio."}, {"tempo": "3-14s", "fala": "O tônico de hoje não é o de vinte anos atrás. Aquele era basicamente álcool, prometia 'fechar poro' e ressecava tudo. Poro não abre nem fecha, aliás.", "direcao": "Corte com zoom rápido. Texto: 'poro não tem porta'"}, {"tempo": "14-28s", "fala": "O tônico moderno é um veículo. Ele repõe o que a limpeza levou e entrega ativo em textura leve: umectante pra pele seca, calmante pra pele sensível, adstringente leve pra pele muito oleosa.", "direcao": "Três dedos na mão marcando os três perfis. Texto: 'seca / sensível / oleosa'"}, {"tempo": "28-40s", "fala": "Então a pergunta certa não é 'preciso de tônico?'. É 'meu tônico tem o ativo que a minha pele precisa?'. Se ele arde, repuxa ou tem álcool no topo da lista, ele não tá ajudando.", "direcao": "Segura frasco neutro sem rótulo, gira mostrando lista de ingredientes desfocada. Texto: 'olha o rótulo, não a moda'"}, {"tempo": "40-45s", "fala": "Me conta nos comentários: qual o seu tipo de pele? Eu te digo se o passo faz sentido.", "direcao": "Close final, sorriso. Texto: 'comenta seu tipo de pele'"}], "carrossel": {"capa": "Tônico facial: necessidade ou marketing?", "laminas": ["O tônico antigo era à base de álcool e prometia 'fechar poros'. Poro não abre nem fecha.", "O tônico moderno funciona como veículo: entrega ativo em textura leve, logo após a limpeza.", "Pele seca: procure umectantes que ajudem na retenção de água.", "Pele sensível: procure fórmulas calmantes, sem álcool no topo da lista.", "Pele oleosa: adstringentes leves podem ajudar no conforto — sem ressecar de propósito.", "Se arde ou repuxa depois, não é 'adaptação'. É sinal de que o produto não combina com você."], "cta_final": "A pergunta não é 'preciso de tônico'. É 'esse tônico serve pra minha pele?'. Salva pra lembrar na próxima compra."}, "legenda": "Tônico não é obrigatório — é opcional com propósito. Ele funciona como veículo de ativos logo depois da limpeza, e a escolha muda conforme o tipo de pele. Se arde e repuxa, não é adaptação: é incompatibilidade.", "hashtags": ["#tonicofacial", "#skincarebrasil", "#dermatologista", "#rotinadepele", "#peleoleosa"]}, {"titulo": "Lavar o rosto: o passo mais simples que quase todo mundo erra", "ganchos": ["Você lava o rosto errado. E não é culpa sua — ninguém ensina isso.", "Água quente no rosto é conforto pra você e problema pra barreira da pele.", "Três erros na hora de lavar o rosto que aparecem todo dia no consultório."], "reels": [{"tempo": "0-3s", "fala": "Você provavelmente lava o rosto errado. E não é culpa sua — ninguém ensina isso.", "direcao": "Plano na pia, mãos entrando em quadro. Texto: 'LAVAR O ROSTO 101'"}, {"tempo": "3-13s", "fala": "Erro um: água quente. Ela dá aquela sensação de limpeza, mas remove mais lipídio da barreira. Água morna pra fria já resolve.", "direcao": "Close na torneira, mão testando a água. Texto: 'morna, não quente'"}, {"tempo": "13-25s", "fala": "Erro dois: esfregar. Não é força, é tempo. Espalha o sabonete com as pontas dos dedos, movimento leve e circular, uns trinta a sessenta segundos. Sem escovinha, sem bucha.", "direcao": "Demonstra o movimento no próprio rosto, câmera de frente. Timer aparecendo na tela: '30-60s'"}, {"tempo": "25-36s", "fala": "Erro três: enxaguar mal e secar esfregando a toalha. Enxágue até não ter mais escorregadio e seca dando toquinhos. E dupla limpeza é pra quem usa maquiagem, protetor resistente ou tem muita oleosidade — não é regra pra todo mundo.", "direcao": "Toalha limpa dando toques no rosto. Texto: 'seca dando toques'"}, {"tempo": "36-45s", "fala": "Duas vezes por dia costuma bastar. Mais que isso, geralmente, é a barreira reclamando. Salva pra fazer certo hoje à noite.", "direcao": "Close final, olhando pra câmera. Texto: 'salva esse vídeo'"}], "carrossel": {"capa": "Como lavar o rosto do jeito certo (passo a passo)", "laminas": ["1. Mãos limpas antes de tudo. Você encosta no rosto o que tem nelas.", "2. Água morna a fria. Quente remove mais lipídios da barreira.", "3. Sabonete compatível com o seu tipo de pele, espalhado com as pontas dos dedos.", "4. Movimento circular leve por 30 a 60 segundos. Sem bucha, sem escovinha, sem força.", "5. Enxágue completo — resíduo de sabonete irrita e resseca.", "6. Seque dando toques com toalha limpa. Nunca esfregando.", "7. Duas vezes ao dia costuma bastar. Dupla limpeza é para dias de maquiagem, protetor resistente ou oleosidade intensa."], "cta_final": "Passo simples, feito certo, muda o conforto da sua pele. Salva e testa hoje à noite."}, "legenda": "Lavar o rosto parece óbvio até você ver os três erros mais comuns. Água quente, esfregar com força e secar puxando a toalha são os que mais aparecem. Técnica boa é técnica gentil — e constante.", "hashtags": ["#limpezadepele", "#skincare", "#dermatologia", "#rotinadepele", "#barreiracutanea"]}, {"titulo": "Melasma não tem atalho — e isso é uma boa notícia", "ganchos": ["Se te prometeram sumir com o melasma em 30 dias, alguém te vendeu expectativa.", "Melasma é crônico. E entender isso é o que faz o tratamento funcionar.", "Por que o melasma volta todo verão? Não é falta de esforço seu."], "reels": [{"tempo": "0-3s", "fala": "Se te prometeram sumir com melasma em 30 dias, alguém te vendeu expectativa.", "direcao": "Close, tom firme e acolhedor. Texto: 'MELASMA: a verdade do tempo'"}, {"tempo": "3-14s", "fala": "Melasma é uma condição crônica e recorrente. A Sociedade Brasileira de Dermatologia trata ele assim: controle, não cura rápida. Então o objetivo é clarear e manter.", "direcao": "Corte. Texto grande na tela: 'CRÔNICO E RECORRENTE'"}, {"tempo": "14-28s", "fala": "E o que mais faz diferença é o que você repete. Fotoproteção diária, com reaplicação, o ano inteiro. Não só na praia. Luz visível e calor também entram na conta.", "direcao": "Linha do tempo animada: 'mês 1 / mês 3 / mês 6' com barra de constância. Texto: 'o que conta é a repetição'"}, {"tempo": "28-40s", "fala": "O tratamento é individualizado e leva meses. E ele volta quando a rotina para — não porque você falhou, mas porque a condição é assim. Manutenção faz parte do plano, não é recaída.", "direcao": "Plano médio, gesto acolhedor. Texto: 'manutenção ≠ fracasso'"}, {"tempo": "40-45s", "fala": "Se você convive com melasma, comenta há quanto tempo. Você vai ver que não tá sozinha.", "direcao": "Close final. Texto: 'comenta aqui'"}], "carrossel": {"capa": "Melasma: por que leva tempo (e por que volta)", "laminas": ["Melasma é uma condição crônica e recorrente. O objetivo do tratamento é controle, não cura instantânea.", "A Nota Técnica da SBD orienta abordagem baseada em evidências e individualizada.", "Fotoproteção diária, com reaplicação, é o pilar. O ano inteiro — não só no verão.", "Luz visível e calor também participam do estímulo. Praia não é o único gatilho.", "Resultado se constrói em meses, não em semanas. Trocar de produto toda hora atrapalha.", "Quando a rotina para, tende a voltar. Manutenção faz parte do plano, não é fracasso seu."], "cta_final": "Consistência é o ativo que ninguém vende em frasco. Leve seu histórico pra avaliação com dermatologista."}, "legenda": "Melasma é crônico e recorrente — e aceitar isso é o que faz o tratamento andar. A SBD orienta abordagem individualizada e baseada em evidências, com fotoproteção diária como pilar. Nada aqui substitui avaliação presencial.", "hashtags": ["#melasma", "#manchasnapele", "#fotoprotecao", "#dermatologia", "#peleconsciente"]}, {"titulo": "Sua vitamina C pode estar oxidada (e você nem percebeu)", "ganchos": ["Se o seu sérum de vitamina C ficou alaranjado, ele parou de trabalhar pra você.", "Comprar vitamina C olhando só a porcentagem é o erro mais caro do skincare.", "25%? Ótimo. Mas 25% de vitamina C oxidada é 25% de nada."], "reels": [{"tempo": "0-3s", "fala": "Se o seu sérum de vitamina C ficou alaranjado, ele parou de trabalhar pra você.", "direcao": "Close no frasco âmbar sem rótulo, girando na mão. Texto: 'oxidou?'"}, {"tempo": "3-14s", "fala": "A vitamina C pura é instável. Luz, ar e calor degradam ela. E quando degrada, muda de cor: de transparente ou levemente amarelo pra laranja escuro.", "direcao": "Comparação lado a lado de dois líquidos em recipientes de vidro neutros. Texto: 'luz + ar + calor'"}, {"tempo": "14-27s", "fala": "Por isso concentração alta não é sinônimo de eficácia. O que importa é a estabilidade da fórmula: pH adequado, antioxidantes de apoio como vitamina E e ferúlico, e embalagem opaca ou âmbar, com pouco contato com o ar.", "direcao": "Corte com texto item a item aparecendo. Texto: 'estabilidade > porcentagem'"}, {"tempo": "27-40s", "fala": "Na prática: guarda longe do box do banho e do sol da janela, fecha bem, e presta atenção na cor. Mudou de cor e de cheiro? A festa acabou.", "direcao": "Mostra guardando o frasco numa gaveta. Texto: 'gaveta > pia do banheiro'"}, {"tempo": "40-45s", "fala": "Vai lá olhar o seu agora e me conta a cor nos comentários.", "direcao": "Close final, expressão cúmplice. Texto: 'que cor tá o seu?'"}], "carrossel": {"capa": "Sua vitamina C oxidou? Olha a cor.", "laminas": ["Vitamina C pura é instável: luz, ar e calor degradam o ativo.", "Quando oxida, o líquido escurece — do transparente/amarelo claro para o laranja escuro.", "Concentração alta não significa eficácia. Estabilidade é o que sustenta a ação.", "Fórmulas estabilizadas costumam trazer pH adequado e antioxidantes de apoio, como vitamina E e ácido ferúlico.", "Embalagem importa: opaca ou âmbar, com pouco contato com o ar.", "Armazenamento: longe do vapor do banho e do sol direto. Sempre bem fechado."], "cta_final": "Antes de trocar de produto, confira a cor do que você já tem. Salva esse checklist."}, "legenda": "Porcentagem alta não salva um sérum de vitamina C oxidado. O ativo é instável e se degrada com luz, ar e calor — e a cor denuncia. Estabilidade da fórmula e armazenamento contam tanto quanto o número no rótulo.", "hashtags": ["#vitaminac", "#skincarecientifico", "#dermatologia", "#antioxidante", "#cuidadoscomapele"]}, {"titulo": "Acne não é falta de banho — e você precisa ouvir isso", "ganchos": ["Ninguém tem acne por ser sujo. Deixa eu tirar esse peso das suas costas.", "Lavar o rosto cinco vezes por dia não trata acne. Piora.", "Se você já ouviu 'é porque você não se limpa direito', esse vídeo é pra você."], "reels": [{"tempo": "0-3s", "fala": "Ninguém tem acne por ser sujo. Deixa eu tirar esse peso das suas costas.", "direcao": "Close no rosto, tom baixo e acolhedor, sem música alta. Texto: 'acne ≠ falta de higiene'"}, {"tempo": "3-15s", "fala": "Acne é uma doença inflamatória do folículo. Ela envolve genética, estímulo hormonal na glândula sebácea, alteração da queratinização e a microbiota da pele. Sujeira não entra nessa lista.", "direcao": "Texto aparecendo em bullets conforme fala. Texto: 'genética • hormônio • sebo • inflamação'"}, {"tempo": "15-28s", "fala": "E aí vem o efeito colateral do mito: a pessoa começa a lavar demais, esfregar, usar álcool. Isso agride a barreira, a pele fica irritada e a inflamação piora. Culpa não é tratamento.", "direcao": "Corte, gesto de 'para'. Texto: 'esfregar não limpa a inflamação'"}, {"tempo": "28-40s", "fala": "O que ajuda é limpeza suave duas vezes ao dia, tratamento adequado ao seu grau de acne e acompanhamento. Acne tem tratamento, e quanto mais cedo, menor a chance de marca.", "direcao": "Plano médio, mais próximo da câmera. Texto: 'tratamento > culpa'"}, {"tempo": "40-45s", "fala": "Manda esse vídeo pra alguém que já ouviu que era falta de cuidado.", "direcao": "Close final. Texto: 'compartilha com quem precisa'"}], "carrossel": {"capa": "Acne não é falta de higiene", "laminas": ["Acne é uma doença inflamatória do folículo pilossebáceo — não um sinal de descuido.", "Os fatores centrais são genética, estímulo hormonal, produção de sebo, alteração da queratinização e microbiota.", "Lavar demais e esfregar agride a barreira cutânea e tende a piorar a irritação.", "Álcool e receitas caseiras abrasivas entram na mesma conta.", "Limpeza suave duas vezes ao dia é suficiente para a maioria das rotinas.", "Tratar cedo, com orientação médica, reduz o risco de marcas permanentes."], "cta_final": "Se você carrega essa culpa desde a adolescência, pode soltar. Compartilhe com quem ainda acredita nesse mito."}, "legenda": "Acne é uma doença inflamatória — não um veredito sobre a sua higiene. Genética, hormônio, sebo e inflamação estão no centro, e lavar demais só irrita mais. Tratar cedo, com orientação médica, reduz o risco de marcas.", "hashtags": ["#acne", "#peleacneica", "#dermatologia", "#autoestima", "#mitosdaskincare"]}, {"titulo": "Ardeu, coçou, vermelhou: é adaptação ou alergia?", "ganchos": ["'Se arde é porque tá funcionando' é a frase mais perigosa do skincare.", "Irritação e alergia não são a mesma coisa — e o tempo de reação denuncia.", "Sua pele ficou sensível 'do nada'? Talvez não tenha sido do nada."], "reels": [{"tempo": "0-3s", "fala": "'Se arde é porque tá funcionando'. Essa frase é a mais perigosa do skincare.", "direcao": "Close, sobrancelha levantada. Texto: 'ardeu = funcionando?'"}, {"tempo": "3-15s", "fala": "Existem duas reações diferentes. A irritativa: aparece rápido, arde ou repuxa logo na aplicação, geralmente só onde você passou, e melhora quando você espaça o produto.", "direcao": "Tela dividida, lado esquerdo com título 'IRRITAÇÃO'. Texto: 'rápida • no local • melhora ao espaçar'"}, {"tempo": "15-28s", "fala": "E a alérgica, a dermatite de contato alérgica: costuma demorar, aparece de um a três dias depois, coça muito mais do que arde, pode inchar, descamar e às vezes passa da área onde você aplicou.", "direcao": "Lado direito da tela: 'ALERGIA'. Texto: '24-72h • coceira • ultrapassa a área'"}, {"tempo": "28-40s", "fala": "Regra prática: ardência leve com ativo novo pode ser ajuste de frequência. Coceira, inchaço e vermelhidão que aumenta com o uso: suspende e procura avaliação. Existe teste de contato pra investigar o que causou.", "direcao": "Volta pro plano médio, gesto de 'pausa'. Texto: 'coceira + inchaço = suspende'"}, {"tempo": "40-45s", "fala": "Salva pra consultar na próxima vez que sua pele reagir.", "direcao": "Close final. Texto: 'salva esse guia'"}], "carrossel": {"capa": "Irritação ou alergia? Sua pele te dá pistas", "laminas": ["Reação irritativa: costuma aparecer logo após a aplicação, com ardência ou repuxamento.", "Reação irritativa: fica restrita à área aplicada e tende a melhorar ao espaçar o uso.", "Dermatite de contato alérgica: costuma surgir de 24 a 72 horas depois do contato.", "Nela, a coceira predomina sobre a ardência — e pode haver inchaço e descamação.", "A alérgica pode ultrapassar a área onde o produto foi aplicado.", "Ardência leve com ativo novo pode ser ajuste de frequência. Coceira e inchaço pedem suspensão.", "O teste de contato ajuda a identificar o agente causador em avaliação médica."], "cta_final": "Sua pele não precisa arder pra funcionar. Salva e leve essas pistas pra sua consulta."}, "legenda": "Ardência não é sinônimo de eficácia. Reação irritativa costuma ser imediata e restrita à área; a alérgica tende a surgir entre 24 e 72 horas, com coceira e possível extensão além do local. Se a reação aumenta com o uso, suspenda e busque avaliação.", "hashtags": ["#dermatitedecontato", "#pelesensivel", "#dermatologia", "#skincare", "#alergiadepele"]}, {"titulo": "Ferida cicatriza melhor úmida, não com casquinha", "ganchos": ["Deixar a ferida 'secar e criar casquinha' é o conselho mais antigo e mais desatualizado que existe.", "Casquinha não é sinal de cura. É atraso.", "Cuidado de ferida em 4 passos — do jeito que a dermatologia orienta."], "reels": [{"tempo": "0-3s", "fala": "Deixar a ferida secar e criar casquinha é o conselho mais antigo e mais desatualizado que existe.", "direcao": "Plano de cima da bancada com gaze e curativo. Texto: 'CUIDADO DE FERIDA 101'"}, {"tempo": "3-14s", "fala": "A ferida cicatriza melhor em ambiente úmido. A casca funciona como uma barreira física que as células precisam contornar — e isso costuma deixar marca mais evidente.", "direcao": "Corte, ilustração simples desenhada na tela. Texto: 'úmido > seco'"}, {"tempo": "14-28s", "fala": "Passo a passo: lava com água e sabonete suave. Nada de água oxigenada ou álcool na ferida aberta, eles agridem o tecido novo. Depois, uma camada fina de um oclusivo simples, tipo petrolato puro, pra manter úmido.", "direcao": "Demonstra em ordem, apontando cada item. Texto: 'lavar → hidratar → cobrir'"}, {"tempo": "28-40s", "fala": "Cobre com curativo limpo e troca todo dia. Antibiótico tópico não é rotina: usa só quando o médico indicar, porque uso desnecessário pode causar alergia de contato. E protetor solar na cicatriz depois de fechada, pra não escurecer.", "direcao": "Fecha o curativo em quadro. Texto: 'antibiótico só com indicação'"}, {"tempo": "40-45s", "fala": "Vermelhidão que aumenta, dor forte ou secreção: procura atendimento. Salva esse passo a passo.", "direcao": "Close final. Texto: 'salva'"}], "carrossel": {"capa": "Ferida: casquinha não é sinal de cura", "laminas": ["Ambiente úmido favorece a cicatrização. A casca é uma barreira física que o tecido novo precisa contornar.", "1. Lave com água e sabonete suave. Sem água oxigenada nem álcool na ferida aberta.", "2. Mantenha úmido com uma camada fina de oclusivo simples, como petrolato puro.", "3. Cubra com curativo limpo e troque diariamente.", "4. Antibiótico tópico não é rotina — use apenas com indicação médica, pelo risco de alergia de contato.", "5. Depois que fechar, proteja a cicatriz do sol para reduzir o escurecimento.", "Sinais de alerta: dor intensa, vermelhidão que aumenta, calor local ou secreção. Procure atendimento."], "cta_final": "Cicatriz bem cuidada começa nas primeiras 24 horas. Salva pra ter em mãos quando precisar."}, "legenda": "Deixar 'secar pra criar casquinha' é conselho antigo. Ambiente úmido favorece a cicatrização, e antisséptico agressivo na ferida aberta agride o tecido novo. Antibiótico tópico entra só com indicação médica — e proteção solar na cicatriz faz diferença.", "hashtags": ["#cicatrizacao", "#cuidadocomferidas", "#dermatologia", "#primeirossocorros", "#cicatrizes"]}, {"titulo": "Rotina noturna: a ordem tem ciência (não é estética)", "ganchos": ["A ordem dos produtos não é frescura de vídeo bonito. É pH e absorção.", "Você pode estar usando os produtos certos na sequência errada.", "Rotina da noite comigo — mas eu vou te explicar o porquê de cada passo."], "reels": [{"tempo": "0-3s", "fala": "A ordem dos produtos não é frescura de vídeo bonito. É pH e absorção.", "direcao": "Plano cenográfico da bancada organizada, luz quente, som de tampa abrindo em destaque (ASMR). Texto: 'ROTINA DA NOITE'"}, {"tempo": "3-13s", "fala": "Primeiro: limpeza. Se teve maquiagem ou protetor resistente, começa por uma limpeza oleosa e depois o sabonete. Rosto limpo é o que permite o resto funcionar.", "direcao": "Close nas mãos emulsionando. Som de água. Texto: '1. limpeza'"}, {"tempo": "13-24s", "fala": "Depois, do mais fluido pro mais denso. Água, sérum, creme. Fórmula aquosa penetra melhor em pele levemente úmida, então não deixa secar totalmente entre um passo e outro.", "direcao": "Corte a cada produto, som do conta-gotas. Texto: 'fluido → denso'"}, {"tempo": "24-36s", "fala": "Ativo forte entra em pele seca e sozinho no seu turno. Não empilha retinoide, ácido e esfoliante na mesma noite. Alterna as noites — sua barreira agradece.", "direcao": "Mostra calendário simples na tela: 'seg / qua / sex'. Texto: 'alterne, não empilhe'"}, {"tempo": "36-45s", "fala": "Fecha com o hidratante, que sela tudo. Simples, repetível, sem drama. Salva pra montar a sua.", "direcao": "Plano final da bancada arrumada, luz baixando. Texto: 'salva pra montar a sua'"}], "carrossel": {"capa": "A ordem do skincare noturno tem ciência", "laminas": ["1. Limpeza. Com maquiagem ou protetor resistente, considere a dupla limpeza.", "2. Textura fluida antes da densa: água, depois sérum, depois creme.", "3. Fórmulas aquosas se distribuem melhor em pele levemente úmida — não deixe secar por completo entre os passos.", "4. Ativos potentes, como retinoides, pedem pele seca e o seu próprio turno.", "5. Não empilhe retinoide, ácido e esfoliante na mesma noite. Alterne.", "6. Hidratante por último: ele sela o que veio antes.", "Rotina que você consegue repetir vale mais do que rotina de dez passos abandonada em uma semana."], "cta_final": "Menos passos, mais constância. Salva e monta a sua sequência hoje."}, "legenda": "Rotina noturna bonita é ótima — rotina noturna coerente é melhor. A lógica é textura, pH e absorção: do mais fluido ao mais denso, com ativo potente no seu próprio turno. Simples e repetível vence complicado e abandonado.", "hashtags": ["#rotinanoturna", "#skincare", "#asmrskincare", "#dermatologia", "#ordemdoskincare"]}, {"titulo": "Dia nublado também queima: o mito do protetor opcional", "ganchos": ["Céu fechado não é filtro solar. A nuvem barra o calor, não o UVA.", "Você usa metade do protetor que precisaria. Vou te mostrar a medida.", "'Mas hoje eu nem vou sair de casa' — ok, vamos conversar sobre janela."], "reels": [{"tempo": "0-3s", "fala": "Céu fechado não é filtro solar. A nuvem barra o calor, não o UVA.", "direcao": "Gravar ao lado da janela em dia cinzento. Texto: 'NUBLADO ≠ PROTEGIDO'"}, {"tempo": "3-14s", "fala": "O UVB é o que mais queima e varia bastante com o clima. Já o UVA é constante ao longo do dia e do ano, atravessa nuvem e atravessa vidro. E é ele que se associa a fotoenvelhecimento e a piora de manchas.", "direcao": "Corte com ícone de nuvem e janela na tela. Texto: 'UVA atravessa nuvem e vidro'"}, {"tempo": "14-27s", "fala": "Segundo ponto: quantidade. A maioria aplica bem menos do que o testado em laboratório. Pro rosto, a referência prática é mais ou menos duas linhas do produto ao longo dos dedos indicador e médio.", "direcao": "Demonstra a medida nos dois dedos. Texto: 'medida dos 2 dedos'"}, {"tempo": "27-40s", "fala": "E reaplicar. A cada duas horas de exposição, ou depois de suar e se molhar. Sem reaplicação, a proteção que você calculou de manhã não existe mais à tarde.", "direcao": "Mostra relógio na tela e gesto de reaplicar. Texto: 'a cada 2h de exposição'"}, {"tempo": "40-45s", "fala": "Marca aqui a amiga que só passa protetor quando vê sol.", "direcao": "Close final, tom leve. Texto: 'marca ela'"}], "carrossel": {"capa": "Dia nublado: você ainda precisa de protetor", "laminas": ["UVB varia mais com clima e horário — é o que mais se associa à queimadura.", "UVA é constante ao longo do dia e do ano, e atravessa nuvens e vidro.", "O UVA se associa a fotoenvelhecimento e à piora de manchas como o melasma.", "Quantidade importa: a maioria das pessoas aplica menos do que o testado em laboratório.", "Referência prática para o rosto: duas linhas do produto ao longo dos dedos indicador e médio.", "Reaplique a cada duas horas de exposição, ou após suar e se molhar.", "Trabalha perto da janela? A exposição também conta."], "cta_final": "Protetor é rotina, não previsão do tempo. Salva e compartilhe com quem só passa quando vê sol."}, "legenda": "Nuvem esconde o sol, não a radiação. O UVA é constante ao longo do ano, atravessa nuvens e vidro e se associa a fotoenvelhecimento e piora de manchas. Quantidade e reaplicação contam tanto quanto o FPS do rótulo.", "hashtags": ["#protetorsolar", "#fotoprotecao", "#uva", "#dermatologia", "#prevencao"]}]}</script>
+<script id="dados-agenda" type="application/json">{"nicho": "dermatologia-estetica", "semana": "2026-08-24", "gerado_em": "2026-08-23", "ideias": [{"titulo": "Vaselina ao redor dos olhos: o que o viral não te contou", "pilar": "Mitos vs verdades", "registro": "", "ganchos": ["Passar vaselina em volta dos olhos todo dia? Calma, deixa eu te explicar uma coisa.", "A vaselina não hidrata a sua pele. Sério. Ela faz outra coisa.", "Chegou nos comentários: 'dermato, vaselina no olho some com olheira?' Vamos por partes."], "reels": [{"tempo": "0-3s", "fala": "Passar vaselina em volta dos olhos todo dia? Calma, deixa eu te explicar uma coisa.", "direcao": "Close no rosto, sem edição, olhando na câmera. Texto na tela: 'VASELINA NOS OLHOS?'"}, {"tempo": "3-12s", "fala": "Primeiro: vaselina não hidrata. Ela é oclusiva. Ou seja, ela sela a água que já tá na pele. Se a pele tá seca embaixo, você tá selando o nada.", "direcao": "Corte seco. Mão fazendo gesto de 'tampa' sobre o dorso da outra mão. Texto: 'oclusivo ≠ hidratante'"}, {"tempo": "12-25s", "fala": "Segundo: a região dos olhos é fina e cheia de glândulas na borda dos cílios. Dermatologistas da Sociedade Brasileira de Dermatologia já alertaram sobre passar vaselina nos cílios justamente por isso: pode obstruir essas glândulas e favorecer pontinhos brancos, aquelas mílias.", "direcao": "Plano médio, apontando pra própria pálpebra sem tocar. Texto: 'borda dos cílios = zona de glândulas'"}, {"tempo": "25-38s", "fala": "Então o jeito mais coerente é: creme com água e ativos primeiro, na pele levemente úmida. Se quiser selar, uma camada bem fininha por cima, longe da linha dos cílios. E olheira genética ou vascular não muda com oclusivo, tá?", "direcao": "Demonstra a ordem com dois potes sem rótulo visível. Texto: 'hidrata → depois sela'"}, {"tempo": "38-45s", "fala": "Se você já teve pontinhos brancos ali, comenta 'MÍLIA' que eu faço um vídeo só disso.", "direcao": "Volta pro close, sorriso. Texto: 'comenta MÍLIA'"}], "carrossel": {"capa": "Vaselina em volta dos olhos: o que ninguém te falou", "laminas": ["Vaselina não hidrata. Ela é oclusiva — sela o que já está na pele.", "Se a pele estiver seca embaixo, você está selando pele seca.", "A borda dos cílios tem glândulas. A SBD-RS já alertou sobre o uso de vaselina nessa região.", "Oclusão em excesso ali pode favorecer mílias, aqueles pontinhos brancos.", "Ordem que faz mais sentido: pele levemente úmida → creme com água e ativos → camada fininha oclusiva por cima, longe da linha dos cílios.", "Olheira de fundo genético ou vascular não se resolve com oclusivo."], "cta_final": "Antes de copiar tendência, entenda a sua pele. Salva pra consultar e leva a dúvida pra sua consulta."}, "legenda": "Vaselina não hidrata — ela sela. E isso muda tudo na região dos olhos. A SBD-RS já alertou sobre o uso na linha dos cílios, onde existem glândulas que podem ser obstruídas. Cada pele tem um contexto: avalie o seu com quem te acompanha.", "hashtags": ["#dermatologia", "#skincare", "#cuidadoscomapele", "#olheiras", "#mitosdaskincare"]}, {"titulo": "Tônico facial: necessário ou dinheiro jogado fora?", "pilar": "Mitos vs verdades", "registro": "", "ganchos": ["'Tônico é enrolação pra vender mais produto?' Depende — e eu vou te falar de quê.", "Tônico não é obrigatório pra todo mundo. Mas pra algumas peles, ele muda a rotina.", "Se o seu tônico arde, você comprou o errado. Ponto."], "reels": [{"tempo": "0-3s", "fala": "'Tônico é enrolação pra vender mais produto?' Depende — e eu vou te falar de quê.", "direcao": "Print de comentário na tela por 2s, depois corta pra rosto em plano médio."}, {"tempo": "3-14s", "fala": "O tônico de hoje não é o de vinte anos atrás. Aquele era basicamente álcool, prometia 'fechar poro' e ressecava tudo. Poro não abre nem fecha, aliás.", "direcao": "Corte com zoom rápido. Texto: 'poro não tem porta'"}, {"tempo": "14-28s", "fala": "O tônico moderno é um veículo. Ele repõe o que a limpeza levou e entrega ativo em textura leve: umectante pra pele seca, calmante pra pele sensível, adstringente leve pra pele muito oleosa.", "direcao": "Três dedos na mão marcando os três perfis. Texto: 'seca / sensível / oleosa'"}, {"tempo": "28-40s", "fala": "Então a pergunta certa não é 'preciso de tônico?'. É 'meu tônico tem o ativo que a minha pele precisa?'. Se ele arde, repuxa ou tem álcool no topo da lista, ele não tá ajudando.", "direcao": "Segura frasco neutro sem rótulo, gira mostrando lista de ingredientes desfocada. Texto: 'olha o rótulo, não a moda'"}, {"tempo": "40-45s", "fala": "Me conta nos comentários: qual o seu tipo de pele? Eu te digo se o passo faz sentido.", "direcao": "Close final, sorriso. Texto: 'comenta seu tipo de pele'"}], "carrossel": {"capa": "Tônico facial: necessidade ou marketing?", "laminas": ["O tônico antigo era à base de álcool e prometia 'fechar poros'. Poro não abre nem fecha.", "O tônico moderno funciona como veículo: entrega ativo em textura leve, logo após a limpeza.", "Pele seca: procure umectantes que ajudem na retenção de água.", "Pele sensível: procure fórmulas calmantes, sem álcool no topo da lista.", "Pele oleosa: adstringentes leves podem ajudar no conforto — sem ressecar de propósito.", "Se arde ou repuxa depois, não é 'adaptação'. É sinal de que o produto não combina com você."], "cta_final": "A pergunta não é 'preciso de tônico'. É 'esse tônico serve pra minha pele?'. Salva pra lembrar na próxima compra."}, "legenda": "Tônico não é obrigatório — é opcional com propósito. Ele funciona como veículo de ativos logo depois da limpeza, e a escolha muda conforme o tipo de pele. Se arde e repuxa, não é adaptação: é incompatibilidade.", "hashtags": ["#tonicofacial", "#skincarebrasil", "#dermatologista", "#rotinadepele", "#peleoleosa"]}, {"titulo": "Lavar o rosto: o passo mais simples que quase todo mundo erra", "pilar": "Educação sobre procedimentos", "registro": "", "ganchos": ["Você lava o rosto errado. E não é culpa sua — ninguém ensina isso.", "Água quente no rosto é conforto pra você e problema pra barreira da pele.", "Três erros na hora de lavar o rosto que aparecem todo dia no consultório."], "reels": [{"tempo": "0-3s", "fala": "Você provavelmente lava o rosto errado. E não é culpa sua — ninguém ensina isso.", "direcao": "Plano na pia, mãos entrando em quadro. Texto: 'LAVAR O ROSTO 101'"}, {"tempo": "3-13s", "fala": "Erro um: água quente. Ela dá aquela sensação de limpeza, mas remove mais lipídio da barreira. Água morna pra fria já resolve.", "direcao": "Close na torneira, mão testando a água. Texto: 'morna, não quente'"}, {"tempo": "13-25s", "fala": "Erro dois: esfregar. Não é força, é tempo. Espalha o sabonete com as pontas dos dedos, movimento leve e circular, uns trinta a sessenta segundos. Sem escovinha, sem bucha.", "direcao": "Demonstra o movimento no próprio rosto, câmera de frente. Timer aparecendo na tela: '30-60s'"}, {"tempo": "25-36s", "fala": "Erro três: enxaguar mal e secar esfregando a toalha. Enxágue até não ter mais escorregadio e seca dando toquinhos. E dupla limpeza é pra quem usa maquiagem, protetor resistente ou tem muita oleosidade — não é regra pra todo mundo.", "direcao": "Toalha limpa dando toques no rosto. Texto: 'seca dando toques'"}, {"tempo": "36-45s", "fala": "Duas vezes por dia costuma bastar. Mais que isso, geralmente, é a barreira reclamando. Salva pra fazer certo hoje à noite.", "direcao": "Close final, olhando pra câmera. Texto: 'salva esse vídeo'"}], "carrossel": {"capa": "Como lavar o rosto do jeito certo (passo a passo)", "laminas": ["1. Mãos limpas antes de tudo. Você encosta no rosto o que tem nelas.", "2. Água morna a fria. Quente remove mais lipídios da barreira.", "3. Sabonete compatível com o seu tipo de pele, espalhado com as pontas dos dedos.", "4. Movimento circular leve por 30 a 60 segundos. Sem bucha, sem escovinha, sem força.", "5. Enxágue completo — resíduo de sabonete irrita e resseca.", "6. Seque dando toques com toalha limpa. Nunca esfregando.", "7. Duas vezes ao dia costuma bastar. Dupla limpeza é para dias de maquiagem, protetor resistente ou oleosidade intensa."], "cta_final": "Passo simples, feito certo, muda o conforto da sua pele. Salva e testa hoje à noite."}, "legenda": "Lavar o rosto parece óbvio até você ver os três erros mais comuns. Água quente, esfregar com força e secar puxando a toalha são os que mais aparecem. Técnica boa é técnica gentil — e constante.", "hashtags": ["#limpezadepele", "#skincare", "#dermatologia", "#rotinadepele", "#barreiracutanea"]}, {"titulo": "Melasma não tem atalho — e isso é uma boa notícia", "pilar": "Rotina e prevenção", "registro": "", "ganchos": ["Se te prometeram sumir com o melasma em 30 dias, alguém te vendeu expectativa.", "Melasma é crônico. E entender isso é o que faz o tratamento funcionar.", "Por que o melasma volta todo verão? Não é falta de esforço seu."], "reels": [{"tempo": "0-3s", "fala": "Se te prometeram sumir com melasma em 30 dias, alguém te vendeu expectativa.", "direcao": "Close, tom firme e acolhedor. Texto: 'MELASMA: a verdade do tempo'"}, {"tempo": "3-14s", "fala": "Melasma é uma condição crônica e recorrente. A Sociedade Brasileira de Dermatologia trata ele assim: controle, não cura rápida. Então o objetivo é clarear e manter.", "direcao": "Corte. Texto grande na tela: 'CRÔNICO E RECORRENTE'"}, {"tempo": "14-28s", "fala": "E o que mais faz diferença é o que você repete. Fotoproteção diária, com reaplicação, o ano inteiro. Não só na praia. Luz visível e calor também entram na conta.", "direcao": "Linha do tempo animada: 'mês 1 / mês 3 / mês 6' com barra de constância. Texto: 'o que conta é a repetição'"}, {"tempo": "28-40s", "fala": "O tratamento é individualizado e leva meses. E ele volta quando a rotina para — não porque você falhou, mas porque a condição é assim. Manutenção faz parte do plano, não é recaída.", "direcao": "Plano médio, gesto acolhedor. Texto: 'manutenção ≠ fracasso'"}, {"tempo": "40-45s", "fala": "Se você convive com melasma, comenta há quanto tempo. Você vai ver que não tá sozinha.", "direcao": "Close final. Texto: 'comenta aqui'"}], "carrossel": {"capa": "Melasma: por que leva tempo (e por que volta)", "laminas": ["Melasma é uma condição crônica e recorrente. O objetivo do tratamento é controle, não cura instantânea.", "A Nota Técnica da SBD orienta abordagem baseada em evidências e individualizada.", "Fotoproteção diária, com reaplicação, é o pilar. O ano inteiro — não só no verão.", "Luz visível e calor também participam do estímulo. Praia não é o único gatilho.", "Resultado se constrói em meses, não em semanas. Trocar de produto toda hora atrapalha.", "Quando a rotina para, tende a voltar. Manutenção faz parte do plano, não é fracasso seu."], "cta_final": "Consistência é o ativo que ninguém vende em frasco. Leve seu histórico pra avaliação com dermatologista."}, "legenda": "Melasma é crônico e recorrente — e aceitar isso é o que faz o tratamento andar. A SBD orienta abordagem individualizada e baseada em evidências, com fotoproteção diária como pilar. Nada aqui substitui avaliação presencial.", "hashtags": ["#melasma", "#manchasnapele", "#fotoprotecao", "#dermatologia", "#peleconsciente"]}, {"titulo": "Sua vitamina C pode estar oxidada (e você nem percebeu)", "pilar": "Educação sobre procedimentos", "registro": "", "ganchos": ["Se o seu sérum de vitamina C ficou alaranjado, ele parou de trabalhar pra você.", "Comprar vitamina C olhando só a porcentagem é o erro mais caro do skincare.", "25%? Ótimo. Mas 25% de vitamina C oxidada é 25% de nada."], "reels": [{"tempo": "0-3s", "fala": "Se o seu sérum de vitamina C ficou alaranjado, ele parou de trabalhar pra você.", "direcao": "Close no frasco âmbar sem rótulo, girando na mão. Texto: 'oxidou?'"}, {"tempo": "3-14s", "fala": "A vitamina C pura é instável. Luz, ar e calor degradam ela. E quando degrada, muda de cor: de transparente ou levemente amarelo pra laranja escuro.", "direcao": "Comparação lado a lado de dois líquidos em recipientes de vidro neutros. Texto: 'luz + ar + calor'"}, {"tempo": "14-27s", "fala": "Por isso concentração alta não é sinônimo de eficácia. O que importa é a estabilidade da fórmula: pH adequado, antioxidantes de apoio como vitamina E e ferúlico, e embalagem opaca ou âmbar, com pouco contato com o ar.", "direcao": "Corte com texto item a item aparecendo. Texto: 'estabilidade > porcentagem'"}, {"tempo": "27-40s", "fala": "Na prática: guarda longe do box do banho e do sol da janela, fecha bem, e presta atenção na cor. Mudou de cor e de cheiro? A festa acabou.", "direcao": "Mostra guardando o frasco numa gaveta. Texto: 'gaveta > pia do banheiro'"}, {"tempo": "40-45s", "fala": "Vai lá olhar o seu agora e me conta a cor nos comentários.", "direcao": "Close final, expressão cúmplice. Texto: 'que cor tá o seu?'"}], "carrossel": {"capa": "Sua vitamina C oxidou? Olha a cor.", "laminas": ["Vitamina C pura é instável: luz, ar e calor degradam o ativo.", "Quando oxida, o líquido escurece — do transparente/amarelo claro para o laranja escuro.", "Concentração alta não significa eficácia. Estabilidade é o que sustenta a ação.", "Fórmulas estabilizadas costumam trazer pH adequado e antioxidantes de apoio, como vitamina E e ácido ferúlico.", "Embalagem importa: opaca ou âmbar, com pouco contato com o ar.", "Armazenamento: longe do vapor do banho e do sol direto. Sempre bem fechado."], "cta_final": "Antes de trocar de produto, confira a cor do que você já tem. Salva esse checklist."}, "legenda": "Porcentagem alta não salva um sérum de vitamina C oxidado. O ativo é instável e se degrada com luz, ar e calor — e a cor denuncia. Estabilidade da fórmula e armazenamento contam tanto quanto o número no rótulo.", "hashtags": ["#vitaminac", "#skincarecientifico", "#dermatologia", "#antioxidante", "#cuidadoscomapele"]}, {"titulo": "Acne não é falta de banho — e você precisa ouvir isso", "pilar": "Mitos vs verdades", "registro": "", "ganchos": ["Ninguém tem acne por ser sujo. Deixa eu tirar esse peso das suas costas.", "Lavar o rosto cinco vezes por dia não trata acne. Piora.", "Se você já ouviu 'é porque você não se limpa direito', esse vídeo é pra você."], "reels": [{"tempo": "0-3s", "fala": "Ninguém tem acne por ser sujo. Deixa eu tirar esse peso das suas costas.", "direcao": "Close no rosto, tom baixo e acolhedor, sem música alta. Texto: 'acne ≠ falta de higiene'"}, {"tempo": "3-15s", "fala": "Acne é uma doença inflamatória do folículo. Ela envolve genética, estímulo hormonal na glândula sebácea, alteração da queratinização e a microbiota da pele. Sujeira não entra nessa lista.", "direcao": "Texto aparecendo em bullets conforme fala. Texto: 'genética • hormônio • sebo • inflamação'"}, {"tempo": "15-28s", "fala": "E aí vem o efeito colateral do mito: a pessoa começa a lavar demais, esfregar, usar álcool. Isso agride a barreira, a pele fica irritada e a inflamação piora. Culpa não é tratamento.", "direcao": "Corte, gesto de 'para'. Texto: 'esfregar não limpa a inflamação'"}, {"tempo": "28-40s", "fala": "O que ajuda é limpeza suave duas vezes ao dia, tratamento adequado ao seu grau de acne e acompanhamento. Acne tem tratamento, e quanto mais cedo, menor a chance de marca.", "direcao": "Plano médio, mais próximo da câmera. Texto: 'tratamento > culpa'"}, {"tempo": "40-45s", "fala": "Manda esse vídeo pra alguém que já ouviu que era falta de cuidado.", "direcao": "Close final. Texto: 'compartilha com quem precisa'"}], "carrossel": {"capa": "Acne não é falta de higiene", "laminas": ["Acne é uma doença inflamatória do folículo pilossebáceo — não um sinal de descuido.", "Os fatores centrais são genética, estímulo hormonal, produção de sebo, alteração da queratinização e microbiota.", "Lavar demais e esfregar agride a barreira cutânea e tende a piorar a irritação.", "Álcool e receitas caseiras abrasivas entram na mesma conta.", "Limpeza suave duas vezes ao dia é suficiente para a maioria das rotinas.", "Tratar cedo, com orientação médica, reduz o risco de marcas permanentes."], "cta_final": "Se você carrega essa culpa desde a adolescência, pode soltar. Compartilhe com quem ainda acredita nesse mito."}, "legenda": "Acne é uma doença inflamatória — não um veredito sobre a sua higiene. Genética, hormônio, sebo e inflamação estão no centro, e lavar demais só irrita mais. Tratar cedo, com orientação médica, reduz o risco de marcas.", "hashtags": ["#acne", "#peleacneica", "#dermatologia", "#autoestima", "#mitosdaskincare"]}, {"titulo": "Ardeu, coçou, vermelhou: é adaptação ou alergia?", "pilar": "Mitos vs verdades", "registro": "", "ganchos": ["'Se arde é porque tá funcionando' é a frase mais perigosa do skincare.", "Irritação e alergia não são a mesma coisa — e o tempo de reação denuncia.", "Sua pele ficou sensível 'do nada'? Talvez não tenha sido do nada."], "reels": [{"tempo": "0-3s", "fala": "'Se arde é porque tá funcionando'. Essa frase é a mais perigosa do skincare.", "direcao": "Close, sobrancelha levantada. Texto: 'ardeu = funcionando?'"}, {"tempo": "3-15s", "fala": "Existem duas reações diferentes. A irritativa: aparece rápido, arde ou repuxa logo na aplicação, geralmente só onde você passou, e melhora quando você espaça o produto.", "direcao": "Tela dividida, lado esquerdo com título 'IRRITAÇÃO'. Texto: 'rápida • no local • melhora ao espaçar'"}, {"tempo": "15-28s", "fala": "E a alérgica, a dermatite de contato alérgica: costuma demorar, aparece de um a três dias depois, coça muito mais do que arde, pode inchar, descamar e às vezes passa da área onde você aplicou.", "direcao": "Lado direito da tela: 'ALERGIA'. Texto: '24-72h • coceira • ultrapassa a área'"}, {"tempo": "28-40s", "fala": "Regra prática: ardência leve com ativo novo pode ser ajuste de frequência. Coceira, inchaço e vermelhidão que aumenta com o uso: suspende e procura avaliação. Existe teste de contato pra investigar o que causou.", "direcao": "Volta pro plano médio, gesto de 'pausa'. Texto: 'coceira + inchaço = suspende'"}, {"tempo": "40-45s", "fala": "Salva pra consultar na próxima vez que sua pele reagir.", "direcao": "Close final. Texto: 'salva esse guia'"}], "carrossel": {"capa": "Irritação ou alergia? Sua pele te dá pistas", "laminas": ["Reação irritativa: costuma aparecer logo após a aplicação, com ardência ou repuxamento.", "Reação irritativa: fica restrita à área aplicada e tende a melhorar ao espaçar o uso.", "Dermatite de contato alérgica: costuma surgir de 24 a 72 horas depois do contato.", "Nela, a coceira predomina sobre a ardência — e pode haver inchaço e descamação.", "A alérgica pode ultrapassar a área onde o produto foi aplicado.", "Ardência leve com ativo novo pode ser ajuste de frequência. Coceira e inchaço pedem suspensão.", "O teste de contato ajuda a identificar o agente causador em avaliação médica."], "cta_final": "Sua pele não precisa arder pra funcionar. Salva e leve essas pistas pra sua consulta."}, "legenda": "Ardência não é sinônimo de eficácia. Reação irritativa costuma ser imediata e restrita à área; a alérgica tende a surgir entre 24 e 72 horas, com coceira e possível extensão além do local. Se a reação aumenta com o uso, suspenda e busque avaliação.", "hashtags": ["#dermatitedecontato", "#pelesensivel", "#dermatologia", "#skincare", "#alergiadepele"]}, {"titulo": "Ferida cicatriza melhor úmida, não com casquinha", "pilar": "Rotina e prevenção", "registro": "", "ganchos": ["Deixar a ferida 'secar e criar casquinha' é o conselho mais antigo e mais desatualizado que existe.", "Casquinha não é sinal de cura. É atraso.", "Cuidado de ferida em 4 passos — do jeito que a dermatologia orienta."], "reels": [{"tempo": "0-3s", "fala": "Deixar a ferida secar e criar casquinha é o conselho mais antigo e mais desatualizado que existe.", "direcao": "Plano de cima da bancada com gaze e curativo. Texto: 'CUIDADO DE FERIDA 101'"}, {"tempo": "3-14s", "fala": "A ferida cicatriza melhor em ambiente úmido. A casca funciona como uma barreira física que as células precisam contornar — e isso costuma deixar marca mais evidente.", "direcao": "Corte, ilustração simples desenhada na tela. Texto: 'úmido > seco'"}, {"tempo": "14-28s", "fala": "Passo a passo: lava com água e sabonete suave. Nada de água oxigenada ou álcool na ferida aberta, eles agridem o tecido novo. Depois, uma camada fina de um oclusivo simples, tipo petrolato puro, pra manter úmido.", "direcao": "Demonstra em ordem, apontando cada item. Texto: 'lavar → hidratar → cobrir'"}, {"tempo": "28-40s", "fala": "Cobre com curativo limpo e troca todo dia. Antibiótico tópico não é rotina: usa só quando o médico indicar, porque uso desnecessário pode causar alergia de contato. E protetor solar na cicatriz depois de fechada, pra não escurecer.", "direcao": "Fecha o curativo em quadro. Texto: 'antibiótico só com indicação'"}, {"tempo": "40-45s", "fala": "Vermelhidão que aumenta, dor forte ou secreção: procura atendimento. Salva esse passo a passo.", "direcao": "Close final. Texto: 'salva'"}], "carrossel": {"capa": "Ferida: casquinha não é sinal de cura", "laminas": ["Ambiente úmido favorece a cicatrização. A casca é uma barreira física que o tecido novo precisa contornar.", "1. Lave com água e sabonete suave. Sem água oxigenada nem álcool na ferida aberta.", "2. Mantenha úmido com uma camada fina de oclusivo simples, como petrolato puro.", "3. Cubra com curativo limpo e troque diariamente.", "4. Antibiótico tópico não é rotina — use apenas com indicação médica, pelo risco de alergia de contato.", "5. Depois que fechar, proteja a cicatriz do sol para reduzir o escurecimento.", "Sinais de alerta: dor intensa, vermelhidão que aumenta, calor local ou secreção. Procure atendimento."], "cta_final": "Cicatriz bem cuidada começa nas primeiras 24 horas. Salva pra ter em mãos quando precisar."}, "legenda": "Deixar 'secar pra criar casquinha' é conselho antigo. Ambiente úmido favorece a cicatrização, e antisséptico agressivo na ferida aberta agride o tecido novo. Antibiótico tópico entra só com indicação médica — e proteção solar na cicatriz faz diferença.", "hashtags": ["#cicatrizacao", "#cuidadocomferidas", "#dermatologia", "#primeirossocorros", "#cicatrizes"]}, {"titulo": "Rotina noturna: a ordem tem ciência (não é estética)", "pilar": "Rotina e prevenção", "registro": "", "ganchos": ["A ordem dos produtos não é frescura de vídeo bonito. É pH e absorção.", "Você pode estar usando os produtos certos na sequência errada.", "Rotina da noite comigo — mas eu vou te explicar o porquê de cada passo."], "reels": [{"tempo": "0-3s", "fala": "A ordem dos produtos não é frescura de vídeo bonito. É pH e absorção.", "direcao": "Plano cenográfico da bancada organizada, luz quente, som de tampa abrindo em destaque (ASMR). Texto: 'ROTINA DA NOITE'"}, {"tempo": "3-13s", "fala": "Primeiro: limpeza. Se teve maquiagem ou protetor resistente, começa por uma limpeza oleosa e depois o sabonete. Rosto limpo é o que permite o resto funcionar.", "direcao": "Close nas mãos emulsionando. Som de água. Texto: '1. limpeza'"}, {"tempo": "13-24s", "fala": "Depois, do mais fluido pro mais denso. Água, sérum, creme. Fórmula aquosa penetra melhor em pele levemente úmida, então não deixa secar totalmente entre um passo e outro.", "direcao": "Corte a cada produto, som do conta-gotas. Texto: 'fluido → denso'"}, {"tempo": "24-36s", "fala": "Ativo forte entra em pele seca e sozinho no seu turno. Não empilha retinoide, ácido e esfoliante na mesma noite. Alterna as noites — sua barreira agradece.", "direcao": "Mostra calendário simples na tela: 'seg / qua / sex'. Texto: 'alterne, não empilhe'"}, {"tempo": "36-45s", "fala": "Fecha com o hidratante, que sela tudo. Simples, repetível, sem drama. Salva pra montar a sua.", "direcao": "Plano final da bancada arrumada, luz baixando. Texto: 'salva pra montar a sua'"}], "carrossel": {"capa": "A ordem do skincare noturno tem ciência", "laminas": ["1. Limpeza. Com maquiagem ou protetor resistente, considere a dupla limpeza.", "2. Textura fluida antes da densa: água, depois sérum, depois creme.", "3. Fórmulas aquosas se distribuem melhor em pele levemente úmida — não deixe secar por completo entre os passos.", "4. Ativos potentes, como retinoides, pedem pele seca e o seu próprio turno.", "5. Não empilhe retinoide, ácido e esfoliante na mesma noite. Alterne.", "6. Hidratante por último: ele sela o que veio antes.", "Rotina que você consegue repetir vale mais do que rotina de dez passos abandonada em uma semana."], "cta_final": "Menos passos, mais constância. Salva e monta a sua sequência hoje."}, "legenda": "Rotina noturna bonita é ótima — rotina noturna coerente é melhor. A lógica é textura, pH e absorção: do mais fluido ao mais denso, com ativo potente no seu próprio turno. Simples e repetível vence complicado e abandonado.", "hashtags": ["#rotinanoturna", "#skincare", "#asmrskincare", "#dermatologia", "#ordemdoskincare"]}, {"titulo": "Dia nublado também queima: o mito do protetor opcional", "pilar": "Rotina e prevenção", "registro": "", "ganchos": ["Céu fechado não é filtro solar. A nuvem barra o calor, não o UVA.", "Você usa metade do protetor que precisaria. Vou te mostrar a medida.", "'Mas hoje eu nem vou sair de casa' — ok, vamos conversar sobre janela."], "reels": [{"tempo": "0-3s", "fala": "Céu fechado não é filtro solar. A nuvem barra o calor, não o UVA.", "direcao": "Gravar ao lado da janela em dia cinzento. Texto: 'NUBLADO ≠ PROTEGIDO'"}, {"tempo": "3-14s", "fala": "O UVB é o que mais queima e varia bastante com o clima. Já o UVA é constante ao longo do dia e do ano, atravessa nuvem e atravessa vidro. E é ele que se associa a fotoenvelhecimento e a piora de manchas.", "direcao": "Corte com ícone de nuvem e janela na tela. Texto: 'UVA atravessa nuvem e vidro'"}, {"tempo": "14-27s", "fala": "Segundo ponto: quantidade. A maioria aplica bem menos do que o testado em laboratório. Pro rosto, a referência prática é mais ou menos duas linhas do produto ao longo dos dedos indicador e médio.", "direcao": "Demonstra a medida nos dois dedos. Texto: 'medida dos 2 dedos'"}, {"tempo": "27-40s", "fala": "E reaplicar. A cada duas horas de exposição, ou depois de suar e se molhar. Sem reaplicação, a proteção que você calculou de manhã não existe mais à tarde.", "direcao": "Mostra relógio na tela e gesto de reaplicar. Texto: 'a cada 2h de exposição'"}, {"tempo": "40-45s", "fala": "Marca aqui a amiga que só passa protetor quando vê sol.", "direcao": "Close final, tom leve. Texto: 'marca ela'"}], "carrossel": {"capa": "Dia nublado: você ainda precisa de protetor", "laminas": ["UVB varia mais com clima e horário — é o que mais se associa à queimadura.", "UVA é constante ao longo do dia e do ano, e atravessa nuvens e vidro.", "O UVA se associa a fotoenvelhecimento e à piora de manchas como o melasma.", "Quantidade importa: a maioria das pessoas aplica menos do que o testado em laboratório.", "Referência prática para o rosto: duas linhas do produto ao longo dos dedos indicador e médio.", "Reaplique a cada duas horas de exposição, ou após suar e se molhar.", "Trabalha perto da janela? A exposição também conta."], "cta_final": "Protetor é rotina, não previsão do tempo. Salva e compartilhe com quem só passa quando vê sol."}, "legenda": "Nuvem esconde o sol, não a radiação. O UVA é constante ao longo do ano, atravessa nuvens e vidro e se associa a fotoenvelhecimento e piora de manchas. Quantidade e reaplicação contam tanto quanto o FPS do rótulo.", "hashtags": ["#protetorsolar", "#fotoprotecao", "#uva", "#dermatologia", "#prevencao"]}]}</script>
 <script>
+const Radar = (() => {
+  const ler = (chave, padrao) => {
+    try { const v = localStorage.getItem(chave); return v ? JSON.parse(v) : padrao; }
+    catch (_) { return padrao; }
+  };
+  const gravar = (chave, valor) => {
+    try { localStorage.setItem(chave, JSON.stringify(valor)); return true; }
+    catch (_) { return false; }
+  };
+  const escapar = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg; t.classList.add('mostrar');
+    clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('mostrar'), 2400);
+  }
+  function copiar(texto, msgOk) {
+    return navigator.clipboard.writeText(texto)
+      .then(() => toast(msgOk || 'Copiado 📋'))
+      .catch(() => window.prompt('Copie manualmente:', texto));
+  }
+  function baixar(nome, conteudo) {
+    const blob = new Blob([conteudo], {type: 'application/json;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = nome;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function lerArquivo(arquivo) {
+    return new Promise((ok, falha) => {
+      const r = new FileReader();
+      r.onload = () => { try { ok(JSON.parse(r.result)); } catch (e) { falha(new Error('O arquivo não é um JSON válido.')); } };
+      r.onerror = () => falha(new Error('Não deu para ler o arquivo.'));
+      r.readAsText(arquivo);
+    });
+  }
+
+  // ── chave da Anthropic (fica só neste navegador) ─────────────────
+  const CHAVE = 'radar-chave-anthropic';
+  const chave = () => { try { return (localStorage.getItem(CHAVE) || '').trim(); } catch (_) { return ''; } };
+  function salvarChave(valor) {
+    valor = String(valor || '').trim().replace(/^["']|["']$/g, '');
+    if (!valor) return {ok: false, recado: 'Cole a chave antes de salvar.'};
+    if (!valor.startsWith('sk-')) return {ok: false, recado: 'Isso não parece uma chave da Anthropic — ela começa com sk-ant-.'};
+    if (valor.length < 20) return {ok: false, recado: 'A chave veio cortada. Copie de novo, inteira.'};
+    try { localStorage.setItem(CHAVE, valor); } catch (_) { return {ok: false, recado: 'O navegador não deixou guardar a chave.'}; }
+    return {ok: true, recado: 'Chave guardada neste navegador.'};
+  }
+  const apagarChave = () => { try { localStorage.removeItem(CHAVE); } catch (_) {} };
+
+  // ── escolhas na agenda (feedback) ─────────────────────────────────
+  const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
+  function registrarFeedback(nicho, semana, ideias) {
+    const dados = ler(chaveFeedback(nicho), {});
+    const bloco = dados[semana] || (dados[semana] = {});
+    const agora = new Date().toISOString().slice(0, 16);
+    for (const i of ideias) {
+      const titulo = String(i.titulo || '').trim();
+      if (!titulo) continue;
+      if (['feita', 'lista', 'descartada'].includes(i.estado)) {
+        bloco[titulo] = {estado: i.estado, pilar: i.pilar || '', registro: i.registro || '', quando: agora};
+      } else {
+        delete bloco[titulo];
+      }
+    }
+    gravar(chaveFeedback(nicho), dados);
+    return dados;
+  }
+  const feedback = nicho => ler(chaveFeedback(nicho), {});
+  function preferencias(nicho) {
+    const dados = feedback(nicho);
+    const esc = {}, desc = {}, vozSim = {}, vozNao = {}, descartados = [];
+    let total = 0;
+    for (const semana of Object.keys(dados).sort()) {
+      for (const [titulo, info] of Object.entries(dados[semana])) {
+        total++;
+        const pilar = (info.pilar || '').split('(')[0].trim();
+        const voz = info.registro || '';
+        if (info.estado === 'feita' || info.estado === 'lista') {
+          esc[pilar] = (esc[pilar] || 0) + 1; if (voz) vozSim[voz] = (vozSim[voz] || 0) + 1;
+        } else {
+          desc[pilar] = (desc[pilar] || 0) + 1; if (voz) vozNao[voz] = (vozNao[voz] || 0) + 1;
+          descartados.push(titulo);
+        }
+      }
+    }
+    if (!total) return null;
+    const top = (o, n) => Object.fromEntries(Object.entries(o).sort((a, b) => b[1] - a[1]).slice(0, n));
+    return {ideias_avaliadas: total, pilares_que_ela_escolhe: top(esc, 4), pilares_que_ela_descarta: top(desc, 4),
+            vozes_que_ela_escolhe: top(vozSim, 4), vozes_que_ela_descarta: top(vozNao, 4),
+            assuntos_descartados: descartados.slice(-12)};
+  }
+
+  // ── galeria guardada neste navegador ──────────────────────────────
+  const chaveGaleria = nicho => 'radar-galeria:' + (nicho || 'padrao');
+  const galeriaLocal = nicho => (ler(chaveGaleria(nicho), {itens: []}).itens || []);
+  function galeriaSalvar(nicho, dados) {
+    const itens = galeriaLocal(nicho);
+    const agora = new Date().toISOString().slice(0, 16);
+    const id = String(dados.id || Math.random().toString(16).slice(2, 12));
+    const novo = {id, atualizado_em: agora, ideia: String(dados.ideia || '').slice(0, 500),
+                  formato: dados.formato || 'video', estilo: String(dados.estilo || ''),
+                  tom: String(dados.tom || ''), tamanho: String(dados.tamanho || ''),
+                  roteiro: limparRoteiro(dados.roteiro || {}), origem: 'navegador'};
+    const i = itens.findIndex(x => x.id === id);
+    if (i >= 0) { novo.criado_em = itens[i].criado_em || agora; itens[i] = novo; }
+    else { novo.criado_em = agora; itens.push(novo); }
+    gravar(chaveGaleria(nicho), {itens});
+    return id;
+  }
+  function galeriaApagar(nicho, id) {
+    const itens = galeriaLocal(nicho).filter(x => x.id !== id);
+    gravar(chaveGaleria(nicho), {itens});
+  }
+  function galeriaImportar(nicho, dados) {
+    const novos = Array.isArray(dados) ? dados : (dados && dados.itens) || [];
+    const itens = galeriaLocal(nicho);
+    let n = 0;
+    for (const item of novos) {
+      if (!item || typeof item !== 'object' || !item.roteiro) continue;
+      const id = String(item.id || Math.random().toString(16).slice(2, 12));
+      const i = itens.findIndex(x => x.id === id);
+      const limpo = {...item, id, roteiro: limparRoteiro(item.roteiro), origem: 'navegador'};
+      if (i >= 0) itens[i] = limpo; else itens.push(limpo);
+      n++;
+    }
+    gravar(chaveGaleria(nicho), {itens});
+    return n;
+  }
+  function galeriaTodos(nicho, publicados) {
+    const locais = galeriaLocal(nicho);
+    const ids = new Set(locais.map(i => i.id));
+    const todos = [...locais, ...(publicados || []).filter(i => !ids.has(i.id)).map(i => ({...i, origem: 'site'}))];
+    return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
+  }
+
+  function limparRoteiro(r) {
+    return {
+      titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
+      gancho: String(r.gancho || '').trim(),
+      blocos: (r.blocos || []).filter(b => b && typeof b === 'object').map(b => ({
+        rotulo: String(b.rotulo || ''), texto: String(b.texto || ''), direcao: String(b.direcao || '')})),
+      legenda: String(r.legenda || '').trim(),
+      hashtags: (r.hashtags || []).map(String).slice(0, 12),
+      por_que_funciona: String(r.por_que_funciona || '').trim(),
+    };
+  }
+  function blocosHtml(r) {
+    return (r.blocos || []).map(b => `<div class="bloco"><div class="rotulo-bloco">${escapar(b.rotulo)}</div>
+      <p class="fala">${escapar(b.texto)}</p>${b.direcao ? `<p class="direcao">${escapar(b.direcao)}</p>` : ''}</div>`).join('');
+  }
+  function roteiroHtml(r, completo) {
+    return `${r.gancho ? `<p class="gancho-gal">🪝 ${escapar(r.gancho)}</p>` : ''}${blocosHtml(r)}` +
+      (completo ? `<div class="rotulo">Legenda</div><div class="legenda">${escapar(r.legenda)}</div>
+        <div class="hashtags">${(r.hashtags || []).map(escapar).join(' ')}</div>` : '');
+  }
+  function textoRoteiro(r) {
+    const linhas = [r.titulo, '', r.gancho ? 'GANCHO: ' + r.gancho : ''];
+    (r.blocos || []).forEach(b => { linhas.push('', String(b.rotulo || '').toUpperCase(), b.texto); if (b.direcao) linhas.push('  🎬 ' + b.direcao); });
+    linhas.push('', 'LEGENDA', r.legenda, '', (r.hashtags || []).join(' '));
+    return linhas.filter(l => l !== undefined).join('\n');
+  }
+
+  // ── backup de tudo o que está neste navegador ─────────────────────
+  function exportarTudo() {
+    const saida = {formato: 'radar-backup', versao: 1, exportado_em: new Date().toISOString(), chaves: {}};
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('radar-') && k !== CHAVE) saida.chaves[k] = ler(k, null);
+      }
+    } catch (_) {}
+    return saida;
+  }
+  function importarTudo(dados) {
+    if (!dados || dados.formato !== 'radar-backup' || !dados.chaves) throw new Error('Isso não é um backup do Radar.');
+    let n = 0;
+    for (const [k, v] of Object.entries(dados.chaves)) {
+      if (!k.startsWith('radar-') || k === CHAVE) continue;
+      if (gravar(k, v)) n++;
+    }
+    return n;
+  }
+
+  // ── IA direto do navegador ────────────────────────────────────────
+  function traduzirErroIA(status, mensagem) {
+    const m = (mensagem || '').toLowerCase();
+    if (status === 401 || m.includes('invalid x-api-key') || m.includes('authentication')) return 'A chave da Anthropic não foi aceita. Confira em Ferramentas → Chave da IA.';
+    if (m.includes('credit balance')) return 'Os créditos da Anthropic acabaram. Recarregue em console.anthropic.com (Plans & Billing).';
+    if (status === 429) return 'A Anthropic pediu para esperar um pouco (limite de uso). Tente de novo em um minuto.';
+    if (status === 529 || status === 503) return 'A Anthropic está sobrecarregada agora. Tente de novo em instantes.';
+    if (status === 404 && m.includes('model')) return 'O modelo configurado não está disponível para esta chave.';
+    return mensagem ? `A IA respondeu com erro: ${mensagem.slice(0, 200)}` : `A IA respondeu com erro (${status}).`;
+  }
+  async function chamarIA({modelo, system, messages, maxTokens, thinking, aoProgresso}) {
+    const k = chave();
+    if (!k) { const e = new Error('Falta a chave da Anthropic. Guarde a sua em Ferramentas → Chave da IA.'); e.semChave = true; throw e; }
+    const corpo = {model: modelo, max_tokens: maxTokens || 16000, system, messages, stream: true};
+    if (thinking) corpo.thinking = thinking;
+    let r;
+    try {
+      r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {'content-type': 'application/json', 'x-api-key': k, 'anthropic-version': '2023-06-01',
+                  'anthropic-dangerous-direct-browser-access': 'true'},
+        body: JSON.stringify(corpo),
+      });
+    } catch (_) {
+      throw new Error('Não consegui falar com a Anthropic — sem internet, ou um bloqueador impediu a chamada.');
+    }
+    if (!r.ok) {
+      let msg = '';
+      try { msg = (await r.json()).error?.message || ''; } catch (_) {}
+      throw new Error(traduzirErroIA(r.status, msg));
+    }
+    const leitor = r.body.getReader(), dec = new TextDecoder();
+    let sobra = '', texto = '', parada = '';
+    while (true) {
+      const {value, done} = await leitor.read();
+      if (done) break;
+      sobra += dec.decode(value, {stream: true});
+      const linhas = sobra.split('\n'); sobra = linhas.pop();
+      for (const linha of linhas) {
+        if (!linha.startsWith('data:')) continue;
+        let ev; try { ev = JSON.parse(linha.slice(5).trim()); } catch (_) { continue; }
+        if (ev.type === 'content_block_delta' && ev.delta && ev.delta.type === 'text_delta') {
+          texto += ev.delta.text; if (aoProgresso) aoProgresso(texto.length);
+        } else if (ev.type === 'message_delta' && ev.delta && ev.delta.stop_reason) {
+          parada = ev.delta.stop_reason;
+        } else if (ev.type === 'error') {
+          throw new Error(traduzirErroIA(0, ev.error && ev.error.message));
+        }
+      }
+    }
+    if (parada === 'refusal') throw new Error('O modelo recusou a solicitação.');
+    if (parada === 'max_tokens') throw new Error('A resposta ficou longa demais e foi cortada. Tente um tamanho menor.');
+    return texto;
+  }
+  // Extrai o maior objeto JSON válido de uma resposta com ruído ao redor
+  function extrairJson(texto) {
+    let limpo = String(texto || '').trim();
+    if (limpo.startsWith('```')) limpo = limpo.replace(/^```[a-z]*\n?/i, '').replace(/```$/, '').trim();
+    let melhor = null, tamanho = 0;
+    for (let i = 0; i < limpo.length; i++) {
+      if (limpo[i] !== '{') continue;
+      let prof = 0, emStr = false, esc = false;
+      for (let j = i; j < limpo.length; j++) {
+        const c = limpo[j];
+        if (emStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') emStr = false; continue; }
+        if (c === '"') emStr = true;
+        else if (c === '{') prof++;
+        else if (c === '}') { prof--; if (prof === 0) {
+          const trecho = limpo.slice(i, j + 1);
+          try { const obj = JSON.parse(trecho); if (obj && typeof obj === 'object' && trecho.length > tamanho) { melhor = obj; tamanho = trecho.length; } } catch (_) {}
+          break; } }
+      }
+    }
+    if (!melhor) throw new Error('A IA respondeu fora do formato. Tente de novo.');
+    return melhor;
+  }
+
+  return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
+          chave, salvarChave, apagarChave,
+          registrarFeedback, feedback, preferencias,
+          galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
+          limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
+          exportarTudo, importarTudo, chamarIA, extrairJson};
+})();
+
+
 const DADOS = JSON.parse(document.getElementById('dados-agenda').textContent);
 const CHAVE = 'radar-' + DADOS.semana;
 const estado = JSON.parse(localStorage.getItem(CHAVE) || '{}');
@@ -729,14 +1081,36 @@ const abertas = new Set();
 let filtro = 'todas';
 let foco = null;
 
-function salvar() { localStorage.setItem(CHAVE, JSON.stringify(estado)); }
+function salvar() {
+  try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (_) {}
+  registrarEscolhas();
+}
+const LOCAL = ['127.0.0.1', 'localhost'].includes(location.hostname);
+let aviso = null;
+function escolhas() {
+  return DADOS.ideias.map((d, i) => {
+    const s = st(i);
+    const estadoIdeia = s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum';
+    return {titulo: d.titulo, pilar: d.pilar, registro: d.registro, estado: estadoIdeia};
+  });
+}
+// As escolhas viram sinal de gosto: ficam no navegador (para o estúdio e as
+// ferramentas do site) e, quando a página é aberta pelo painel, também no
+// arquivo de feedback do nicho.
+function registrarEscolhas() {
+  if (!DADOS.nicho) return;
+  clearTimeout(aviso);
+  aviso = setTimeout(() => {
+    const ideias = escolhas();
+    Radar.registrarFeedback(DADOS.nicho, DADOS.semana, ideias);
+    if (!LOCAL) return;
+    fetch('/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({nicho: DADOS.nicho, semana: DADOS.semana, ideias})}).catch(() => {});
+  }, 400);
+}
 function st(id) { return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false, formato: 'reels', gancho: 0}); }
 
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('mostrar');
-  clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('mostrar'), 2400);
-}
+const toast = Radar.toast;
 
 function lerHash() {
   const m = location.hash.match(/^#r(\d+)$/);
@@ -813,11 +1187,7 @@ function textoRoteiro(id) {
   return out;
 }
 
-function copiar(texto, msgOk) {
-  navigator.clipboard.writeText(texto)
-    .then(() => toast(msgOk))
-    .catch(() => window.prompt('Copie manualmente:', texto));
-}
+const copiar = Radar.copiar;
 
 document.getElementById('restaurar').addEventListener('click', () => {
   Object.values(estado).forEach(e => { e.descartada = false; });

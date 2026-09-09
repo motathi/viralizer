@@ -10,86 +10,32 @@ A página renderiza os roteiros da semana com:
 - descarte individual (✕) com restauração;
 - histórico das semanas anteriores no painel e aviso de agenda desatualizada;
 - copiar roteiro e link compartilhável de um roteiro só (#r<n>).
+
+As escolhas (lista, feita, descartada) também ficam registradas no
+navegador como feedback, para o estúdio e a página de ferramentas do site;
+no painel local, vão além: chegam ao arquivo de feedback do nicho.
+
+O estilo, a navegação e o JavaScript comuns vêm de src/publicar/base.py;
+as páginas de ferramentas (estúdio, galeria, manual, ferramentas) de
+src/publicar/paginas.py. Tudo é escrito junto por publicar_agenda().
 """
 
-import json
 import re
 from datetime import date, timedelta
 from html import escape
 from pathlib import Path
 
 from src.agenda.montador import normalizar_ideia
+from src.publicar.base import documento
+from src.publicar.paginas import publicar_paginas
 
-ESTILO = """  :root {
-    /* Design tokens — paleta oficial do Instagram */
-    --ig-blue: #405DE6; --ig-purple: #833AB4; --ig-magenta: #C13584;
-    --ig-pink: #E1306C; --ig-orange: #F77737; --ig-yellow: #FCAF45;
-    --grad: linear-gradient(45deg, #405DE6 0%, #833AB4 30%, #C13584 50%, #E1306C 70%, #F77737 100%);
-    --grad-suave: linear-gradient(45deg, #f5f1fe, #fdeef5, #fff4ec);
-
-    /* Neutros (escala do Instagram) */
-    --fundo: #ffffff; --superficie: #fafafa; --tinta: #262626;
-    --suave: #737373; --borda: #dbdbdb; --borda-leve: #efefef;
-    --acento: #C13584; --ok: #1f9d63; --ok-claro: #e8f6ef;
-
-    /* Elevação e forma */
-    --r-lg: 20px; --r-md: 14px; --r-full: 999px;
-    --sombra-1: 0 1px 2px rgba(0,0,0,.05);
-    --sombra-2: 0 8px 24px -8px rgba(131, 58, 180, .16);
-    --sombra-3: 0 18px 44px -16px rgba(131, 58, 180, .28);
-  }
-  * { box-sizing: border-box; margin: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-         background: var(--fundo); color: var(--tinta); line-height: 1.6;
-         -webkit-font-smoothing: antialiased; }
-  .container { max-width: 1020px; margin: 0 auto; padding: 0 18px; }
-  button { font-family: inherit; }
-  :focus-visible { outline: 2px solid var(--ig-purple); outline-offset: 2px; border-radius: 4px; }
-
-  header.hero { padding: 44px 0 18px; text-align: center; }
-  .selo { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem;
-          font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-          padding: 6px 16px; border-radius: var(--r-full); margin-bottom: 16px;
-          color: var(--tinta); position: relative; background:
-            linear-gradient(var(--fundo), var(--fundo)) padding-box,
-            var(--grad) border-box; border: 2px solid transparent; }
-  .selo::before { content: ""; width: 10px; height: 10px; border-radius: 50%;
-                  background: var(--grad); }
-  h1 { font-size: clamp(1.5rem, 4.5vw, 2.2rem); line-height: 1.22;
-       font-weight: 800; letter-spacing: -.02em; }
-  h1 span { background: var(--grad); -webkit-background-clip: text;
-            background-clip: text; -webkit-text-fill-color: transparent; }
-  .sub { color: var(--suave); max-width: 640px; margin: 12px auto 0; font-size: .93rem; }
-
-  .painel { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.86);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            padding: 10px 0; border-bottom: 1px solid var(--borda-leve); }
-  .painel-linha { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
-                  justify-content: space-between; }
-  .abas { display: flex; gap: 4px; background: var(--superficie);
-          border: 1px solid var(--borda-leve); border-radius: var(--r-full); padding: 4px; }
-  .aba { border: 0; background: transparent; color: var(--suave); font-size: .84rem;
-         font-weight: 600; padding: 7px 15px; border-radius: var(--r-full);
-         cursor: pointer; transition: all .2s; }
-  .aba:hover { color: var(--tinta); }
-  .aba.ativa { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
-  .progresso { font-size: .84rem; color: var(--suave); font-weight: 600; }
-  .progresso b { background: var(--grad); -webkit-background-clip: text;
-                 background-clip: text; -webkit-text-fill-color: transparent;
-                 font-weight: 800; }
-
+ESTILO_AGENDA = """
   #banner-foco { display: none; border-radius: var(--r-md); padding: 14px 18px;
                  margin: 18px 0 0; font-size: .9rem; align-items: center;
                  justify-content: space-between; gap: 10px; flex-wrap: wrap;
                  background: var(--grad-suave); border: 1px solid var(--borda-leve); }
   body.em-foco #banner-foco { display: flex; }
   body.em-foco .painel, body.em-foco .aviso { display: none; }
-
-  section.agenda { padding: 22px 0 70px; }
-  .aviso { background: var(--grad-suave); border-radius: var(--r-md);
-           padding: 11px 16px; font-size: .83rem; margin-bottom: 22px; }
-
   .lista-cartoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
                    gap: 16px; align-items: start; }
 
@@ -110,37 +56,17 @@ ESTILO = """  :root {
   .cab { padding: 18px 18px 15px; cursor: pointer; position: relative; }
   .topo { display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
           margin-bottom: 9px; padding-right: 28px; }
-  .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
-          border-radius: var(--r-full); background: var(--superficie);
-          border: 1px solid var(--borda-leve); color: var(--suave); }
-  .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
-                letter-spacing: .01em; }
   .descartar { position: absolute; right: 44px; top: 16px; width: 24px; height: 24px;
                border: 0; background: transparent; color: var(--borda); font-size: 1rem;
                line-height: 1; cursor: pointer; border-radius: 50%; transition: all .2s; }
   .descartar:hover { background: #fdeef2; color: var(--ig-pink); }
   .cartao.descartada { display: none; }
-  .banner-aviso { display: none; border-radius: var(--r-md); padding: 12px 16px;
-                  margin-bottom: 16px; font-size: .86rem; align-items: center; gap: 10px;
-                  justify-content: space-between; flex-wrap: wrap; }
-  .banner-aviso.visivel { display: flex; }
-  #aviso-antiga { background: #fff6e6; border: 1px solid #ffe0a3; color: #7a5200; }
-  #barra-descartadas { background: var(--superficie); border: 1px solid var(--borda-leve);
-                       color: var(--suave); }
-  .semanas { display: flex; align-items: center; gap: 6px; font-size: .82rem;
-             color: var(--suave); }
-  .semanas select { font: inherit; font-size: .82rem; color: var(--tinta);
-                    border: 1px solid var(--borda-leve); background: var(--superficie);
-                    border-radius: var(--r-full); padding: 6px 12px; cursor: pointer; }
   .chip.plataforma { display: inline-flex; align-items: center; gap: 5px;
                      padding: 4px 10px; background: var(--fundo);
                      border: 1px solid var(--borda-leve); }
   .chip.plataforma svg { width: 15px; height: 15px; display: block; }
   .viral-item .logo { width: 14px; height: 14px; vertical-align: -2px;
                       margin-right: 5px; display: inline-block; }
-  .chip.trend { color: var(--acento); background:
-                  linear-gradient(var(--fundo), var(--fundo)) padding-box,
-                  var(--grad) border-box; border: 1.5px solid transparent; }
   .chip-status { display: none; }
   .cartao.na-lista .chip-status.lista { display: inline-block; background: var(--grad);
                                         border: 0; color: #fff; }
@@ -159,11 +85,6 @@ ESTILO = """  :root {
   .cartao.aberta .detalhe { display: block; animation: abrir .3s ease; }
   @keyframes abrir { from { opacity: 0; transform: translateY(-6px); }
                      to { opacity: 1; transform: none; } }
-
-  .rotulo { font-size: .72rem; font-weight: 800; text-transform: uppercase;
-            letter-spacing: .08em; margin: 20px 0 9px;
-            background: var(--grad); -webkit-background-clip: text;
-            background-clip: text; -webkit-text-fill-color: transparent; }
   .ganchos { display: flex; flex-direction: column; gap: 8px; }
   .gancho-opcao { display: flex; gap: 10px; align-items: flex-start;
                   background: var(--superficie); border: 1.5px solid var(--borda-leve);
@@ -204,13 +125,6 @@ ESTILO = """  :root {
                     align-items: center; justify-content: center; }
   .lamina.capa::before { content: "★"; }
   .lamina.cta::before { content: "➤"; }
-
-  .legenda { background: var(--superficie); border-radius: var(--r-md);
-             padding: 13px 15px; font-size: .89rem; white-space: pre-wrap; }
-  .hashtags { font-size: .85rem; margin-top: 7px; font-weight: 600;
-              background: var(--grad); -webkit-background-clip: text;
-              background-clip: text; -webkit-text-fill-color: transparent; }
-
   .virais-origem { display: flex; flex-direction: column; gap: 8px; }
   .viral-item { background: var(--superficie); border-radius: var(--r-md);
                 padding: 11px 15px; font-size: .86rem;
@@ -234,33 +148,12 @@ ESTILO = """  :root {
   details ul { padding-left: 18px; }
   details li { margin-bottom: 6px; overflow-wrap: anywhere; }
   .texto { white-space: pre-wrap; }
-
-  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
-           padding-top: 16px; border-top: 1px solid var(--borda-leve); }
-  .btn { border: 1.5px solid var(--borda); background: var(--fundo); color: var(--tinta);
-         font-size: .84rem; font-weight: 700; padding: 9px 16px;
-         border-radius: var(--r-full); cursor: pointer; transition: all .2s; }
-  .btn:hover { border-color: var(--ig-magenta); color: var(--ig-magenta);
-               transform: translateY(-1px); }
-  .btn.primario { background: var(--grad); border-color: transparent; color: #fff;
-                  box-shadow: var(--sombra-2); }
-  .btn.primario:hover { color: #fff; filter: brightness(1.06); box-shadow: var(--sombra-3); }
   .btn.na-lista-btn { background: var(--grad-suave); border: 1.5px solid transparent;
                       background-origin: border-box; color: var(--ig-magenta); }
   .btn.feito-btn.marcado { background: var(--ok-claro); border-color: var(--ok); color: var(--ok); }
 
   .vazio { text-align: center; color: var(--suave); padding: 44px 0; display: none; }
-
-  #toast { position: fixed; left: 50%; bottom: 28px;
-           transform: translateX(-50%) translateY(80px);
-           background: var(--tinta); color: #fff; font-size: .87rem; font-weight: 600;
-           padding: 12px 22px; border-radius: var(--r-full); opacity: 0;
-           transition: all .35s cubic-bezier(.34,1.3,.64,1); z-index: 50;
-           pointer-events: none; max-width: 90vw; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
-  #toast.mostrar { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-  footer { border-top: 1px solid var(--borda-leve); padding: 26px 0 42px;
-           text-align: center; color: var(--suave); font-size: .83rem; }"""
+"""
 
 SCRIPT = """
 const DADOS = JSON.parse(document.getElementById('dados-agenda').textContent);
@@ -271,31 +164,35 @@ let filtro = 'todas';
 let foco = null;
 
 function salvar() {
-  localStorage.setItem(CHAVE, JSON.stringify(estado));
-  avisarPainel();
+  try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (_) {}
+  registrarEscolhas();
 }
 const LOCAL = ['127.0.0.1', 'localhost'].includes(location.hostname);
 let aviso = null;
-function avisarPainel() {
-  if (!LOCAL || !DADOS.nicho) return;
+function escolhas() {
+  return DADOS.ideias.map((d, i) => {
+    const s = st(i);
+    const estadoIdeia = s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum';
+    return {titulo: d.titulo, pilar: d.pilar, registro: d.registro, estado: estadoIdeia};
+  });
+}
+// As escolhas viram sinal de gosto: ficam no navegador (para o estúdio e as
+// ferramentas do site) e, quando a página é aberta pelo painel, também no
+// arquivo de feedback do nicho.
+function registrarEscolhas() {
+  if (!DADOS.nicho) return;
   clearTimeout(aviso);
   aviso = setTimeout(() => {
-    const ideias = DADOS.ideias.map((d, i) => {
-      const s = st(i);
-      const estadoIdeia = s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum';
-      return {titulo: d.titulo, pilar: d.pilar, registro: d.registro, estado: estadoIdeia};
-    });
+    const ideias = escolhas();
+    Radar.registrarFeedback(DADOS.nicho, DADOS.semana, ideias);
+    if (!LOCAL) return;
     fetch('/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({nicho: DADOS.nicho, semana: DADOS.semana, ideias})}).catch(() => {});
   }, 400);
 }
 function st(id) { return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false, formato: 'reels', gancho: 0}); }
 
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('mostrar');
-  clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('mostrar'), 2400);
-}
+const toast = Radar.toast;
 
 function lerHash() {
   const m = location.hash.match(/^#r(\\d+)$/);
@@ -372,11 +269,7 @@ function textoRoteiro(id) {
   return out;
 }
 
-function copiar(texto, msgOk) {
-  navigator.clipboard.writeText(texto)
-    .then(() => toast(msgOk))
-    .catch(() => window.prompt('Copie manualmente:', texto));
-}
+const copiar = Radar.copiar;
 
 document.getElementById('restaurar').addEventListener('click', () => {
   Object.values(estado).forEach(e => { e.descartada = false; });
@@ -470,15 +363,6 @@ ICONES = {
         '<path d="M10 8.6l6 3.4-6 3.4V8.6z" fill="#fff"/></svg>'
     ),
 }
-
-DEFS_SVG = (
-    '<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>'
-    '<linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">'
-    '<stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/>'
-    '<stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/>'
-    '<stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>'
-)
-
 
 def _chip_plataforma(origem: str) -> str:
     """Chip da plataforma de origem usando o logo em vez do nome."""
@@ -660,25 +544,35 @@ def _seletor_semanas(semanas: list[str], semana_atual: str | None, prefixo: str)
             f'{"".join(opcoes)}</select></div>')
 
 
+def semana_seguinte(hoje: date | None = None) -> str:
+    """A segunda-feira que a agenda cobre (ISO)."""
+    hoje = hoje or date.today()
+    return (hoje + timedelta(days=(7 - hoje.weekday()) % 7 or 7)).isoformat()
+
+
 def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
                   semanas: list[str] | None = None, semana_atual: str | None = None,
-                  prefixo: str = "",
-                  nicho: str | None = None, galeria: bool = False) -> None:
+                  prefixo: str = "", nicho: str | None = None,
+                  semana: str | None = None, gerado_em: str | None = None) -> None:
     """Escreve a agenda da semana como web/index.html.
 
     `semanas` são as agendas arquivadas (mais recente primeiro) exibidas no
     seletor do painel; `semana_atual` marca qual está aberta (None = a atual);
     `prefixo` ajusta os links quando a página é escrita em web/semanas/.
+    `semana` e `gerado_em` (ISO) permitem re-renderizar uma geração antiga
+    sem que ela pareça nova.
     """
     ideias = [normalizar_ideia(i) for i in roteiros["ideias"]]
     total_sinais = sum(len(v) for v in sinais.values())
-    inicio = date.today() + timedelta(days=(7 - date.today().weekday()) % 7 or 7)
+    semana = semana or semana_seguinte()
+    gerado_em = gerado_em or date.today().isoformat()
+    inicio = date.fromisoformat(semana)
     cartoes = "".join(_cartao(ideia, i) for i, ideia in enumerate(ideias))
 
     dados = {
         "nicho": nicho or "",
-        "semana": inicio.isoformat(),
-        "gerado_em": date.today().isoformat(),
+        "semana": semana,
+        "gerado_em": gerado_em,
         "ideias": [
             {
                 "titulo": i["titulo"],
@@ -693,25 +587,13 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
             for i in ideias
         ],
     }
-    dados_json = json.dumps(dados, ensure_ascii=False).replace("</", "<\\/")
 
-    html = f"""<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radar de Conteúdo Viral — {escape(config['nome'])}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>{ESTILO}</style>
-</head>
-<body>
-{DEFS_SVG}
+    corpo = f"""
 <header class="hero container">
-  <div class="selo">Radar de Conteúdo Viral</div>
+  <div class="selo">Agenda da semana</div>
   <h1>Agenda da semana — <span>{escape(config['nome'])}</span></h1>
   <p class="sub">Semana de {inicio.strftime('%d/%m/%Y')} · {len(ideias)} ideias ·
-  {total_sinais} sinais de tendência analisados · atualizada em {date.today().strftime('%d/%m/%Y')}</p>
+  {total_sinais} sinais de tendência analisados · atualizada em {date.fromisoformat(gerado_em).strftime('%d/%m/%Y')}</p>
 </header>
 
 <div class="painel">
@@ -723,7 +605,6 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
     </div>
     <div class="progresso" id="contagem"></div>
     {_seletor_semanas(semanas or [], semana_atual, prefixo)}
-    {f'<div class="semanas"><a class="btn" href="{prefixo}galeria.html">💡 Galeria</a></div>' if galeria else ''}
   </div>
 </div>
 
@@ -732,142 +613,46 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
     <span>🔗 Você está vendo um roteiro compartilhado.</span>
     <button class="btn" id="sair-foco">Ver a agenda completa</button>
   </div>
-  <div class="banner-aviso" id="aviso-antiga"><span></span></div>
-  <div class="banner-aviso" id="barra-descartadas"><span></span>
+  <div class="banner-aviso alerta" id="aviso-antiga"><span></span></div>
+  <div class="banner-aviso neutro" id="barra-descartadas"><span></span>
     <button class="btn" id="restaurar">Restaurar descartadas</button></div>
   <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre
-  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.</div>
+  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.
+  Quer um roteiro a partir de uma ideia sua? Use o <a href="{prefixo}estudio.html">estúdio</a>.</div>
   <div class="lista-cartoes">{cartoes}</div>
   <p class="vazio" id="vazio">Nada por aqui ainda — adicione ideias à sua lista. 📌</p>
 </section>
-
-<footer>
-  <div class="container">
-    <p><strong>Radar de Conteúdo Viral</strong> — pesquisa de tendências, roteiros embasados e agenda semanal.</p>
-  </div>
-</footer>
-
-<div id="toast"></div>
-<script id="dados-agenda" type="application/json">{dados_json}</script>
-<script>{SCRIPT}</script>
-</body>
-</html>
 """
+    html = documento(titulo=f"Radar de Conteúdo Viral — {config['nome']}", ativa="agenda",
+                     corpo=corpo, estilo_extra=ESTILO_AGENDA, script=SCRIPT, dados=dados,
+                     prefixo=prefixo, id_dados="dados-agenda")
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(html, encoding="utf-8")
 
 
 def publicar_agenda(config: dict, roteiros: dict, sinais: dict, raiz: Path,
-                    nicho: str | None = None) -> Path:
+                    nicho: str | None = None, semana: str | None = None,
+                    gerado_em: str | None = None) -> Path:
     """Publica a agenda da semana e a arquiva, mantendo o histórico no painel.
 
-    Escreve web/index.html (com o seletor de semanas anteriores) e uma cópia
+    Escreve web/index.html (com o seletor de semanas anteriores), uma cópia
     imutável em web/semanas/<semana>.html, para que agendas passadas sigam
-    acessíveis com seus roteiros.
+    acessíveis com seus roteiros, e as páginas de ferramentas do site
+    (estúdio, galeria, manual, ferramentas).
     """
     web = raiz / "web"
     pasta_semanas = web / "semanas"
     pasta_semanas.mkdir(parents=True, exist_ok=True)
 
-    inicio = date.today() + timedelta(days=(7 - date.today().weekday()) % 7 or 7)
-    semana = inicio.isoformat()
-
+    semana = semana or semana_seguinte()
     arquivadas = sorted(
         (p.stem for p in pasta_semanas.glob("*.html") if p.stem != semana), reverse=True
     )
-    tem_galeria = bool(nicho) and publicar_galeria(config, raiz, nicho) is not None
     publicar_site(config, roteiros, sinais, web / "index.html", semanas=arquivadas,
-                  nicho=nicho, galeria=tem_galeria)
+                  nicho=nicho, semana=semana, gerado_em=gerado_em)
     publicar_site(config, roteiros, sinais, pasta_semanas / f"{semana}.html",
-                  semana_atual=semana, prefixo="../", nicho=nicho, galeria=tem_galeria)
+                  semana_atual=semana, prefixo="../", nicho=nicho,
+                  semana=semana, gerado_em=gerado_em)
+    if nicho:
+        publicar_paginas(config, raiz, nicho)
     return web / "index.html"
-
-
-def _bloco_galeria(item: dict) -> str:
-    r = item.get("roteiro") or {}
-    blocos = "".join(
-        f'<div class="bloco"><span class="tempo">{escape(b.get("rotulo", ""))}</span>'
-        f'<p class="fala">{escape(b.get("texto", ""))}</p>'
-        + (f'<p class="direcao">🎬 {escape(b["direcao"])}</p>' if b.get("direcao") else "")
-        + "</div>"
-        for b in r.get("blocos", [])
-    )
-    tags = " ".join(escape(h) for h in r.get("hashtags", []))
-    formato = {"video": "🎬 Vídeo", "carrossel": "🖼️ Carrossel", "stories": "📱 Stories"}.get(
-        item.get("formato", ""), escape(item.get("formato", "")))
-    return f"""
-  <details class="galeria-item">
-    <summary>
-      <span class="chip">{formato}</span>
-      {f'<span class="chip">{escape(item["tom"])}</span>' if item.get("tom") else ''}
-      <b>{escape(r.get("titulo") or item.get("ideia", ""))}</b>
-      <span class="quando">{escape((item.get("atualizado_em") or "")[:10])}</span>
-    </summary>
-    <div class="corpo">
-      {f'<p class="gancho-gal">🪝 {escape(r["gancho"])}</p>' if r.get("gancho") else ''}
-      <div class="blocos">{blocos}</div>
-      {f'<div class="rotulo">Legenda</div><div class="legenda">{escape(r["legenda"])}</div>' if r.get("legenda") else ''}
-      {f'<div class="hashtags">{tags}</div>' if tags else ''}
-      <p class="ideia-orig">Ideia original: {escape(item.get("ideia", ""))}</p>
-    </div>
-  </details>"""
-
-
-def publicar_galeria(config: dict, raiz: Path, nicho: str) -> Path | None:
-    """Escreve web/galeria.html a partir do que foi salvo no estúdio.
-
-    Devolve None quando não há galeria — aí o site não mostra o link.
-    """
-    arquivo = raiz / "dados" / f"galeria-{nicho}.json"
-    if not arquivo.exists():
-        return None
-    try:
-        itens = json.loads(arquivo.read_text(encoding="utf-8")).get("itens", [])
-    except (ValueError, OSError):
-        return None
-    if not itens:
-        return None
-    itens = sorted(itens, key=lambda i: i.get("atualizado_em", ""), reverse=True)
-    corpo = "".join(_bloco_galeria(i) for i in itens)
-    html = f"""<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Galeria de ideias — {escape(config['nome'])}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>{ESTILO}
-  .galeria-item {{ border: 1px solid var(--borda); border-radius: var(--r-lg); background: var(--fundo);
-    margin-bottom: 12px; overflow: hidden; }}
-  .galeria-item summary {{ list-style: none; cursor: pointer; padding: 16px 18px; display: flex;
-    flex-wrap: wrap; align-items: center; gap: 8px; }}
-  .galeria-item summary::-webkit-details-marker {{ display: none; }}
-  .galeria-item summary b {{ flex: 1 1 240px; font-size: 1rem; }}
-  .galeria-item .quando {{ color: var(--suave); font-size: .8rem; }}
-  .galeria-item .corpo {{ padding: 0 18px 18px; }}
-  .gancho-gal {{ font-weight: 600; margin: 0 0 12px; }}
-  .ideia-orig {{ color: var(--suave); font-size: .82rem; margin-top: 14px; }}
-</style>
-</head>
-<body>
-{DEFS_SVG}
-<header class="hero container">
-  <div class="selo">Radar de Conteúdo Viral</div>
-  <h1>Galeria de ideias — <span>{escape(config['nome'])}</span></h1>
-  <p class="sub">{len(itens)} roteiro{'s' if len(itens) != 1 else ''} criado{'s' if len(itens) != 1 else ''} no estúdio ·
-  atualizada em {date.today().strftime('%d/%m/%Y')}</p>
-</header>
-<div class="painel"><div class="container painel-linha">
-  <div class="semanas"><a class="btn" href="index.html">← Agenda da semana</a></div>
-</div></div>
-<section class="agenda container">
-{corpo}
-</section>
-<footer>Radar de Conteúdo Viral · galeria do estúdio</footer>
-</body>
-</html>
-"""
-    destino = raiz / "web" / "galeria.html"
-    destino.write_text(html, encoding="utf-8")
-    return destino

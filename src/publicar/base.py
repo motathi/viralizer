@@ -1,0 +1,546 @@
+"""O que todas as páginas do site publicado compartilham.
+
+Estilo (tokens do Instagram), barra de navegação, moldura do documento e o
+JavaScript comum: o que fica guardado no navegador (escolhas da agenda,
+galeria, chave da IA), a leitura das preferências reveladas e a chamada à
+API da Anthropic feita direto do navegador — é o que permite ao estúdio
+rodar no site sem depender do computador da pessoa.
+"""
+
+import json
+from html import escape
+
+ESTILO = """  :root {
+    /* Design tokens — paleta oficial do Instagram */
+    --ig-blue: #405DE6; --ig-purple: #833AB4; --ig-magenta: #C13584;
+    --ig-pink: #E1306C; --ig-orange: #F77737; --ig-yellow: #FCAF45;
+    --grad: linear-gradient(45deg, #405DE6 0%, #833AB4 30%, #C13584 50%, #E1306C 70%, #F77737 100%);
+    --grad-suave: linear-gradient(45deg, #f5f1fe, #fdeef5, #fff4ec);
+
+    /* Neutros (escala do Instagram) */
+    --fundo: #ffffff; --superficie: #fafafa; --tinta: #262626;
+    --suave: #737373; --borda: #dbdbdb; --borda-leve: #efefef;
+    --acento: #C13584; --ok: #1f9d63; --ok-claro: #e8f6ef;
+    --alerta-fundo: #fff6e6; --alerta-borda: #ffe0a3; --alerta-tinta: #7a5200;
+    --erro-fundo: #fff0f0; --erro-borda: #ffc9c9; --erro-tinta: #8a1c1c;
+
+    /* Elevação e forma */
+    --r-lg: 20px; --r-md: 14px; --r-full: 999px;
+    --sombra-1: 0 1px 2px rgba(0,0,0,.05);
+    --sombra-2: 0 8px 24px -8px rgba(131, 58, 180, .16);
+    --sombra-3: 0 18px 44px -16px rgba(131, 58, 180, .28);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+         background: var(--fundo); color: var(--tinta); line-height: 1.6;
+         -webkit-font-smoothing: antialiased; }
+  .container { max-width: 1020px; margin: 0 auto; padding: 0 18px; }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--ig-purple); outline-offset: 2px; border-radius: 4px; }
+  [hidden] { display: none !important; }
+
+  /* ── Navegação do site ─────────────────────────────────────────── */
+  nav.nav { border-bottom: 1px solid var(--borda-leve); background: var(--fundo); }
+  .nav-linha { display: flex; align-items: center; gap: 18px; min-height: 58px; }
+  .marca { font-weight: 800; letter-spacing: -.02em; text-decoration: none; color: var(--tinta);
+           font-size: .98rem; white-space: nowrap; }
+  .marca span { background: var(--grad); -webkit-background-clip: text;
+                background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-links { display: flex; gap: 2px; margin-left: auto; overflow-x: auto;
+               scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { color: var(--suave); text-decoration: none; font-size: .86rem; font-weight: 600;
+                 padding: 8px 13px; border-radius: var(--r-full); white-space: nowrap;
+                 transition: all .2s; }
+  .nav-links a:hover { color: var(--tinta); background: var(--superficie); }
+  .nav-links a.ativo { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
+  @media (max-width: 640px) {
+    .nav-linha { flex-wrap: wrap; padding-bottom: 8px; }
+    .nav-links { margin-left: -18px; margin-right: -18px; padding: 0 18px; width: calc(100% + 36px); }
+  }
+
+  header.hero { padding: 44px 0 18px; text-align: center; }
+  .selo { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem;
+          font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+          padding: 6px 16px; border-radius: var(--r-full); margin-bottom: 16px;
+          color: var(--tinta); position: relative; background:
+            linear-gradient(var(--fundo), var(--fundo)) padding-box,
+            var(--grad) border-box; border: 2px solid transparent; }
+  .selo::before { content: ""; width: 10px; height: 10px; border-radius: 50%;
+                  background: var(--grad); }
+  h1 { font-size: clamp(1.5rem, 4.5vw, 2.2rem); line-height: 1.22;
+       font-weight: 800; letter-spacing: -.02em; }
+  h1 span { background: var(--grad); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; }
+  .sub { color: var(--suave); max-width: 640px; margin: 12px auto 0; font-size: .93rem; }
+
+  .painel { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.86);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            padding: 10px 0; border-bottom: 1px solid var(--borda-leve); }
+  .painel-linha { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+                  justify-content: space-between; }
+  .abas { display: flex; gap: 4px; background: var(--superficie);
+          border: 1px solid var(--borda-leve); border-radius: var(--r-full); padding: 4px; }
+  .aba { border: 0; background: transparent; color: var(--suave); font-size: .84rem;
+         font-weight: 600; padding: 7px 15px; border-radius: var(--r-full);
+         cursor: pointer; transition: all .2s; }
+  .aba:hover { color: var(--tinta); }
+  .aba.ativa { background: var(--grad); color: #fff; box-shadow: var(--sombra-2); }
+  .progresso { font-size: .84rem; color: var(--suave); font-weight: 600; }
+  .progresso b { background: var(--grad); -webkit-background-clip: text;
+                 background-clip: text; -webkit-text-fill-color: transparent;
+                 font-weight: 800; }
+
+  section.agenda { padding: 22px 0 70px; }
+  .aviso { background: var(--grad-suave); border-radius: var(--r-md);
+           padding: 11px 16px; font-size: .83rem; margin-bottom: 22px; }
+  .chip { font-size: .7rem; font-weight: 600; padding: 3px 11px;
+          border-radius: var(--r-full); background: var(--superficie);
+          border: 1px solid var(--borda-leve); color: var(--suave); }
+  .chip.views { background: var(--grad); border: 0; color: #fff; font-weight: 800;
+                letter-spacing: .01em; }
+  .chip.ok { background: var(--ok-claro); border-color: transparent; color: var(--ok); }
+  .chip.trend { color: var(--acento); background:
+                  linear-gradient(var(--fundo), var(--fundo)) padding-box,
+                  var(--grad) border-box; border: 1.5px solid transparent; }
+  .banner-aviso { display: none; border-radius: var(--r-md); padding: 12px 16px;
+                  margin-bottom: 16px; font-size: .86rem; align-items: center; gap: 10px;
+                  justify-content: space-between; flex-wrap: wrap; }
+  .banner-aviso.visivel { display: flex; }
+  .banner-aviso.alerta { background: var(--alerta-fundo); border: 1px solid var(--alerta-borda);
+                         color: var(--alerta-tinta); }
+  .banner-aviso.neutro { background: var(--superficie); border: 1px solid var(--borda-leve);
+                         color: var(--suave); }
+  .semanas { display: flex; align-items: center; gap: 6px; font-size: .82rem;
+             color: var(--suave); }
+  .semanas select { font: inherit; font-size: .82rem; color: var(--tinta);
+                    border: 1px solid var(--borda-leve); background: var(--superficie);
+                    border-radius: var(--r-full); padding: 6px 12px; cursor: pointer; }
+
+  .rotulo { font-size: .72rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: .08em; margin: 20px 0 9px;
+            background: var(--grad); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; }
+  .legenda { background: var(--superficie); border-radius: var(--r-md);
+             padding: 13px 15px; font-size: .89rem; white-space: pre-wrap; }
+  .hashtags { font-size: .85rem; margin-top: 7px; font-weight: 600;
+              background: var(--grad); -webkit-background-clip: text;
+              background-clip: text; -webkit-text-fill-color: transparent; }
+  .texto { white-space: pre-wrap; }
+
+  .btn { border: 1.5px solid var(--borda); background: var(--fundo); color: var(--tinta);
+         font-size: .84rem; font-weight: 700; padding: 9px 16px; text-decoration: none;
+         border-radius: var(--r-full); cursor: pointer; transition: all .2s;
+         display: inline-block; line-height: 1.4; }
+  .btn:hover { border-color: var(--ig-magenta); color: var(--ig-magenta);
+               transform: translateY(-1px); }
+  .btn.primario { background: var(--grad); border-color: transparent; color: #fff;
+                  box-shadow: var(--sombra-2); }
+  .btn.primario:hover { color: #fff; filter: brightness(1.06); box-shadow: var(--sombra-3); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+  .btn.pequeno { font-size: .78rem; padding: 6px 12px; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;
+           padding-top: 16px; border-top: 1px solid var(--borda-leve); }
+
+  /* ── Blocos de formulário e cartões das ferramentas ────────────── */
+  .cartao-ferramenta { background: var(--fundo); border: 1px solid var(--borda);
+                       border-radius: var(--r-lg); box-shadow: var(--sombra-1);
+                       padding: 20px 22px; margin-bottom: 14px; }
+  .cartao-ferramenta h2 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.01em;
+                          display: flex; align-items: center; gap: 8px; }
+  .cartao-ferramenta h2 .icone { font-size: 1.15rem; }
+  .cartao-ferramenta > p { color: var(--suave); font-size: .88rem; margin-top: 4px; }
+  .cartao-ferramenta .acoes { margin-top: 14px; padding-top: 0; border-top: 0; }
+  .grade-ferramentas { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                       gap: 14px; }
+  .grade-ferramentas .cartao-ferramenta { margin-bottom: 0; display: flex; flex-direction: column; }
+  .grade-ferramentas .cartao-ferramenta > p { flex: 1; }
+  .titulo-secao { font-size: .75rem; font-weight: 700; letter-spacing: .11em;
+                  text-transform: uppercase; color: var(--suave); margin: 30px 0 12px; }
+  .titulo-secao:first-child { margin-top: 0; }
+  label.campo { display: block; font-size: .8rem; font-weight: 600; color: var(--suave); margin-bottom: 5px; }
+  select, textarea, input[type=text], input[type=password] {
+    font: inherit; font-size: .92rem; padding: 10px 14px; border-radius: 12px;
+    border: 1.5px solid var(--borda); background: var(--superficie); color: var(--tinta); width: 100%; }
+  textarea { min-height: 96px; resize: vertical; }
+  .linha-campos { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .linha-campos input { flex: 1 1 260px; }
+  .mensagem { border-radius: var(--r-md); padding: 12px 16px; font-size: .88rem; margin-top: 12px; }
+  .mensagem.erro { background: var(--erro-fundo); border: 1px solid var(--erro-borda); color: var(--erro-tinta); }
+  .mensagem.ok { background: var(--ok-claro); border: 1px solid #bfe8cf; color: #146a3f; }
+  .mensagem.alerta { background: var(--alerta-fundo); border: 1px solid var(--alerta-borda); color: var(--alerta-tinta); }
+  .mensagem a { color: inherit; font-weight: 700; }
+  .vazio-suave { color: var(--suave); background: var(--superficie); border: 1px solid var(--borda-leve);
+                 border-radius: var(--r-md); padding: 18px 20px; font-size: .9rem; }
+  .girando { display: inline-block; width: 13px; height: 13px; border: 2px solid #e2dfe6;
+             border-top-color: var(--ig-magenta); border-radius: 50%; animation: g .8s linear infinite;
+             margin-right: 8px; vertical-align: -1px; }
+  @keyframes g { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .girando { animation: none; } }
+  table.tabela { width: 100%; border-collapse: collapse; font-size: .86rem; margin-top: 10px; }
+  table.tabela th, table.tabela td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--borda-leve); }
+  table.tabela th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--suave); }
+  table.tabela td.num, table.tabela th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .rolagem { overflow-x: auto; }
+
+  /* ── Roteiro do estúdio/galeria (blocos rotulados) ─────────────── */
+  .bloco { padding: 10px 0; border-bottom: 1px dashed var(--borda-leve); font-size: .9rem; }
+  .bloco:last-child { border-bottom: 0; }
+  .bloco .rotulo-bloco { font-size: .72rem; font-weight: 800; letter-spacing: .08em;
+                         text-transform: uppercase; color: var(--ig-magenta); }
+  .bloco .fala { margin: 3px 0; }
+  .bloco .direcao { color: var(--suave); font-size: .8rem; margin-top: 3px; }
+  .bloco .direcao::before { content: "🎥 "; }
+  .gancho-gal { font-weight: 600; margin: 0 0 12px; }
+
+  #toast { position: fixed; left: 50%; bottom: 28px;
+           transform: translateX(-50%) translateY(80px);
+           background: var(--tinta); color: #fff; font-size: .87rem; font-weight: 600;
+           padding: 12px 22px; border-radius: var(--r-full); opacity: 0;
+           transition: all .35s cubic-bezier(.34,1.3,.64,1); z-index: 50;
+           pointer-events: none; max-width: 90vw; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+  #toast.mostrar { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  footer { border-top: 1px solid var(--borda-leve); padding: 26px 0 42px;
+           text-align: center; color: var(--suave); font-size: .83rem; }
+  footer a { color: var(--suave); }"""
+
+DEFS_SVG = (
+    '<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>'
+    '<linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">'
+    '<stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/>'
+    '<stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/>'
+    '<stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>'
+)
+
+# As seções do site, na ordem da barra de navegação
+PAGINAS = [
+    ("agenda", "📅 Agenda", "index.html"),
+    ("estudio", "✨ Estúdio", "estudio.html"),
+    ("galeria", "💡 Galeria", "galeria.html"),
+    ("manual", "📘 Manual", "manual.html"),
+    ("ferramentas", "🧰 Ferramentas", "ferramentas.html"),
+]
+
+
+def navegacao(ativa: str, prefixo: str = "") -> str:
+    links = "".join(
+        f'<a href="{prefixo}{arquivo}"{" class=" + chr(34) + "ativo" + chr(34) if chave == ativa else ""}'
+        f'{" aria-current=" + chr(34) + "page" + chr(34) if chave == ativa else ""}>{rotulo}</a>'
+        for chave, rotulo, arquivo in PAGINAS
+    )
+    return (f'<nav class="nav"><div class="container nav-linha">'
+            f'<a class="marca" href="{prefixo}index.html">Radar de <span>Conteúdo Viral</span></a>'
+            f'<div class="nav-links">{links}</div></div></nav>')
+
+
+def documento(*, titulo: str, ativa: str, corpo: str, estilo_extra: str = "",
+              script: str = "", dados: dict | None = None, prefixo: str = "",
+              id_dados: str = "dados-pagina") -> str:
+    """Moldura comum: cabeçalho, fontes, estilo, navegação, corpo, JS."""
+    bloco_dados = ""
+    if dados is not None:
+        conteudo = json.dumps(dados, ensure_ascii=False).replace("</", "<\\/")
+        bloco_dados = f'<script id="{id_dados}" type="application/json">{conteudo}</script>'
+    return f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{escape(titulo)}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>{ESTILO}
+{estilo_extra}</style>
+</head>
+<body>
+{DEFS_SVG}
+{navegacao(ativa, prefixo)}
+{corpo}
+<footer>
+  <div class="container">
+    <p><strong>Radar de Conteúdo Viral</strong> — pesquisa de tendências, roteiros embasados e agenda semanal.</p>
+  </div>
+</footer>
+<div id="toast"></div>
+{bloco_dados}
+<script>{SCRIPT_COMUM}
+{script}</script>
+</body>
+</html>
+"""
+
+
+# JavaScript compartilhado: tudo o que roda no navegador sem servidor.
+SCRIPT_COMUM = r"""
+const Radar = (() => {
+  const ler = (chave, padrao) => {
+    try { const v = localStorage.getItem(chave); return v ? JSON.parse(v) : padrao; }
+    catch (_) { return padrao; }
+  };
+  const gravar = (chave, valor) => {
+    try { localStorage.setItem(chave, JSON.stringify(valor)); return true; }
+    catch (_) { return false; }
+  };
+  const escapar = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg; t.classList.add('mostrar');
+    clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('mostrar'), 2400);
+  }
+  function copiar(texto, msgOk) {
+    return navigator.clipboard.writeText(texto)
+      .then(() => toast(msgOk || 'Copiado 📋'))
+      .catch(() => window.prompt('Copie manualmente:', texto));
+  }
+  function baixar(nome, conteudo) {
+    const blob = new Blob([conteudo], {type: 'application/json;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = nome;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+  function lerArquivo(arquivo) {
+    return new Promise((ok, falha) => {
+      const r = new FileReader();
+      r.onload = () => { try { ok(JSON.parse(r.result)); } catch (e) { falha(new Error('O arquivo não é um JSON válido.')); } };
+      r.onerror = () => falha(new Error('Não deu para ler o arquivo.'));
+      r.readAsText(arquivo);
+    });
+  }
+
+  // ── chave da Anthropic (fica só neste navegador) ─────────────────
+  const CHAVE = 'radar-chave-anthropic';
+  const chave = () => { try { return (localStorage.getItem(CHAVE) || '').trim(); } catch (_) { return ''; } };
+  function salvarChave(valor) {
+    valor = String(valor || '').trim().replace(/^["']|["']$/g, '');
+    if (!valor) return {ok: false, recado: 'Cole a chave antes de salvar.'};
+    if (!valor.startsWith('sk-')) return {ok: false, recado: 'Isso não parece uma chave da Anthropic — ela começa com sk-ant-.'};
+    if (valor.length < 20) return {ok: false, recado: 'A chave veio cortada. Copie de novo, inteira.'};
+    try { localStorage.setItem(CHAVE, valor); } catch (_) { return {ok: false, recado: 'O navegador não deixou guardar a chave.'}; }
+    return {ok: true, recado: 'Chave guardada neste navegador.'};
+  }
+  const apagarChave = () => { try { localStorage.removeItem(CHAVE); } catch (_) {} };
+
+  // ── escolhas na agenda (feedback) ─────────────────────────────────
+  const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
+  function registrarFeedback(nicho, semana, ideias) {
+    const dados = ler(chaveFeedback(nicho), {});
+    const bloco = dados[semana] || (dados[semana] = {});
+    const agora = new Date().toISOString().slice(0, 16);
+    for (const i of ideias) {
+      const titulo = String(i.titulo || '').trim();
+      if (!titulo) continue;
+      if (['feita', 'lista', 'descartada'].includes(i.estado)) {
+        bloco[titulo] = {estado: i.estado, pilar: i.pilar || '', registro: i.registro || '', quando: agora};
+      } else {
+        delete bloco[titulo];
+      }
+    }
+    gravar(chaveFeedback(nicho), dados);
+    return dados;
+  }
+  const feedback = nicho => ler(chaveFeedback(nicho), {});
+  function preferencias(nicho) {
+    const dados = feedback(nicho);
+    const esc = {}, desc = {}, vozSim = {}, vozNao = {}, descartados = [];
+    let total = 0;
+    for (const semana of Object.keys(dados).sort()) {
+      for (const [titulo, info] of Object.entries(dados[semana])) {
+        total++;
+        const pilar = (info.pilar || '').split('(')[0].trim();
+        const voz = info.registro || '';
+        if (info.estado === 'feita' || info.estado === 'lista') {
+          esc[pilar] = (esc[pilar] || 0) + 1; if (voz) vozSim[voz] = (vozSim[voz] || 0) + 1;
+        } else {
+          desc[pilar] = (desc[pilar] || 0) + 1; if (voz) vozNao[voz] = (vozNao[voz] || 0) + 1;
+          descartados.push(titulo);
+        }
+      }
+    }
+    if (!total) return null;
+    const top = (o, n) => Object.fromEntries(Object.entries(o).sort((a, b) => b[1] - a[1]).slice(0, n));
+    return {ideias_avaliadas: total, pilares_que_ela_escolhe: top(esc, 4), pilares_que_ela_descarta: top(desc, 4),
+            vozes_que_ela_escolhe: top(vozSim, 4), vozes_que_ela_descarta: top(vozNao, 4),
+            assuntos_descartados: descartados.slice(-12)};
+  }
+
+  // ── galeria guardada neste navegador ──────────────────────────────
+  const chaveGaleria = nicho => 'radar-galeria:' + (nicho || 'padrao');
+  const galeriaLocal = nicho => (ler(chaveGaleria(nicho), {itens: []}).itens || []);
+  function galeriaSalvar(nicho, dados) {
+    const itens = galeriaLocal(nicho);
+    const agora = new Date().toISOString().slice(0, 16);
+    const id = String(dados.id || Math.random().toString(16).slice(2, 12));
+    const novo = {id, atualizado_em: agora, ideia: String(dados.ideia || '').slice(0, 500),
+                  formato: dados.formato || 'video', estilo: String(dados.estilo || ''),
+                  tom: String(dados.tom || ''), tamanho: String(dados.tamanho || ''),
+                  roteiro: limparRoteiro(dados.roteiro || {}), origem: 'navegador'};
+    const i = itens.findIndex(x => x.id === id);
+    if (i >= 0) { novo.criado_em = itens[i].criado_em || agora; itens[i] = novo; }
+    else { novo.criado_em = agora; itens.push(novo); }
+    gravar(chaveGaleria(nicho), {itens});
+    return id;
+  }
+  function galeriaApagar(nicho, id) {
+    const itens = galeriaLocal(nicho).filter(x => x.id !== id);
+    gravar(chaveGaleria(nicho), {itens});
+  }
+  function galeriaImportar(nicho, dados) {
+    const novos = Array.isArray(dados) ? dados : (dados && dados.itens) || [];
+    const itens = galeriaLocal(nicho);
+    let n = 0;
+    for (const item of novos) {
+      if (!item || typeof item !== 'object' || !item.roteiro) continue;
+      const id = String(item.id || Math.random().toString(16).slice(2, 12));
+      const i = itens.findIndex(x => x.id === id);
+      const limpo = {...item, id, roteiro: limparRoteiro(item.roteiro), origem: 'navegador'};
+      if (i >= 0) itens[i] = limpo; else itens.push(limpo);
+      n++;
+    }
+    gravar(chaveGaleria(nicho), {itens});
+    return n;
+  }
+  function galeriaTodos(nicho, publicados) {
+    const locais = galeriaLocal(nicho);
+    const ids = new Set(locais.map(i => i.id));
+    const todos = [...locais, ...(publicados || []).filter(i => !ids.has(i.id)).map(i => ({...i, origem: 'site'}))];
+    return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
+  }
+
+  function limparRoteiro(r) {
+    return {
+      titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
+      gancho: String(r.gancho || '').trim(),
+      blocos: (r.blocos || []).filter(b => b && typeof b === 'object').map(b => ({
+        rotulo: String(b.rotulo || ''), texto: String(b.texto || ''), direcao: String(b.direcao || '')})),
+      legenda: String(r.legenda || '').trim(),
+      hashtags: (r.hashtags || []).map(String).slice(0, 12),
+      por_que_funciona: String(r.por_que_funciona || '').trim(),
+    };
+  }
+  function blocosHtml(r) {
+    return (r.blocos || []).map(b => `<div class="bloco"><div class="rotulo-bloco">${escapar(b.rotulo)}</div>
+      <p class="fala">${escapar(b.texto)}</p>${b.direcao ? `<p class="direcao">${escapar(b.direcao)}</p>` : ''}</div>`).join('');
+  }
+  function roteiroHtml(r, completo) {
+    return `${r.gancho ? `<p class="gancho-gal">🪝 ${escapar(r.gancho)}</p>` : ''}${blocosHtml(r)}` +
+      (completo ? `<div class="rotulo">Legenda</div><div class="legenda">${escapar(r.legenda)}</div>
+        <div class="hashtags">${(r.hashtags || []).map(escapar).join(' ')}</div>` : '');
+  }
+  function textoRoteiro(r) {
+    const linhas = [r.titulo, '', r.gancho ? 'GANCHO: ' + r.gancho : ''];
+    (r.blocos || []).forEach(b => { linhas.push('', String(b.rotulo || '').toUpperCase(), b.texto); if (b.direcao) linhas.push('  🎬 ' + b.direcao); });
+    linhas.push('', 'LEGENDA', r.legenda, '', (r.hashtags || []).join(' '));
+    return linhas.filter(l => l !== undefined).join('\n');
+  }
+
+  // ── backup de tudo o que está neste navegador ─────────────────────
+  function exportarTudo() {
+    const saida = {formato: 'radar-backup', versao: 1, exportado_em: new Date().toISOString(), chaves: {}};
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('radar-') && k !== CHAVE) saida.chaves[k] = ler(k, null);
+      }
+    } catch (_) {}
+    return saida;
+  }
+  function importarTudo(dados) {
+    if (!dados || dados.formato !== 'radar-backup' || !dados.chaves) throw new Error('Isso não é um backup do Radar.');
+    let n = 0;
+    for (const [k, v] of Object.entries(dados.chaves)) {
+      if (!k.startsWith('radar-') || k === CHAVE) continue;
+      if (gravar(k, v)) n++;
+    }
+    return n;
+  }
+
+  // ── IA direto do navegador ────────────────────────────────────────
+  function traduzirErroIA(status, mensagem) {
+    const m = (mensagem || '').toLowerCase();
+    if (status === 401 || m.includes('invalid x-api-key') || m.includes('authentication')) return 'A chave da Anthropic não foi aceita. Confira em Ferramentas → Chave da IA.';
+    if (m.includes('credit balance')) return 'Os créditos da Anthropic acabaram. Recarregue em console.anthropic.com (Plans & Billing).';
+    if (status === 429) return 'A Anthropic pediu para esperar um pouco (limite de uso). Tente de novo em um minuto.';
+    if (status === 529 || status === 503) return 'A Anthropic está sobrecarregada agora. Tente de novo em instantes.';
+    if (status === 404 && m.includes('model')) return 'O modelo configurado não está disponível para esta chave.';
+    return mensagem ? `A IA respondeu com erro: ${mensagem.slice(0, 200)}` : `A IA respondeu com erro (${status}).`;
+  }
+  async function chamarIA({modelo, system, messages, maxTokens, thinking, aoProgresso}) {
+    const k = chave();
+    if (!k) { const e = new Error('Falta a chave da Anthropic. Guarde a sua em Ferramentas → Chave da IA.'); e.semChave = true; throw e; }
+    const corpo = {model: modelo, max_tokens: maxTokens || 16000, system, messages, stream: true};
+    if (thinking) corpo.thinking = thinking;
+    let r;
+    try {
+      r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {'content-type': 'application/json', 'x-api-key': k, 'anthropic-version': '2023-06-01',
+                  'anthropic-dangerous-direct-browser-access': 'true'},
+        body: JSON.stringify(corpo),
+      });
+    } catch (_) {
+      throw new Error('Não consegui falar com a Anthropic — sem internet, ou um bloqueador impediu a chamada.');
+    }
+    if (!r.ok) {
+      let msg = '';
+      try { msg = (await r.json()).error?.message || ''; } catch (_) {}
+      throw new Error(traduzirErroIA(r.status, msg));
+    }
+    const leitor = r.body.getReader(), dec = new TextDecoder();
+    let sobra = '', texto = '', parada = '';
+    while (true) {
+      const {value, done} = await leitor.read();
+      if (done) break;
+      sobra += dec.decode(value, {stream: true});
+      const linhas = sobra.split('\n'); sobra = linhas.pop();
+      for (const linha of linhas) {
+        if (!linha.startsWith('data:')) continue;
+        let ev; try { ev = JSON.parse(linha.slice(5).trim()); } catch (_) { continue; }
+        if (ev.type === 'content_block_delta' && ev.delta && ev.delta.type === 'text_delta') {
+          texto += ev.delta.text; if (aoProgresso) aoProgresso(texto.length);
+        } else if (ev.type === 'message_delta' && ev.delta && ev.delta.stop_reason) {
+          parada = ev.delta.stop_reason;
+        } else if (ev.type === 'error') {
+          throw new Error(traduzirErroIA(0, ev.error && ev.error.message));
+        }
+      }
+    }
+    if (parada === 'refusal') throw new Error('O modelo recusou a solicitação.');
+    if (parada === 'max_tokens') throw new Error('A resposta ficou longa demais e foi cortada. Tente um tamanho menor.');
+    return texto;
+  }
+  // Extrai o maior objeto JSON válido de uma resposta com ruído ao redor
+  function extrairJson(texto) {
+    let limpo = String(texto || '').trim();
+    if (limpo.startsWith('```')) limpo = limpo.replace(/^```[a-z]*\n?/i, '').replace(/```$/, '').trim();
+    let melhor = null, tamanho = 0;
+    for (let i = 0; i < limpo.length; i++) {
+      if (limpo[i] !== '{') continue;
+      let prof = 0, emStr = false, esc = false;
+      for (let j = i; j < limpo.length; j++) {
+        const c = limpo[j];
+        if (emStr) { if (esc) esc = false; else if (c === '\\') esc = true; else if (c === '"') emStr = false; continue; }
+        if (c === '"') emStr = true;
+        else if (c === '{') prof++;
+        else if (c === '}') { prof--; if (prof === 0) {
+          const trecho = limpo.slice(i, j + 1);
+          try { const obj = JSON.parse(trecho); if (obj && typeof obj === 'object' && trecho.length > tamanho) { melhor = obj; tamanho = trecho.length; } } catch (_) {}
+          break; } }
+      }
+    }
+    if (!melhor) throw new Error('A IA respondeu fora do formato. Tente de novo.');
+    return melhor;
+  }
+
+  return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
+          chave, salvarChave, apagarChave,
+          registrarFeedback, feedback, preferencias,
+          galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
+          limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
+          exportarTudo, importarTudo, chamarIA, extrairJson};
+})();
+"""

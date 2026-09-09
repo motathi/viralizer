@@ -130,6 +130,7 @@ Saídas:
 | Caminho | Conteúdo |
 |---|---|
 | `web/index.html` | Agenda da semana (site publicado na Vercel) |
+| `web/estudio.html`, `galeria.html`, `manual.html`, `ferramentas.html` | Ferramentas do site que rodam no navegador (ver "O site") |
 | `web/semanas/<data>.html` | Agendas arquivadas, acessíveis pelo seletor no painel |
 | `dados/<nicho>.json` | Última geração, usada pelo `rerender` |
 | `dados/historico-<nicho>.json` | Memória anti-repetição |
@@ -139,13 +140,28 @@ O painel local fica em `src/painel/` e não precisa de nenhuma dependência extr
 
 ## O site
 
-- Cards compactos que expandem ao clicar, com chip de views do viral de origem e logo da plataforma
-- Escolha entre 3 ganchos (troca a abertura do roteiro), alternância **Reels ⇄ Carrossel**
-- Fila de produção: **+ Adicionar à lista** → **Marcar como feita** (a feita sai da fila e vai para "Feitas")
-- **✕ descartar** ideia individualmente, com opção de restaurar
-- Copiar roteiro pronto e link compartilhável de um roteiro só (`#rN`)
-- Aviso automático se a agenda ficar mais de 8 dias sem atualizar (falha na automação)
-- Estado salvo no navegador, por semana
+O site publicado (Vercel, pasta `web/`) deixou de ser só a agenda: virou o lugar de
+tudo o que **não precisa do computador para rodar**. A barra de navegação leva a cinco
+páginas, todas estáticas, geradas pelo pipeline e pelo `rerender`:
+
+| Página | O que faz | Onde roda |
+|---|---|---|
+| **📅 Agenda** (`index.html`) | Cards que expandem, 3 ganchos por ideia, Reels ⇄ Carrossel, fila de produção (lista → feita), descarte com restauração, copiar roteiro, link compartilhável (`#rN`), semanas anteriores, aviso de agenda desatualizada | no navegador |
+| **✨ Estúdio** (`estudio.html`) | Sua ideia vira três roteiros em ângulos diferentes (vídeo, carrossel ou stories; estilo, tom e tamanho); você escolhe um, ajusta conversando e salva. Usa os mesmos prompts do painel, o manual do nicho e suas preferências | no navegador, chamando a API da Anthropic direto com a **sua chave** |
+| **💡 Galeria** (`galeria.html`) | Roteiros publicados pelo painel + os salvos neste navegador. Copiar, reabrir no estúdio, apagar, exportar/importar JSON (o mesmo formato de `dados/galeria-<nicho>.json`) | no navegador |
+| **📘 Manual** (`manual.html`) | O manual do nicho (o que o radar aprendeu com os virais), embutido na publicação | estático |
+| **🧰 Ferramentas** (`ferramentas.html`) | Guardar/testar a chave da IA; **preferências reveladas** calculadas a partir das suas escolhas na agenda (com exportação para `dados/feedback-<nicho>.json`); backup e restauração de tudo o que está no navegador; disparo da agenda na nuvem (GitHub Actions); termos de busca e o rendimento de cada um; e a lista do que só roda pelo painel, com o motivo | no navegador |
+
+Tudo o que a pessoa faz no site fica no `localStorage` do navegador dela (escolhas por
+semana, feedback, galeria, chave). A chave da Anthropic nunca entra no backup nem sai do
+navegador — a chamada vai do navegador para `api.anthropic.com`, sem servidor no meio.
+
+**O que continua só no painel local** (precisa da máquina): gerar a agenda pelo IP residencial,
+conectar TikTok, testar coleta, otimizar termos (grava no YAML), publicar (git push) e atualizar
+o programa. A página Ferramentas explica cada um.
+
+Para mudar o design sem gerar roteiros de novo: `python -m src.publicar.rerender --nicho <nicho>`
+reconstrói todas as páginas preservando a semana e a data da agenda que está no ar.
 
 ## Automação
 

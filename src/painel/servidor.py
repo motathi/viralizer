@@ -28,6 +28,7 @@ from dotenv import load_dotenv
 
 from src import feedback as feedback_mod
 from src.painel import estudio
+from src.roteiros import manual as manual_mod
 
 RAIZ = Path(__file__).resolve().parent.parent.parent
 PORTA = 8777
@@ -117,46 +118,6 @@ def _iniciar(comando: list[str], acao: str) -> bool:
             return False
     threading.Thread(target=_executar, args=(comando, acao), daemon=True).start()
     return True
-
-
-def _md_para_html(md: str) -> str:
-    """Conversor mínimo de Markdown (títulos, listas, negrito, itálico, hr).
-
-    Só o que o manual usa — sem dependência nova para um leitor local.
-    """
-    import html as h
-    import re
-    saida, em_lista = [], False
-    for linha in md.splitlines():
-        s = linha.rstrip()
-        if s.startswith("- ") or s.startswith("* "):
-            if not em_lista:
-                saida.append("<ul>"); em_lista = True
-            saida.append(f"<li>{_inline(h.escape(s[2:]))}</li>")
-            continue
-        if em_lista:
-            saida.append("</ul>"); em_lista = False
-        if not s:
-            continue
-        if s.startswith("---"):
-            saida.append("<hr>")
-        elif s.startswith("# "):
-            saida.append(f"<h1>{_inline(h.escape(s[2:]))}</h1>")
-        elif s.startswith("## "):
-            saida.append(f"<h2>{_inline(h.escape(s[3:]))}</h2>")
-        elif s.startswith("### "):
-            saida.append(f"<h3>{_inline(h.escape(s[4:]))}</h3>")
-        else:
-            saida.append(f"<p>{_inline(h.escape(s))}</p>")
-    if em_lista:
-        saida.append("</ul>")
-    return "\n".join(saida)
-
-
-def _inline(texto: str) -> str:
-    import re
-    texto = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", texto)
-    return re.sub(r"(?<![\w*])_(.+?)_(?![\w*])|\*(.+?)\*", lambda m: f"<i>{m.group(1) or m.group(2)}</i>", texto)
 
 
 PAGINA_MANUAL = """<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
@@ -611,6 +572,16 @@ setInterval(atualizar, 1500);
 """
 
 
+def _arquivo_do_site(caminho: str) -> Path | None:
+    """Página de web/ correspondente ao caminho pedido, ou None."""
+    from urllib.parse import unquote
+    web = (RAIZ / "web").resolve()
+    alvo = (web / unquote(caminho).lstrip("/")).resolve()
+    if alvo.is_file() and alvo.suffix == ".html" and web in alvo.parents:
+        return alvo
+    return None
+
+
 class Painel(BaseHTTPRequestHandler):
     def _responder(self, corpo: bytes, tipo: str = "text/html; charset=utf-8",
                    codigo: int = 200) -> None:
@@ -643,7 +614,7 @@ class Painel(BaseHTTPRequestHandler):
                          if "=" in x).get("nicho") or (nichos[0] if nichos else "")
             arquivo = RAIZ / "dados" / f"manual-{nicho}.md"
             if arquivo.exists():
-                corpo = _md_para_html(arquivo.read_text(encoding="utf-8"))
+                corpo = manual_mod.para_html(arquivo.read_text(encoding="utf-8"))
             else:
                 corpo = ('<div class="vazio"><b>O manual ainda não existe.</b><br>'
                          'Ele é escrito ao fim de cada geração de agenda, a partir do que a '
@@ -658,6 +629,10 @@ class Painel(BaseHTTPRequestHandler):
                 self._responder(arquivo.read_bytes())
             else:
                 self._responder(b"Nenhuma agenda gerada ainda.", codigo=404)
+        elif (arquivo := _arquivo_do_site(caminho)) is not None:
+            # as demais páginas do site (estúdio, galeria, manual, ferramentas,
+            # semanas anteriores), para a navegação funcionar aqui também
+            self._responder(arquivo.read_bytes())
         else:
             self._responder(b"nao encontrado", codigo=404)
 

@@ -8,7 +8,9 @@ e o que evitar. É o que o roteirista lê antes de escrever, e é o que a
 pessoa pode abrir no painel para ver o que o radar aprendeu.
 """
 
+import html
 import json
+import re
 from datetime import date
 from pathlib import Path
 
@@ -102,3 +104,44 @@ def para_prompt(texto: str) -> str:
     if len(texto) <= MAX_CARACTERES_NO_PROMPT:
         return texto
     return texto[:MAX_CARACTERES_NO_PROMPT] + "\n\n[manual truncado]"
+
+
+def _inline(texto: str) -> str:
+    texto = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", texto)
+    return re.sub(r"(?<![\w*])_(.+?)_(?![\w*])|\*(.+?)\*",
+                  lambda m: f"<i>{m.group(1) or m.group(2)}</i>", texto)
+
+
+def para_html(md: str) -> str:
+    """Conversor mínimo de Markdown (títulos, listas, negrito, itálico, hr).
+
+    Só o que o manual usa — sem dependência nova. Serve tanto ao painel
+    local quanto à página do manual no site publicado.
+    """
+    saida, em_lista = [], False
+    for linha in md.splitlines():
+        s = linha.rstrip()
+        if s.startswith("- ") or s.startswith("* "):
+            if not em_lista:
+                saida.append("<ul>")
+                em_lista = True
+            saida.append(f"<li>{_inline(html.escape(s[2:]))}</li>")
+            continue
+        if em_lista:
+            saida.append("</ul>")
+            em_lista = False
+        if not s:
+            continue
+        if s.startswith("---"):
+            saida.append("<hr>")
+        elif s.startswith("# "):
+            saida.append(f"<h1>{_inline(html.escape(s[2:]))}</h1>")
+        elif s.startswith("## "):
+            saida.append(f"<h2>{_inline(html.escape(s[3:]))}</h2>")
+        elif s.startswith("### "):
+            saida.append(f"<h3>{_inline(html.escape(s[4:]))}</h3>")
+        else:
+            saida.append(f"<p>{_inline(html.escape(s))}</p>")
+    if em_lista:
+        saida.append("</ul>")
+    return "\n".join(saida)
