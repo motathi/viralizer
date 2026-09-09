@@ -663,7 +663,7 @@ def _seletor_semanas(semanas: list[str], semana_atual: str | None, prefixo: str)
 def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
                   semanas: list[str] | None = None, semana_atual: str | None = None,
                   prefixo: str = "",
-                  nicho: str | None = None) -> None:
+                  nicho: str | None = None, galeria: bool = False) -> None:
     """Escreve a agenda da semana como web/index.html.
 
     `semanas` são as agendas arquivadas (mais recente primeiro) exibidas no
@@ -723,6 +723,7 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
     </div>
     <div class="progresso" id="contagem"></div>
     {_seletor_semanas(semanas or [], semana_atual, prefixo)}
+    {f'<div class="semanas"><a class="btn" href="{prefixo}galeria.html">💡 Galeria</a></div>' if galeria else ''}
   </div>
 </div>
 
@@ -774,8 +775,99 @@ def publicar_agenda(config: dict, roteiros: dict, sinais: dict, raiz: Path,
     arquivadas = sorted(
         (p.stem for p in pasta_semanas.glob("*.html") if p.stem != semana), reverse=True
     )
+    tem_galeria = bool(nicho) and publicar_galeria(config, raiz, nicho) is not None
     publicar_site(config, roteiros, sinais, web / "index.html", semanas=arquivadas,
-                  nicho=nicho)
+                  nicho=nicho, galeria=tem_galeria)
     publicar_site(config, roteiros, sinais, pasta_semanas / f"{semana}.html",
-                  semana_atual=semana, prefixo="../", nicho=nicho)
+                  semana_atual=semana, prefixo="../", nicho=nicho, galeria=tem_galeria)
     return web / "index.html"
+
+
+def _bloco_galeria(item: dict) -> str:
+    r = item.get("roteiro") or {}
+    blocos = "".join(
+        f'<div class="bloco"><span class="tempo">{escape(b.get("rotulo", ""))}</span>'
+        f'<p class="fala">{escape(b.get("texto", ""))}</p>'
+        + (f'<p class="direcao">🎬 {escape(b["direcao"])}</p>' if b.get("direcao") else "")
+        + "</div>"
+        for b in r.get("blocos", [])
+    )
+    tags = " ".join(escape(h) for h in r.get("hashtags", []))
+    formato = {"video": "🎬 Vídeo", "carrossel": "🖼️ Carrossel", "stories": "📱 Stories"}.get(
+        item.get("formato", ""), escape(item.get("formato", "")))
+    return f"""
+  <details class="galeria-item">
+    <summary>
+      <span class="chip">{formato}</span>
+      {f'<span class="chip">{escape(item["tom"])}</span>' if item.get("tom") else ''}
+      <b>{escape(r.get("titulo") or item.get("ideia", ""))}</b>
+      <span class="quando">{escape((item.get("atualizado_em") or "")[:10])}</span>
+    </summary>
+    <div class="corpo">
+      {f'<p class="gancho-gal">🪝 {escape(r["gancho"])}</p>' if r.get("gancho") else ''}
+      <div class="blocos">{blocos}</div>
+      {f'<div class="rotulo">Legenda</div><div class="legenda">{escape(r["legenda"])}</div>' if r.get("legenda") else ''}
+      {f'<div class="hashtags">{tags}</div>' if tags else ''}
+      <p class="ideia-orig">Ideia original: {escape(item.get("ideia", ""))}</p>
+    </div>
+  </details>"""
+
+
+def publicar_galeria(config: dict, raiz: Path, nicho: str) -> Path | None:
+    """Escreve web/galeria.html a partir do que foi salvo no estúdio.
+
+    Devolve None quando não há galeria — aí o site não mostra o link.
+    """
+    arquivo = raiz / "dados" / f"galeria-{nicho}.json"
+    if not arquivo.exists():
+        return None
+    try:
+        itens = json.loads(arquivo.read_text(encoding="utf-8")).get("itens", [])
+    except (ValueError, OSError):
+        return None
+    if not itens:
+        return None
+    itens = sorted(itens, key=lambda i: i.get("atualizado_em", ""), reverse=True)
+    corpo = "".join(_bloco_galeria(i) for i in itens)
+    html = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeria de ideias — {escape(config['nome'])}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>{ESTILO}
+  .galeria-item {{ border: 1px solid var(--borda); border-radius: var(--r-lg); background: var(--fundo);
+    margin-bottom: 12px; overflow: hidden; }}
+  .galeria-item summary {{ list-style: none; cursor: pointer; padding: 16px 18px; display: flex;
+    flex-wrap: wrap; align-items: center; gap: 8px; }}
+  .galeria-item summary::-webkit-details-marker {{ display: none; }}
+  .galeria-item summary b {{ flex: 1 1 240px; font-size: 1rem; }}
+  .galeria-item .quando {{ color: var(--suave); font-size: .8rem; }}
+  .galeria-item .corpo {{ padding: 0 18px 18px; }}
+  .gancho-gal {{ font-weight: 600; margin: 0 0 12px; }}
+  .ideia-orig {{ color: var(--suave); font-size: .82rem; margin-top: 14px; }}
+</style>
+</head>
+<body>
+{DEFS_SVG}
+<header class="hero container">
+  <div class="selo">Radar de Conteúdo Viral</div>
+  <h1>Galeria de ideias — <span>{escape(config['nome'])}</span></h1>
+  <p class="sub">{len(itens)} roteiro{'s' if len(itens) != 1 else ''} criado{'s' if len(itens) != 1 else ''} no estúdio ·
+  atualizada em {date.today().strftime('%d/%m/%Y')}</p>
+</header>
+<div class="painel"><div class="container painel-linha">
+  <div class="semanas"><a class="btn" href="index.html">← Agenda da semana</a></div>
+</div></div>
+<section class="agenda container">
+{corpo}
+</section>
+<footer>Radar de Conteúdo Viral · galeria do estúdio</footer>
+</body>
+</html>
+"""
+    destino = raiz / "web" / "galeria.html"
+    destino.write_text(html, encoding="utf-8")
+    return destino

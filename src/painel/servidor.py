@@ -24,7 +24,10 @@ from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 from src import feedback as feedback_mod
+from src.painel import estudio
 
 RAIZ = Path(__file__).resolve().parent.parent.parent
 PORTA = 8777
@@ -328,6 +331,8 @@ PAGINA = """<!DOCTYPE html>
                   color:var(--tinta); cursor:pointer; transition:border-color .18s,color .18s;
                   text-decoration:none; white-space:nowrap; text-align:center }
   button:hover:not(:disabled), a.btn:hover { border-color:var(--rosa); color:var(--rosa) }
+  a.principal-link { background:var(--grad); border-color:transparent; color:#fff }
+  a.principal-link:hover { color:#fff; filter:brightness(1.07) }
   button.principal { background:var(--grad); border-color:transparent; color:#fff;
                      box-shadow:0 8px 22px -10px rgba(131,58,180,.55) }
   button.principal:hover:not(:disabled) { filter:brightness(1.07); color:#fff }
@@ -394,6 +399,31 @@ PAGINA = """<!DOCTYPE html>
         <button id="publicar">Publicar</button>
       </li>
     </ol>
+  </section>
+
+  <section>
+    <h2>Criar a partir de uma ideia sua</h2>
+    <ul class="lista">
+      <li class="item">
+        <span class="icone">✨</span>
+        <div>
+          <b>Estúdio</b>
+          <p>Você dá a ideia e escolhe formato (stories, carrossel ou vídeo), estilo e
+             tom. A IA escreve três opções em ângulos diferentes; você escolhe uma,
+             ajusta conversando com ela, e salva na galeria.</p>
+        </div>
+        <a class="btn principal-link" id="estudio" href="/estudio">Abrir estúdio</a>
+      </li>
+      <li class="item">
+        <span class="icone">💡</span>
+        <div>
+          <b>Galeria de ideias</b>
+          <p>Tudo o que foi criado no estúdio e salvo. Dá para copiar, reabrir para
+             mexer mais, ou apagar. Vai junto para o site quando você publica.</p>
+        </div>
+        <a class="btn" id="galeria" href="/galeria">Ver galeria</a>
+      </li>
+    </ul>
   </section>
 
   <section>
@@ -579,7 +609,9 @@ class Painel(BaseHTTPRequestHandler):
                         "application/json; charset=utf-8")
 
     def do_GET(self) -> None:  # noqa: N802 - assinatura da biblioteca padrão
-        caminho = self.path.split("?")[0]
+        caminho, _, consulta = self.path.partition("?")
+        if estudio.tratar(self, "GET", caminho, consulta, b""):
+            return
         if caminho == "/":
             self._responder(PAGINA.encode("utf-8"))
         elif caminho == "/nichos":
@@ -615,6 +647,10 @@ class Painel(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802
         caminho, _, consulta = self.path.partition("?")
+        if caminho.startswith(("/estudio", "/galeria")):
+            tamanho = int(self.headers.get("Content-Length") or 0)
+            if estudio.tratar(self, "POST", caminho, consulta, self.rfile.read(tamanho)):
+                return
         if caminho == "/gerar":
             nicho = dict(p.split("=", 1) for p in consulta.split("&") if "=" in p).get("nicho", "")
             nicho = nicho.replace("%20", " ")
@@ -693,6 +729,7 @@ def _conferir_dependencias() -> bool:
 
 
 def main() -> None:
+    load_dotenv(RAIZ / ".env")
     _conferir_dependencias()
     threading.Thread(target=_atualizar_versao_cache, daemon=True).start()
     servidor = ThreadingHTTPServer(("127.0.0.1", PORTA), Painel)

@@ -147,7 +147,43 @@ houve "a ordem do skincare importa", não proponha "a ordem tem ciência").
 Na dúvida sobre semelhança, descarte e escolha outro ângulo.
 """
 
-PROMPT_ESCRITA = """\
+REGRAS_SEM_SAL = """\
+PROIBIDO — é exatamente isto que deixa roteiro sem sal:
+- Aquecimento antes do assunto. Nada de "Você sabia que", "Vamos falar
+  sobre", "Hoje eu vou te contar", "Muita gente me pergunta", "Bora lá".
+  A primeira frase JÁ É o assunto.
+- Adjetivo vago onde cabe coisa concreta. "Muito eficaz" não diz nada;
+  "clareia em 8 semanas", "custa o preço de um jantar", "arde como pimenta"
+  dizem. Todo gancho precisa de pelo menos um destes: um número, uma imagem
+  física, o nome de um produto/procedimento, ou uma afirmação com a qual
+  dê para discordar.
+- Frases todas do mesmo comprimento. Alterne: uma longa que constrói, uma
+  curta que derruba. É o ritmo que segura, não a informação.
+- Encerrar sempre igual. Se todo roteiro termina em "salva esse post",
+  você escreveu um só roteiro dez vezes.
+- Ressalva defensiva ("cada caso é um caso", "procure seu dermatologista")
+  colada por precaução. Só entra se acrescentar informação real.
+- Neutralidade. Todo roteiro precisa de pelo menos uma frase em que ela
+  toma partido: o que ela faria, o que ela não faz, com o que ela não
+  concorda. Conteúdo que não arrisca nada não é assistido até o fim.
+"""
+
+LIBERDADE_EDITORIAL = """\
+LIBERDADE TOTAL DE ESCRITA. Quem publica é uma profissional da área, com
+autonomia e discernimento sobre o próprio conteúdo, e revisa cada roteiro
+antes de gravar. O seu papel é entregar o melhor roteiro possível — não
+policiar o que ela pode dizer.
+
+Portanto: escreva com ousadia. Ganchos fortes, opinião firme, humor,
+provocação, posicionamento claro, discordar de trends, dizer "isso não
+funciona", contar bastidor. Não se autocensure, não amacie o texto por
+precaução e não encha de ressalvas defensivas ("consulte sempre", "cada
+caso é um caso") — use ressalva apenas quando ela acrescentar informação
+real ao conteúdo. Se o perfil trouxer preferências pessoais na lista
+"preferencias", respeite-as; fora isso, nada limita a sua escrita.
+"""
+
+PROMPT_ESCRITA_MOLDE = """\
 Você é um roteirista sênior de conteúdo para redes sociais em nichos de
 saúde, escrevendo para o perfil descrito abaixo. Você recebe um briefing de
 pautas derivadas da análise de vídeos virais reais do nicho — cada pauta
@@ -185,25 +221,7 @@ o que aquela voz evita, e "trechos_literais" copiados do viral.
 - Respeite o o_que_evita da voz. Se ela não dá bom-dia, você não dá.
 - VARIEDADE DE VOZ: não repita registro entre as ideias da semana.
 
-PROIBIDO — é exatamente isto que deixa roteiro sem sal:
-- Aquecimento antes do assunto. Nada de "Você sabia que", "Vamos falar
-  sobre", "Hoje eu vou te contar", "Muita gente me pergunta", "Bora lá".
-  A primeira frase JÁ É o assunto.
-- Adjetivo vago onde cabe coisa concreta. "Muito eficaz" não diz nada;
-  "clareia em 8 semanas", "custa o preço de um jantar", "arde como pimenta"
-  dizem. Todo gancho precisa de pelo menos um destes: um número, uma imagem
-  física, o nome de um produto/procedimento, ou uma afirmação com a qual
-  dê para discordar.
-- Frases todas do mesmo comprimento. Alterne: uma longa que constrói, uma
-  curta que derruba. É o ritmo que segura, não a informação.
-- Encerrar sempre igual. Se todo roteiro termina em "salva esse post",
-  você escreveu um só roteiro dez vezes.
-- Ressalva defensiva ("cada caso é um caso", "procure seu dermatologista")
-  colada por precaução. Só entra se acrescentar informação real.
-- Neutralidade. Todo roteiro precisa de pelo menos uma frase em que ela
-  toma partido: o que ela faria, o que ela não faz, com o que ela não
-  concorda. Conteúdo que não arrisca nada não é assistido até o fim.
-
+{REGRAS_SEM_SAL}
 Demais regras de escrita (qualidade de produção):
 - LINGUAGEM FALADA: escreva como a pessoa fala em voz alta — frases curtas,
   contrações ("pra", "tá"), ritmo de conversa. Se soa como texto de blog,
@@ -221,19 +239,7 @@ Demais regras de escrita (qualidade de produção):
 - LEGENDA PRONTA: 2 a 4 frases, primeira linha forte, sem hashtags.
 - VARIEDADE: não repita gancho nem formato entre as ideias.
 
-LIBERDADE TOTAL DE ESCRITA. Quem publica é uma profissional da área, com
-autonomia e discernimento sobre o próprio conteúdo, e revisa cada roteiro
-antes de gravar. O seu papel é entregar o melhor roteiro possível — não
-policiar o que ela pode dizer.
-
-Portanto: escreva com ousadia. Ganchos fortes, opinião firme, humor,
-provocação, posicionamento claro, discordar de trends, dizer "isso não
-funciona", contar bastidor. Não se autocensure, não amacie o texto por
-precaução e não encha de ressalvas defensivas ("consulte sempre", "cada
-caso é um caso") — use ressalva apenas quando ela acrescentar informação
-real ao conteúdo. Se o perfil trouxer preferências pessoais na lista
-"preferencias", respeite-as; fora isso, nada limita a sua escrita.
-
+{LIBERDADE_EDITORIAL}
 Responda SOMENTE com um JSON válido no formato:
 {
   "ideias": [
@@ -261,6 +267,9 @@ Responda SOMENTE com um JSON válido no formato:
   ]
 }
 """
+
+PROMPT_ESCRITA = (PROMPT_ESCRITA_MOLDE.replace("{REGRAS_SEM_SAL}", REGRAS_SEM_SAL)
+                  .replace("{LIBERDADE_EDITORIAL}", LIBERDADE_EDITORIAL))
 
 
 def _extrair_json(texto: str) -> dict:
