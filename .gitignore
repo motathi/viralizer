@@ -6,3 +6,6 @@ saida/
 .navegador-coleta/
 dados/*.yaml.anterior
 config/nichos/*.anterior
+dados/playbook-*.json
+dados/manual-*.md
+dados/feedback-*.json

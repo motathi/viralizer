@@ -24,6 +24,8 @@ from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from src import feedback as feedback_mod
+
 RAIZ = Path(__file__).resolve().parent.parent.parent
 PORTA = 8777
 
@@ -110,6 +112,68 @@ def _iniciar(comando: list[str], acao: str) -> bool:
             return False
     threading.Thread(target=_executar, args=(comando, acao), daemon=True).start()
     return True
+
+
+def _md_para_html(md: str) -> str:
+    """Conversor mínimo de Markdown (títulos, listas, negrito, itálico, hr).
+
+    Só o que o manual usa — sem dependência nova para um leitor local.
+    """
+    import html as h
+    import re
+    saida, em_lista = [], False
+    for linha in md.splitlines():
+        s = linha.rstrip()
+        if s.startswith("- ") or s.startswith("* "):
+            if not em_lista:
+                saida.append("<ul>"); em_lista = True
+            saida.append(f"<li>{_inline(h.escape(s[2:]))}</li>")
+            continue
+        if em_lista:
+            saida.append("</ul>"); em_lista = False
+        if not s:
+            continue
+        if s.startswith("---"):
+            saida.append("<hr>")
+        elif s.startswith("# "):
+            saida.append(f"<h1>{_inline(h.escape(s[2:]))}</h1>")
+        elif s.startswith("## "):
+            saida.append(f"<h2>{_inline(h.escape(s[3:]))}</h2>")
+        elif s.startswith("### "):
+            saida.append(f"<h3>{_inline(h.escape(s[4:]))}</h3>")
+        else:
+            saida.append(f"<p>{_inline(h.escape(s))}</p>")
+    if em_lista:
+        saida.append("</ul>")
+    return "\n".join(saida)
+
+
+def _inline(texto: str) -> str:
+    import re
+    texto = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", texto)
+    return re.sub(r"(?<![\w*])_(.+?)_(?![\w*])|\*(.+?)\*", lambda m: f"<i>{m.group(1) or m.group(2)}</i>", texto)
+
+
+PAGINA_MANUAL = """<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Manual do nicho</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --grad: linear-gradient(45deg,#405DE6,#833AB4 30%,#C13584 50%,#E1306C 70%,#F77737);
+          --tinta:#1c1b1f; --suave:#6f6b76; --borda:#eceaef }
+  * { box-sizing:border-box } body { margin:0; font-family:Inter,"Segoe UI",system-ui,sans-serif;
+  color:var(--tinta); background:#fff; line-height:1.6; padding:36px 18px 60px }
+  main { max-width:680px; margin:0 auto }
+  h1 { font-size:1.6rem; font-weight:800; letter-spacing:-.025em; margin:0 0 6px }
+  h1 + p { color:var(--suave); margin-top:0 }
+  h2 { font-size:.78rem; font-weight:700; letter-spacing:.11em; text-transform:uppercase;
+       color:var(--suave); margin:34px 0 10px; padding-top:18px; border-top:1px solid var(--borda) }
+  ul { padding-left:20px } li { margin:6px 0 } p { margin:8px 0 }
+  hr { border:0; border-top:1px solid var(--borda); margin:28px 0 }
+  .vazio { background:#fbfafc; border:1px solid var(--borda); border-radius:14px; padding:18px }
+  a.voltar { display:inline-block; margin-bottom:22px; color:var(--suave); text-decoration:none; font-size:.9rem }
+</style></head><body><main><a class="voltar" href="/">← painel</a>
+{{CORPO}}
+</main></body></html>"""
 
 
 def _tem_chave() -> bool:
@@ -354,6 +418,16 @@ PAGINA = """<!DOCTYPE html>
         <button id="testar">Testar</button>
       </li>
       <li class="item">
+        <span class="icone">📘</span>
+        <div>
+          <b>Manual do nicho</b>
+          <p>O que o radar aprendeu até agora: estruturas que viralizam, vozes,
+             aberturas com exemplos, vocabulário — consolidado semana a semana e
+             lido pelo roteirista antes de escrever.</p>
+        </div>
+        <a class="btn" id="manual" href="/manual" target="_blank" rel="noopener">Ler</a>
+      </li>
+      <li class="item">
         <span class="icone">🎯</span>
         <div>
           <b>Otimizar termos de busca</b>
@@ -514,6 +588,19 @@ class Painel(BaseHTTPRequestHandler):
             self._json(versao_cache)
         elif caminho == "/chaves":
             self._json({"anthropic": _tem_chave()})
+        elif caminho == "/manual":
+            nichos = _nichos()
+            consulta = self.path.partition("?")[2]
+            nicho = dict(x.split("=", 1) for x in consulta.split("&")
+                         if "=" in x).get("nicho") or (nichos[0] if nichos else "")
+            arquivo = RAIZ / "dados" / f"manual-{nicho}.md"
+            if arquivo.exists():
+                corpo = _md_para_html(arquivo.read_text(encoding="utf-8"))
+            else:
+                corpo = ('<div class="vazio"><b>O manual ainda não existe.</b><br>'
+                         'Ele é escrito ao fim de cada geração de agenda, a partir do que a '
+                         'pesquisa da semana descobriu. Gere a primeira agenda e volte aqui.</div>')
+            self._responder(PAGINA_MANUAL.replace("{{CORPO}}", corpo).encode("utf-8"))
         elif caminho == "/status":
             with trava:
                 self._json({**estado, "agenda": _info_agenda()})
@@ -555,6 +642,18 @@ class Painel(BaseHTTPRequestHandler):
             ok = _iniciar([sys.executable, "-m", "src.painel.otimizar",
                            "--nicho", nicho], "Otimizando os termos de busca")
             self._json({"ok": ok})
+        elif caminho == "/feedback":
+            tamanho = int(self.headers.get("Content-Length") or 0)
+            try:
+                dados = json.loads(self.rfile.read(tamanho).decode("utf-8", "ignore"))
+            except ValueError:
+                self._json({"ok": False}); return
+            nicho = str(dados.get("nicho", ""))
+            if nicho not in _nichos():
+                self._json({"ok": False, "erro": "nicho inválido"}); return
+            total = feedback_mod.registrar(RAIZ, nicho, str(dados.get("semana", "")),
+                                           dados.get("ideias") or [])
+            self._json({"ok": True, "registradas": total})
         elif caminho == "/chave":
             tamanho = int(self.headers.get("Content-Length") or 0)
             corpo = self.rfile.read(tamanho).decode("utf-8", "ignore")

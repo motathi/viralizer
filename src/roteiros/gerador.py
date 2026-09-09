@@ -13,8 +13,14 @@ Pipeline em duas etapas para equilibrar custo e qualidade:
 import json
 import re
 from collections import Counter
+from pathlib import Path
 
 import anthropic
+
+from src.feedback import preferencias as preferencias_reveladas
+from src.roteiros import manual as manual_mod
+from src.roteiros import playbook as pb
+from src.texto import parecidos, tokens as _tokens
 
 MODELO_PESQUISA = "claude-haiku-4-5"
 MODELO_ESCRITA = "claude-opus-5"
@@ -126,6 +132,14 @@ os sinais dos demais assuntos mesmo que tenham métrica menor (desde que
 ainda virais), ou entregue menos pautas. Variedade de assunto vale mais que
 métrica bruta.
 
+CONHECIMENTO ACUMULADO: o campo "conhecimento_acumulado" traz o que as
+pesquisas das semanas anteriores já consolidaram (padrões e vozes vistos em
+2+ semanas) e o que está em observação. Use para separar o estrutural do
+passageiro: um padrão consolidado que se repete esta semana é regra do
+nicho; um que sumiu merece nota ("padrão X não apareceu esta semana"); algo
+que não está lá é NOVO e deve ser destacado como tal no padroes_da_semana.
+Não deixe o acumulado te cegar: os virais desta semana mandam.
+
 MEMÓRIA (anti-repetição): o campo "ja_publicado" traz temas e ganchos já
 usados em semanas anteriores. É PROIBIDO repetir ou apenas reformular
 qualquer um deles — inclusive versões próximas da mesma tese (ex.: se já
@@ -143,6 +157,18 @@ linguagem ao escrever o roteiro (mesma mecânica de gancho, mesma voz,
 adaptadas à autoridade médica do perfil — sem copiar texto). Não invente dados nem referências: use somente o que está no
 briefing (pode reformular a redação, nunca o conteúdo factual). Copie os
 campos virais_origem e padrao_aplicado da pauta para a ideia correspondente.
+
+MANUAL DO NICHO: o campo "manual_do_nicho" é o conhecimento acumulado de
+várias semanas de virais deste nicho — estruturas comprovadas com métrica,
+vozes, aberturas com exemplos literais, vocabulário, o que evitar. Leia
+antes de escrever e use as estruturas comprovadas. Não é regra rígida: o
+briefing desta semana manda quando conflitar, e o manual não substitui a
+linguagem de cada pauta — ele afina o ouvido, a pauta dá a voz.
+
+PREFERÊNCIAS REVELADAS: se vier o campo "preferencias_reveladas", é o que
+ela escolheu gravar e o que descartou nas semanas anteriores. Trate como
+sinal de gosto, não como regra: pese a favor do que ela escolhe, e não
+proponha nada parecido com os assuntos descartados.
 
 A VOZ É PARTE DA PAUTA — leia isto antes de tudo.
 Cada pauta traz um campo "linguagem" decifrado do viral que a originou:
@@ -290,25 +316,8 @@ def _rodar(client, *, modelo, system, conteudo, tools=None, max_tokens=16000,
         return "".join(b.text for b in response.content if b.type == "text")
 
 
-# Palavras que aparecem em qualquer legenda e não distinguem assunto nenhum
-PALAVRAS_VAZIAS = {
-    "para", "como", "isso", "esse", "essa", "seus", "suas", "mais", "menos",
-    "você", "voce", "vocês", "voces", "então", "entao", "porque", "quando",
-    "sobre", "todos", "todas", "muito", "muita", "pode", "posso", "fazer",
-    "aqui", "agora", "hoje", "dica", "dicas", "vídeo", "video", "gente",
-    "with", "this", "that", "your", "from", "have", "what", "when", "will",
-    "para", "pero", "como", "esto", "esta", "todo", "toda", "muy",
-}
-
-
-def _tokens(texto: str) -> set[str]:
-    """Palavras significativas de um texto, para comparar assunto."""
-    return {p for p in re.findall(r"[a-zà-ú]{4,}", texto.lower())
-            if p not in PALAVRAS_VAZIAS}
-
-
 def _mesmo_assunto(a: set, b: set, limite: float) -> bool:
-    return bool(a and b) and len(a & b) / len(a | b) > limite
+    return parecidos(a, b, limite)
 
 
 def _selecionar_variado(itens: list, limite: int, max_por_autor: int = 2,
@@ -448,10 +457,18 @@ def _conferir_variedade(briefing: dict) -> None:
               "a coleta desta semana pode ter vindo dominada por uma trend só")
 
 
-def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) -> dict:
-    """Gera as ideias/roteiros da semana em duas etapas (pesquisa + escrita)."""
+def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None,
+                   raiz: Path | None = None, nicho: str | None = None) -> dict:
+    """Gera as ideias/roteiros da semana em duas etapas (pesquisa + escrita).
+
+    Com `raiz` e `nicho`, o caderno de aprendizado entra na pesquisa, absorve
+    o que ela descobriu, vira manual e chega ao roteirista — é assim que a
+    semana seguinte começa de onde esta parou.
+    """
     client = anthropic.Anthropic()
     quantidade = config["geracao"]["ideias_por_semana"]
+    aprende = raiz is not None and nicho is not None
+    caderno = pb.carregar(raiz, nicho) if aprende else pb.vazio()
 
     # Etapa 1 — pesquisa e curadoria com modelo barato + busca web
     pedido_pesquisa = {
@@ -460,7 +477,10 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
         "quantidade_de_pautas": quantidade,
         "sinais_coletados": _compactar_sinais(sinais),
         "ja_publicado": historico or [],
+        "conhecimento_acumulado": pb.resumo_para_pesquisa(caderno),
     }
+    if caderno["semanas"]:
+        print(f"📘 Caderno do nicho: {len(caderno['semanas'])} semana(s) de aprendizado")
     print(f"   [1/2] Pesquisa e curadoria ({MODELO_PESQUISA})...")
     briefing = _extrair_json(
         _rodar(
@@ -486,6 +506,24 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
     _conferir_variedade(briefing)
     print(f"       {len(briefing['pautas'])} pautas com âncora viral verificada")
 
+    # o que a pesquisa descobriu entra no caderno e vira manual
+    manual_texto = ""
+    prefs = None
+    if aprende:
+        pb.absorver(caderno, briefing)
+        pb.salvar(raiz, nicho, caderno)
+        prefs = preferencias_reveladas(raiz, nicho)
+        print(f"   [📘] Destilando o manual do nicho ({MODELO_PESQUISA})...")
+        try:
+            manual_texto = manual_mod.destilar(client, config, pb.resumo_para_escrita(caderno), prefs)
+            manual_mod.salvar(raiz, nicho, manual_texto)
+            c = pb.classificar(caderno)
+            print(f"        {len(c['padroes']['consolidado'])} estruturas consolidadas, "
+                  f"{len(c['padroes']['em_observacao'])} em observação")
+        except Exception as e:  # noqa: BLE001 - o manual é apoio, não pode travar a semana
+            print(f"        (manual não atualizado: {type(e).__name__}) — usando o anterior")
+            manual_texto = manual_mod.carregar(raiz, nicho)
+
     # Etapa 2 — escrita dos roteiros com o modelo forte, sem busca
     pedido_escrita = {
         "nicho": config["nome"],
@@ -495,6 +533,10 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None) ->
         "duracao_alvo_segundos": config["geracao"]["duracao_alvo_segundos"],
         "briefing": briefing,
     }
+    if manual_texto:
+        pedido_escrita["manual_do_nicho"] = manual_mod.para_prompt(manual_texto)
+    if prefs:
+        pedido_escrita["preferencias_reveladas"] = prefs
     print(f"   [2/2] Escrita dos roteiros ({MODELO_ESCRITA})...")
     roteiros = _extrair_json(
         _rodar(

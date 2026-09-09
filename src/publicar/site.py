@@ -270,7 +270,25 @@ const abertas = new Set();
 let filtro = 'todas';
 let foco = null;
 
-function salvar() { localStorage.setItem(CHAVE, JSON.stringify(estado)); }
+function salvar() {
+  localStorage.setItem(CHAVE, JSON.stringify(estado));
+  avisarPainel();
+}
+const LOCAL = ['127.0.0.1', 'localhost'].includes(location.hostname);
+let aviso = null;
+function avisarPainel() {
+  if (!LOCAL || !DADOS.nicho) return;
+  clearTimeout(aviso);
+  aviso = setTimeout(() => {
+    const ideias = DADOS.ideias.map((d, i) => {
+      const s = st(i);
+      const estadoIdeia = s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum';
+      return {titulo: d.titulo, pilar: d.pilar, registro: d.registro, estado: estadoIdeia};
+    });
+    fetch('/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({nicho: DADOS.nicho, semana: DADOS.semana, ideias})}).catch(() => {});
+  }, 400);
+}
 function st(id) { return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false, formato: 'reels', gancho: 0}); }
 
 function toast(msg) {
@@ -644,7 +662,8 @@ def _seletor_semanas(semanas: list[str], semana_atual: str | None, prefixo: str)
 
 def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
                   semanas: list[str] | None = None, semana_atual: str | None = None,
-                  prefixo: str = "") -> None:
+                  prefixo: str = "",
+                  nicho: str | None = None) -> None:
     """Escreve a agenda da semana como web/index.html.
 
     `semanas` são as agendas arquivadas (mais recente primeiro) exibidas no
@@ -657,11 +676,14 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
     cartoes = "".join(_cartao(ideia, i) for i, ideia in enumerate(ideias))
 
     dados = {
+        "nicho": nicho or "",
         "semana": inicio.isoformat(),
         "gerado_em": date.today().isoformat(),
         "ideias": [
             {
                 "titulo": i["titulo"],
+                "pilar": i.get("pilar", ""),
+                "registro": (i.get("voz") or {}).get("registro", ""),
                 "ganchos": [g for g in i["ganchos_3s"] if g],
                 "reels": i["roteiro_reels"],
                 "carrossel": i["roteiro_carrossel"],
@@ -734,7 +756,8 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
     destino.write_text(html, encoding="utf-8")
 
 
-def publicar_agenda(config: dict, roteiros: dict, sinais: dict, raiz: Path) -> Path:
+def publicar_agenda(config: dict, roteiros: dict, sinais: dict, raiz: Path,
+                    nicho: str | None = None) -> Path:
     """Publica a agenda da semana e a arquiva, mantendo o histórico no painel.
 
     Escreve web/index.html (com o seletor de semanas anteriores) e uma cópia
@@ -751,7 +774,8 @@ def publicar_agenda(config: dict, roteiros: dict, sinais: dict, raiz: Path) -> P
     arquivadas = sorted(
         (p.stem for p in pasta_semanas.glob("*.html") if p.stem != semana), reverse=True
     )
-    publicar_site(config, roteiros, sinais, web / "index.html", semanas=arquivadas)
+    publicar_site(config, roteiros, sinais, web / "index.html", semanas=arquivadas,
+                  nicho=nicho)
     publicar_site(config, roteiros, sinais, pasta_semanas / f"{semana}.html",
-                  semana_atual=semana, prefixo="../")
+                  semana_atual=semana, prefixo="../", nicho=nicho)
     return web / "index.html"

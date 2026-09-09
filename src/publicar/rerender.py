@@ -29,7 +29,8 @@ def main() -> None:
     dados = json.loads(
         (RAIZ / "dados" / f"{args.nicho}.json").read_text(encoding="utf-8")
     )
-    destino = publicar_agenda(config, dados["roteiros"], dados["sinais"], RAIZ)
+    destino = publicar_agenda(config, dados["roteiros"], dados["sinais"], RAIZ,
+                              nicho=args.nicho)
     print(f"🌐 Site re-renderizado: {destino}")
 
 

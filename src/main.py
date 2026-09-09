@@ -98,7 +98,7 @@ def main() -> None:
     if historico:
         print(f"🧠 Memória: {len(historico)} ideias já publicadas — não serão repetidas")
     print("✍️  Gerando ideias e roteiros embasados (isso leva alguns minutos)...")
-    roteiros = gerar_roteiros(config, sinais, historico)
+    roteiros = gerar_roteiros(config, sinais, historico, raiz=RAIZ, nicho=args.nicho)
     (saida / "roteiros.json").write_text(
         json.dumps(roteiros, ensure_ascii=False, indent=2), encoding="utf-8"
     )
@@ -111,7 +111,7 @@ def main() -> None:
 
     if args.publicar_site:
         from src.publicar.site import publicar_agenda
-        destino = publicar_agenda(config, roteiros, sinais, RAIZ)
+        destino = publicar_agenda(config, roteiros, sinais, RAIZ, nicho=args.nicho)
         # persiste a geração para permitir re-render (mudança de design)
         # sem custo de IA — ver src/publicar/rerender.py
         dados_dir = RAIZ / "dados"
