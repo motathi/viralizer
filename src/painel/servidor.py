@@ -62,6 +62,8 @@ DICAS = [
      "Clique em 🔑 Conectar TikTok para fazer login e tente de novo."),
     ("Failed to establish a new connection", "🌐 Sem conexão com a internet, ou o serviço "
                                              "está fora do ar. Tente de novo em alguns minutos."),
+    ("Author identity unknown", "🪪 O Git não sabia quem você é. O painel já configurou isso "
+     "neste projeto — clique em Publicar de novo."),
     ("could not read Username", "🔐 O Git não está autenticado nesta máquina — por isso não "
                                 "deu para publicar. As alterações ficaram salvas aqui."),
 ]
@@ -343,6 +345,10 @@ PAGINA = """<!DOCTYPE html>
            border:1.5px solid var(--borda); background:var(--painel); color:var(--tinta);
            cursor:pointer }
 
+  .log-caixa { position:relative }
+  .log-caixa #copiarLog { position:absolute; top:10px; right:10px; font-size:.78rem; padding:6px 12px;
+    background:#2a272e; border-color:#3d3944; color:#efe9f1 }
+  .log-caixa #copiarLog:hover { border-color:var(--rosa); color:#fff }
   #log { background:#1b191e; color:#efe9f1; font-family:ui-monospace,Menlo,Consolas,monospace;
          font-size:.8rem; line-height:1.55; border-radius:14px; padding:16px 18px;
          white-space:pre-wrap; max-height:400px; overflow:auto; display:none }
@@ -478,7 +484,10 @@ PAGINA = """<!DOCTYPE html>
     </ul>
   </section>
 
-  <div id="log"></div>
+  <div class="log-caixa" id="logCaixa" hidden>
+    <button id="copiarLog" title="Copia tudo que está na tela preta">📋 Copiar tela preta</button>
+    <div id="log"></div>
+  </div>
   <p class="rodape">💡 Pode deixar esta aba aberta enquanto trabalha — o progresso
      aparece aqui. A janela preta precisa continuar aberta: é ela que faz o trabalho.</p>
 </div>
@@ -518,6 +527,7 @@ function pintar(e) {
     const colado = l.scrollTop + l.clientHeight >= l.scrollHeight - 30;
     l.textContent = e.log.join('\\n');
     l.classList.add('visivel');
+    $('#logCaixa').hidden = false;
     if (colado) l.scrollTop = l.scrollHeight;
   }
 }
@@ -585,6 +595,12 @@ for (const [id, rota] of Object.entries(ACOES)) {
   };
 }
 
+$('#copiarLog').onclick = async () => {
+  const b = $('#copiarLog');
+  try { await navigator.clipboard.writeText($('#log').textContent); b.textContent = '✅ Copiado'; }
+  catch (_) { b.textContent = '⚠️ Não deu — selecione o texto e use Ctrl+C'; }
+  setTimeout(() => b.textContent = '📋 Copiar tela preta', 2500);
+};
 carregarNichos();
 conferirChave();
 conferirVersao();

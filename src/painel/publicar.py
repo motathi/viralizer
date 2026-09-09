@@ -16,6 +16,19 @@ def _git(*args: str) -> subprocess.CompletedProcess:
                           capture_output=True, check=False)
 
 
+def _garantir_identidade() -> None:
+    """Sem nome e e-mail o Git recusa o commit — e o site nunca atualiza.
+
+    Numa máquina recém-instalada isso é o normal. Gravamos uma identidade
+    só neste repositório (sem --global), para não mexer em nada fora dele.
+    """
+    if _git("config", "user.email").stdout.strip() and _git("config", "user.name").stdout.strip():
+        return
+    _git("config", "user.name", "Radar de Conteúdo Viral")
+    _git("config", "user.email", "radar@painel.local")
+    print("🪪 Identidade do Git configurada neste projeto (só para os commits do painel).")
+
+
 def main() -> int:
     if not (RAIZ / "web" / "index.html").exists():
         print("❌ Nenhuma agenda encontrada. Gere a agenda antes de publicar.")
@@ -26,6 +39,7 @@ def main() -> int:
         print("ℹ️  Nada novo para publicar — o site já está atualizado.")
         return 0
 
+    _garantir_identidade()
     commit = _git("commit", "-m", f"chore: agenda de {date.today().strftime('%d/%m/%Y')}")
     if commit.returncode != 0:
         print(f"❌ Não consegui salvar as alterações:\n{commit.stdout}{commit.stderr}")
@@ -33,7 +47,11 @@ def main() -> int:
     print("📦 Alterações salvas.")
 
     print("☁️  Enviando para o GitHub...")
-    envio = _git("push")
+    sync = _git("pull", "--rebase", "--autostash")
+    if sync.returncode != 0:
+        print(f"❌ Não consegui juntar com a versão do servidor:\n{sync.stdout}{sync.stderr}")
+        return 1
+    envio = _git("push", "-u", "origin", "HEAD")
     if envio.returncode != 0:
         print(f"❌ Falha ao enviar:\n{envio.stdout}{envio.stderr}\n"
               "Dica: verifique sua conexão e se o Git está autenticado nesta máquina.")
