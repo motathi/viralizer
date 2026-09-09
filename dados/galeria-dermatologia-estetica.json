@@ -1,0 +1,66 @@
+{
+  "itens": [
+    {
+      "id": "5e46e1fee3",
+      "atualizado_em": "2026-09-09T11:21",
+      "ideia": "Tudo que meus pacientes recebem na minha consulta online de acne, fiquem até o final que vou falar o valor \nVideo mostrando embalando o kit de produtos de brinde, colocando na caixa, com a receita, e o cheirinho.\nO foco é mostrar o processo e cuidado com os pacientes, o diferencial de enviar em uma caixa com brindes.",
+      "formato": "video",
+      "estilo": "Bastidor / humanizado",
+      "tom": "Acolhedor",
+      "tamanho": "60s",
+      "roteiro": {
+        "titulo": "O que NÃO vai dentro",
+        "angulo": "Enquanto embala, ela lista o que se recusa a colocar na caixa — posicionamento contra kit padronizado, ácido no dia um e promessa de prazo — e só no fim mostra o que vai.",
+        "gancho": "Tem quatro coisas que eu me recuso a colocar dentro dessa caixa. E é justamente por isso que ela funciona.",
+        "blocos": [
+          {
+            "rotulo": "0-4s",
+            "texto": "Tem quatro coisas que eu me recuso a colocar dentro dessa caixa. E é por isso que ela funciona.",
+            "direcao": "Caixa aberta e vazia na mesa. Suas mãos apoiadas nas laterais. Corte pro seu rosto, sério. Sem música."
+          },
+          {
+            "rotulo": "4-13s",
+            "texto": "Primeira: kit pronto. Eu não compro caixa fechada e mando igual pra todo mundo. Pele oleosa com nódulo e pele seca com cravinho não usam a mesma coisa, e quem te vende isso sabe disso.",
+            "direcao": "Você empurrando pra fora do quadro uma caixinha genérica. Texto na tela: 'kit padrão = chute embalado'."
+          },
+          {
+            "rotulo": "13-23s",
+            "texto": "Segunda: ácido pra usar no dia um. Pele inflamada que recebe ácido de cara descama, arde e a paciente para na primeira semana. Eu entrego o ácido dentro da caixa, mas com data pra começar.",
+            "direcao": "Close num frasco com um adesivo escrito à mão: 'começar dia 15'. Segurar o close 2 segundos."
+          },
+          {
+            "rotulo": "23-32s",
+            "texto": "Terceira: promessa de prazo. Ninguém aqui vai ouvir de mim que em trinta dias some. Acne inflamatória responde em oito a doze semanas e mancha demora mais que isso.",
+            "direcao": "Você olhando pra câmera, sem embalar, mãos paradas. Texto na tela: '8 a 12 semanas'."
+          },
+          {
+            "rotulo": "32-40s",
+            "texto": "Quarta: caixa muda. Sem receita explicada, sem nome, sem ninguém pra perguntar depois. Por isso vai o meu WhatsApp e o retorno em trinta dias já incluído.",
+            "direcao": "Colocando o cartão de contato dentro da caixa. Corte rápido de uma conversa no celular (nome borrado)."
+          },
+          {
+            "rotulo": "40-50s",
+            "texto": "Agora o que vai: os produtos que eu escolhi olhando a sua pele, os dois protocolos impressos, as amostras do que vem depois, o bilhete com o seu nome e um sachê que deixa a caixa inteira cheirosa.",
+            "direcao": "Sequência acelerada de montagem, um item por corte, música entra. Termina com você cheirando o sachê e sorrindo."
+          },
+          {
+            "rotulo": "50-60s",
+            "texto": "Consulta online, essa caixa e o retorno: [SEU VALOR]. Se você já gastou isso em farmácia esse ano sem saber o que estava passando, você entendeu meu ponto. Comenta EU QUERO.",
+            "direcao": "Você com a caixa fechada no colo, plano médio. Valor grande na tela. Fala a última frase com meio sorriso."
+          }
+        ],
+        "legenda": "Não existe kit de acne que sirva pra todo mundo — e quem te vende um sabe disso. Na minha caixa não entra ácido pra começar no dia um, não entra promessa de trinta dias e não entra produto que eu não escolhi olhando a sua pele. Comenta EU QUERO que eu te mando como funciona a consulta online.",
+        "hashtags": [
+          "#acne",
+          "#peleacneica",
+          "#dermatologiaestetica",
+          "#kitdeacne",
+          "#consultaonline",
+          "#cuidadoscomapele"
+        ],
+        "por_que_funciona": "A estrutura de negação cria curiosidade acumulada (o espectador fica pra saber o que sobra) e cada item recusado é uma tomada de posição concreta, com número e cena, em vez de elogio ao próprio serviço."
+      },
+      "criado_em": "2026-09-09T11:21"
+    }
+  ]
+}
