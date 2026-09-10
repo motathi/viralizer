@@ -2,15 +2,15 @@
 
 Fluxo: formulário (formato, estilo, tom, tamanho) -> a IA escreve três
 opções em ângulos distintos -> a pessoa escolhe uma -> refina conversando
--> salva na galeria. Tudo com o manual do nicho e as preferências dela,
-para o estúdio ter a mesma inteligência da agenda semanal.
+-> salva. Tudo com o manual do nicho e as preferências dela, para o
+estúdio ter a mesma inteligência da agenda semanal.
 
-Roda dentro do painel (127.0.0.1): é onde a chave existe. A galeria vai
-para o site quando a pessoa publica.
+O que é salvo entra na agenda, junto com as ideias das semanas geradas —
+não há mais galeria à parte. As funções de leitura e gravação continuam
+aqui porque é este arquivo que o painel e a publicação usam.
 """
 
 import json
-import re
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -287,8 +287,9 @@ def tratar(h, metodo: str, caminho: str, consulta: str, corpo: bytes) -> bool:
     if metodo == "GET":
         if caminho == "/estudio":
             h._responder(PAGINA_ESTUDIO.encode("utf-8")); return True
-        if caminho == "/galeria":
-            h._responder(PAGINA_GALERIA.encode("utf-8")); return True
+        if caminho == "/galeria":  # a galeria virou parte da agenda
+            h.send_response(302); h.send_header("Location", "/agenda")
+            h.send_header("Content-Length", "0"); h.end_headers(); return True
         if caminho == "/estudio/menus":
             nichos = _nichos()
             publico = _config(nichos[0]).get("perfil", {}).get("publico", "") if nichos else ""
@@ -612,76 +613,5 @@ async function reabrir(id) {
   $('#mensagens').innerHTML = ''; bolha('ia', 'Reabri da galeria. O que você quer mudar?'); renderRoteiro(); etapa(3);
 }
 carregarMenus();
-</script></body></html>
-""".replace("__ESTILO__", ESTILO_COMUM)
-
-PAGINA_GALERIA = """<!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Galeria — Radar de Conteúdo Viral</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>__ESTILO__
-  .wrap { max-width:760px }
-  .item { margin-bottom:12px }
-  .item summary { list-style:none; cursor:pointer; display:flex; flex-wrap:wrap; gap:8px; align-items:center }
-  .item summary::-webkit-details-marker { display:none }
-  .item summary b { flex:1 1 220px }
-  .item .quando { color:var(--suave); font-size:.8rem }
-  .item .corpo { margin-top:14px }
-  .item .acoes { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px }
-  .vazio { color:var(--suave); background:var(--painel); border:1px solid var(--borda); border-radius:14px; padding:20px }
-</style></head><body><div class="wrap">
-  <a class="voltar" href="/">← painel</a>
-  <h1>Galeria <span>de ideias</span></h1>
-  <p class="sub">Tudo o que você criou no estúdio. Vai junto para o site quando você publica.</p>
-  <div style="margin-bottom:18px"><a class="btn" href="/estudio">✨ Nova ideia no estúdio</a></div>
-  <div id="lista"></div>
-</div>
-<script>
-const $ = s => document.querySelector(s);
-let NICHO = '';
-function escapar(s) { return String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-const ROTULOS = { video: '🎬 Vídeo', carrossel: '🖼️ Carrossel', stories: '📱 Stories' };
-function blocosHtml(r) {
-  return (r.blocos || []).map(b => `<div class="bloco"><div class="rotulo">${escapar(b.rotulo)}</div>
-    <p class="texto">${escapar(b.texto)}</p>${b.direcao ? `<p class="direcao">🎬 ${escapar(b.direcao)}</p>` : ''}</div>`).join('');
-}
-function textoParaCopiar(r) {
-  const linhas = [r.titulo, '', r.gancho ? 'GANCHO: ' + r.gancho : ''];
-  (r.blocos||[]).forEach(b => { linhas.push('', b.rotulo.toUpperCase(), b.texto); if (b.direcao) linhas.push('  🎬 ' + b.direcao); });
-  linhas.push('', 'LEGENDA', r.legenda, '', (r.hashtags||[]).join(' '));
-  return linhas.join('\\n');
-}
-async function carregar() {
-  const r = await (await fetch('/galeria/itens')).json();
-  NICHO = r.nicho;
-  if (!r.itens.length) { $('#lista').innerHTML = '<div class="vazio">Nada salvo ainda. Crie a primeira ideia no estúdio.</div>'; return; }
-  $('#lista').innerHTML = r.itens.map(i => `<details class="cartao item" data-id="${escapar(i.id)}">
-    <summary><span class="chip">${ROTULOS[i.formato] || escapar(i.formato)}</span>${i.tom ? `<span class="chip">${escapar(i.tom)}</span>` : ''}
-      <b>${escapar(i.roteiro.titulo || i.ideia)}</b><span class="quando">${escapar((i.atualizado_em||'').slice(0,10))}</span></summary>
-    <div class="corpo">
-      ${i.roteiro.gancho ? `<p class="gancho">🪝 ${escapar(i.roteiro.gancho)}</p>` : ''}
-      ${blocosHtml(i.roteiro)}
-      ${i.roteiro.legenda ? `<h2 style="margin-top:14px">Legenda</h2><div class="legenda">${escapar(i.roteiro.legenda)}</div>` : ''}
-      <div class="tags">${(i.roteiro.hashtags||[]).map(escapar).join(' ')}</div>
-      <p style="color:var(--suave);font-size:.82rem;margin-top:12px">Ideia original: ${escapar(i.ideia)}</p>
-      <div class="acoes">
-        <a class="btn" href="/estudio?id=${escapar(i.id)}">✏️ Reabrir no estúdio</a>
-        <button class="copiar">📋 Copiar</button>
-        <button class="apagar">🗑️ Apagar</button>
-      </div>
-    </div></details>`).join('');
-  $('#lista').querySelectorAll('details').forEach(d => {
-    const item = r.itens.find(i => i.id === d.dataset.id);
-    d.querySelector('.copiar').onclick = async () => { try { await navigator.clipboard.writeText(textoParaCopiar(item.roteiro)); d.querySelector('.copiar').textContent = '✅ Copiado'; } catch (_) {} };
-    d.querySelector('.apagar').onclick = async () => {
-      if (!confirm('Apagar "' + (item.roteiro.titulo || item.ideia) + '"?')) return;
-      await fetch('/galeria/apagar', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({nicho: NICHO, id: item.id})});
-      carregar();
-    };
-  });
-}
-carregar();
 </script></body></html>
 """.replace("__ESTILO__", ESTILO_COMUM)

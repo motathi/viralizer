@@ -240,13 +240,14 @@
 </head>
 <body>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/><stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>
-<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html">📅 Agenda</a><a href="estudio.html" class="ativo" aria-current="page">✨ Estúdio</a><a href="galeria.html">💡 Galeria</a><a href="manual.html">📘 Manual</a><a href="ferramentas.html">🧰 Ferramentas</a></div></div></nav>
+<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html">📅 Agenda</a><a href="estudio.html" class="ativo" aria-current="page">✨ Estúdio</a><a href="manual.html">📘 Manual</a><a href="ferramentas.html">🧰 Ferramentas</a></div></div></nav>
 
 <header class="hero container">
   <div class="selo">Estúdio de roteiros</div>
   <h1>Sua ideia, <span>três roteiros</span></h1>
   <p class="sub">Você dá a ideia e escolhe formato, estilo e tom. A IA escreve três opções em ângulos
-  diferentes; você escolhe uma, ajusta conversando e salva na galeria. Não precisa configurar nada.</p>
+  diferentes; você escolhe uma, ajusta conversando e salva — a ideia entra na agenda junto com as outras.
+  Não precisa configurar nada.</p>
 </header>
 <section class="estudio container">
   <div class="banner-aviso alerta" id="aviso-chave"><span id="aviso-chave-texto"></span>
@@ -295,7 +296,7 @@
         </div>
         <div class="mensagem erro" id="erro3" hidden></div>
         <div class="acoes">
-          <button class="btn primario" id="salvar">💾 Salvar na galeria</button>
+          <button class="btn primario" id="salvar">💾 Salvar na agenda</button>
           <button class="btn" id="copiar">📋 Copiar</button>
           <button class="btn" id="voltar2">← Ver as 3 opções</button>
         </div>
@@ -368,6 +369,14 @@ const Radar = (() => {
   const senha = () => { try { return (localStorage.getItem(SENHA) || '').trim(); } catch (_) { return ''; } };
   const salvarSenha = v => { try { localStorage.setItem(SENHA, String(v || '').trim()); return true; } catch (_) { return false; } };
   const apagarSenha = () => { try { localStorage.removeItem(SENHA); } catch (_) {} };
+
+  // ── estado da agenda: lista, feita, descartada, gancho e formato ──
+  // Uma chave só para todas as semanas — o que é descartado some da lista
+  // inteira. Este é o ponto por onde o estado passa a ser compartilhado
+  // entre aparelhos quando houver banco: só estas quatro funções mudam.
+  const chaveEstado = nicho => 'radar-estado:' + (nicho || 'padrao');
+  const estadoAgenda = nicho => ler(chaveEstado(nicho), {});
+  const gravarEstadoAgenda = (nicho, estado) => gravar(chaveEstado(nicho), estado);
 
   // ── escolhas na agenda (feedback) ─────────────────────────────────
   const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
@@ -455,6 +464,10 @@ const Radar = (() => {
     return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
   }
 
+  // As ideias do estúdio, que agora aparecem na própria agenda.
+  const minhasIdeias = (nicho, publicadas) => galeriaTodos(nicho, publicadas || []);
+  const apagarMinhaIdeia = (nicho, id) => galeriaApagar(nicho, id);
+
   function limparRoteiro(r) {
     return {
       titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
@@ -514,11 +527,11 @@ const Radar = (() => {
       const r = await fetch('/api/ia', {method: 'GET', headers: {'accept': 'application/json'}});
       if (r.ok) {
         const d = await r.json();
-        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, servidor: true};
+        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, painel: !!d.painel, servidor: true};
         return estadoCache;
       }
     } catch (_) {}
-    estadoCache = {configurada: false, senha: false, servidor: false};
+    estadoCache = {configurada: false, senha: false, painel: false, servidor: false};
     return estadoCache;
   }
 
@@ -637,6 +650,7 @@ const Radar = (() => {
   return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
           chave, salvarChave, apagarChave, senha, salvarSenha, apagarSenha, estadoIA,
           registrarFeedback, feedback, preferencias,
+          estadoAgenda, gravarEstadoAgenda, minhasIdeias, apagarMinhaIdeia,
           galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
           limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
           exportarTudo, importarTudo, chamarIA, extrairJson};
@@ -779,22 +793,21 @@ $('#pedido').onkeydown = e => { if (e.key === 'Enter') enviar(); };
 $('#salvar').onclick = () => {
   idSalvo = Radar.galeriaSalvar(CFG.nicho, {id: idSalvo, ideia: params.ideia, formato: params.formato,
     estilo: params.estilo, tom: params.tom, tamanho: params.tamanho, roteiro});
-  $('#salvo').innerHTML = '✅ Salvo na galeria deste navegador. <a href="galeria.html">Ver galeria</a> · <a href="estudio.html">Nova ideia</a>';
+  $('#salvo').innerHTML = '✅ Salvo. <a href="index.html">Ver na agenda</a> · <a href="estudio.html">Criar outra</a>';
   $('#salvo').hidden = false;
 };
 $('#copiar').onclick = () => Radar.copiar(Radar.textoRoteiro(roteiro), 'Roteiro copiado 📋');
 $('#voltar1').onclick = () => etapa(1);
 $('#voltar2').onclick = () => (opcoes.length ? etapa(2) : etapa(1));
 function reabrir(id) {
-  const item = Radar.galeriaTodos(CFG.nicho, CFG.galeria_publicada).find(i => i.id === id);
+  const item = Radar.minhasIdeias(CFG.nicho, CFG.galeria_publicada).find(i => i.id === id);
   if (!item) return;
   $('#ideia').value = item.ideia || ''; $('#formato').value = item.formato || 'video'; atualizarTamanhos();
   $('#tamanho').value = item.tamanho || ''; $('#estilo').value = item.estilo || ''; $('#tom').value = item.tom || '';
   lerParams(); roteiro = Radar.limparRoteiro(item.roteiro || {}); opcoes = []; conversa = [];
-  idSalvo = item.origem === 'navegador' ? id : null;
+  idSalvo = id;
   $('#mensagens').innerHTML = '';
-  bolha('ia', item.origem === 'navegador' ? 'Reabri da galeria. O que você quer mudar?'
-        : 'Reabri um roteiro publicado. Ao salvar, ele vira uma cópia sua neste navegador.');
+  bolha('ia', 'Reabri a ideia. O que você quer mudar?');
   renderRoteiro(); etapa(3);
 }
 montarMenus();

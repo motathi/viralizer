@@ -1,11 +1,11 @@
-"""As páginas de ferramentas do site publicado: estúdio, galeria, manual e
-ferramentas.
+"""As páginas de ferramentas do site publicado: estúdio, manual e
+ferramentas. A galeria deixou de existir à parte — o que sai do estúdio
+entra na própria agenda.
 
 Tudo aqui roda no navegador de quem abre o site, sem depender do
 computador onde o painel foi instalado. O estúdio fala com a IA por
 /api/ia, onde a chave da Anthropic fica no servidor — uma só para todo
-mundo que abre o site (ver api/ia.js). A galeria e as escolhas ficam no
-armazenamento local do navegador, com exportação para levar ao painel.
+mundo que abre o site (ver api/ia.js).
 """
 
 import json
@@ -108,7 +108,8 @@ CORPO_ESTUDIO = """
   <div class="selo">Estúdio de roteiros</div>
   <h1>Sua ideia, <span>três roteiros</span></h1>
   <p class="sub">Você dá a ideia e escolhe formato, estilo e tom. A IA escreve três opções em ângulos
-  diferentes; você escolhe uma, ajusta conversando e salva na galeria. Não precisa configurar nada.</p>
+  diferentes; você escolhe uma, ajusta conversando e salva — a ideia entra na agenda junto com as outras.
+  Não precisa configurar nada.</p>
 </header>
 <section class="estudio container">
   <div class="banner-aviso alerta" id="aviso-chave"><span id="aviso-chave-texto"></span>
@@ -157,7 +158,7 @@ CORPO_ESTUDIO = """
         </div>
         <div class="mensagem erro" id="erro3" hidden></div>
         <div class="acoes">
-          <button class="btn primario" id="salvar">💾 Salvar na galeria</button>
+          <button class="btn primario" id="salvar">💾 Salvar na agenda</button>
           <button class="btn" id="copiar">📋 Copiar</button>
           <button class="btn" id="voltar2">← Ver as 3 opções</button>
         </div>
@@ -305,22 +306,21 @@ $('#pedido').onkeydown = e => { if (e.key === 'Enter') enviar(); };
 $('#salvar').onclick = () => {
   idSalvo = Radar.galeriaSalvar(CFG.nicho, {id: idSalvo, ideia: params.ideia, formato: params.formato,
     estilo: params.estilo, tom: params.tom, tamanho: params.tamanho, roteiro});
-  $('#salvo').innerHTML = '✅ Salvo na galeria deste navegador. <a href="galeria.html">Ver galeria</a> · <a href="estudio.html">Nova ideia</a>';
+  $('#salvo').innerHTML = '✅ Salvo. <a href="index.html">Ver na agenda</a> · <a href="estudio.html">Criar outra</a>';
   $('#salvo').hidden = false;
 };
 $('#copiar').onclick = () => Radar.copiar(Radar.textoRoteiro(roteiro), 'Roteiro copiado 📋');
 $('#voltar1').onclick = () => etapa(1);
 $('#voltar2').onclick = () => (opcoes.length ? etapa(2) : etapa(1));
 function reabrir(id) {
-  const item = Radar.galeriaTodos(CFG.nicho, CFG.galeria_publicada).find(i => i.id === id);
+  const item = Radar.minhasIdeias(CFG.nicho, CFG.galeria_publicada).find(i => i.id === id);
   if (!item) return;
   $('#ideia').value = item.ideia || ''; $('#formato').value = item.formato || 'video'; atualizarTamanhos();
   $('#tamanho').value = item.tamanho || ''; $('#estilo').value = item.estilo || ''; $('#tom').value = item.tom || '';
   lerParams(); roteiro = Radar.limparRoteiro(item.roteiro || {}); opcoes = []; conversa = [];
-  idSalvo = item.origem === 'navegador' ? id : null;
+  idSalvo = id;
   $('#mensagens').innerHTML = '';
-  bolha('ia', item.origem === 'navegador' ? 'Reabri da galeria. O que você quer mudar?'
-        : 'Reabri um roteiro publicado. Ao salvar, ele vira uma cópia sua neste navegador.');
+  bolha('ia', 'Reabri a ideia. O que você quer mudar?');
   renderRoteiro(); etapa(3);
 }
 montarMenus();
@@ -345,107 +345,6 @@ def pagina_estudio(config: dict, raiz: Path, nicho: str) -> str:
     return documento(titulo=f"Estúdio — {config['nome']}", ativa="estudio",
                      corpo=CORPO_ESTUDIO, estilo_extra=ESTILO_ESTUDIO,
                      script=SCRIPT_ESTUDIO, dados=dados)
-
-
-# ── Galeria ──────────────────────────────────────────────────────────────
-
-ESTILO_GALERIA = """
-  section.galeria { padding: 0 0 60px; }
-  .galeria-topo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 18px; }
-  .galeria-topo .espaco { flex: 1; }
-  .galeria-item { border: 1px solid var(--borda); border-radius: var(--r-lg); background: var(--fundo);
-                  margin-bottom: 12px; overflow: hidden; box-shadow: var(--sombra-1); }
-  .galeria-item summary { list-style: none; cursor: pointer; padding: 16px 18px; display: flex;
-                          flex-wrap: wrap; align-items: center; gap: 8px; }
-  .galeria-item summary::-webkit-details-marker { display: none; }
-  .galeria-item summary b { flex: 1 1 240px; font-size: 1rem; }
-  .galeria-item .quando { color: var(--suave); font-size: .8rem; }
-  .galeria-item .corpo { padding: 0 18px 18px; }
-  .ideia-orig { color: var(--suave); font-size: .82rem; margin-top: 14px; }
-  .galeria-item .acoes { margin-top: 14px; }
-"""
-
-CORPO_GALERIA = """
-<header class="hero container">
-  <div class="selo">Galeria de ideias</div>
-  <h1>Tudo o que saiu do <span>estúdio</span></h1>
-  <p class="sub">Roteiros publicados pelo painel e os que você salvou neste navegador. Dá para copiar,
-  reabrir no estúdio para mexer mais, apagar, e exportar para levar ao painel.</p>
-</header>
-<section class="galeria container">
-  <div class="galeria-topo">
-    <a class="btn primario" href="estudio.html">✨ Nova ideia no estúdio</a>
-    <span class="espaco"></span>
-    <button class="btn" id="exportar">⬇️ Exportar (JSON)</button>
-    <button class="btn" id="importar">⬆️ Importar</button>
-    <input type="file" id="arquivo" accept="application/json,.json" hidden>
-  </div>
-  <div class="mensagem" id="recado" hidden></div>
-  <div id="lista"></div>
-</section>
-"""
-
-SCRIPT_GALERIA = r"""
-const CFG = JSON.parse(document.getElementById('dados-pagina').textContent);
-const $ = s => document.querySelector(s);
-const escapar = Radar.escapar;
-const ROTULOS = {video: '🎬 Vídeo', carrossel: '🖼️ Carrossel', stories: '📱 Stories'};
-function recado(tipo, texto) { const r = $('#recado'); r.className = 'mensagem ' + tipo; r.textContent = texto; r.hidden = false; }
-function carregar() {
-  const itens = Radar.galeriaTodos(CFG.nicho, CFG.galeria_publicada);
-  if (!itens.length) {
-    $('#lista').innerHTML = '<div class="vazio-suave">Nada salvo ainda. Crie a primeira ideia no estúdio — ela fica guardada aqui, neste navegador.</div>';
-    return;
-  }
-  $('#lista').innerHTML = itens.map(i => {
-    const r = i.roteiro || {};
-    return `<details class="galeria-item" data-id="${escapar(i.id)}">
-    <summary><span class="chip">${ROTULOS[i.formato] || escapar(i.formato)}</span>${i.tom ? `<span class="chip">${escapar(i.tom)}</span>` : ''}
-      <span class="chip ${i.origem === 'site' ? 'trend' : 'ok'}">${i.origem === 'site' ? '☁️ publicado' : '💾 neste navegador'}</span>
-      <b>${escapar(r.titulo || i.ideia)}</b><span class="quando">${escapar(String(i.atualizado_em || '').slice(0, 10))}</span></summary>
-    <div class="corpo">
-      ${Radar.roteiroHtml(r, true)}
-      <p class="ideia-orig">Ideia original: ${escapar(i.ideia)}</p>
-      <div class="acoes">
-        <a class="btn" href="estudio.html?id=${encodeURIComponent(i.id)}">✏️ Reabrir no estúdio</a>
-        <button class="btn copiar">📋 Copiar</button>
-        ${i.origem === 'site' ? '' : '<button class="btn apagar">🗑️ Apagar</button>'}
-      </div>
-    </div></details>`;
-  }).join('');
-  $('#lista').querySelectorAll('details').forEach(d => {
-    const item = itens.find(i => i.id === d.dataset.id);
-    d.querySelector('.copiar').onclick = () => Radar.copiar(Radar.textoRoteiro(item.roteiro || {}), 'Roteiro copiado 📋');
-    const apagar = d.querySelector('.apagar');
-    if (apagar) apagar.onclick = () => {
-      if (!confirm('Apagar "' + ((item.roteiro || {}).titulo || item.ideia) + '" deste navegador?')) return;
-      Radar.galeriaApagar(CFG.nicho, item.id); Radar.toast('Apagado'); carregar();
-    };
-  });
-}
-$('#exportar').onclick = () => {
-  const itens = Radar.galeriaLocal(CFG.nicho).map(({origem, ...resto}) => resto);
-  if (!itens.length) { recado('alerta', 'Nada salvo neste navegador para exportar — os publicados já estão no painel.'); return; }
-  Radar.baixar(`galeria-${CFG.nicho}.json`, JSON.stringify({itens}, null, 2));
-  recado('ok', `${itens.length} roteiro(s) exportado(s). Para levar ao painel, coloque o arquivo em dados/ do projeto (ou junte com o que já existe lá).`);
-};
-$('#importar').onclick = () => $('#arquivo').click();
-$('#arquivo').onchange = async e => {
-  const arquivo = e.target.files[0]; if (!arquivo) return;
-  try { const n = Radar.galeriaImportar(CFG.nicho, await Radar.lerArquivo(arquivo)); recado('ok', `${n} roteiro(s) importado(s).`); carregar(); }
-  catch (err) { recado('erro', '⚠️ ' + err.message); }
-  e.target.value = '';
-};
-carregar();
-"""
-
-
-def pagina_galeria(config: dict, raiz: Path, nicho: str) -> str:
-    dados = {"nicho": nicho, "nome": config["nome"],
-             "galeria_publicada": galeria_publicada(raiz, nicho)}
-    return documento(titulo=f"Galeria de ideias — {config['nome']}", ativa="galeria",
-                     corpo=CORPO_GALERIA, estilo_extra=ESTILO_GALERIA,
-                     script=SCRIPT_GALERIA, dados=dados)
 
 
 # ── Manual do nicho ──────────────────────────────────────────────────────
@@ -513,7 +412,7 @@ SO_NO_COMPUTADOR = [
     ("🔑", "Conectar TikTok", "O login fica guardado no navegador da coleta, na sua máquina. Sem ele as buscas voltam vazias."),
     ("🧪", "Testar coleta", "Só faz a busca de vídeos, sem IA e sem custo — mas precisa do navegador da coleta."),
     ("🎯", "Otimizar termos de busca", "Reescreve o arquivo do nicho no projeto; o site publicado não tem como gravar lá."),
-    ("☁️", "Publicar no site", "Envia a agenda e a galeria do painel para o GitHub; a Vercel publica em cerca de um minuto."),
+    ("☁️", "Publicar no site", "Envia a agenda do painel para o GitHub; a Vercel publica em cerca de um minuto."),
     ("🔄", "Atualizar programa", "Baixa a versão nova do código para a pasta do projeto."),
 ]
 
@@ -608,7 +507,7 @@ def pagina_ferramentas(config: dict, raiz: Path, nicho: str) -> str:
 
   <div class="cartao-ferramenta" id="backup">
     <h2><span class="icone">💾</span> Backup das suas escolhas</h2>
-    <p>Lista, feitas, descartadas, ganchos escolhidos e a galeria deste navegador, num arquivo só.
+    <p>Lista, feitas, descartadas, ganchos escolhidos e as ideias que você criou, num arquivo só.
        Serve para trocar de aparelho ou de navegador sem perder nada. A chave da IA não entra.</p>
     <div class="acoes">
       <button class="btn primario" id="backup-exportar">⬇️ Baixar backup</button>
@@ -776,12 +675,11 @@ pintarIA(); pintarPreferencias(); pintarTermos();
 
 
 def publicar_paginas(config: dict, raiz: Path, nicho: str) -> list[Path]:
-    """Escreve estudio.html, galeria.html, manual.html e ferramentas.html em web/."""
+    """Escreve estudio.html, manual.html e ferramentas.html em web/."""
     web = raiz / "web"
     web.mkdir(parents=True, exist_ok=True)
     saidas = {
         "estudio.html": pagina_estudio(config, raiz, nicho),
-        "galeria.html": pagina_galeria(config, raiz, nicho),
         "manual.html": pagina_manual(config, raiz, nicho),
         "ferramentas.html": pagina_ferramentas(config, raiz, nicho),
     }

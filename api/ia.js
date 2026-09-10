@@ -83,6 +83,7 @@ export function GET() {
   return json({
     configurada: !!chave(),
     senha: !!senhaExigida(),
+    painel: false,
     modelos: [...MODELOS],
     max_tokens: MAX_TOKENS,
   });

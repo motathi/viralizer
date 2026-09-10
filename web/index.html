@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radar de Conteúdo Viral — Dermatologia Estética</title>
+<title>Agenda de conteúdo — Dermatologia Estética</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>  :root {
@@ -239,6 +239,8 @@
   .chip.plataforma svg { width: 15px; height: 15px; display: block; }
   .viral-item .logo { width: 14px; height: 14px; vertical-align: -2px;
                       margin-right: 5px; display: inline-block; }
+  .chip.semana { font-variant-numeric: tabular-nums; }
+  .chip.minha { background: var(--grad-suave); border-color: transparent; color: var(--acento); font-weight: 700; }
   .chip-status { display: none; }
   .cartao.na-lista .chip-status.lista { display: inline-block; background: var(--grad);
                                         border: 0; color: #fff; }
@@ -329,24 +331,25 @@
 </head>
 <body>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/><stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>
-<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html" class="ativo" aria-current="page">📅 Agenda</a><a href="estudio.html">✨ Estúdio</a><a href="galeria.html">💡 Galeria</a><a href="manual.html">📘 Manual</a><a href="ferramentas.html">🧰 Ferramentas</a></div></div></nav>
+<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html" class="ativo" aria-current="page">📅 Agenda</a><a href="estudio.html">✨ Estúdio</a><a href="manual.html">📘 Manual</a><a href="ferramentas.html">🧰 Ferramentas</a></div></div></nav>
 
 <header class="hero container">
-  <div class="selo">Agenda da semana</div>
-  <h1>Agenda da semana — <span>Dermatologia Estética</span></h1>
-  <p class="sub">Semana de 14/09/2026 · 11 ideias ·
-  60 sinais de tendência analisados · atualizada em 08/09/2026</p>
+  <div class="selo">Agenda de conteúdo</div>
+  <h1>Todas as ideias — <span>Dermatologia Estética</span></h1>
+  <p class="sub">21 ideias de 2 semanas, mais o que você criar no
+  <a href="estudio.html">estúdio</a> · atualizada em 08/09/2026</p>
 </header>
 
 <div class="painel">
   <div class="container painel-linha">
     <div class="abas">
       <button class="aba ativa" data-filtro="todas">Todas</button>
+      <button class="aba" data-filtro="minhas">✨ Minhas ideias</button>
       <button class="aba" data-filtro="lista">📌 Minha lista</button>
       <button class="aba" data-filtro="feitas">✓ Feitas</button>
     </div>
     <div class="progresso" id="contagem"></div>
-    <div class="semanas"><select id="sel-semana" aria-label="Escolher semana" onchange="if(this.value) location.href=this.value"><option value="">📅 Semana atual</option><option value="semanas/2026-08-24.html">Semana de 24/08/2026</option></select></div>
+    <div class="semanas"><a class="btn" href="estudio.html">✨ Criar uma ideia</a></div>
   </div>
 </div>
 
@@ -359,14 +362,14 @@
   <div class="banner-aviso neutro" id="barra-descartadas"><span></span>
     <button class="btn" id="restaurar">Restaurar descartadas</button></div>
   <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre
-  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.
-  Quer um roteiro a partir de uma ideia sua? Use o <a href="estudio.html">estúdio</a>.</div>
-  <div class="lista-cartoes">
-  <article class="cartao" data-id="0" id="r0">
+  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.</div>
+  <div class="lista-cartoes" id="lista-cartoes">
+  <article class="cartao" data-id="g2026-09-14-0" id="rg2026-09-14-0">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~48s</span>
         <span class="chip views">🔥 9.8M views</span>
@@ -379,7 +382,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g0"><span>Voltou o short curtinho... e voltou junto uma coisa que eu tô vendo demais no consultório.</span></label><label class="gancho-opcao"><input type="radio" name="g0"><span>Tem uma coisa aparecendo na parte de trás da coxa das minhas pacientes e não é celulite.</span></label><label class="gancho-opcao"><input type="radio" name="g0"><span>Se você treina de short, presta atenção nos próximos 30 segundos: é sobre onde sua pele encosta.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-0"><span>Voltou o short curtinho... e voltou junto uma coisa que eu tô vendo demais no consultório.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-0"><span>Tem uma coisa aparecendo na parte de trás da coxa das minhas pacientes e não é celulite.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-0"><span>Se você treina de short, presta atenção nos próximos 30 segundos: é sobre onde sua pele encosta.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -405,11 +408,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="1" id="r1">
+  <article class="cartao" data-id="g2026-09-14-1" id="rg2026-09-14-1">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~50s</span>
         <span class="chip views">🔥 13.3M views</span>
@@ -422,7 +426,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g1"><span>Como usar peróxido de benzoíla do jeito que um dermatologista usa.</span></label><label class="gancho-opcao"><input type="radio" name="g1"><span>Seu peróxido de benzoíla não é forte demais. Você que tá usando errado.</span></label><label class="gancho-opcao"><input type="radio" name="g1"><span>Se o peróxido de benzoíla descascou sua cara inteira, foram três erros — e nenhum deles é o produto.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-1"><span>Como usar peróxido de benzoíla do jeito que um dermatologista usa.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-1"><span>Seu peróxido de benzoíla não é forte demais. Você que tá usando errado.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-1"><span>Se o peróxido de benzoíla descascou sua cara inteira, foram três erros — e nenhum deles é o produto.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -448,11 +452,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="2" id="r2">
+  <article class="cartao" data-id="g2026-09-14-2" id="rg2026-09-14-2">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~45s</span>
         <span class="chip views">🔥 9.8M views</span>
@@ -465,7 +470,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g2"><span>POV: você é a amiga dermatologista e vê alguém sentar de pele nua no banco do vestiário.</span></label><label class="gancho-opcao"><input type="radio" name="g2"><span>Eu não sento de pele nua em banco de vestiário. E não é frescura.</span></label><label class="gancho-opcao"><input type="radio" name="g2"><span>O chão do vestiário é o lugar da academia que mais me preocupa — e não é pelo cheiro.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-2"><span>POV: você é a amiga dermatologista e vê alguém sentar de pele nua no banco do vestiário.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-2"><span>Eu não sento de pele nua em banco de vestiário. E não é frescura.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-2"><span>O chão do vestiário é o lugar da academia que mais me preocupa — e não é pelo cheiro.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -491,11 +496,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="3" id="r3">
+  <article class="cartao" data-id="g2026-09-14-3" id="rg2026-09-14-3">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~46s</span>
         <span class="chip views">🔥 13.3M views</span>
@@ -508,7 +514,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g3"><span>&#x27;Peróxido de benzoíla destruiu minha pele.&#x27; Respondendo: não foi ele. Foram três coisas que você fez.</span></label><label class="gancho-opcao"><input type="radio" name="g3"><span>Comentário: &#x27;usei 10% todo dia e descascou tudo&#x27;. Amiga, você usou uma marreta pra pendurar um quadro.</span></label><label class="gancho-opcao"><input type="radio" name="g3"><span>Se sua pele ardeu e descascou com peróxido de benzoíla, o problema não é o produto ser forte.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-3"><span>&#x27;Peróxido de benzoíla destruiu minha pele.&#x27; Respondendo: não foi ele. Foram três coisas que você fez.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-3"><span>Comentário: &#x27;usei 10% todo dia e descascou tudo&#x27;. Amiga, você usou uma marreta pra pendurar um quadro.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-3"><span>Se sua pele ardeu e descascou com peróxido de benzoíla, o problema não é o produto ser forte.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -534,11 +540,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="4" id="r4">
+  <article class="cartao" data-id="g2026-09-14-4" id="rg2026-09-14-4">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~46s</span>
         <span class="chip views">🔥 9.8M views</span>
@@ -551,7 +558,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g4"><span>Chegou com uma bolinha. Voltou em três semanas com doze. E ela não pegou de ninguém.</span></label><label class="gancho-opcao"><input type="radio" name="g4"><span>A pergunta que eu mais ouço no consultório: &#x27;mas se era uma só, por que espalhou?&#x27;</span></label><label class="gancho-opcao"><input type="radio" name="g4"><span>Tem um jeito de multiplicar molusco sozinha, dentro de casa, sem contato com ninguém.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-4"><span>Chegou com uma bolinha. Voltou em três semanas com doze. E ela não pegou de ninguém.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-4"><span>A pergunta que eu mais ouço no consultório: &#x27;mas se era uma só, por que espalhou?&#x27;</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-4"><span>Tem um jeito de multiplicar molusco sozinha, dentro de casa, sem contato com ninguém.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -577,11 +584,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="5" id="r5">
+  <article class="cartao" data-id="g2026-09-14-5" id="rg2026-09-14-5">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~48s</span>
         <span class="chip views">🔥 15.4M views</span>
@@ -594,7 +602,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g5"><span>(texto na tela) Peróxido de benzoíla. Sem música, sem discurso. Só o jeito certo.</span></label><label class="gancho-opcao"><input type="radio" name="g5"><span>(texto na tela) 2,5%. Dia sim, dia não. Assiste até o fim que a ordem importa.</span></label><label class="gancho-opcao"><input type="radio" name="g5"><span>(texto na tela) A rotina que eu faço com peróxido — em silêncio, porque não tem o que discutir.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-5"><span>(texto na tela) Peróxido de benzoíla. Sem música, sem discurso. Só o jeito certo.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-5"><span>(texto na tela) 2,5%. Dia sim, dia não. Assiste até o fim que a ordem importa.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-5"><span>(texto na tela) A rotina que eu faço com peróxido — em silêncio, porque não tem o que discutir.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -620,11 +628,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="6" id="r6">
+  <article class="cartao" data-id="g2026-09-14-6" id="rg2026-09-14-6">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~48s</span>
         <span class="chip views">🔥 16.3M views</span>
@@ -637,7 +646,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g6"><span>Vídeo lindíssimo, 15 milhões de views, e ninguém perguntou o que tinha dentro daqueles potes.</span></label><label class="gancho-opcao"><input type="radio" name="g6"><span>Eu adoro esses vídeos de skincare estético. Só não confundo estética com protocolo.</span></label><label class="gancho-opcao"><input type="radio" name="g6"><span>Sete camadas, luz de fim de tarde, som de água. E uma pele que vai arder amanhã.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-6"><span>Vídeo lindíssimo, 15 milhões de views, e ninguém perguntou o que tinha dentro daqueles potes.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-6"><span>Eu adoro esses vídeos de skincare estético. Só não confundo estética com protocolo.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-6"><span>Sete camadas, luz de fim de tarde, som de água. E uma pele que vai arder amanhã.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -663,11 +672,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="7" id="r7">
+  <article class="cartao" data-id="g2026-09-14-7" id="rg2026-09-14-7">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~48s</span>
         <span class="chip views">🔥 13.3M views</span>
@@ -680,7 +690,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g7"><span>Semana 1 do peróxido: sua pele piora. Semana 4: começa. Semana 12: o resultado que você queria.</span></label><label class="gancho-opcao"><input type="radio" name="g7"><span>Você desistiu do peróxido de benzoíla no dia 9. O produto só ia mostrar serviço no dia 30.</span></label><label class="gancho-opcao"><input type="radio" name="g7"><span>Quer saber se seu tratamento de acne funcionou? Marca no calendário — não no espelho de amanhã.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-7"><span>Semana 1 do peróxido: sua pele piora. Semana 4: começa. Semana 12: o resultado que você queria.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-7"><span>Você desistiu do peróxido de benzoíla no dia 9. O produto só ia mostrar serviço no dia 30.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-7"><span>Quer saber se seu tratamento de acne funcionou? Marca no calendário — não no espelho de amanhã.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -706,11 +716,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="8" id="r8">
+  <article class="cartao" data-id="g2026-09-14-8" id="rg2026-09-14-8">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Mitos vs verdades / rotina da profissional</span>
         <span class="chip">~48s</span>
         <span class="chip views">🔥 9.8M views</span>
@@ -723,7 +734,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g8"><span>Cinco coisas que eu, dermatologista, não faço no verão — e a primeira é toalha emprestada.</span></label><label class="gancho-opcao"><input type="radio" name="g8"><span>Eu não sento na borda da piscina de pele nua. Vou te contar exatamente por quê.</span></label><label class="gancho-opcao"><input type="radio" name="g8"><span>Não é sobre protetor solar. São cinco hábitos de verão que eu me recuso a ter.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-8"><span>Cinco coisas que eu, dermatologista, não faço no verão — e a primeira é toalha emprestada.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-8"><span>Eu não sento na borda da piscina de pele nua. Vou te contar exatamente por quê.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-8"><span>Não é sobre protetor solar. São cinco hábitos de verão que eu me recuso a ter.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -749,11 +760,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="9" id="r9">
+  <article class="cartao" data-id="g2026-09-14-9" id="rg2026-09-14-9">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Mitos vs verdades</span>
         <span class="chip">~48s</span>
         <span class="chip views">🔥 9.8M views</span>
@@ -766,7 +778,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g9"><span>&#x27;Verruga é falta de higiene.&#x27; Não é. E essa frase faz gente adiar tratamento por vergonha.</span></label><label class="gancho-opcao"><input type="radio" name="g9"><span>Ninguém pega verruga por ser suja. Pega por encostar.</span></label><label class="gancho-opcao"><input type="radio" name="g9"><span>Se alguém te disse que molusco é sinal de casa mal cuidada, essa pessoa está errada — e eu explico em 30 segundos.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-9"><span>&#x27;Verruga é falta de higiene.&#x27; Não é. E essa frase faz gente adiar tratamento por vergonha.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-9"><span>Ninguém pega verruga por ser suja. Pega por encostar.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-9"><span>Se alguém te disse que molusco é sinal de casa mal cuidada, essa pessoa está errada — e eu explico em 30 segundos.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -792,11 +804,12 @@
       </div>
     </div>
   </article>
-  <article class="cartao" data-id="10" id="r10">
+  <article class="cartao" data-id="g2026-09-14-10" id="rg2026-09-14-10">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">📅 14/09</span>
         <span class="chip">Educação sobre procedimentos</span>
         <span class="chip">~48s</span>
         <span class="chip views">🔥 13.3M views</span>
@@ -809,7 +822,7 @@
     </div>
     <div class="detalhe">
       <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
-      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="g10"><span>Peróxido de benzoíla não é só pra cara. As costas e o bumbum agradecem — e o verão é o pior momento pra ignorar.</span></label><label class="gancho-opcao"><input type="radio" name="g10"><span>Você trata acne no rosto religiosamente e deixa as costas por conta do destino.</span></label><label class="gancho-opcao"><input type="radio" name="g10"><span>O jeito que um derm usa peróxido no corpo: no chuveiro, com cronômetro.</span></label></div>
+      <div class="ganchos"><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-10"><span>Peróxido de benzoíla não é só pra cara. As costas e o bumbum agradecem — e o verão é o pior momento pra ignorar.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-10"><span>Você trata acne no rosto religiosamente e deixa as costas por conta do destino.</span></label><label class="gancho-opcao"><input type="radio" name="gg2026-09-14-10"><span>O jeito que um derm usa peróxido no corpo: no chuveiro, com cronômetro.</span></label></div>
 
       <div class="rotulo">Roteiro</div>
       <div class="segmentos"><button class="seg ativa" data-fmt="reels">🎬 Reels</button><button class="seg" data-fmt="carrossel">🖼️ Carrossel</button></div>
@@ -834,8 +847,448 @@
         <button class="btn compartilhar-btn">🔗 Compartilhar</button>
       </div>
     </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-0" id="rg2026-08-24-0">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Mitos vs verdades</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Vaselina ao redor dos olhos: o que o viral não te contou</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#dermatologia #skincare #cuidadoscomapele #olheiras #mitosdaskincare</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-1" id="rg2026-08-24-1">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Mitos vs verdades</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Tônico facial: necessário ou dinheiro jogado fora?</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#tonicofacial #skincarebrasil #dermatologista #rotinadepele #peleoleosa</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-2" id="rg2026-08-24-2">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Educação sobre procedimentos</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Lavar o rosto: o passo mais simples que quase todo mundo erra</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#limpezadepele #skincare #dermatologia #rotinadepele #barreiracutanea</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-3" id="rg2026-08-24-3">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Rotina e prevenção</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Melasma não tem atalho — e isso é uma boa notícia</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#melasma #manchasnapele #fotoprotecao #dermatologia #peleconsciente</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-4" id="rg2026-08-24-4">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Educação sobre procedimentos</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Sua vitamina C pode estar oxidada (e você nem percebeu)</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#vitaminac #skincarecientifico #dermatologia #antioxidante #cuidadoscomapele</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-5" id="rg2026-08-24-5">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Mitos vs verdades</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Acne não é falta de banho — e você precisa ouvir isso</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#acne #peleacneica #dermatologia #autoestima #mitosdaskincare</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-6" id="rg2026-08-24-6">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Mitos vs verdades</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Ardeu, coçou, vermelhou: é adaptação ou alergia?</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#dermatitedecontato #pelesensivel #dermatologia #skincare #alergiadepele</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-7" id="rg2026-08-24-7">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Rotina e prevenção</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Ferida cicatriza melhor úmida, não com casquinha</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#cicatrizacao #cuidadocomferidas #dermatologia #primeirossocorros #cicatrizes</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-8" id="rg2026-08-24-8">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Rotina e prevenção</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Rotina noturna: a ordem tem ciência (não é estética)</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#rotinanoturna #skincare #asmrskincare #dermatologia #ordemdoskincare</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
+  </article>
+  <article class="cartao" data-id="g2026-08-24-9" id="rg2026-08-24-9">
+    <div class="cab">
+      <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip semana">📅 24/08</span>
+        <span class="chip">Rotina e prevenção</span>
+        <span class="chip">~?s</span>
+        
+        
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>Dia nublado também queima: o mito do protetor opcional</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      <div class="rotulo">Escolha o gancho (3 primeiros segundos)</div>
+      <div class="ganchos"></div>
+
+      <div class="rotulo">Roteiro</div>
+      
+      <div class="painel-reels"><div class="bloco-tempo"><span class="tempo">—</span><div><div class="fala-gancho"></div></div></div></div>
+      
+
+      
+
+      <div class="rotulo">Legenda pronta</div>
+      <div class="legenda"></div>
+      <div class="hashtags">#protetorsolar #fotoprotecao #uva #dermatologia #prevencao</div>
+
+      <details><summary>📈 Por que deve performar</summary>
+        <p class="texto"></p></details>
+      <details><summary>🔬 Embasamento científico</summary><ul></ul></details>
+      
+
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <button class="btn compartilhar-btn">🔗 Compartilhar</button>
+      </div>
+    </div>
   </article></div>
-  <p class="vazio" id="vazio">Nada por aqui ainda — adicione ideias à sua lista. 📌</p>
+  <p class="vazio" id="vazio">Nada por aqui ainda. 📌</p>
 </section>
 
 <footer>
@@ -844,7 +1297,7 @@
   </div>
 </footer>
 <div id="toast"></div>
-<script id="dados-agenda" type="application/json">{"nicho": "dermatologia-estetica", "semana": "2026-09-14", "gerado_em": "2026-09-08", "ideias": [{"titulo": "Voltou o short curtinho — e voltaram as verrugas e o molusco", "pilar": "Mitos vs verdades (educação preventiva sobre viral transmissível)", "registro": "Dermatologista alertando sobre um fenômeno que está vendo acontecer agora — urgência-amiga, sem venda e sem disclaimer", "ganchos": ["Voltou o short curtinho... e voltou junto uma coisa que eu tô vendo demais no consultório.", "Tem uma coisa aparecendo na parte de trás da coxa das minhas pacientes e não é celulite.", "Se você treina de short, presta atenção nos próximos 30 segundos: é sobre onde sua pele encosta."], "reels": [{"tempo": "0-3s", "fala": "Voltou o short curtinho... e voltou junto uma coisa que eu tô vendo muito no consultório ultimamente.", "direcao": "Close no rosto, sem saudação, corta já na primeira palavra. Texto na tela: 'short curtinho voltou...'"}, {"tempo": "3-10s", "fala": "Verruga e molusco. E o lugar onde tá aparecendo é que surpreende.", "direcao": "Pausa de meio segundo antes de 'verruga'. Corte seco. Texto na tela: 'verruga + molusco'."}, {"tempo": "10-20s", "fala": "Parte de trás da coxa. Dobra do joelho. Bumbum. Ou seja: exatamente onde a pele nua encosta em banco de academia, cadeira de plástico de piscina, colchonete de pilates.", "direcao": "Enumerar apontando na própria perna ou usar b-roll de banco de academia. Texto: 'onde a pele encosta'."}, {"tempo": "20-32s", "fala": "Os dois são vírus de pele. Erupção benigna, mas contagiosa. E tem um detalhe que quase ninguém sabe: se você cutuca, você espalha em você mesma. Isso tem nome, autoinoculação.", "direcao": "Tom mais baixo, quase confidencial. Texto na tela: 'cutucou = espalhou'."}, {"tempo": "32-42s", "fala": "Então: toalha entre você e o banco, chinelo no vestiário, e não passa lâmina por cima de uma lesãozinha dessas. A depilação carrega o vírus perna acima.", "direcao": "Três dedos contando na tela. Corte rápido a cada item."}, {"tempo": "42-48s", "fala": "Não é pra ter pânico de piscina. É pra parar de sentar de pele nua em superfície que o mundo inteiro sentou.", "direcao": "Olhar direto na câmera, sorriso leve no final. Texto: 'toalha. sempre.'"}], "carrossel": {"capa": "Voltou o short curtinho — e voltou o molusco", "laminas": ["Tenho visto mais verruga e molusco nas últimas semanas. E quase sempre no mesmo lugar.", "Atrás da coxa, dobra do joelho, bumbum: onde a pele nua encosta em banco público.", "Verruga e molusco são erupções benignas da pele causadas por vírus. Benigno não quer dizer que não passa pro outro.", "O molusco tem uma característica cruel: cutucar espalha. Chama autoinoculação — você mesma leva o vírus pra outra área.", "Depilar por cima de uma lesão é o jeito mais rápido de transformar uma bolinha em dez.", "Toalha entre você e o banco. Chinelo no vestiário. Nada de toalha compartilhada."], "cta_final": "Manda pra amiga que treina de short e senta em qualquer banco."}, "legenda": "Verruga e molusco não são falta de higiene: são vírus de pele, e o verão multiplica o contato. Tenho visto mais casos justamente na parte de trás da coxa, onde a pele nua encosta em banco de academia e cadeira de piscina. Toalha entre você e a superfície resolve boa parte. E cutucar espalha — isso vale repetir.", "hashtags": ["#verruga", "#moluscocontagioso", "#dermatologia", "#saudedapele", "#verao"]}, {"titulo": "Como usar peróxido de benzoíla do jeito que um derm usa", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Dermatologista que tira o mistério de um produto de farmácia — democratiza, não vende", "ganchos": ["Como usar peróxido de benzoíla do jeito que um dermatologista usa.", "Seu peróxido de benzoíla não é forte demais. Você que tá usando errado.", "Se o peróxido de benzoíla descascou sua cara inteira, foram três erros — e nenhum deles é o produto."], "reels": [{"tempo": "0-3s", "fala": "Como usar peróxido de benzoíla do jeito que a gente usa no consultório.", "direcao": "Produto na mão, close. Texto na tela: 'peróxido de benzoíla, do jeito certo'."}, {"tempo": "3-12s", "fala": "Primeiro: concentração. Tem de 2,5%, 5% e 10%. Mais forte não é mais rápido, é mais irritante. Quem tem pele sensível começa no 2,5%.", "direcao": "Mostrar as embalagens lado a lado ou texto grande '2,5 / 5 / 10'."}, {"tempo": "12-22s", "fala": "Segundo: frequência. Todo dia desde o primeiro dia é o erro clássico. Dia sim, dia não na primeira semana, e aí você sobe.", "direcao": "Corte seco. Texto na tela: 'dia sim, dia não — 1ª semana'."}, {"tempo": "22-34s", "fala": "Terceiro: combinação. Peróxido com retinoide tópico teve melhora significativa contra acne em 12 semanas em estudo controlado. Um não anula o outro, mas eu separo: um de manhã, outro de noite.", "direcao": "Dois frascos, mãos separando esquerda e direita. Texto: 'manhã x noite'."}, {"tempo": "34-44s", "fala": "E quarto, o que ninguém aguenta ouvir: resultado aparece de 4 a 6 semanas de uso contínuo, e leva até 3 meses pra chegar no máximo. Uma semana e desistir não é teste, é ensaio.", "direcao": "Olhar firme na câmera. Texto: '4 a 6 semanas. até 3 meses.'"}, {"tempo": "44-50s", "fala": "Ah, e ele descolore tecido. Fronha branca e toalha velha, por favor.", "direcao": "Fecho rápido com humor, mostrar toalha manchada se tiver."}], "carrossel": {"capa": "Peróxido de benzoíla: o jeito que um derm usa", "laminas": ["Concentração: 2,5%, 5% ou 10%. Mais forte não é mais rápido — é mais irritante.", "Frequência: dia sim, dia não na primeira semana. Depois você sobe.", "Eficácia depende de concentração, frequência e da sua pele. Não é só 'passar'.", "Com retinoide tópico: a combinação mostrou melhora significativa contra placebo em 12 semanas.", "Eu prefiro separar: um de manhã, outro à noite. Menos irritação, mesma potência.", "Prazo real: 4 a 6 semanas pra ver, até 3 meses pra chegar no máximo.", "Descolore tecido. Fronha branca e toalha que você não ama."], "cta_final": "Salva pra consultar quando abrir o pote."}, "legenda": "Peróxido de benzoíla é vendido sem receita e usado errado por quase todo mundo. Concentração alta demais, todo dia desde o primeiro dia e desistência na segunda semana — essa é a receita do ressecamento. O produto precisa de 4 a 6 semanas pra mostrar resultado e até 3 meses pra chegar no máximo dele.", "hashtags": ["#peroxidodebenzoila", "#acne", "#skincarecomciencia", "#dermatologista"]}, {"titulo": "POV: você no vestiário da academia (e o que sua pele tá encostando)", "pilar": "Mitos vs verdades (educação preventiva sobre viral transmissível)", "registro": "Derm-amiga em modo cúmplice dentro do vestiário — meio sussurro, meio deboche, zero tom de palestra", "ganchos": ["POV: você é a amiga dermatologista e vê alguém sentar de pele nua no banco do vestiário.", "Eu não sento de pele nua em banco de vestiário. E não é frescura.", "O chão do vestiário é o lugar da academia que mais me preocupa — e não é pelo cheiro."], "reels": [{"tempo": "0-4s", "fala": "POV: você tá no vestiário e senta de pele nua no banco. Eu, dermatologista, morrendo por dentro.", "direcao": "Grava no vestiário/academia, celular na mão, câmera meio de lado. Texto: 'POV: a amiga derm te vê'."}, {"tempo": "4-14s", "fala": "Verruga e molusco são vírus de pele. Passam de pele pra pele e de superfície pra pele. Banco, colchonete, chão de box de banho, toalha emprestada.", "direcao": "B-roll rápido de cada superfície citada, corte a cada palavra."}, {"tempo": "14-26s", "fala": "E eu tô vendo mais desses casos agora. Não em mão, não em pé. Em coxa e bumbum. Onde a pele encosta no que todo mundo encosta.", "direcao": "Volta pro rosto, tom mais baixo e sério. Texto na tela: 'coxa. bumbum.'"}, {"tempo": "26-38s", "fala": "Meu kit de vestiário: chinelo pra tomar banho, toalha minha embaixo antes de sentar, e nada de dividir toalha com ninguém, nem com a pessoa que eu amo.", "direcao": "Mostrar chinelo e toalha dentro da bolsa. Corte rápido."}, {"tempo": "38-45s", "fala": "Não é nojo. É que vírus de pele não olha se a academia é cara.", "direcao": "Olhar na câmera, fecho seco, sem sorriso."}], "carrossel": {"capa": "O que eu não faço no vestiário da academia", "laminas": ["Não sento de pele nua no banco. Toalha embaixo, sempre.", "Não tomo banho descalça. Chinelo entra na mala junto com a garrafinha.", "Não empresto e não pego toalha emprestada. De ninguém.", "Por quê: verruga e molusco são erupções benignas causadas por vírus — e vírus passa por contato.", "Tenho visto mais casos em coxa e bumbum. Justamente onde a pele nua encosta em superfície pública.", "Cutucar espalha. É o que chamamos de autoinoculação: uma lesão vira várias."], "cta_final": "Comenta 'kit' que eu conto o que mais anda na minha mala de academia."}, "legenda": "Chinelo e toalha na mala não é frescura de dermatologista. Verruga e molusco são vírus de pele e passam por contato — inclusive contato com superfície. Ando vendo mais casos em coxa e bumbum, exatamente onde a pele nua encosta em banco de vestiário e colchonete.", "hashtags": ["#academia", "#vestiario", "#verruga", "#dermatologia", "#dicadederm"]}, {"titulo": "Resposta ao comentário: 'peróxido de benzoíla destruiu minha pele'", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Dermatologista respondendo comentário sem passar pano — direta, quase ríspida, mas termina dando o caminho", "ganchos": ["'Peróxido de benzoíla destruiu minha pele.' Respondendo: não foi ele. Foram três coisas que você fez.", "Comentário: 'usei 10% todo dia e descascou tudo'. Amiga, você usou uma marreta pra pendurar um quadro.", "Se sua pele ardeu e descascou com peróxido de benzoíla, o problema não é o produto ser forte."], "reels": [{"tempo": "0-4s", "fala": "'Peróxido de benzoíla destruiu minha pele.' Vou responder sem passar pano: não foi o produto.", "direcao": "Print do comentário na tela, rosto no canto. Sem cumprimento."}, {"tempo": "4-14s", "fala": "Erro um: você começou no 10%. Existe 2,5% e existe 5%. A eficácia depende de concentração, frequência e da sua pele — não é quem aguenta mais.", "direcao": "Texto grande na tela: 'começou no 10% ❌'."}, {"tempo": "14-24s", "fala": "Erro dois: todo dia desde o primeiro dia. Pele não é máquina. Dia sim, dia não na primeira semana e você chega no mesmo lugar sem descascar.", "direcao": "Corte seco, mudança de enquadramento."}, {"tempo": "24-36s", "fala": "Erro três: empilhar. Peróxido, ácido, esfoliante e retinoide na mesma noite. Peróxido com retinoide funciona, tem estudo com melhora significativa em 12 semanas — mas em horários separados, não tudo de uma vez em cima da cara.", "direcao": "Mostrar quatro frascos e ir tirando três da mesa."}, {"tempo": "36-46s", "fala": "Recomeça: menor concentração, dia alternado, hidratante depois. E dá tempo — de 4 a 6 semanas pra ver diferença.", "direcao": "Texto final: 'recomeça direito'. Olhar firme."}], "carrossel": {"capa": "'O peróxido de benzoíla destruiu minha pele'", "laminas": ["Não destruiu. Você começou no 10% quando existia 2,5%.", "Eficácia depende de concentração, frequência e das características da sua pele. Não de coragem.", "Todo dia desde o dia 1 é o segundo erro. Dia alternado na primeira semana.", "Empilhar peróxido + ácido + esfoliante + retinoide na mesma noite é pedir barreira destruída.", "Peróxido com retinoide tópico funciona: melhora significativa vs placebo em 12 semanas. Mas em horários separados.", "Hidratante não atrapalha o tratamento. Descascar não é sinal de que está funcionando."], "cta_final": "Se você abandonou o peróxido por causa disso, me conta nos comentários em qual erro você caiu."}, "legenda": "Peróxido de benzoíla quase nunca é forte demais — o uso é que costuma ser errado. Concentração alta logo de cara, uso diário desde o primeiro dia e empilhamento de ativos na mesma noite: é essa combinação que descasca a cara e faz a pessoa desistir. O produto pede de 4 a 6 semanas pra mostrar serviço.", "hashtags": ["#acne", "#peroxidodebenzoila", "#respondendocomentario", "#dermatologia"]}, {"titulo": "Era uma bolinha. Virou doze. O que aconteceu no meio.", "pilar": "Mitos vs verdades (educação preventiva sobre viral transmissível)", "registro": "Dermatologista contando bastidor de consultório — narrativa, ritmo de história, revelação no meio", "ganchos": ["Chegou com uma bolinha. Voltou em três semanas com doze. E ela não pegou de ninguém.", "A pergunta que eu mais ouço no consultório: 'mas se era uma só, por que espalhou?'", "Tem um jeito de multiplicar molusco sozinha, dentro de casa, sem contato com ninguém."], "reels": [{"tempo": "0-4s", "fala": "Uma bolinha na coxa. Três semanas depois, uma dúzia. E ela não encostou em ninguém no meio do caminho.", "direcao": "Sentada, enquadramento médio, luz suave. Texto na tela: '1 → 12'."}, {"tempo": "4-14s", "fala": "Molusco contagioso é isso: uma erupção viral benigna da pele. Benigna. Mas tem um truque sujo — ela se espalha em você mesma.", "direcao": "Corte pra close. Texto: 'benigno ≠ inofensivo'."}, {"tempo": "14-26s", "fala": "Chama autoinoculação. Você cutuca, o conteúdo sai, e você leva o vírus pra pele do lado. Coçar embaixo do chuveiro faz isso. Bucha faz isso. Lâmina de depilar faz isso muito bem.", "direcao": "Mostrar bucha e lâmina, tirar as duas de cena com a mão."}, {"tempo": "26-38s", "fala": "Então enquanto tiver lesão: não depila a área, não esfrega, não estoura. E secar a região com a toalha em toque, não esfregando de um lado pro outro.", "direcao": "Demonstrar o gesto de secar em toque com a toalha."}, {"tempo": "38-46s", "fala": "Cutucar não resolve, cutucar publica. E depois o tratamento vira doze em vez de um.", "direcao": "Olhar direto, pausa final. Texto: 'não cutuca.'"}], "carrossel": {"capa": "Era uma bolinha. Virou doze.", "laminas": ["Molusco contagioso é uma erupção viral benigna da pele.", "Benigna não significa parada: ela se espalha na própria pessoa.", "O nome disso é autoinoculação — você leva o vírus de uma área pra outra.", "Coçar no banho, esfregar com bucha e depilar por cima são os três maiores multiplicadores.", "Enquanto tiver lesão: não depila a área, não esfrega, não estoura.", "Seca a região em toque, não arrastando a toalha."], "cta_final": "Salva pra lembrar da regra: cutucou, espalhou."}, "legenda": "Molusco não precisa de outra pessoa pra se espalhar — ele se espalha em você. Autoinoculação é o motivo de uma lesão virar uma dúzia em poucas semanas, e coçar no banho, esfregar com bucha e passar a lâmina por cima são os caminhos mais rápidos pra isso. Enquanto tiver lesão, a área não se depila.", "hashtags": ["#moluscocontagioso", "#peleinfantil", "#dermatologia", "#autoinoculacao"]}, {"titulo": "Rotina silenciosa: peróxido de benzoíla em 20 segundos", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Skincare lifestyle silencioso — mostra, não explica; a autoridade aparece só no texto da tela", "ganchos": ["(texto na tela) Peróxido de benzoíla. Sem música, sem discurso. Só o jeito certo.", "(texto na tela) 2,5%. Dia sim, dia não. Assiste até o fim que a ordem importa.", "(texto na tela) A rotina que eu faço com peróxido — em silêncio, porque não tem o que discutir."], "reels": [{"tempo": "0-3s", "fala": "(sem fala — som do frasco abrindo)", "direcao": "Close extremo na tampa girando, luz natural lateral. Texto: 'peróxido de benzoíla, do jeito certo'."}, {"tempo": "3-10s", "fala": "(sem fala — água correndo)", "direcao": "Lavagem do rosto em close, som limpo. Texto: 'pele lavada e SECA. molhada irrita mais'."}, {"tempo": "10-20s", "fala": "(sem fala — som da bisnaga)", "direcao": "Ervilha de produto no dedo, aplicação em quatro pontos. Texto: 'concentração menor primeiro: 2,5%'."}, {"tempo": "20-30s", "fala": "(sem fala — som do pote de hidratante)", "direcao": "Hidratante espalhado em movimento lento. Texto: 'hidratante depois não anula. descascar não é sinal de funcionar'."}, {"tempo": "30-40s", "fala": "(sem fala — toalha branca dobrando)", "direcao": "Fronha e toalha brancas. Texto: 'ele descolore tecido. usa branco.'"}, {"tempo": "40-48s", "fala": "(sem fala — calendário sendo marcado)", "direcao": "Calendário com Xs alternados. Texto final: 'dia sim, dia não. resultado: 4 a 6 semanas.'"}], "carrossel": {"capa": "A rotina do peróxido, sem palavra nenhuma", "laminas": ["Pele lavada e seca. Aplicar em pele úmida aumenta a irritação.", "Uma ervilha. Quatro pontos. Espalha. Mais produto não acelera nada.", "Concentração baixa primeiro. 2,5% antes de pensar em 10%.", "Hidratante depois. Ele não anula o ativo.", "Fronha e toalha brancas: o produto descolore tecido.", "Dia sim, dia não na primeira semana. Resultado real: 4 a 6 semanas."], "cta_final": "Manda pra quem começou peróxido essa semana."}, "legenda": "Sem trilha, sem discurso: a rotina do peróxido de benzoíla como ela deveria ser feita. Pele seca, pouca quantidade, concentração baixa no começo e dia alternado na primeira semana. E o prazo que ninguém quer ouvir: 4 a 6 semanas até ver diferença.", "hashtags": ["#asmrskincare", "#peroxidodebenzoila", "#skincareroutine", "#peleoleosa"]}, {"titulo": "Aquele vídeo de skincare lindo que ia arruinar sua pele", "pilar": "Mitos vs verdades", "registro": "Dermatologista crítica de trend — ácida, opinativa, toma partido sem pedir licença", "ganchos": ["Vídeo lindíssimo, 15 milhões de views, e ninguém perguntou o que tinha dentro daqueles potes.", "Eu adoro esses vídeos de skincare estético. Só não confundo estética com protocolo.", "Sete camadas, luz de fim de tarde, som de água. E uma pele que vai arder amanhã."], "reels": [{"tempo": "0-4s", "fala": "Esses vídeos de skincare com sete potes e som de água? Eu assisto todos. E não faço nenhum.", "direcao": "Tela dividida: b-roll aesthetic de um lado, ela de outro. Texto: 'assisto. não faço.'"}, {"tempo": "4-14s", "fala": "Não é implicância. É que ali ninguém diz o que tem no vidrinho, nem em que ordem, nem com que frequência. E é exatamente frequência e concentração que decidem se um ativo funciona ou irrita.", "direcao": "Corte pra ela sozinha, tom firme."}, {"tempo": "14-26s", "fala": "Pega peróxido de benzoíla. Mesmo produto, duas pessoas: uma clareia a acne, a outra descasca a cara. A diferença tá na concentração, na frequência e na pele de cada uma — não na iluminação do vídeo.", "direcao": "Mostrar o frasco. Texto na tela: 'concentração + frequência + sua pele'."}, {"tempo": "26-38s", "fala": "E tem a parte do tempo. Nesses vídeos tudo acontece em 20 segundos. Na vida real, peróxido leva de 4 a 6 semanas pra mostrar resultado e até 3 meses pra chegar no máximo.", "direcao": "Corte seco. Texto grande: '4-6 semanas.'"}, {"tempo": "38-48s", "fala": "Continua assistindo, é relaxante. Só não copia rotina de quem nunca disse qual é o seu problema de pele.", "direcao": "Sorriso curto, olhar direto. Texto final: 'estética ≠ protocolo'."}], "carrossel": {"capa": "Por que eu não copio rotina de vídeo aesthetic", "laminas": ["Vídeo bonito não diz concentração. E concentração muda tudo.", "Vídeo bonito não diz frequência. Frequência é metade do resultado.", "Vídeo bonito não diz qual é o problema de pele daquela pessoa.", "Mesmo peróxido de benzoíla: em uma pele trata acne, em outra irrita. Depende de concentração, frequência e características individuais.", "Vídeo bonito acontece em 20 segundos. Tratamento acontece em semanas: 4 a 6 pra ver, até 3 meses pro máximo.", "Assistir é ótimo. Copiar é que dá errado."], "cta_final": "Me manda o vídeo de rotina que você quer que eu analise."}, "legenda": "Vídeo de skincare aesthetic é a coisa mais relaxante da internet e a pior fonte de protocolo que existe. Ninguém diz concentração, frequência nem qual é o problema de pele — e são exatamente essas três coisas que decidem se um ativo trata ou irrita. Copiar rotina de estranho é o jeito mais rápido de estragar barreira.", "hashtags": ["#skincare", "#trend", "#dermatologista", "#mitosdapele"]}, {"titulo": "O calendário do peróxido de benzoíla: semana 1, 4 e 12", "pilar": "Educação sobre procedimentos (expectativa de resultado)", "registro": "Dermatologista treinadora de expectativa — fala em números e prazos, paciência com firmeza de treinador", "ganchos": ["Semana 1 do peróxido: sua pele piora. Semana 4: começa. Semana 12: o resultado que você queria.", "Você desistiu do peróxido de benzoíla no dia 9. O produto só ia mostrar serviço no dia 30.", "Quer saber se seu tratamento de acne funcionou? Marca no calendário — não no espelho de amanhã."], "reels": [{"tempo": "0-4s", "fala": "Você desistiu do peróxido no dia nove. Ele só ia começar a aparecer lá pelo dia trinta.", "direcao": "Calendário grande em mãos, dedo apontando o dia 9. Texto: 'dia 9 ❌'."}, {"tempo": "4-14s", "fala": "Semana 1: ressecamento, ardência leve, aquela sensação de que piorou. É a fase que faz todo mundo abandonar.", "direcao": "Marcar a primeira semana no calendário. Texto: 'semana 1: parece pior'."}, {"tempo": "14-26s", "fala": "Semana 4 a 6: aqui, com uso contínuo, aparece o resultado. Contínuo, não 'quando eu lembro'.", "direcao": "Círculo vermelho na semana 4. Texto: 'semana 4-6: aparece'."}, {"tempo": "26-38s", "fala": "Semana 12: em estudo controlado, peróxido junto com retinoide tópico deu melhora significativa contra placebo nesse prazo. Três meses. É esse o cronograma real.", "direcao": "Virar a página do calendário. Texto: 'semana 12: o resultado real'."}, {"tempo": "38-48s", "fala": "Se você troca de produto a cada duas semanas, você nunca vai passar da fase ruim de nenhum deles. Escolhe um e vai até dezembro.", "direcao": "Fecha o calendário na câmera. Texto final: 'escolhe um. vai até o fim.'"}], "carrossel": {"capa": "O calendário real do peróxido de benzoíla", "laminas": ["Semana 1: ressecamento e sensação de piora. É aqui que 80% desiste.", "Semanas 4 a 6: com uso contínuo, o resultado começa a aparecer.", "Até 3 meses: é o prazo para o efeito pleno.", "Semana 12: peróxido + retinoide tópico mostrou melhora significativa vs placebo em estudo controlado.", "'Contínuo' quer dizer na frequência combinada, não quando você lembra.", "Trocar de produto a cada 15 dias = viver só a fase ruim de todos eles."], "cta_final": "Print nesse calendário e cola no espelho."}, "legenda": "A maior causa de fracasso no tratamento da acne não é o produto errado — é o calendário errado. Peróxido de benzoíla precisa de 4 a 6 semanas de uso contínuo pra mostrar resultado e até 3 meses pro efeito pleno; associado a retinoide tópico, os estudos avaliam melhora em 12 semanas. Duas semanas não é teste.", "hashtags": ["#acne", "#tratamentodeacne", "#peroxidodebenzoila", "#pacienciacomapele"]}, {"titulo": "Cinco coisas que eu não faço no verão (e sou chata com isso)", "pilar": "Mitos vs verdades / rotina da profissional", "registro": "Confessional em primeira pessoa — 'eu não faço', posicionamento pessoal assumido, sem tom de recomendação genérica", "ganchos": ["Cinco coisas que eu, dermatologista, não faço no verão — e a primeira é toalha emprestada.", "Eu não sento na borda da piscina de pele nua. Vou te contar exatamente por quê.", "Não é sobre protetor solar. São cinco hábitos de verão que eu me recuso a ter."], "reels": [{"tempo": "0-4s", "fala": "Cinco coisas que eu não faço no verão. Nenhuma delas é sobre protetor solar.", "direcao": "Cenário externo, óculos escuros. Texto: '5 coisas que eu não faço'."}, {"tempo": "4-12s", "fala": "Um: toalha emprestada. Nem da amiga, nem do hotel espalhada em espreguiçadeira já usada. Verruga e molusco são vírus de pele e passam por contato.", "direcao": "B-roll de toalha na espreguiçadeira. Texto: '1. toalha emprestada'."}, {"tempo": "12-20s", "fala": "Dois: sentar de pele nua em banco de vestiário e cadeira de plástico de clube. Coloco minha toalha embaixo, sempre.", "direcao": "Demonstra colocando a toalha. Texto: '2. pele nua no banco'."}, {"tempo": "20-28s", "fala": "Três: andar descalça em box de banho coletivo. Chinelo é item de mala, não de estilo.", "direcao": "Close no chinelo entrando na mala. Texto: '3. descalça no box'."}, {"tempo": "28-38s", "fala": "Quatro: depilar por cima de uma lesãozinha. A lâmina espalha o vírus perna acima e uma vira várias. E cinco: cutucar bolinha, porque cutucar é o mesmo que semear.", "direcao": "Tirar a lâmina de cena com a mão. Texto: '4. depilar por cima / 5. cutucar'."}, {"tempo": "38-48s", "fala": "Nada disso é medo de sair de casa. É toalha na bolsa e chinelo no pé, o resto é verão normal.", "direcao": "Sorriso, corte final. Texto: 'toalha + chinelo. só isso.'"}], "carrossel": {"capa": "5 coisas que eu não faço no verão (e nenhuma é sobre protetor)", "laminas": ["1. Toalha emprestada. Vírus de pele passa por contato.", "2. Sentar de pele nua em banco de vestiário ou cadeira de clube.", "3. Andar descalça em box de banho coletivo.", "4. Depilar por cima de lesão: a lâmina espalha uma pra várias.", "5. Cutucar bolinha — autoinoculação é levar o vírus pra pele do lado.", "Verruga e molusco são erupções benignas causadas por vírus. Benignas, contagiosas."], "cta_final": "Qual dessas cinco você faz sem pensar? Confessa nos comentários."}, "legenda": "Minhas cinco regras de verão não têm nada a ver com protetor solar. Verruga e molusco são vírus de pele, passam por contato e se espalham na própria pessoa quando ela cutuca ou depila por cima. Toalha na bolsa, chinelo no pé e mão longe da lesão resolvem quase tudo.", "hashtags": ["#verao", "#dicasdederm", "#piscina", "#saudedapele", "#verruga"]}, {"titulo": "'Verruga é falta de higiene' — não é, e eu vou cortar esse assunto aqui", "pilar": "Mitos vs verdades", "registro": "Dermatologista que corta mito de frente — firme, quase impaciente com a crença, acolhedora com a paciente", "ganchos": ["'Verruga é falta de higiene.' Não é. E essa frase faz gente adiar tratamento por vergonha.", "Ninguém pega verruga por ser suja. Pega por encostar.", "Se alguém te disse que molusco é sinal de casa mal cuidada, essa pessoa está errada — e eu explico em 30 segundos."], "reels": [{"tempo": "0-4s", "fala": "'Verruga é falta de higiene.' Não é. E essa frase faz muita gente esconder a lesão em vez de tratar.", "direcao": "Frontal, sem sorriso. Texto na tela: 'MITO'."}, {"tempo": "4-14s", "fala": "Verruga e molusco são erupções da pele causadas por vírus. Vírus não escolhe casa limpa ou suja. Escolhe pele que encostou em pele, ou em superfície.", "direcao": "Corte pra close. Texto: 'é vírus, não sujeira'."}, {"tempo": "14-26s", "fala": "Por isso aparece em criança que vai na piscina, em adulto que treina, em quem usa vestiário. E, com o verão, tenho visto mais — principalmente onde a pele nua encosta em banco.", "direcao": "B-roll piscina/academia. Texto: 'onde a pele encosta'."}, {"tempo": "26-38s", "fala": "São lesões benignas. Benignas, mas contagiosas, e que se espalham na própria pessoa quando ela cutuca. Vergonha aqui só atrasa: quanto antes trata, menos lesão pra tratar.", "direcao": "Volta ao frontal, tom mais suave. Texto: 'benigna ≠ ignorar'."}, {"tempo": "38-48s", "fala": "Então para de perguntar 'onde foi que eu peguei' e vai resolver. A resposta quase sempre é: numa superfície qualquer, num dia comum.", "direcao": "Olhar direto, fecho seco."}], "carrossel": {"capa": "Verruga não é falta de higiene", "laminas": ["Verruga e molusco são erupções epidérmicas benignas causadas por infecção viral da pele.", "Vírus se pega por contato: pele com pele ou pele com superfície.", "Piscina, vestiário, colchonete, toalha compartilhada: os pontos mais comuns.", "Benigna não é sinônimo de deixar quieto: ela contagia e se espalha em você mesma.", "Autoinoculação: cutucar leva o vírus pra área vizinha e multiplica as lesões.", "Vergonha atrasa o tratamento — e quanto mais tarde, mais lesão pra tratar."], "cta_final": "Manda esse post pra quem tá com vergonha de mostrar aquela bolinha."}, "legenda": "Verruga não é sinal de falta de higiene: é infecção viral da pele, benigna e contagiosa, que se pega por contato com outra pele ou com superfície. A crença de que é 'sujeira' faz gente esconder a lesão e chegar no consultório com dez em vez de uma. Cutucar espalha — isso sim é o que piora o quadro.", "hashtags": ["#mitoseverdades", "#verruga", "#moluscocontagioso", "#dermatologia"]}, {"titulo": "Peróxido de benzoíla no corpo: as costas e o bumbum que ninguém trata", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Dermatologista prática de banheiro — instrução passo a passo, tom de quem está mostrando ali na hora, sem solenidade", "ganchos": ["Peróxido de benzoíla não é só pra cara. As costas e o bumbum agradecem — e o verão é o pior momento pra ignorar.", "Você trata acne no rosto religiosamente e deixa as costas por conta do destino.", "O jeito que um derm usa peróxido no corpo: no chuveiro, com cronômetro."], "reels": [{"tempo": "0-4s", "fala": "Peróxido de benzoíla não é só pra cara. Costas e bumbum também, e no verão isso pesa.", "direcao": "Gravar no banheiro, frasco na mão. Texto: 'peróxido no corpo'."}, {"tempo": "4-14s", "fala": "No corpo eu prefiro a versão de lavar. Ensaboa, espalha na área, deixa agir e enxágua. É o jeito de ter o ativo sem passar creme em costas inteira.", "direcao": "Demonstrar espalhando na mão. Texto: 'versão de lavar'."}, {"tempo": "14-24s", "fala": "Concentração: começa na menor. Frequência: não é todo dia de cara. A eficácia depende justamente de concentração, frequência e do tipo de pele — os três, não um só.", "direcao": "Corte seco, texto: 'concentração + frequência + sua pele'."}, {"tempo": "24-36s", "fala": "Detalhe do verão: enxagua muito bem antes de vestir o biquíni. Ele descolore tecido. Já vi biquíni preto virar biquíni manchado.", "direcao": "Mostrar peça de roupa clara vs escura. Texto: 'descolore tecido'."}, {"tempo": "36-48s", "fala": "E não espera milagre em uma semana: de 4 a 6 semanas pra ver resultado, até 3 meses pro efeito completo. Costas leva o mesmo tempo que rosto — só que você olha menos.", "direcao": "Fecho na câmera. Texto final: '4-6 semanas. no corpo também.'"}], "carrossel": {"capa": "Acne nas costas: o peróxido que você só usa no rosto", "laminas": ["No corpo, a versão de lavar resolve: ensaboa, deixa agir, enxágua.", "Comece pela concentração menor. Alta concentração no corpo irrita igual.", "Frequência gradual, não todo dia desde o primeiro banho.", "Eficácia depende de concentração, frequência e das características da sua pele.", "Enxágue bem antes de vestir: peróxido descolore tecido, inclusive biquíni.", "Prazo: 4 a 6 semanas pra ver resultado, até 3 meses pro efeito pleno."], "cta_final": "Marca alguém que sofre com acne nas costas todo verão."}, "legenda": "Acne nas costas e no bumbum some da rotina de todo mundo porque não está no espelho. O peróxido de benzoíla em versão de lavar resolve boa parte disso no próprio banho: concentração menor no começo, frequência gradual e enxágue caprichado — ele descolore tecido. E o prazo é o mesmo do rosto: 4 a 6 semanas pra ver, até 3 meses pro efeito completo.", "hashtags": ["#acnenascostas", "#peroxidodebenzoila", "#verao", "#dermatologia", "#bacne"]}]}</script>
+<script id="dados-agenda" type="application/json">{"nicho": "dermatologia-estetica", "gerado_em": "2026-09-08", "semanas": ["2026-09-14", "2026-08-24"], "ideias": [{"id": "g2026-09-14-0", "semana": "2026-09-14", "titulo": "Voltou o short curtinho — e voltaram as verrugas e o molusco", "pilar": "Mitos vs verdades (educação preventiva sobre viral transmissível)", "registro": "Dermatologista alertando sobre um fenômeno que está vendo acontecer agora — urgência-amiga, sem venda e sem disclaimer", "ganchos": ["Voltou o short curtinho... e voltou junto uma coisa que eu tô vendo demais no consultório.", "Tem uma coisa aparecendo na parte de trás da coxa das minhas pacientes e não é celulite.", "Se você treina de short, presta atenção nos próximos 30 segundos: é sobre onde sua pele encosta."], "reels": [{"tempo": "0-3s", "fala": "Voltou o short curtinho... e voltou junto uma coisa que eu tô vendo muito no consultório ultimamente.", "direcao": "Close no rosto, sem saudação, corta já na primeira palavra. Texto na tela: 'short curtinho voltou...'"}, {"tempo": "3-10s", "fala": "Verruga e molusco. E o lugar onde tá aparecendo é que surpreende.", "direcao": "Pausa de meio segundo antes de 'verruga'. Corte seco. Texto na tela: 'verruga + molusco'."}, {"tempo": "10-20s", "fala": "Parte de trás da coxa. Dobra do joelho. Bumbum. Ou seja: exatamente onde a pele nua encosta em banco de academia, cadeira de plástico de piscina, colchonete de pilates.", "direcao": "Enumerar apontando na própria perna ou usar b-roll de banco de academia. Texto: 'onde a pele encosta'."}, {"tempo": "20-32s", "fala": "Os dois são vírus de pele. Erupção benigna, mas contagiosa. E tem um detalhe que quase ninguém sabe: se você cutuca, você espalha em você mesma. Isso tem nome, autoinoculação.", "direcao": "Tom mais baixo, quase confidencial. Texto na tela: 'cutucou = espalhou'."}, {"tempo": "32-42s", "fala": "Então: toalha entre você e o banco, chinelo no vestiário, e não passa lâmina por cima de uma lesãozinha dessas. A depilação carrega o vírus perna acima.", "direcao": "Três dedos contando na tela. Corte rápido a cada item."}, {"tempo": "42-48s", "fala": "Não é pra ter pânico de piscina. É pra parar de sentar de pele nua em superfície que o mundo inteiro sentou.", "direcao": "Olhar direto na câmera, sorriso leve no final. Texto: 'toalha. sempre.'"}], "carrossel": {"capa": "Voltou o short curtinho — e voltou o molusco", "laminas": ["Tenho visto mais verruga e molusco nas últimas semanas. E quase sempre no mesmo lugar.", "Atrás da coxa, dobra do joelho, bumbum: onde a pele nua encosta em banco público.", "Verruga e molusco são erupções benignas da pele causadas por vírus. Benigno não quer dizer que não passa pro outro.", "O molusco tem uma característica cruel: cutucar espalha. Chama autoinoculação — você mesma leva o vírus pra outra área.", "Depilar por cima de uma lesão é o jeito mais rápido de transformar uma bolinha em dez.", "Toalha entre você e o banco. Chinelo no vestiário. Nada de toalha compartilhada."], "cta_final": "Manda pra amiga que treina de short e senta em qualquer banco."}, "legenda": "Verruga e molusco não são falta de higiene: são vírus de pele, e o verão multiplica o contato. Tenho visto mais casos justamente na parte de trás da coxa, onde a pele nua encosta em banco de academia e cadeira de piscina. Toalha entre você e a superfície resolve boa parte. E cutucar espalha — isso vale repetir.", "hashtags": ["#verruga", "#moluscocontagioso", "#dermatologia", "#saudedapele", "#verao"]}, {"id": "g2026-09-14-1", "semana": "2026-09-14", "titulo": "Como usar peróxido de benzoíla do jeito que um derm usa", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Dermatologista que tira o mistério de um produto de farmácia — democratiza, não vende", "ganchos": ["Como usar peróxido de benzoíla do jeito que um dermatologista usa.", "Seu peróxido de benzoíla não é forte demais. Você que tá usando errado.", "Se o peróxido de benzoíla descascou sua cara inteira, foram três erros — e nenhum deles é o produto."], "reels": [{"tempo": "0-3s", "fala": "Como usar peróxido de benzoíla do jeito que a gente usa no consultório.", "direcao": "Produto na mão, close. Texto na tela: 'peróxido de benzoíla, do jeito certo'."}, {"tempo": "3-12s", "fala": "Primeiro: concentração. Tem de 2,5%, 5% e 10%. Mais forte não é mais rápido, é mais irritante. Quem tem pele sensível começa no 2,5%.", "direcao": "Mostrar as embalagens lado a lado ou texto grande '2,5 / 5 / 10'."}, {"tempo": "12-22s", "fala": "Segundo: frequência. Todo dia desde o primeiro dia é o erro clássico. Dia sim, dia não na primeira semana, e aí você sobe.", "direcao": "Corte seco. Texto na tela: 'dia sim, dia não — 1ª semana'."}, {"tempo": "22-34s", "fala": "Terceiro: combinação. Peróxido com retinoide tópico teve melhora significativa contra acne em 12 semanas em estudo controlado. Um não anula o outro, mas eu separo: um de manhã, outro de noite.", "direcao": "Dois frascos, mãos separando esquerda e direita. Texto: 'manhã x noite'."}, {"tempo": "34-44s", "fala": "E quarto, o que ninguém aguenta ouvir: resultado aparece de 4 a 6 semanas de uso contínuo, e leva até 3 meses pra chegar no máximo. Uma semana e desistir não é teste, é ensaio.", "direcao": "Olhar firme na câmera. Texto: '4 a 6 semanas. até 3 meses.'"}, {"tempo": "44-50s", "fala": "Ah, e ele descolore tecido. Fronha branca e toalha velha, por favor.", "direcao": "Fecho rápido com humor, mostrar toalha manchada se tiver."}], "carrossel": {"capa": "Peróxido de benzoíla: o jeito que um derm usa", "laminas": ["Concentração: 2,5%, 5% ou 10%. Mais forte não é mais rápido — é mais irritante.", "Frequência: dia sim, dia não na primeira semana. Depois você sobe.", "Eficácia depende de concentração, frequência e da sua pele. Não é só 'passar'.", "Com retinoide tópico: a combinação mostrou melhora significativa contra placebo em 12 semanas.", "Eu prefiro separar: um de manhã, outro à noite. Menos irritação, mesma potência.", "Prazo real: 4 a 6 semanas pra ver, até 3 meses pra chegar no máximo.", "Descolore tecido. Fronha branca e toalha que você não ama."], "cta_final": "Salva pra consultar quando abrir o pote."}, "legenda": "Peróxido de benzoíla é vendido sem receita e usado errado por quase todo mundo. Concentração alta demais, todo dia desde o primeiro dia e desistência na segunda semana — essa é a receita do ressecamento. O produto precisa de 4 a 6 semanas pra mostrar resultado e até 3 meses pra chegar no máximo dele.", "hashtags": ["#peroxidodebenzoila", "#acne", "#skincarecomciencia", "#dermatologista"]}, {"id": "g2026-09-14-2", "semana": "2026-09-14", "titulo": "POV: você no vestiário da academia (e o que sua pele tá encostando)", "pilar": "Mitos vs verdades (educação preventiva sobre viral transmissível)", "registro": "Derm-amiga em modo cúmplice dentro do vestiário — meio sussurro, meio deboche, zero tom de palestra", "ganchos": ["POV: você é a amiga dermatologista e vê alguém sentar de pele nua no banco do vestiário.", "Eu não sento de pele nua em banco de vestiário. E não é frescura.", "O chão do vestiário é o lugar da academia que mais me preocupa — e não é pelo cheiro."], "reels": [{"tempo": "0-4s", "fala": "POV: você tá no vestiário e senta de pele nua no banco. Eu, dermatologista, morrendo por dentro.", "direcao": "Grava no vestiário/academia, celular na mão, câmera meio de lado. Texto: 'POV: a amiga derm te vê'."}, {"tempo": "4-14s", "fala": "Verruga e molusco são vírus de pele. Passam de pele pra pele e de superfície pra pele. Banco, colchonete, chão de box de banho, toalha emprestada.", "direcao": "B-roll rápido de cada superfície citada, corte a cada palavra."}, {"tempo": "14-26s", "fala": "E eu tô vendo mais desses casos agora. Não em mão, não em pé. Em coxa e bumbum. Onde a pele encosta no que todo mundo encosta.", "direcao": "Volta pro rosto, tom mais baixo e sério. Texto na tela: 'coxa. bumbum.'"}, {"tempo": "26-38s", "fala": "Meu kit de vestiário: chinelo pra tomar banho, toalha minha embaixo antes de sentar, e nada de dividir toalha com ninguém, nem com a pessoa que eu amo.", "direcao": "Mostrar chinelo e toalha dentro da bolsa. Corte rápido."}, {"tempo": "38-45s", "fala": "Não é nojo. É que vírus de pele não olha se a academia é cara.", "direcao": "Olhar na câmera, fecho seco, sem sorriso."}], "carrossel": {"capa": "O que eu não faço no vestiário da academia", "laminas": ["Não sento de pele nua no banco. Toalha embaixo, sempre.", "Não tomo banho descalça. Chinelo entra na mala junto com a garrafinha.", "Não empresto e não pego toalha emprestada. De ninguém.", "Por quê: verruga e molusco são erupções benignas causadas por vírus — e vírus passa por contato.", "Tenho visto mais casos em coxa e bumbum. Justamente onde a pele nua encosta em superfície pública.", "Cutucar espalha. É o que chamamos de autoinoculação: uma lesão vira várias."], "cta_final": "Comenta 'kit' que eu conto o que mais anda na minha mala de academia."}, "legenda": "Chinelo e toalha na mala não é frescura de dermatologista. Verruga e molusco são vírus de pele e passam por contato — inclusive contato com superfície. Ando vendo mais casos em coxa e bumbum, exatamente onde a pele nua encosta em banco de vestiário e colchonete.", "hashtags": ["#academia", "#vestiario", "#verruga", "#dermatologia", "#dicadederm"]}, {"id": "g2026-09-14-3", "semana": "2026-09-14", "titulo": "Resposta ao comentário: 'peróxido de benzoíla destruiu minha pele'", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Dermatologista respondendo comentário sem passar pano — direta, quase ríspida, mas termina dando o caminho", "ganchos": ["'Peróxido de benzoíla destruiu minha pele.' Respondendo: não foi ele. Foram três coisas que você fez.", "Comentário: 'usei 10% todo dia e descascou tudo'. Amiga, você usou uma marreta pra pendurar um quadro.", "Se sua pele ardeu e descascou com peróxido de benzoíla, o problema não é o produto ser forte."], "reels": [{"tempo": "0-4s", "fala": "'Peróxido de benzoíla destruiu minha pele.' Vou responder sem passar pano: não foi o produto.", "direcao": "Print do comentário na tela, rosto no canto. Sem cumprimento."}, {"tempo": "4-14s", "fala": "Erro um: você começou no 10%. Existe 2,5% e existe 5%. A eficácia depende de concentração, frequência e da sua pele — não é quem aguenta mais.", "direcao": "Texto grande na tela: 'começou no 10% ❌'."}, {"tempo": "14-24s", "fala": "Erro dois: todo dia desde o primeiro dia. Pele não é máquina. Dia sim, dia não na primeira semana e você chega no mesmo lugar sem descascar.", "direcao": "Corte seco, mudança de enquadramento."}, {"tempo": "24-36s", "fala": "Erro três: empilhar. Peróxido, ácido, esfoliante e retinoide na mesma noite. Peróxido com retinoide funciona, tem estudo com melhora significativa em 12 semanas — mas em horários separados, não tudo de uma vez em cima da cara.", "direcao": "Mostrar quatro frascos e ir tirando três da mesa."}, {"tempo": "36-46s", "fala": "Recomeça: menor concentração, dia alternado, hidratante depois. E dá tempo — de 4 a 6 semanas pra ver diferença.", "direcao": "Texto final: 'recomeça direito'. Olhar firme."}], "carrossel": {"capa": "'O peróxido de benzoíla destruiu minha pele'", "laminas": ["Não destruiu. Você começou no 10% quando existia 2,5%.", "Eficácia depende de concentração, frequência e das características da sua pele. Não de coragem.", "Todo dia desde o dia 1 é o segundo erro. Dia alternado na primeira semana.", "Empilhar peróxido + ácido + esfoliante + retinoide na mesma noite é pedir barreira destruída.", "Peróxido com retinoide tópico funciona: melhora significativa vs placebo em 12 semanas. Mas em horários separados.", "Hidratante não atrapalha o tratamento. Descascar não é sinal de que está funcionando."], "cta_final": "Se você abandonou o peróxido por causa disso, me conta nos comentários em qual erro você caiu."}, "legenda": "Peróxido de benzoíla quase nunca é forte demais — o uso é que costuma ser errado. Concentração alta logo de cara, uso diário desde o primeiro dia e empilhamento de ativos na mesma noite: é essa combinação que descasca a cara e faz a pessoa desistir. O produto pede de 4 a 6 semanas pra mostrar serviço.", "hashtags": ["#acne", "#peroxidodebenzoila", "#respondendocomentario", "#dermatologia"]}, {"id": "g2026-09-14-4", "semana": "2026-09-14", "titulo": "Era uma bolinha. Virou doze. O que aconteceu no meio.", "pilar": "Mitos vs verdades (educação preventiva sobre viral transmissível)", "registro": "Dermatologista contando bastidor de consultório — narrativa, ritmo de história, revelação no meio", "ganchos": ["Chegou com uma bolinha. Voltou em três semanas com doze. E ela não pegou de ninguém.", "A pergunta que eu mais ouço no consultório: 'mas se era uma só, por que espalhou?'", "Tem um jeito de multiplicar molusco sozinha, dentro de casa, sem contato com ninguém."], "reels": [{"tempo": "0-4s", "fala": "Uma bolinha na coxa. Três semanas depois, uma dúzia. E ela não encostou em ninguém no meio do caminho.", "direcao": "Sentada, enquadramento médio, luz suave. Texto na tela: '1 → 12'."}, {"tempo": "4-14s", "fala": "Molusco contagioso é isso: uma erupção viral benigna da pele. Benigna. Mas tem um truque sujo — ela se espalha em você mesma.", "direcao": "Corte pra close. Texto: 'benigno ≠ inofensivo'."}, {"tempo": "14-26s", "fala": "Chama autoinoculação. Você cutuca, o conteúdo sai, e você leva o vírus pra pele do lado. Coçar embaixo do chuveiro faz isso. Bucha faz isso. Lâmina de depilar faz isso muito bem.", "direcao": "Mostrar bucha e lâmina, tirar as duas de cena com a mão."}, {"tempo": "26-38s", "fala": "Então enquanto tiver lesão: não depila a área, não esfrega, não estoura. E secar a região com a toalha em toque, não esfregando de um lado pro outro.", "direcao": "Demonstrar o gesto de secar em toque com a toalha."}, {"tempo": "38-46s", "fala": "Cutucar não resolve, cutucar publica. E depois o tratamento vira doze em vez de um.", "direcao": "Olhar direto, pausa final. Texto: 'não cutuca.'"}], "carrossel": {"capa": "Era uma bolinha. Virou doze.", "laminas": ["Molusco contagioso é uma erupção viral benigna da pele.", "Benigna não significa parada: ela se espalha na própria pessoa.", "O nome disso é autoinoculação — você leva o vírus de uma área pra outra.", "Coçar no banho, esfregar com bucha e depilar por cima são os três maiores multiplicadores.", "Enquanto tiver lesão: não depila a área, não esfrega, não estoura.", "Seca a região em toque, não arrastando a toalha."], "cta_final": "Salva pra lembrar da regra: cutucou, espalhou."}, "legenda": "Molusco não precisa de outra pessoa pra se espalhar — ele se espalha em você. Autoinoculação é o motivo de uma lesão virar uma dúzia em poucas semanas, e coçar no banho, esfregar com bucha e passar a lâmina por cima são os caminhos mais rápidos pra isso. Enquanto tiver lesão, a área não se depila.", "hashtags": ["#moluscocontagioso", "#peleinfantil", "#dermatologia", "#autoinoculacao"]}, {"id": "g2026-09-14-5", "semana": "2026-09-14", "titulo": "Rotina silenciosa: peróxido de benzoíla em 20 segundos", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Skincare lifestyle silencioso — mostra, não explica; a autoridade aparece só no texto da tela", "ganchos": ["(texto na tela) Peróxido de benzoíla. Sem música, sem discurso. Só o jeito certo.", "(texto na tela) 2,5%. Dia sim, dia não. Assiste até o fim que a ordem importa.", "(texto na tela) A rotina que eu faço com peróxido — em silêncio, porque não tem o que discutir."], "reels": [{"tempo": "0-3s", "fala": "(sem fala — som do frasco abrindo)", "direcao": "Close extremo na tampa girando, luz natural lateral. Texto: 'peróxido de benzoíla, do jeito certo'."}, {"tempo": "3-10s", "fala": "(sem fala — água correndo)", "direcao": "Lavagem do rosto em close, som limpo. Texto: 'pele lavada e SECA. molhada irrita mais'."}, {"tempo": "10-20s", "fala": "(sem fala — som da bisnaga)", "direcao": "Ervilha de produto no dedo, aplicação em quatro pontos. Texto: 'concentração menor primeiro: 2,5%'."}, {"tempo": "20-30s", "fala": "(sem fala — som do pote de hidratante)", "direcao": "Hidratante espalhado em movimento lento. Texto: 'hidratante depois não anula. descascar não é sinal de funcionar'."}, {"tempo": "30-40s", "fala": "(sem fala — toalha branca dobrando)", "direcao": "Fronha e toalha brancas. Texto: 'ele descolore tecido. usa branco.'"}, {"tempo": "40-48s", "fala": "(sem fala — calendário sendo marcado)", "direcao": "Calendário com Xs alternados. Texto final: 'dia sim, dia não. resultado: 4 a 6 semanas.'"}], "carrossel": {"capa": "A rotina do peróxido, sem palavra nenhuma", "laminas": ["Pele lavada e seca. Aplicar em pele úmida aumenta a irritação.", "Uma ervilha. Quatro pontos. Espalha. Mais produto não acelera nada.", "Concentração baixa primeiro. 2,5% antes de pensar em 10%.", "Hidratante depois. Ele não anula o ativo.", "Fronha e toalha brancas: o produto descolore tecido.", "Dia sim, dia não na primeira semana. Resultado real: 4 a 6 semanas."], "cta_final": "Manda pra quem começou peróxido essa semana."}, "legenda": "Sem trilha, sem discurso: a rotina do peróxido de benzoíla como ela deveria ser feita. Pele seca, pouca quantidade, concentração baixa no começo e dia alternado na primeira semana. E o prazo que ninguém quer ouvir: 4 a 6 semanas até ver diferença.", "hashtags": ["#asmrskincare", "#peroxidodebenzoila", "#skincareroutine", "#peleoleosa"]}, {"id": "g2026-09-14-6", "semana": "2026-09-14", "titulo": "Aquele vídeo de skincare lindo que ia arruinar sua pele", "pilar": "Mitos vs verdades", "registro": "Dermatologista crítica de trend — ácida, opinativa, toma partido sem pedir licença", "ganchos": ["Vídeo lindíssimo, 15 milhões de views, e ninguém perguntou o que tinha dentro daqueles potes.", "Eu adoro esses vídeos de skincare estético. Só não confundo estética com protocolo.", "Sete camadas, luz de fim de tarde, som de água. E uma pele que vai arder amanhã."], "reels": [{"tempo": "0-4s", "fala": "Esses vídeos de skincare com sete potes e som de água? Eu assisto todos. E não faço nenhum.", "direcao": "Tela dividida: b-roll aesthetic de um lado, ela de outro. Texto: 'assisto. não faço.'"}, {"tempo": "4-14s", "fala": "Não é implicância. É que ali ninguém diz o que tem no vidrinho, nem em que ordem, nem com que frequência. E é exatamente frequência e concentração que decidem se um ativo funciona ou irrita.", "direcao": "Corte pra ela sozinha, tom firme."}, {"tempo": "14-26s", "fala": "Pega peróxido de benzoíla. Mesmo produto, duas pessoas: uma clareia a acne, a outra descasca a cara. A diferença tá na concentração, na frequência e na pele de cada uma — não na iluminação do vídeo.", "direcao": "Mostrar o frasco. Texto na tela: 'concentração + frequência + sua pele'."}, {"tempo": "26-38s", "fala": "E tem a parte do tempo. Nesses vídeos tudo acontece em 20 segundos. Na vida real, peróxido leva de 4 a 6 semanas pra mostrar resultado e até 3 meses pra chegar no máximo.", "direcao": "Corte seco. Texto grande: '4-6 semanas.'"}, {"tempo": "38-48s", "fala": "Continua assistindo, é relaxante. Só não copia rotina de quem nunca disse qual é o seu problema de pele.", "direcao": "Sorriso curto, olhar direto. Texto final: 'estética ≠ protocolo'."}], "carrossel": {"capa": "Por que eu não copio rotina de vídeo aesthetic", "laminas": ["Vídeo bonito não diz concentração. E concentração muda tudo.", "Vídeo bonito não diz frequência. Frequência é metade do resultado.", "Vídeo bonito não diz qual é o problema de pele daquela pessoa.", "Mesmo peróxido de benzoíla: em uma pele trata acne, em outra irrita. Depende de concentração, frequência e características individuais.", "Vídeo bonito acontece em 20 segundos. Tratamento acontece em semanas: 4 a 6 pra ver, até 3 meses pro máximo.", "Assistir é ótimo. Copiar é que dá errado."], "cta_final": "Me manda o vídeo de rotina que você quer que eu analise."}, "legenda": "Vídeo de skincare aesthetic é a coisa mais relaxante da internet e a pior fonte de protocolo que existe. Ninguém diz concentração, frequência nem qual é o problema de pele — e são exatamente essas três coisas que decidem se um ativo trata ou irrita. Copiar rotina de estranho é o jeito mais rápido de estragar barreira.", "hashtags": ["#skincare", "#trend", "#dermatologista", "#mitosdapele"]}, {"id": "g2026-09-14-7", "semana": "2026-09-14", "titulo": "O calendário do peróxido de benzoíla: semana 1, 4 e 12", "pilar": "Educação sobre procedimentos (expectativa de resultado)", "registro": "Dermatologista treinadora de expectativa — fala em números e prazos, paciência com firmeza de treinador", "ganchos": ["Semana 1 do peróxido: sua pele piora. Semana 4: começa. Semana 12: o resultado que você queria.", "Você desistiu do peróxido de benzoíla no dia 9. O produto só ia mostrar serviço no dia 30.", "Quer saber se seu tratamento de acne funcionou? Marca no calendário — não no espelho de amanhã."], "reels": [{"tempo": "0-4s", "fala": "Você desistiu do peróxido no dia nove. Ele só ia começar a aparecer lá pelo dia trinta.", "direcao": "Calendário grande em mãos, dedo apontando o dia 9. Texto: 'dia 9 ❌'."}, {"tempo": "4-14s", "fala": "Semana 1: ressecamento, ardência leve, aquela sensação de que piorou. É a fase que faz todo mundo abandonar.", "direcao": "Marcar a primeira semana no calendário. Texto: 'semana 1: parece pior'."}, {"tempo": "14-26s", "fala": "Semana 4 a 6: aqui, com uso contínuo, aparece o resultado. Contínuo, não 'quando eu lembro'.", "direcao": "Círculo vermelho na semana 4. Texto: 'semana 4-6: aparece'."}, {"tempo": "26-38s", "fala": "Semana 12: em estudo controlado, peróxido junto com retinoide tópico deu melhora significativa contra placebo nesse prazo. Três meses. É esse o cronograma real.", "direcao": "Virar a página do calendário. Texto: 'semana 12: o resultado real'."}, {"tempo": "38-48s", "fala": "Se você troca de produto a cada duas semanas, você nunca vai passar da fase ruim de nenhum deles. Escolhe um e vai até dezembro.", "direcao": "Fecha o calendário na câmera. Texto final: 'escolhe um. vai até o fim.'"}], "carrossel": {"capa": "O calendário real do peróxido de benzoíla", "laminas": ["Semana 1: ressecamento e sensação de piora. É aqui que 80% desiste.", "Semanas 4 a 6: com uso contínuo, o resultado começa a aparecer.", "Até 3 meses: é o prazo para o efeito pleno.", "Semana 12: peróxido + retinoide tópico mostrou melhora significativa vs placebo em estudo controlado.", "'Contínuo' quer dizer na frequência combinada, não quando você lembra.", "Trocar de produto a cada 15 dias = viver só a fase ruim de todos eles."], "cta_final": "Print nesse calendário e cola no espelho."}, "legenda": "A maior causa de fracasso no tratamento da acne não é o produto errado — é o calendário errado. Peróxido de benzoíla precisa de 4 a 6 semanas de uso contínuo pra mostrar resultado e até 3 meses pro efeito pleno; associado a retinoide tópico, os estudos avaliam melhora em 12 semanas. Duas semanas não é teste.", "hashtags": ["#acne", "#tratamentodeacne", "#peroxidodebenzoila", "#pacienciacomapele"]}, {"id": "g2026-09-14-8", "semana": "2026-09-14", "titulo": "Cinco coisas que eu não faço no verão (e sou chata com isso)", "pilar": "Mitos vs verdades / rotina da profissional", "registro": "Confessional em primeira pessoa — 'eu não faço', posicionamento pessoal assumido, sem tom de recomendação genérica", "ganchos": ["Cinco coisas que eu, dermatologista, não faço no verão — e a primeira é toalha emprestada.", "Eu não sento na borda da piscina de pele nua. Vou te contar exatamente por quê.", "Não é sobre protetor solar. São cinco hábitos de verão que eu me recuso a ter."], "reels": [{"tempo": "0-4s", "fala": "Cinco coisas que eu não faço no verão. Nenhuma delas é sobre protetor solar.", "direcao": "Cenário externo, óculos escuros. Texto: '5 coisas que eu não faço'."}, {"tempo": "4-12s", "fala": "Um: toalha emprestada. Nem da amiga, nem do hotel espalhada em espreguiçadeira já usada. Verruga e molusco são vírus de pele e passam por contato.", "direcao": "B-roll de toalha na espreguiçadeira. Texto: '1. toalha emprestada'."}, {"tempo": "12-20s", "fala": "Dois: sentar de pele nua em banco de vestiário e cadeira de plástico de clube. Coloco minha toalha embaixo, sempre.", "direcao": "Demonstra colocando a toalha. Texto: '2. pele nua no banco'."}, {"tempo": "20-28s", "fala": "Três: andar descalça em box de banho coletivo. Chinelo é item de mala, não de estilo.", "direcao": "Close no chinelo entrando na mala. Texto: '3. descalça no box'."}, {"tempo": "28-38s", "fala": "Quatro: depilar por cima de uma lesãozinha. A lâmina espalha o vírus perna acima e uma vira várias. E cinco: cutucar bolinha, porque cutucar é o mesmo que semear.", "direcao": "Tirar a lâmina de cena com a mão. Texto: '4. depilar por cima / 5. cutucar'."}, {"tempo": "38-48s", "fala": "Nada disso é medo de sair de casa. É toalha na bolsa e chinelo no pé, o resto é verão normal.", "direcao": "Sorriso, corte final. Texto: 'toalha + chinelo. só isso.'"}], "carrossel": {"capa": "5 coisas que eu não faço no verão (e nenhuma é sobre protetor)", "laminas": ["1. Toalha emprestada. Vírus de pele passa por contato.", "2. Sentar de pele nua em banco de vestiário ou cadeira de clube.", "3. Andar descalça em box de banho coletivo.", "4. Depilar por cima de lesão: a lâmina espalha uma pra várias.", "5. Cutucar bolinha — autoinoculação é levar o vírus pra pele do lado.", "Verruga e molusco são erupções benignas causadas por vírus. Benignas, contagiosas."], "cta_final": "Qual dessas cinco você faz sem pensar? Confessa nos comentários."}, "legenda": "Minhas cinco regras de verão não têm nada a ver com protetor solar. Verruga e molusco são vírus de pele, passam por contato e se espalham na própria pessoa quando ela cutuca ou depila por cima. Toalha na bolsa, chinelo no pé e mão longe da lesão resolvem quase tudo.", "hashtags": ["#verao", "#dicasdederm", "#piscina", "#saudedapele", "#verruga"]}, {"id": "g2026-09-14-9", "semana": "2026-09-14", "titulo": "'Verruga é falta de higiene' — não é, e eu vou cortar esse assunto aqui", "pilar": "Mitos vs verdades", "registro": "Dermatologista que corta mito de frente — firme, quase impaciente com a crença, acolhedora com a paciente", "ganchos": ["'Verruga é falta de higiene.' Não é. E essa frase faz gente adiar tratamento por vergonha.", "Ninguém pega verruga por ser suja. Pega por encostar.", "Se alguém te disse que molusco é sinal de casa mal cuidada, essa pessoa está errada — e eu explico em 30 segundos."], "reels": [{"tempo": "0-4s", "fala": "'Verruga é falta de higiene.' Não é. E essa frase faz muita gente esconder a lesão em vez de tratar.", "direcao": "Frontal, sem sorriso. Texto na tela: 'MITO'."}, {"tempo": "4-14s", "fala": "Verruga e molusco são erupções da pele causadas por vírus. Vírus não escolhe casa limpa ou suja. Escolhe pele que encostou em pele, ou em superfície.", "direcao": "Corte pra close. Texto: 'é vírus, não sujeira'."}, {"tempo": "14-26s", "fala": "Por isso aparece em criança que vai na piscina, em adulto que treina, em quem usa vestiário. E, com o verão, tenho visto mais — principalmente onde a pele nua encosta em banco.", "direcao": "B-roll piscina/academia. Texto: 'onde a pele encosta'."}, {"tempo": "26-38s", "fala": "São lesões benignas. Benignas, mas contagiosas, e que se espalham na própria pessoa quando ela cutuca. Vergonha aqui só atrasa: quanto antes trata, menos lesão pra tratar.", "direcao": "Volta ao frontal, tom mais suave. Texto: 'benigna ≠ ignorar'."}, {"tempo": "38-48s", "fala": "Então para de perguntar 'onde foi que eu peguei' e vai resolver. A resposta quase sempre é: numa superfície qualquer, num dia comum.", "direcao": "Olhar direto, fecho seco."}], "carrossel": {"capa": "Verruga não é falta de higiene", "laminas": ["Verruga e molusco são erupções epidérmicas benignas causadas por infecção viral da pele.", "Vírus se pega por contato: pele com pele ou pele com superfície.", "Piscina, vestiário, colchonete, toalha compartilhada: os pontos mais comuns.", "Benigna não é sinônimo de deixar quieto: ela contagia e se espalha em você mesma.", "Autoinoculação: cutucar leva o vírus pra área vizinha e multiplica as lesões.", "Vergonha atrasa o tratamento — e quanto mais tarde, mais lesão pra tratar."], "cta_final": "Manda esse post pra quem tá com vergonha de mostrar aquela bolinha."}, "legenda": "Verruga não é sinal de falta de higiene: é infecção viral da pele, benigna e contagiosa, que se pega por contato com outra pele ou com superfície. A crença de que é 'sujeira' faz gente esconder a lesão e chegar no consultório com dez em vez de uma. Cutucar espalha — isso sim é o que piora o quadro.", "hashtags": ["#mitoseverdades", "#verruga", "#moluscocontagioso", "#dermatologia"]}, {"id": "g2026-09-14-10", "semana": "2026-09-14", "titulo": "Peróxido de benzoíla no corpo: as costas e o bumbum que ninguém trata", "pilar": "Educação sobre procedimentos (uso correto de ativo tópico)", "registro": "Dermatologista prática de banheiro — instrução passo a passo, tom de quem está mostrando ali na hora, sem solenidade", "ganchos": ["Peróxido de benzoíla não é só pra cara. As costas e o bumbum agradecem — e o verão é o pior momento pra ignorar.", "Você trata acne no rosto religiosamente e deixa as costas por conta do destino.", "O jeito que um derm usa peróxido no corpo: no chuveiro, com cronômetro."], "reels": [{"tempo": "0-4s", "fala": "Peróxido de benzoíla não é só pra cara. Costas e bumbum também, e no verão isso pesa.", "direcao": "Gravar no banheiro, frasco na mão. Texto: 'peróxido no corpo'."}, {"tempo": "4-14s", "fala": "No corpo eu prefiro a versão de lavar. Ensaboa, espalha na área, deixa agir e enxágua. É o jeito de ter o ativo sem passar creme em costas inteira.", "direcao": "Demonstrar espalhando na mão. Texto: 'versão de lavar'."}, {"tempo": "14-24s", "fala": "Concentração: começa na menor. Frequência: não é todo dia de cara. A eficácia depende justamente de concentração, frequência e do tipo de pele — os três, não um só.", "direcao": "Corte seco, texto: 'concentração + frequência + sua pele'."}, {"tempo": "24-36s", "fala": "Detalhe do verão: enxagua muito bem antes de vestir o biquíni. Ele descolore tecido. Já vi biquíni preto virar biquíni manchado.", "direcao": "Mostrar peça de roupa clara vs escura. Texto: 'descolore tecido'."}, {"tempo": "36-48s", "fala": "E não espera milagre em uma semana: de 4 a 6 semanas pra ver resultado, até 3 meses pro efeito completo. Costas leva o mesmo tempo que rosto — só que você olha menos.", "direcao": "Fecho na câmera. Texto final: '4-6 semanas. no corpo também.'"}], "carrossel": {"capa": "Acne nas costas: o peróxido que você só usa no rosto", "laminas": ["No corpo, a versão de lavar resolve: ensaboa, deixa agir, enxágua.", "Comece pela concentração menor. Alta concentração no corpo irrita igual.", "Frequência gradual, não todo dia desde o primeiro banho.", "Eficácia depende de concentração, frequência e das características da sua pele.", "Enxágue bem antes de vestir: peróxido descolore tecido, inclusive biquíni.", "Prazo: 4 a 6 semanas pra ver resultado, até 3 meses pro efeito pleno."], "cta_final": "Marca alguém que sofre com acne nas costas todo verão."}, "legenda": "Acne nas costas e no bumbum some da rotina de todo mundo porque não está no espelho. O peróxido de benzoíla em versão de lavar resolve boa parte disso no próprio banho: concentração menor no começo, frequência gradual e enxágue caprichado — ele descolore tecido. E o prazo é o mesmo do rosto: 4 a 6 semanas pra ver, até 3 meses pro efeito completo.", "hashtags": ["#acnenascostas", "#peroxidodebenzoila", "#verao", "#dermatologia", "#bacne"]}, {"id": "g2026-08-24-0", "semana": "2026-08-24", "titulo": "Vaselina ao redor dos olhos: o que o viral não te contou", "pilar": "Mitos vs verdades", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#dermatologia", "#skincare", "#cuidadoscomapele", "#olheiras", "#mitosdaskincare"]}, {"id": "g2026-08-24-1", "semana": "2026-08-24", "titulo": "Tônico facial: necessário ou dinheiro jogado fora?", "pilar": "Mitos vs verdades", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#tonicofacial", "#skincarebrasil", "#dermatologista", "#rotinadepele", "#peleoleosa"]}, {"id": "g2026-08-24-2", "semana": "2026-08-24", "titulo": "Lavar o rosto: o passo mais simples que quase todo mundo erra", "pilar": "Educação sobre procedimentos", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#limpezadepele", "#skincare", "#dermatologia", "#rotinadepele", "#barreiracutanea"]}, {"id": "g2026-08-24-3", "semana": "2026-08-24", "titulo": "Melasma não tem atalho — e isso é uma boa notícia", "pilar": "Rotina e prevenção", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#melasma", "#manchasnapele", "#fotoprotecao", "#dermatologia", "#peleconsciente"]}, {"id": "g2026-08-24-4", "semana": "2026-08-24", "titulo": "Sua vitamina C pode estar oxidada (e você nem percebeu)", "pilar": "Educação sobre procedimentos", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#vitaminac", "#skincarecientifico", "#dermatologia", "#antioxidante", "#cuidadoscomapele"]}, {"id": "g2026-08-24-5", "semana": "2026-08-24", "titulo": "Acne não é falta de banho — e você precisa ouvir isso", "pilar": "Mitos vs verdades", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#acne", "#peleacneica", "#dermatologia", "#autoestima", "#mitosdaskincare"]}, {"id": "g2026-08-24-6", "semana": "2026-08-24", "titulo": "Ardeu, coçou, vermelhou: é adaptação ou alergia?", "pilar": "Mitos vs verdades", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#dermatitedecontato", "#pelesensivel", "#dermatologia", "#skincare", "#alergiadepele"]}, {"id": "g2026-08-24-7", "semana": "2026-08-24", "titulo": "Ferida cicatriza melhor úmida, não com casquinha", "pilar": "Rotina e prevenção", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#cicatrizacao", "#cuidadocomferidas", "#dermatologia", "#primeirossocorros", "#cicatrizes"]}, {"id": "g2026-08-24-8", "semana": "2026-08-24", "titulo": "Rotina noturna: a ordem tem ciência (não é estética)", "pilar": "Rotina e prevenção", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#rotinanoturna", "#skincare", "#asmrskincare", "#dermatologia", "#ordemdoskincare"]}, {"id": "g2026-08-24-9", "semana": "2026-08-24", "titulo": "Dia nublado também queima: o mito do protetor opcional", "pilar": "Rotina e prevenção", "registro": "", "ganchos": [], "reels": [{"tempo": "", "fala": "", "direcao": ""}], "carrossel": {"capa": "", "laminas": [], "cta_final": ""}, "legenda": "", "hashtags": ["#protetorsolar", "#fotoprotecao", "#uva", "#dermatologia", "#prevencao"]}], "minhas_publicadas": [{"id": "5e46e1fee3", "atualizado_em": "2026-09-09T11:21", "ideia": "Tudo que meus pacientes recebem na minha consulta online de acne, fiquem até o final que vou falar o valor \nVideo mostrando embalando o kit de produtos de brinde, colocando na caixa, com a receita, e o cheirinho.\nO foco é mostrar o processo e cuidado com os pacientes, o diferencial de enviar em uma caixa com brindes.", "formato": "video", "estilo": "Bastidor / humanizado", "tom": "Acolhedor", "tamanho": "60s", "roteiro": {"titulo": "O que NÃO vai dentro", "angulo": "Enquanto embala, ela lista o que se recusa a colocar na caixa — posicionamento contra kit padronizado, ácido no dia um e promessa de prazo — e só no fim mostra o que vai.", "gancho": "Tem quatro coisas que eu me recuso a colocar dentro dessa caixa. E é justamente por isso que ela funciona.", "blocos": [{"rotulo": "0-4s", "texto": "Tem quatro coisas que eu me recuso a colocar dentro dessa caixa. E é por isso que ela funciona.", "direcao": "Caixa aberta e vazia na mesa. Suas mãos apoiadas nas laterais. Corte pro seu rosto, sério. Sem música."}, {"rotulo": "4-13s", "texto": "Primeira: kit pronto. Eu não compro caixa fechada e mando igual pra todo mundo. Pele oleosa com nódulo e pele seca com cravinho não usam a mesma coisa, e quem te vende isso sabe disso.", "direcao": "Você empurrando pra fora do quadro uma caixinha genérica. Texto na tela: 'kit padrão = chute embalado'."}, {"rotulo": "13-23s", "texto": "Segunda: ácido pra usar no dia um. Pele inflamada que recebe ácido de cara descama, arde e a paciente para na primeira semana. Eu entrego o ácido dentro da caixa, mas com data pra começar.", "direcao": "Close num frasco com um adesivo escrito à mão: 'começar dia 15'. Segurar o close 2 segundos."}, {"rotulo": "23-32s", "texto": "Terceira: promessa de prazo. Ninguém aqui vai ouvir de mim que em trinta dias some. Acne inflamatória responde em oito a doze semanas e mancha demora mais que isso.", "direcao": "Você olhando pra câmera, sem embalar, mãos paradas. Texto na tela: '8 a 12 semanas'."}, {"rotulo": "32-40s", "texto": "Quarta: caixa muda. Sem receita explicada, sem nome, sem ninguém pra perguntar depois. Por isso vai o meu WhatsApp e o retorno em trinta dias já incluído.", "direcao": "Colocando o cartão de contato dentro da caixa. Corte rápido de uma conversa no celular (nome borrado)."}, {"rotulo": "40-50s", "texto": "Agora o que vai: os produtos que eu escolhi olhando a sua pele, os dois protocolos impressos, as amostras do que vem depois, o bilhete com o seu nome e um sachê que deixa a caixa inteira cheirosa.", "direcao": "Sequência acelerada de montagem, um item por corte, música entra. Termina com você cheirando o sachê e sorrindo."}, {"rotulo": "50-60s", "texto": "Consulta online, essa caixa e o retorno: [SEU VALOR]. Se você já gastou isso em farmácia esse ano sem saber o que estava passando, você entendeu meu ponto. Comenta EU QUERO.", "direcao": "Você com a caixa fechada no colo, plano médio. Valor grande na tela. Fala a última frase com meio sorriso."}], "legenda": "Não existe kit de acne que sirva pra todo mundo — e quem te vende um sabe disso. Na minha caixa não entra ácido pra começar no dia um, não entra promessa de trinta dias e não entra produto que eu não escolhi olhando a sua pele. Comenta EU QUERO que eu te mando como funciona a consulta online.", "hashtags": ["#acne", "#peleacneica", "#dermatologiaestetica", "#kitdeacne", "#consultaonline", "#cuidadoscomapele"], "por_que_funciona": "A estrutura de negação cria curiosidade acumulada (o espectador fica pra saber o que sobra) e cada item recusado é uma tomada de posição concreta, com número e cena, em vez de elogio ao próprio serviço."}, "criado_em": "2026-09-09T11:21"}]}</script>
 <script>
 const Radar = (() => {
   const ler = (chave, padrao) => {
@@ -901,6 +1354,14 @@ const Radar = (() => {
   const senha = () => { try { return (localStorage.getItem(SENHA) || '').trim(); } catch (_) { return ''; } };
   const salvarSenha = v => { try { localStorage.setItem(SENHA, String(v || '').trim()); return true; } catch (_) { return false; } };
   const apagarSenha = () => { try { localStorage.removeItem(SENHA); } catch (_) {} };
+
+  // ── estado da agenda: lista, feita, descartada, gancho e formato ──
+  // Uma chave só para todas as semanas — o que é descartado some da lista
+  // inteira. Este é o ponto por onde o estado passa a ser compartilhado
+  // entre aparelhos quando houver banco: só estas quatro funções mudam.
+  const chaveEstado = nicho => 'radar-estado:' + (nicho || 'padrao');
+  const estadoAgenda = nicho => ler(chaveEstado(nicho), {});
+  const gravarEstadoAgenda = (nicho, estado) => gravar(chaveEstado(nicho), estado);
 
   // ── escolhas na agenda (feedback) ─────────────────────────────────
   const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
@@ -988,6 +1449,10 @@ const Radar = (() => {
     return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
   }
 
+  // As ideias do estúdio, que agora aparecem na própria agenda.
+  const minhasIdeias = (nicho, publicadas) => galeriaTodos(nicho, publicadas || []);
+  const apagarMinhaIdeia = (nicho, id) => galeriaApagar(nicho, id);
+
   function limparRoteiro(r) {
     return {
       titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
@@ -1047,11 +1512,11 @@ const Radar = (() => {
       const r = await fetch('/api/ia', {method: 'GET', headers: {'accept': 'application/json'}});
       if (r.ok) {
         const d = await r.json();
-        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, servidor: true};
+        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, painel: !!d.painel, servidor: true};
         return estadoCache;
       }
     } catch (_) {}
-    estadoCache = {configurada: false, senha: false, servidor: false};
+    estadoCache = {configurada: false, senha: false, painel: false, servidor: false};
     return estadoCache;
   }
 
@@ -1170,6 +1635,7 @@ const Radar = (() => {
   return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
           chave, salvarChave, apagarChave, senha, salvarSenha, apagarSenha, estadoIA,
           registrarFeedback, feedback, preferencias,
+          estadoAgenda, gravarEstadoAgenda, minhasIdeias, apagarMinhaIdeia,
           galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
           limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
           exportarTudo, importarTudo, chamarIA, extrairJson};
@@ -1177,54 +1643,109 @@ const Radar = (() => {
 
 
 const DADOS = JSON.parse(document.getElementById('dados-agenda').textContent);
-const CHAVE = 'radar-' + DADOS.semana;
-const estado = JSON.parse(localStorage.getItem(CHAVE) || '{}');
+const IDEIAS = {};
+DADOS.ideias.forEach(d => { IDEIAS[d.id] = d; });
+
+// O estado é um só para todas as semanas: uma ideia descartada some da
+// lista inteira, não só da semana em que nasceu.
+const estado = Radar.estadoAgenda(DADOS.nicho);
 const abertas = new Set();
 let filtro = 'todas';
 let foco = null;
 
+function st(id) {
+  return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false,
+                                      formato: 'reels', gancho: 0});
+}
 function salvar() {
-  try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (_) {}
+  Radar.gravarEstadoAgenda(DADOS.nicho, estado);
   registrarEscolhas();
 }
-const LOCAL = ['127.0.0.1', 'localhost'].includes(location.hostname);
 let aviso = null;
-function escolhas() {
-  return DADOS.ideias.map((d, i) => {
-    const s = st(i);
-    const estadoIdeia = s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum';
-    return {titulo: d.titulo, pilar: d.pilar, registro: d.registro, estado: estadoIdeia};
-  });
-}
-// As escolhas viram sinal de gosto: ficam no navegador (para o estúdio e as
-// ferramentas do site) e, quando a página é aberta pelo painel, também no
-// arquivo de feedback do nicho.
+// As escolhas viram sinal de gosto para o estúdio; no painel, também vão
+// para o arquivo de feedback do nicho.
 function registrarEscolhas() {
   if (!DADOS.nicho) return;
   clearTimeout(aviso);
   aviso = setTimeout(() => {
-    const ideias = escolhas();
-    Radar.registrarFeedback(DADOS.nicho, DADOS.semana, ideias);
-    if (!LOCAL) return;
-    fetch('/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({nicho: DADOS.nicho, semana: DADOS.semana, ideias})}).catch(() => {});
+    const ideias = DADOS.ideias.map(d => {
+      const s = st(d.id);
+      return {titulo: d.titulo, pilar: d.pilar, registro: d.registro,
+              estado: s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum'};
+    });
+    Radar.registrarFeedback(DADOS.nicho, 'todas', ideias);
+    // No painel, as escolhas também vão para o arquivo de feedback do nicho.
+    // Quem responde /api/ia diz se é o painel — adivinhar pelo endereço
+    // erra em túnel, preview e servidor local qualquer.
+    Radar.estadoIA().then(estado => {
+      if (!estado.painel) return;
+      fetch('/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({nicho: DADOS.nicho, semana: 'todas', ideias})}).catch(() => {});
+    }).catch(() => {});
   }, 400);
 }
-function st(id) { return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false, formato: 'reels', gancho: 0}); }
-
 const toast = Radar.toast;
+const copiar = Radar.copiar;
+const escapar = Radar.escapar;
 
 function lerHash() {
-  const m = location.hash.match(/^#r(\d+)$/);
-  foco = m && DADOS.ideias[m[1]] ? m[1] : null;
+  const m = location.hash.match(/^#r(.+)$/);
+  foco = (m && document.getElementById('r' + m[1])) ? m[1] : null;
   if (foco !== null) abertas.add(foco);
   document.body.classList.toggle('em-foco', foco !== null);
+}
+
+// ── as ideias criadas no estúdio entram na mesma lista ────────────────
+function cartaoMinhaIdeia(item) {
+  const r = item.roteiro || {};
+  const blocos = (r.blocos || []).map(b => `<div class="bloco-tempo">
+    <span class="tempo">${escapar(b.rotulo)}</span>
+    <div><div>${escapar(b.texto)}</div>${b.direcao ? `<div class="direcao">${escapar(b.direcao)}</div>` : ''}</div></div>`).join('');
+  const rotulos = {video: '🎬 Vídeo', carrossel: '🖼️ Carrossel', stories: '📱 Stories'};
+  const publicada = item.origem === 'site';
+  return `<article class="cartao minha${publicada ? ' publicada' : ''}" data-id="${escapar(item.id)}" id="r${escapar(item.id)}">
+    <div class="cab">
+      <button class="descartar" title="Apagar esta ideia" aria-label="Apagar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip minha">✨ sua ideia</span>
+        <span class="chip">${rotulos[item.formato] || escapar(item.formato || '')}</span>
+        ${item.tom ? `<span class="chip">${escapar(item.tom)}</span>` : ''}
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>${escapar(r.titulo || item.ideia)}</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      ${r.gancho ? `<div class="rotulo">Gancho</div><p class="gancho-gal">🪝 ${escapar(r.gancho)}</p>` : ''}
+      <div class="rotulo">Roteiro</div>${blocos}
+      ${r.legenda ? `<div class="rotulo">Legenda pronta</div><div class="legenda">${escapar(r.legenda)}</div>` : ''}
+      <div class="hashtags">${(r.hashtags || []).map(escapar).join(' ')}</div>
+      <p class="previa" style="font-style:normal;margin-top:12px">Ideia original: ${escapar(item.ideia || '')}</p>
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <a class="btn" href="estudio.html?id=${encodeURIComponent(item.id)}">✏️ Reabrir no estúdio</a>
+      </div>
+    </div>
+  </article>`;
+}
+function minhasIdeias() { return Radar.minhasIdeias(DADOS.nicho, DADOS.minhas_publicadas); }
+function montarMinhas() {
+  const lista = document.getElementById('lista-cartoes');
+  lista.querySelectorAll('.cartao.minha').forEach(c => c.remove());
+  const itens = minhasIdeias();
+  if (!itens.length) return;
+  lista.insertAdjacentHTML('afterbegin', itens.map(cartaoMinhaIdeia).join(''));
 }
 
 function render() {
   let naLista = 0, feitas = 0, visiveis = 0, descartadas = 0;
   document.querySelectorAll('.cartao').forEach(c => {
-    const id = c.dataset.id, s = st(id), d = DADOS.ideias[id];
+    const id = c.dataset.id, s = st(id), d = IDEIAS[id];
+    const minha = c.classList.contains('minha');
     if (s.descartada) descartadas++;
     if (s.lista && !s.feito && !s.descartada) naLista++;
     if (s.feito && !s.descartada) feitas++;
@@ -1238,21 +1759,24 @@ function render() {
     const btnF = c.querySelector('.feito-btn');
     btnF.classList.toggle('marcado', s.feito);
     btnF.textContent = s.feito ? '✓ Feita!' : 'Marcar como feita';
-    c.querySelectorAll('.gancho-opcao').forEach((g, i) => {
-      g.classList.toggle('sel', i === s.gancho);
-      g.querySelector('input').checked = i === s.gancho;
-    });
-    // o gancho escolhido substitui a fala do bloco de abertura do roteiro
-    const abertura = c.querySelector('.fala-gancho');
-    if (abertura) abertura.textContent = d.ganchos[s.gancho] || d.ganchos[0];
-    const previa = c.querySelector('.previa');
-    if (previa) previa.textContent = '🎣 ' + (d.ganchos[s.gancho] || '');
-    c.querySelectorAll('.seg').forEach(b => b.classList.toggle('ativa', b.dataset.fmt === s.formato));
-    const pr = c.querySelector('.painel-reels'), pc = c.querySelector('.painel-carrossel');
-    if (pr) pr.style.display = s.formato === 'reels' ? '' : 'none';
-    if (pc) pc.style.display = s.formato === 'carrossel' ? '' : 'none';
+    if (d) {
+      c.querySelectorAll('.gancho-opcao').forEach((g, i) => {
+        g.classList.toggle('sel', i === s.gancho);
+        g.querySelector('input').checked = i === s.gancho;
+      });
+      // o gancho escolhido substitui a fala do bloco de abertura do roteiro
+      const abertura = c.querySelector('.fala-gancho');
+      if (abertura) abertura.textContent = d.ganchos[s.gancho] || d.ganchos[0];
+      const previa = c.querySelector('.previa');
+      if (previa) previa.textContent = '🎣 ' + (d.ganchos[s.gancho] || '');
+      c.querySelectorAll('.seg').forEach(b => b.classList.toggle('ativa', b.dataset.fmt === s.formato));
+      const pr = c.querySelector('.painel-reels'), pc = c.querySelector('.painel-carrossel');
+      if (pr) pr.style.display = s.formato === 'reels' ? '' : 'none';
+      if (pc) pc.style.display = s.formato === 'carrossel' ? '' : 'none';
+    }
     // "Minha lista" = fila de produção: o que foi feito sai dela e vai para "Feitas"
     const passaFiltro = filtro === 'todas' ? !s.descartada
+      : filtro === 'minhas' ? (minha && !s.descartada)
       : filtro === 'lista' ? (s.lista && !s.feito && !s.descartada)
       : (s.feito && !s.descartada);
     const mostra = foco !== null ? id === foco : passaFiltro;
@@ -1271,7 +1795,12 @@ function render() {
 }
 
 function textoRoteiro(id) {
-  const d = DADOS.ideias[id], s = st(id);
+  const d = IDEIAS[id];
+  if (!d) {
+    const item = minhasIdeias().find(i => i.id === id);
+    return item ? Radar.textoRoteiro(item.roteiro || {}) : '';
+  }
+  const s = st(id);
   const gancho = d.ganchos[s.gancho] || d.ganchos[0];
   let out = d.titulo + '\n\n🎣 Gancho: ' + gancho + '\n\n';
   if (s.formato === 'reels' || !d.carrossel.laminas.length) {
@@ -1289,21 +1818,19 @@ function textoRoteiro(id) {
   return out;
 }
 
-const copiar = Radar.copiar;
-
 document.getElementById('restaurar').addEventListener('click', () => {
   Object.values(estado).forEach(e => { e.descartada = false; });
   toast('Ideias restauradas');
   render();
 });
 
-// Aviso quando a agenda não é atualizada há mais de 8 dias (falha na automação)
+// Aviso quando a agenda mais recente não é atualizada há mais de 8 dias
 (function avisarSeAntiga() {
   const dias = Math.floor((Date.now() - new Date(DADOS.gerado_em + 'T12:00:00')) / 86400000);
   if (dias > 8) {
     const el = document.getElementById('aviso-antiga');
     el.querySelector('span').textContent =
-      `⚠️ Esta agenda foi gerada há ${dias} dias — a atualização automática de segunda pode ter falhado.`;
+      `⚠️ A agenda mais recente foi gerada há ${dias} dias — a atualização automática de segunda pode ter falhado.`;
     el.classList.add('visivel');
   }
 })();
@@ -1322,6 +1849,12 @@ document.addEventListener('click', e => {
   if (!c) return;
   const id = c.dataset.id, s = st(id);
   if (e.target.closest('.descartar')) {
+    if (c.classList.contains('minha') && !c.classList.contains('publicada')) {
+      if (!confirm('Apagar esta ideia?')) return;
+      Radar.apagarMinhaIdeia(DADOS.nicho, id);
+      delete estado[id];
+      c.remove(); toast('Ideia apagada'); render(); return;
+    }
     s.descartada = true; abertas.delete(id);
     toast('Ideia descartada — dá pra restaurar no topo');
   } else if (e.target.closest('.cab')) {
@@ -1341,12 +1874,12 @@ document.addEventListener('click', e => {
   } else if (e.target.closest('.copiar-btn')) {
     copiar(textoRoteiro(id), 'Roteiro copiado 📋'); return;
   } else if (e.target.closest('.compartilhar-btn')) {
-    const link = location.origin + location.pathname + '#r' + id;
-    copiar(link, 'Link do roteiro copiado 🔗'); return;
+    copiar(location.origin + location.pathname + '#r' + id, 'Link do roteiro copiado 🔗'); return;
   } else { return; }
   render();
 });
 
+montarMinhas();
 lerHash();
 render();
 </script>

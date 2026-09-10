@@ -215,7 +215,7 @@
 </head>
 <body>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/><stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>
-<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html">📅 Agenda</a><a href="estudio.html">✨ Estúdio</a><a href="galeria.html">💡 Galeria</a><a href="manual.html" class="ativo" aria-current="page">📘 Manual</a><a href="ferramentas.html">🧰 Ferramentas</a></div></div></nav>
+<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html">📅 Agenda</a><a href="estudio.html">✨ Estúdio</a><a href="manual.html" class="ativo" aria-current="page">📘 Manual</a><a href="ferramentas.html">🧰 Ferramentas</a></div></div></nav>
 
 <header class="hero container">
   <div class="selo">Manual do nicho</div>
@@ -287,6 +287,14 @@ const Radar = (() => {
   const senha = () => { try { return (localStorage.getItem(SENHA) || '').trim(); } catch (_) { return ''; } };
   const salvarSenha = v => { try { localStorage.setItem(SENHA, String(v || '').trim()); return true; } catch (_) { return false; } };
   const apagarSenha = () => { try { localStorage.removeItem(SENHA); } catch (_) {} };
+
+  // ── estado da agenda: lista, feita, descartada, gancho e formato ──
+  // Uma chave só para todas as semanas — o que é descartado some da lista
+  // inteira. Este é o ponto por onde o estado passa a ser compartilhado
+  // entre aparelhos quando houver banco: só estas quatro funções mudam.
+  const chaveEstado = nicho => 'radar-estado:' + (nicho || 'padrao');
+  const estadoAgenda = nicho => ler(chaveEstado(nicho), {});
+  const gravarEstadoAgenda = (nicho, estado) => gravar(chaveEstado(nicho), estado);
 
   // ── escolhas na agenda (feedback) ─────────────────────────────────
   const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
@@ -374,6 +382,10 @@ const Radar = (() => {
     return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
   }
 
+  // As ideias do estúdio, que agora aparecem na própria agenda.
+  const minhasIdeias = (nicho, publicadas) => galeriaTodos(nicho, publicadas || []);
+  const apagarMinhaIdeia = (nicho, id) => galeriaApagar(nicho, id);
+
   function limparRoteiro(r) {
     return {
       titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
@@ -433,11 +445,11 @@ const Radar = (() => {
       const r = await fetch('/api/ia', {method: 'GET', headers: {'accept': 'application/json'}});
       if (r.ok) {
         const d = await r.json();
-        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, servidor: true};
+        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, painel: !!d.painel, servidor: true};
         return estadoCache;
       }
     } catch (_) {}
-    estadoCache = {configurada: false, senha: false, servidor: false};
+    estadoCache = {configurada: false, senha: false, painel: false, servidor: false};
     return estadoCache;
   }
 
@@ -556,6 +568,7 @@ const Radar = (() => {
   return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
           chave, salvarChave, apagarChave, senha, salvarSenha, apagarSenha, estadoIA,
           registrarFeedback, feedback, preferencias,
+          estadoAgenda, gravarEstadoAgenda, minhasIdeias, apagarMinhaIdeia,
           galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
           limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
           exportarTudo, importarTudo, chamarIA, extrairJson};

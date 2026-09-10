@@ -133,10 +133,10 @@ Saídas:
 
 | Caminho | Conteúdo |
 |---|---|
-| `web/index.html` | Agenda da semana (site publicado na Vercel) |
-| `web/estudio.html`, `galeria.html`, `manual.html`, `ferramentas.html` | Ferramentas do site que rodam no navegador (ver "O site") |
+| `web/index.html` | Agenda com todas as ideias (site publicado na Vercel) |
+| `web/estudio.html`, `manual.html`, `ferramentas.html` | Ferramentas do site que rodam no navegador (ver "O site") |
 | `api/ia.js` | Proxy da IA no servidor da Vercel — guarda a chave fora do navegador |
-| `web/semanas/<data>.html` | Agendas arquivadas, acessíveis pelo seletor no painel |
+| `dados/agendas-<nicho>.json` | Todas as gerações já feitas — é o que a agenda mostra |
 | `dados/<nicho>.json` | Última geração, usada pelo `rerender` |
 | `dados/historico-<nicho>.json` | Memória anti-repetição |
 | `saida/<nicho>/<data>/` | `sinais.json`, `roteiros.json` e `agenda.md` da execução |
@@ -145,21 +145,30 @@ O painel local fica em `src/painel/` e não precisa de nenhuma dependência extr
 
 ## O site
 
-O site publicado (Vercel, pasta `web/`) deixou de ser só a agenda: virou o lugar de
-tudo o que **não precisa do computador para rodar**. A barra de navegação leva a cinco
-páginas, todas estáticas, geradas pelo pipeline e pelo `rerender`:
+O site publicado (Vercel, pasta `web/`) é onde fica tudo o que **não precisa do
+computador para rodar**. São quatro páginas, todas estáticas, geradas pelo pipeline
+e pelo `rerender`:
 
-| Página | O que faz | Onde roda |
-|---|---|---|
-| **📅 Agenda** (`index.html`) | Cards que expandem, 3 ganchos por ideia, Reels ⇄ Carrossel, fila de produção (lista → feita), descarte com restauração, copiar roteiro, link compartilhável (`#rN`), semanas anteriores, aviso de agenda desatualizada | no navegador |
-| **✨ Estúdio** (`estudio.html`) | Sua ideia vira três roteiros em ângulos diferentes (vídeo, carrossel ou stories; estilo, tom e tamanho); você escolhe um, ajusta conversando e salva. Usa os mesmos prompts do painel, o manual do nicho e suas preferências | no navegador, falando com a IA por `/api/ia` — **a chave fica no servidor**, uma só para todos |
-| **💡 Galeria** (`galeria.html`) | Roteiros publicados pelo painel + os salvos neste navegador. Copiar, reabrir no estúdio, apagar, exportar/importar JSON (o mesmo formato de `dados/galeria-<nicho>.json`) | no navegador |
-| **📘 Manual** (`manual.html`) | O manual do nicho (o que o radar aprendeu com os virais), embutido na publicação | estático |
-| **🧰 Ferramentas** (`ferramentas.html`) | Estado da IA do site (e teste); **preferências reveladas** calculadas a partir das suas escolhas na agenda (com exportação para `dados/feedback-<nicho>.json`); backup e restauração de tudo o que está no navegador; disparo da agenda na nuvem (GitHub Actions); termos de busca e o rendimento de cada um; e a lista do que só roda pelo painel, com o motivo | no navegador |
+| Página | O que faz |
+|---|---|
+| **📅 Agenda** (`index.html`) | **Uma lista só, com as ideias de todas as semanas já geradas** mais as que você criou no estúdio. Cada card diz de que semana veio. Abre ao clicar, com 3 ganchos por ideia, Reels ⇄ Carrossel, fila de produção (lista → feita), descarte com restauração, copiar roteiro e link de um roteiro só (`#r<id>`). Filtros: Todas, ✨ Minhas ideias, 📌 Minha lista, ✓ Feitas |
+| **✨ Estúdio** (`estudio.html`) | Sua ideia vira três roteiros em ângulos diferentes (vídeo, carrossel ou stories; estilo, tom e tamanho); você escolhe um, ajusta conversando e salva — a ideia **entra na agenda**, junto com as outras. Usa os mesmos prompts do painel, o manual do nicho e suas preferências |
+| **📘 Manual** (`manual.html`) | O manual do nicho (o que o radar aprendeu com os virais), embutido na publicação |
+| **🧰 Ferramentas** (`ferramentas.html`) | Estado da IA do site (e teste); **preferências reveladas** calculadas a partir das suas escolhas na agenda (com exportação para `dados/feedback-<nicho>.json`); backup e restauração; disparo da agenda na nuvem (GitHub Actions); termos de busca e o rendimento de cada um; e a lista do que só roda pelo painel, com o motivo |
 
-Tudo o que a pessoa faz no site fica no `localStorage` do navegador dela (escolhas por
-semana, feedback, galeria). **A chave da Anthropic não fica no navegador de ninguém**: ela
-mora no servidor, e o navegador só conversa com `/api/ia` — ver "A chave da IA" abaixo.
+Não há mais galeria à parte nem página por semana: o que o estúdio cria e o que cada
+semana gerou vivem na mesma lista. As gerações passadas ficam em
+`dados/agendas-<nicho>.json` (ver `src/publicar/arquivo.py`), acumuladas a cada rodada.
+
+**Onde o estado mora.** Hoje as escolhas (lista, feita, descartada, gancho) e as ideias do
+estúdio ficam no `localStorage` de cada navegador, sob uma chave só para todas as semanas.
+Isso significa que **apagar uma ideia só apaga naquele aparelho** — para apagar em todo
+lugar falta um banco compartilhado. O código já está preparado: tudo passa por quatro
+funções em `src/publicar/base.py` (`estadoAgenda`, `gravarEstadoAgenda`, `minhasIdeias`,
+`apagarMinhaIdeia`), e é só ali que a troca acontece.
+
+Para mudar o design sem gerar roteiros de novo: `python -m src.publicar.rerender --nicho <nicho>`
+reconstrói todas as páginas a partir do que já foi gerado.
 
 ### A chave da IA
 
@@ -188,7 +197,7 @@ mostra se deu certo, e tem um botão que testa com uma chamada mínima.
 > 2. **Limite de gasto** na Anthropic (console.anthropic.com → *Plans & Billing*), que é o
 >    teto que ninguém contorna. Vale usar uma chave só para o site, separada da pessoal.
 
-Sem `ANTHROPIC_API_KEY` no servidor o site continua abrindo: a agenda, a galeria, o manual e
+Sem `ANTHROPIC_API_KEY` no servidor o site continua abrindo: a agenda, o manual e
 as ferramentas funcionam, e só o estúdio fica parado, avisando o que falta. Quem quiser pode,
 nesse caso, guardar uma chave própria em Ferramentas — ela fica só no aparelho dela.
 

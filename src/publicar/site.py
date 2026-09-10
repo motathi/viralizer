@@ -1,23 +1,20 @@
-"""Publica a agenda gerada como página interativa do site (web/index.html).
+"""Publica todas as agendas como uma página só (web/index.html).
 
-A página renderiza os roteiros da semana com:
+A página reúne, numa lista única, as ideias de todas as semanas já geradas
+mais as que saíram do estúdio — sem galeria à parte e sem separar por
+semana. Cada card traz de que semana veio.
+
+O que a página faz:
 - cards compactos em grade que expandem ao clicar;
 - alternância Reels ⇄ Carrossel e escolha entre as 3 opções de gancho
   (o gancho escolhido substitui o bloco de abertura do roteiro);
-- "minha lista" de ideias selecionadas e marcação de feitas (estado salvo
-  no navegador, por semana), com filtros e contador;
-- fila de produção: ideias marcadas como feitas saem da lista;
+- fila de produção: "minha lista" → "feita", com filtros e contador;
 - descarte individual (✕) com restauração;
-- histórico das semanas anteriores no painel e aviso de agenda desatualizada;
-- copiar roteiro e link compartilhável de um roteiro só (#r<n>).
+- copiar roteiro e link compartilhável de um roteiro só (#r<id>).
 
-As escolhas (lista, feita, descartada) também ficam registradas no
-navegador como feedback, para o estúdio e a página de ferramentas do site;
-no painel local, vão além: chegam ao arquivo de feedback do nicho.
-
-O estilo, a navegação e o JavaScript comuns vêm de src/publicar/base.py;
-as páginas de ferramentas (estúdio, galeria, manual, ferramentas) de
-src/publicar/paginas.py. Tudo é escrito junto por publicar_agenda().
+As gerações passadas vêm de src/publicar/arquivo.py; o estilo, a navegação
+e o JavaScript comuns de src/publicar/base.py; as demais páginas de
+src/publicar/paginas.py.
 """
 
 import re
@@ -26,7 +23,9 @@ from html import escape
 from pathlib import Path
 
 from src.agenda.montador import normalizar_ideia
+from src.publicar.arquivo import registrar as registrar_agenda, semear_de_paginas
 from src.publicar.base import documento
+from src.publicar.paginas import galeria_publicada
 from src.publicar.paginas import publicar_paginas
 
 ESTILO_AGENDA = """
@@ -67,6 +66,8 @@ ESTILO_AGENDA = """
   .chip.plataforma svg { width: 15px; height: 15px; display: block; }
   .viral-item .logo { width: 14px; height: 14px; vertical-align: -2px;
                       margin-right: 5px; display: inline-block; }
+  .chip.semana { font-variant-numeric: tabular-nums; }
+  .chip.minha { background: var(--grad-suave); border-color: transparent; color: var(--acento); font-weight: 700; }
   .chip-status { display: none; }
   .cartao.na-lista .chip-status.lista { display: inline-block; background: var(--grad);
                                         border: 0; color: #fff; }
@@ -155,56 +156,111 @@ ESTILO_AGENDA = """
   .vazio { text-align: center; color: var(--suave); padding: 44px 0; display: none; }
 """
 
-SCRIPT = """
+SCRIPT = r"""
 const DADOS = JSON.parse(document.getElementById('dados-agenda').textContent);
-const CHAVE = 'radar-' + DADOS.semana;
-const estado = JSON.parse(localStorage.getItem(CHAVE) || '{}');
+const IDEIAS = {};
+DADOS.ideias.forEach(d => { IDEIAS[d.id] = d; });
+
+// O estado é um só para todas as semanas: uma ideia descartada some da
+// lista inteira, não só da semana em que nasceu.
+const estado = Radar.estadoAgenda(DADOS.nicho);
 const abertas = new Set();
 let filtro = 'todas';
 let foco = null;
 
+function st(id) {
+  return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false,
+                                      formato: 'reels', gancho: 0});
+}
 function salvar() {
-  try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (_) {}
+  Radar.gravarEstadoAgenda(DADOS.nicho, estado);
   registrarEscolhas();
 }
-const LOCAL = ['127.0.0.1', 'localhost'].includes(location.hostname);
 let aviso = null;
-function escolhas() {
-  return DADOS.ideias.map((d, i) => {
-    const s = st(i);
-    const estadoIdeia = s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum';
-    return {titulo: d.titulo, pilar: d.pilar, registro: d.registro, estado: estadoIdeia};
-  });
-}
-// As escolhas viram sinal de gosto: ficam no navegador (para o estúdio e as
-// ferramentas do site) e, quando a página é aberta pelo painel, também no
-// arquivo de feedback do nicho.
+// As escolhas viram sinal de gosto para o estúdio; no painel, também vão
+// para o arquivo de feedback do nicho.
 function registrarEscolhas() {
   if (!DADOS.nicho) return;
   clearTimeout(aviso);
   aviso = setTimeout(() => {
-    const ideias = escolhas();
-    Radar.registrarFeedback(DADOS.nicho, DADOS.semana, ideias);
-    if (!LOCAL) return;
-    fetch('/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({nicho: DADOS.nicho, semana: DADOS.semana, ideias})}).catch(() => {});
+    const ideias = DADOS.ideias.map(d => {
+      const s = st(d.id);
+      return {titulo: d.titulo, pilar: d.pilar, registro: d.registro,
+              estado: s.feito ? 'feita' : s.descartada ? 'descartada' : s.lista ? 'lista' : 'nenhum'};
+    });
+    Radar.registrarFeedback(DADOS.nicho, 'todas', ideias);
+    // No painel, as escolhas também vão para o arquivo de feedback do nicho.
+    // Quem responde /api/ia diz se é o painel — adivinhar pelo endereço
+    // erra em túnel, preview e servidor local qualquer.
+    Radar.estadoIA().then(estado => {
+      if (!estado.painel) return;
+      fetch('/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({nicho: DADOS.nicho, semana: 'todas', ideias})}).catch(() => {});
+    }).catch(() => {});
   }, 400);
 }
-function st(id) { return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false, formato: 'reels', gancho: 0}); }
-
 const toast = Radar.toast;
+const copiar = Radar.copiar;
+const escapar = Radar.escapar;
 
 function lerHash() {
-  const m = location.hash.match(/^#r(\\d+)$/);
-  foco = m && DADOS.ideias[m[1]] ? m[1] : null;
+  const m = location.hash.match(/^#r(.+)$/);
+  foco = (m && document.getElementById('r' + m[1])) ? m[1] : null;
   if (foco !== null) abertas.add(foco);
   document.body.classList.toggle('em-foco', foco !== null);
+}
+
+// ── as ideias criadas no estúdio entram na mesma lista ────────────────
+function cartaoMinhaIdeia(item) {
+  const r = item.roteiro || {};
+  const blocos = (r.blocos || []).map(b => `<div class="bloco-tempo">
+    <span class="tempo">${escapar(b.rotulo)}</span>
+    <div><div>${escapar(b.texto)}</div>${b.direcao ? `<div class="direcao">${escapar(b.direcao)}</div>` : ''}</div></div>`).join('');
+  const rotulos = {video: '🎬 Vídeo', carrossel: '🖼️ Carrossel', stories: '📱 Stories'};
+  const publicada = item.origem === 'site';
+  return `<article class="cartao minha${publicada ? ' publicada' : ''}" data-id="${escapar(item.id)}" id="r${escapar(item.id)}">
+    <div class="cab">
+      <button class="descartar" title="Apagar esta ideia" aria-label="Apagar">✕</button>
+      <span class="seta">▼</span>
+      <div class="topo">
+        <span class="chip minha">✨ sua ideia</span>
+        <span class="chip">${rotulos[item.formato] || escapar(item.formato || '')}</span>
+        ${item.tom ? `<span class="chip">${escapar(item.tom)}</span>` : ''}
+        <span class="chip chip-status lista">📌 na lista</span>
+        <span class="chip chip-status feito">✓ feita</span>
+      </div>
+      <h3>${escapar(r.titulo || item.ideia)}</h3>
+      <p class="previa"></p>
+    </div>
+    <div class="detalhe">
+      ${r.gancho ? `<div class="rotulo">Gancho</div><p class="gancho-gal">🪝 ${escapar(r.gancho)}</p>` : ''}
+      <div class="rotulo">Roteiro</div>${blocos}
+      ${r.legenda ? `<div class="rotulo">Legenda pronta</div><div class="legenda">${escapar(r.legenda)}</div>` : ''}
+      <div class="hashtags">${(r.hashtags || []).map(escapar).join(' ')}</div>
+      <p class="previa" style="font-style:normal;margin-top:12px">Ideia original: ${escapar(item.ideia || '')}</p>
+      <div class="acoes">
+        <button class="btn primario na-lista-btn2">+ Adicionar à lista</button>
+        <button class="btn feito-btn">Marcar como feita</button>
+        <button class="btn copiar-btn">📋 Copiar roteiro</button>
+        <a class="btn" href="estudio.html?id=${encodeURIComponent(item.id)}">✏️ Reabrir no estúdio</a>
+      </div>
+    </div>
+  </article>`;
+}
+function minhasIdeias() { return Radar.minhasIdeias(DADOS.nicho, DADOS.minhas_publicadas); }
+function montarMinhas() {
+  const lista = document.getElementById('lista-cartoes');
+  lista.querySelectorAll('.cartao.minha').forEach(c => c.remove());
+  const itens = minhasIdeias();
+  if (!itens.length) return;
+  lista.insertAdjacentHTML('afterbegin', itens.map(cartaoMinhaIdeia).join(''));
 }
 
 function render() {
   let naLista = 0, feitas = 0, visiveis = 0, descartadas = 0;
   document.querySelectorAll('.cartao').forEach(c => {
-    const id = c.dataset.id, s = st(id), d = DADOS.ideias[id];
+    const id = c.dataset.id, s = st(id), d = IDEIAS[id];
+    const minha = c.classList.contains('minha');
     if (s.descartada) descartadas++;
     if (s.lista && !s.feito && !s.descartada) naLista++;
     if (s.feito && !s.descartada) feitas++;
@@ -218,21 +274,24 @@ function render() {
     const btnF = c.querySelector('.feito-btn');
     btnF.classList.toggle('marcado', s.feito);
     btnF.textContent = s.feito ? '✓ Feita!' : 'Marcar como feita';
-    c.querySelectorAll('.gancho-opcao').forEach((g, i) => {
-      g.classList.toggle('sel', i === s.gancho);
-      g.querySelector('input').checked = i === s.gancho;
-    });
-    // o gancho escolhido substitui a fala do bloco de abertura do roteiro
-    const abertura = c.querySelector('.fala-gancho');
-    if (abertura) abertura.textContent = d.ganchos[s.gancho] || d.ganchos[0];
-    const previa = c.querySelector('.previa');
-    if (previa) previa.textContent = '🎣 ' + (d.ganchos[s.gancho] || '');
-    c.querySelectorAll('.seg').forEach(b => b.classList.toggle('ativa', b.dataset.fmt === s.formato));
-    const pr = c.querySelector('.painel-reels'), pc = c.querySelector('.painel-carrossel');
-    if (pr) pr.style.display = s.formato === 'reels' ? '' : 'none';
-    if (pc) pc.style.display = s.formato === 'carrossel' ? '' : 'none';
+    if (d) {
+      c.querySelectorAll('.gancho-opcao').forEach((g, i) => {
+        g.classList.toggle('sel', i === s.gancho);
+        g.querySelector('input').checked = i === s.gancho;
+      });
+      // o gancho escolhido substitui a fala do bloco de abertura do roteiro
+      const abertura = c.querySelector('.fala-gancho');
+      if (abertura) abertura.textContent = d.ganchos[s.gancho] || d.ganchos[0];
+      const previa = c.querySelector('.previa');
+      if (previa) previa.textContent = '🎣 ' + (d.ganchos[s.gancho] || '');
+      c.querySelectorAll('.seg').forEach(b => b.classList.toggle('ativa', b.dataset.fmt === s.formato));
+      const pr = c.querySelector('.painel-reels'), pc = c.querySelector('.painel-carrossel');
+      if (pr) pr.style.display = s.formato === 'reels' ? '' : 'none';
+      if (pc) pc.style.display = s.formato === 'carrossel' ? '' : 'none';
+    }
     // "Minha lista" = fila de produção: o que foi feito sai dela e vai para "Feitas"
     const passaFiltro = filtro === 'todas' ? !s.descartada
+      : filtro === 'minhas' ? (minha && !s.descartada)
       : filtro === 'lista' ? (s.lista && !s.feito && !s.descartada)
       : (s.feito && !s.descartada);
     const mostra = foco !== null ? id === foco : passaFiltro;
@@ -251,25 +310,28 @@ function render() {
 }
 
 function textoRoteiro(id) {
-  const d = DADOS.ideias[id], s = st(id);
+  const d = IDEIAS[id];
+  if (!d) {
+    const item = minhasIdeias().find(i => i.id === id);
+    return item ? Radar.textoRoteiro(item.roteiro || {}) : '';
+  }
+  const s = st(id);
   const gancho = d.ganchos[s.gancho] || d.ganchos[0];
-  let out = d.titulo + '\\n\\n🎣 Gancho: ' + gancho + '\\n\\n';
+  let out = d.titulo + '\n\n🎣 Gancho: ' + gancho + '\n\n';
   if (s.formato === 'reels' || !d.carrossel.laminas.length) {
-    out += '🎬 ROTEIRO (Reels/TikTok)\\n';
+    out += '🎬 ROTEIRO (Reels/TikTok)\n';
     d.reels.forEach((b, i) => {
-      out += `\\n[${b.tempo}] ${i === 0 ? gancho : b.fala}`;
-      if (b.direcao) out += `\\n   🎥 ${b.direcao}`;
+      out += `\n[${b.tempo}] ${i === 0 ? gancho : b.fala}`;
+      if (b.direcao) out += `\n   🎥 ${b.direcao}`;
     });
   } else {
-    out += '🖼️ CARROSSEL\\nCapa: ' + d.carrossel.capa;
-    d.carrossel.laminas.forEach((l, i) => { out += `\\nLâmina ${i + 1}: ${l}`; });
-    out += '\\nCTA final: ' + d.carrossel.cta_final;
+    out += '🖼️ CARROSSEL\nCapa: ' + d.carrossel.capa;
+    d.carrossel.laminas.forEach((l, i) => { out += `\nLâmina ${i + 1}: ${l}`; });
+    out += '\nCTA final: ' + d.carrossel.cta_final;
   }
-  out += '\\n\\n✍️ Legenda:\\n' + d.legenda + '\\n\\n' + d.hashtags.join(' ');
+  out += '\n\n✍️ Legenda:\n' + d.legenda + '\n\n' + d.hashtags.join(' ');
   return out;
 }
-
-const copiar = Radar.copiar;
 
 document.getElementById('restaurar').addEventListener('click', () => {
   Object.values(estado).forEach(e => { e.descartada = false; });
@@ -277,13 +339,13 @@ document.getElementById('restaurar').addEventListener('click', () => {
   render();
 });
 
-// Aviso quando a agenda não é atualizada há mais de 8 dias (falha na automação)
+// Aviso quando a agenda mais recente não é atualizada há mais de 8 dias
 (function avisarSeAntiga() {
   const dias = Math.floor((Date.now() - new Date(DADOS.gerado_em + 'T12:00:00')) / 86400000);
   if (dias > 8) {
     const el = document.getElementById('aviso-antiga');
     el.querySelector('span').textContent =
-      `⚠️ Esta agenda foi gerada há ${dias} dias — a atualização automática de segunda pode ter falhado.`;
+      `⚠️ A agenda mais recente foi gerada há ${dias} dias — a atualização automática de segunda pode ter falhado.`;
     el.classList.add('visivel');
   }
 })();
@@ -302,6 +364,12 @@ document.addEventListener('click', e => {
   if (!c) return;
   const id = c.dataset.id, s = st(id);
   if (e.target.closest('.descartar')) {
+    if (c.classList.contains('minha') && !c.classList.contains('publicada')) {
+      if (!confirm('Apagar esta ideia?')) return;
+      Radar.apagarMinhaIdeia(DADOS.nicho, id);
+      delete estado[id];
+      c.remove(); toast('Ideia apagada'); render(); return;
+    }
     s.descartada = true; abertas.delete(id);
     toast('Ideia descartada — dá pra restaurar no topo');
   } else if (e.target.closest('.cab')) {
@@ -321,12 +389,12 @@ document.addEventListener('click', e => {
   } else if (e.target.closest('.copiar-btn')) {
     copiar(textoRoteiro(id), 'Roteiro copiado 📋'); return;
   } else if (e.target.closest('.compartilhar-btn')) {
-    const link = location.origin + location.pathname + '#r' + id;
-    copiar(link, 'Link do roteiro copiado 🔗'); return;
+    copiar(location.origin + location.pathname + '#r' + id, 'Link do roteiro copiado 🔗'); return;
   } else { return; }
   render();
 });
 
+montarMinhas();
 lerHash();
 render();
 """
@@ -406,13 +474,22 @@ def _resumo_metrica(ideia: dict) -> str:
     return max(metricas, key=_valor_metrica, default="")
 
 
-def _cartao(ideia: dict, posicao: int) -> str:
+def _rotulo_semana(semana: str) -> str:
+    """"2026-09-14" -> "14/09" — o card diz de que semana a ideia veio."""
+    try:
+        a, m, d = semana.split("-")
+        return f"📅 {d}/{m}"
+    except ValueError:
+        return "📅"
+
+
+def _cartao(ideia: dict, ident: str, semana: str) -> str:
     origem = ideia.get("plataforma_origem_da_tendencia", "")
     metrica_resumo = _resumo_metrica(ideia)
     carrossel = ideia["roteiro_carrossel"]
 
     ganchos = "".join(
-        f'<label class="gancho-opcao"><input type="radio" name="g{posicao}">'
+        f'<label class="gancho-opcao"><input type="radio" name="g{ident}">'
         f"<span>{escape(g)}</span></label>"
         for g in ideia["ganchos_3s"] if g
     )
@@ -479,11 +556,12 @@ def _cartao(ideia: dict, posicao: int) -> str:
     )
 
     return f"""
-  <article class="cartao" data-id="{posicao}" id="r{posicao}">
+  <article class="cartao" data-id="{ident}" id="r{ident}">
     <div class="cab">
       <button class="descartar" title="Descartar esta ideia" aria-label="Descartar">✕</button>
       <span class="seta">▼</span>
       <div class="topo">
+        <span class="chip semana">{_rotulo_semana(semana)}</span>
         <span class="chip">{escape(ideia.get('pilar', '').split('(')[0].strip())}</span>
         <span class="chip">~{ideia.get('duracao_estimada_seg', '?')}s</span>
         {f'<span class="chip views">🔥 {escape(metrica_resumo)}</span>' if metrica_resumo else ''}
@@ -524,87 +602,61 @@ def _cartao(ideia: dict, posicao: int) -> str:
   </article>"""
 
 
-def _seletor_semanas(semanas: list[str], semana_atual: str | None, prefixo: str) -> str:
-    """Histórico no painel: dropdown na página atual, volta nas arquivadas."""
-    def rotulo(iso: str) -> str:
-        a, m, d = iso.split("-")
-        return f"Semana de {d}/{m}/{a}"
-
-    if semana_atual is not None:  # página de uma semana anterior
-        return ('<div class="semanas"><a class="btn" href="../index.html">'
-                "← Voltar para a semana atual</a></div>")
-    if not semanas:
-        return ""
-    opcoes = ['<option value="">📅 Semana atual</option>'] + [
-        f'<option value="{prefixo}semanas/{iso}.html">{rotulo(iso)}</option>'
-        for iso in semanas
-    ]
-    return ('<div class="semanas"><select id="sel-semana" aria-label="Escolher semana" '
-            'onchange="if(this.value) location.href=this.value">'
-            f'{"".join(opcoes)}</select></div>')
-
-
 def semana_seguinte(hoje: date | None = None) -> str:
     """A segunda-feira que a agenda cobre (ISO)."""
     hoje = hoje or date.today()
     return (hoje + timedelta(days=(7 - hoje.weekday()) % 7 or 7)).isoformat()
 
 
-def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
-                  semanas: list[str] | None = None, semana_atual: str | None = None,
-                  prefixo: str = "", nicho: str | None = None,
-                  semana: str | None = None, gerado_em: str | None = None) -> None:
-    """Escreve a agenda da semana como web/index.html.
+def publicar_site(config: dict, agendas: list[dict], destino: Path,
+                  nicho: str | None = None, total_sinais: int = 0,
+                  raiz_dados: Path | None = None) -> None:
+    """Escreve web/index.html com as ideias de todas as semanas guardadas.
 
-    `semanas` são as agendas arquivadas (mais recente primeiro) exibidas no
-    seletor do painel; `semana_atual` marca qual está aberta (None = a atual);
-    `prefixo` ajusta os links quando a página é escrita em web/semanas/.
-    `semana` e `gerado_em` (ISO) permitem re-renderizar uma geração antiga
-    sem que ela pareça nova.
+    `agendas` vem de src/publicar/arquivo.py, da mais recente para a mais
+    antiga; cada uma traz `semana`, `gerado_em` e `ideias` já normalizadas.
     """
-    ideias = [normalizar_ideia(i) for i in roteiros["ideias"]]
-    total_sinais = sum(len(v) for v in sinais.values())
-    semana = semana or semana_seguinte()
-    gerado_em = gerado_em or date.today().isoformat()
-    inicio = date.fromisoformat(semana)
-    cartoes = "".join(_cartao(ideia, i) for i, ideia in enumerate(ideias))
+    cartoes, catalogo = [], []
+    for agenda in agendas:
+        semana = agenda.get("semana", "")
+        for i, bruta in enumerate(agenda.get("ideias") or []):
+            ideia = normalizar_ideia(bruta)
+            ident = f"g{semana}-{i}"
+            cartoes.append(_cartao(ideia, ident, semana))
+            catalogo.append({
+                "id": ident, "semana": semana,
+                "titulo": ideia["titulo"], "pilar": ideia.get("pilar", ""),
+                "registro": (ideia.get("voz") or {}).get("registro", ""),
+                "ganchos": [g for g in ideia["ganchos_3s"] if g],
+                "reels": ideia["roteiro_reels"], "carrossel": ideia["roteiro_carrossel"],
+                "legenda": ideia.get("legenda_post") or ideia.get("cta", ""),
+                "hashtags": ideia.get("hashtags", []),
+            })
 
-    dados = {
-        "nicho": nicho or "",
-        "semana": semana,
-        "gerado_em": gerado_em,
-        "ideias": [
-            {
-                "titulo": i["titulo"],
-                "pilar": i.get("pilar", ""),
-                "registro": (i.get("voz") or {}).get("registro", ""),
-                "ganchos": [g for g in i["ganchos_3s"] if g],
-                "reels": i["roteiro_reels"],
-                "carrossel": i["roteiro_carrossel"],
-                "legenda": i.get("legenda_post") or i.get("cta", ""),
-                "hashtags": i.get("hashtags", []),
-            }
-            for i in ideias
-        ],
-    }
+    recente = agendas[0] if agendas else {}
+    gerado_em = recente.get("gerado_em") or date.today().isoformat()
+    dados = {"nicho": nicho or "", "gerado_em": gerado_em,
+             "semanas": [a.get("semana", "") for a in agendas], "ideias": catalogo,
+             "minhas_publicadas": galeria_publicada(raiz_dados, nicho) if (raiz_dados and nicho) else []}
 
     corpo = f"""
 <header class="hero container">
-  <div class="selo">Agenda da semana</div>
-  <h1>Agenda da semana — <span>{escape(config['nome'])}</span></h1>
-  <p class="sub">Semana de {inicio.strftime('%d/%m/%Y')} · {len(ideias)} ideias ·
-  {total_sinais} sinais de tendência analisados · atualizada em {date.fromisoformat(gerado_em).strftime('%d/%m/%Y')}</p>
+  <div class="selo">Agenda de conteúdo</div>
+  <h1>Todas as ideias — <span>{escape(config['nome'])}</span></h1>
+  <p class="sub">{len(catalogo)} ideias de {len(agendas)} semana{'s' if len(agendas) != 1 else ''}, mais o que você criar no
+  <a href="estudio.html">estúdio</a> · atualizada em {date.fromisoformat(gerado_em).strftime('%d/%m/%Y')}</p>
 </header>
 
 <div class="painel">
   <div class="container painel-linha">
     <div class="abas">
       <button class="aba ativa" data-filtro="todas">Todas</button>
+      <button class="aba" data-filtro="minhas">✨ Minhas ideias</button>
       <button class="aba" data-filtro="lista">📌 Minha lista</button>
       <button class="aba" data-filtro="feitas">✓ Feitas</button>
     </div>
     <div class="progresso" id="contagem"></div>
-    {_seletor_semanas(semanas or [], semana_atual, prefixo)}
+    <div class="semanas"><a class="btn" href="estudio.html">✨ Criar uma ideia</a></div>
   </div>
 </div>
 
@@ -617,15 +669,14 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
   <div class="banner-aviso neutro" id="barra-descartadas"><span></span>
     <button class="btn" id="restaurar">Restaurar descartadas</button></div>
   <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre
-  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.
-  Quer um roteiro a partir de uma ideia sua? Use o <a href="{prefixo}estudio.html">estúdio</a>.</div>
-  <div class="lista-cartoes">{cartoes}</div>
-  <p class="vazio" id="vazio">Nada por aqui ainda — adicione ideias à sua lista. 📌</p>
+  qualquer afirmação médica é sempre da profissional. Toque em um card para abrir o roteiro.</div>
+  <div class="lista-cartoes" id="lista-cartoes">{''.join(cartoes)}</div>
+  <p class="vazio" id="vazio">Nada por aqui ainda. 📌</p>
 </section>
 """
-    html = documento(titulo=f"Radar de Conteúdo Viral — {config['nome']}", ativa="agenda",
+    html = documento(titulo=f"Agenda de conteúdo — {config['nome']}", ativa="agenda",
                      corpo=corpo, estilo_extra=ESTILO_AGENDA, script=SCRIPT, dados=dados,
-                     prefixo=prefixo, id_dados="dados-agenda")
+                     id_dados="dados-agenda")
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(html, encoding="utf-8")
 
@@ -633,26 +684,27 @@ def publicar_site(config: dict, roteiros: dict, sinais: dict, destino: Path,
 def publicar_agenda(config: dict, roteiros: dict, sinais: dict, raiz: Path,
                     nicho: str | None = None, semana: str | None = None,
                     gerado_em: str | None = None) -> Path:
-    """Publica a agenda da semana e a arquiva, mantendo o histórico no painel.
+    """Guarda a geração desta semana e reescreve o site com tudo o que existe.
 
-    Escreve web/index.html (com o seletor de semanas anteriores), uma cópia
-    imutável em web/semanas/<semana>.html, para que agendas passadas sigam
-    acessíveis com seus roteiros, e as páginas de ferramentas do site
-    (estúdio, galeria, manual, ferramentas).
+    Não há mais uma página por semana: as ideias de todas elas ficam na
+    mesma lista em web/index.html. As páginas de ferramentas (estúdio,
+    manual, ferramentas) são reescritas junto.
     """
     web = raiz / "web"
-    pasta_semanas = web / "semanas"
-    pasta_semanas.mkdir(parents=True, exist_ok=True)
-
+    web.mkdir(parents=True, exist_ok=True)
     semana = semana or semana_seguinte()
-    arquivadas = sorted(
-        (p.stem for p in pasta_semanas.glob("*.html") if p.stem != semana), reverse=True
-    )
-    publicar_site(config, roteiros, sinais, web / "index.html", semanas=arquivadas,
-                  nicho=nicho, semana=semana, gerado_em=gerado_em)
-    publicar_site(config, roteiros, sinais, pasta_semanas / f"{semana}.html",
-                  semana_atual=semana, prefixo="../", nicho=nicho,
-                  semana=semana, gerado_em=gerado_em)
+    gerado_em = gerado_em or date.today().isoformat()
+
+    if nicho:
+        semear_de_paginas(raiz, nicho)  # traz as semanas que só existiam como HTML
+        ideias = [normalizar_ideia(i) for i in roteiros["ideias"]]
+        agendas = registrar_agenda(raiz, nicho, semana, gerado_em, ideias)
+    else:
+        agendas = [{"semana": semana, "gerado_em": gerado_em,
+                    "ideias": [normalizar_ideia(i) for i in roteiros["ideias"]]}]
+
+    publicar_site(config, agendas, web / "index.html", nicho=nicho, raiz_dados=raiz,
+                  total_sinais=sum(len(v) for v in sinais.values()))
     if nicho:
         publicar_paginas(config, raiz, nicho)
     return web / "index.html"

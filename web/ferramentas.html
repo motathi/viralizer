@@ -221,7 +221,7 @@
 </head>
 <body>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FCAF45"/><stop offset="25%" stop-color="#F77737"/><stop offset="50%" stop-color="#E1306C"/><stop offset="75%" stop-color="#C13584"/><stop offset="100%" stop-color="#833AB4"/></linearGradient></defs></svg>
-<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html">📅 Agenda</a><a href="estudio.html">✨ Estúdio</a><a href="galeria.html">💡 Galeria</a><a href="manual.html">📘 Manual</a><a href="ferramentas.html" class="ativo" aria-current="page">🧰 Ferramentas</a></div></div></nav>
+<nav class="nav"><div class="container nav-linha"><a class="marca" href="index.html">Radar de <span>Conteúdo Viral</span></a><div class="nav-links"><a href="index.html">📅 Agenda</a><a href="estudio.html">✨ Estúdio</a><a href="manual.html">📘 Manual</a><a href="ferramentas.html" class="ativo" aria-current="page">🧰 Ferramentas</a></div></div></nav>
 
 <header class="hero container">
   <div class="selo">Ferramentas</div>
@@ -279,7 +279,7 @@
 
   <div class="cartao-ferramenta" id="backup">
     <h2><span class="icone">💾</span> Backup das suas escolhas</h2>
-    <p>Lista, feitas, descartadas, ganchos escolhidos e a galeria deste navegador, num arquivo só.
+    <p>Lista, feitas, descartadas, ganchos escolhidos e as ideias que você criou, num arquivo só.
        Serve para trocar de aparelho ou de navegador sem perder nada. A chave da IA não entra.</p>
     <div class="acoes">
       <button class="btn primario" id="backup-exportar">⬇️ Baixar backup</button>
@@ -306,7 +306,7 @@
   </div>
 
   <div class="titulo-secao">Só no computador (pelo painel)</div>
-  <ul class="lista-local"><li><b>🎬 Gerar a agenda pelo seu IP</b><span>A coleta gratuita do TikTok roda pelo navegador do seu computador, que é o que o TikTok trata como uso normal. Na nuvem ela é bloqueada — por isso o botão fica no painel.</span></li><li><b>🔑 Conectar TikTok</b><span>O login fica guardado no navegador da coleta, na sua máquina. Sem ele as buscas voltam vazias.</span></li><li><b>🧪 Testar coleta</b><span>Só faz a busca de vídeos, sem IA e sem custo — mas precisa do navegador da coleta.</span></li><li><b>🎯 Otimizar termos de busca</b><span>Reescreve o arquivo do nicho no projeto; o site publicado não tem como gravar lá.</span></li><li><b>☁️ Publicar no site</b><span>Envia a agenda e a galeria do painel para o GitHub; a Vercel publica em cerca de um minuto.</span></li><li><b>🔄 Atualizar programa</b><span>Baixa a versão nova do código para a pasta do projeto.</span></li></ul>
+  <ul class="lista-local"><li><b>🎬 Gerar a agenda pelo seu IP</b><span>A coleta gratuita do TikTok roda pelo navegador do seu computador, que é o que o TikTok trata como uso normal. Na nuvem ela é bloqueada — por isso o botão fica no painel.</span></li><li><b>🔑 Conectar TikTok</b><span>O login fica guardado no navegador da coleta, na sua máquina. Sem ele as buscas voltam vazias.</span></li><li><b>🧪 Testar coleta</b><span>Só faz a busca de vídeos, sem IA e sem custo — mas precisa do navegador da coleta.</span></li><li><b>🎯 Otimizar termos de busca</b><span>Reescreve o arquivo do nicho no projeto; o site publicado não tem como gravar lá.</span></li><li><b>☁️ Publicar no site</b><span>Envia a agenda do painel para o GitHub; a Vercel publica em cerca de um minuto.</span></li><li><b>🔄 Atualizar programa</b><span>Baixa a versão nova do código para a pasta do projeto.</span></li></ul>
   <p class="nota">Para abrir o painel: duplo clique em <code>abrir-painel</code> na pasta do projeto.</p>
 </section>
 
@@ -373,6 +373,14 @@ const Radar = (() => {
   const senha = () => { try { return (localStorage.getItem(SENHA) || '').trim(); } catch (_) { return ''; } };
   const salvarSenha = v => { try { localStorage.setItem(SENHA, String(v || '').trim()); return true; } catch (_) { return false; } };
   const apagarSenha = () => { try { localStorage.removeItem(SENHA); } catch (_) {} };
+
+  // ── estado da agenda: lista, feita, descartada, gancho e formato ──
+  // Uma chave só para todas as semanas — o que é descartado some da lista
+  // inteira. Este é o ponto por onde o estado passa a ser compartilhado
+  // entre aparelhos quando houver banco: só estas quatro funções mudam.
+  const chaveEstado = nicho => 'radar-estado:' + (nicho || 'padrao');
+  const estadoAgenda = nicho => ler(chaveEstado(nicho), {});
+  const gravarEstadoAgenda = (nicho, estado) => gravar(chaveEstado(nicho), estado);
 
   // ── escolhas na agenda (feedback) ─────────────────────────────────
   const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
@@ -460,6 +468,10 @@ const Radar = (() => {
     return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
   }
 
+  // As ideias do estúdio, que agora aparecem na própria agenda.
+  const minhasIdeias = (nicho, publicadas) => galeriaTodos(nicho, publicadas || []);
+  const apagarMinhaIdeia = (nicho, id) => galeriaApagar(nicho, id);
+
   function limparRoteiro(r) {
     return {
       titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
@@ -519,11 +531,11 @@ const Radar = (() => {
       const r = await fetch('/api/ia', {method: 'GET', headers: {'accept': 'application/json'}});
       if (r.ok) {
         const d = await r.json();
-        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, servidor: true};
+        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, painel: !!d.painel, servidor: true};
         return estadoCache;
       }
     } catch (_) {}
-    estadoCache = {configurada: false, senha: false, servidor: false};
+    estadoCache = {configurada: false, senha: false, painel: false, servidor: false};
     return estadoCache;
   }
 
@@ -642,6 +654,7 @@ const Radar = (() => {
   return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
           chave, salvarChave, apagarChave, senha, salvarSenha, apagarSenha, estadoIA,
           registrarFeedback, feedback, preferencias,
+          estadoAgenda, gravarEstadoAgenda, minhasIdeias, apagarMinhaIdeia,
           galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
           limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
           exportarTudo, importarTudo, chamarIA, extrairJson};

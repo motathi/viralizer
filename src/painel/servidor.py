@@ -382,18 +382,10 @@ PAGINA = """<!DOCTYPE html>
           <b>Estúdio</b>
           <p>Você dá a ideia e escolhe formato (stories, carrossel ou vídeo), estilo e
              tom. A IA escreve três opções em ângulos diferentes; você escolhe uma,
-             ajusta conversando com ela, e salva na galeria.</p>
+             ajusta conversando com ela, e salva — a ideia entra na agenda
+             junto com as das outras semanas.</p>
         </div>
         <a class="btn principal-link" id="estudio" href="/estudio">Abrir estúdio</a>
-      </li>
-      <li class="item">
-        <span class="icone">💡</span>
-        <div>
-          <b>Galeria de ideias</b>
-          <p>Tudo o que foi criado no estúdio e salvo. Dá para copiar, reabrir para
-             mexer mais, ou apagar. Vai junto para o site quando você publica.</p>
-        </div>
-        <a class="btn" id="galeria" href="/galeria">Ver galeria</a>
       </li>
     </ul>
   </section>
@@ -647,7 +639,7 @@ class Painel(BaseHTTPRequestHandler):
                          'pesquisa da semana descobriu. Gere a primeira agenda e volte aqui.</div>')
             self._responder(PAGINA_MANUAL.replace("{{CORPO}}", corpo).encode("utf-8"))
         elif caminho == "/api/ia":
-            self._json({"configurada": _tem_chave(), "senha": False,
+            self._json({"configurada": _tem_chave(), "senha": False, "painel": True,
                         "modelos": list(MODELOS_IA), "max_tokens": MAX_TOKENS_IA})
         elif caminho == "/status":
             with trava:
@@ -659,8 +651,8 @@ class Painel(BaseHTTPRequestHandler):
             else:
                 self._responder(b"Nenhuma agenda gerada ainda.", codigo=404)
         elif (arquivo := _arquivo_do_site(caminho)) is not None:
-            # as demais páginas do site (estúdio, galeria, manual, ferramentas,
-            # semanas anteriores), para a navegação funcionar aqui também
+            # as demais páginas do site (estúdio, manual, ferramentas), para a
+            # navegação funcionar aqui também
             self._responder(arquivo.read_bytes())
         else:
             self._responder(b"nao encontrado", codigo=404)

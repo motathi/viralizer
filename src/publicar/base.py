@@ -1,8 +1,12 @@
 """O que todas as páginas do site publicado compartilham.
 
 Estilo (tokens do Instagram), barra de navegação, moldura do documento e o
-JavaScript comum: o que fica guardado no navegador (escolhas da agenda,
-galeria), a leitura das preferências reveladas e a chamada à IA.
+JavaScript comum: o que fica guardado no navegador (estado da agenda e as
+ideias do estúdio), a leitura das preferências reveladas e a chamada à IA.
+
+O estado da agenda passa por quatro funções — estadoAgenda,
+gravarEstadoAgenda, minhasIdeias e apagarMinhaIdeia. É por elas que o
+estado deixa de ser por navegador quando houver um banco compartilhado.
 
 A IA é chamada por /api/ia, onde a chave da Anthropic fica no servidor —
 uma só para todo mundo que abre o site (api/ia.js na Vercel, ou o painel
@@ -222,7 +226,6 @@ DEFS_SVG = (
 PAGINAS = [
     ("agenda", "📅 Agenda", "index.html"),
     ("estudio", "✨ Estúdio", "estudio.html"),
-    ("galeria", "💡 Galeria", "galeria.html"),
     ("manual", "📘 Manual", "manual.html"),
     ("ferramentas", "🧰 Ferramentas", "ferramentas.html"),
 ]
@@ -334,6 +337,14 @@ const Radar = (() => {
   const salvarSenha = v => { try { localStorage.setItem(SENHA, String(v || '').trim()); return true; } catch (_) { return false; } };
   const apagarSenha = () => { try { localStorage.removeItem(SENHA); } catch (_) {} };
 
+  // ── estado da agenda: lista, feita, descartada, gancho e formato ──
+  // Uma chave só para todas as semanas — o que é descartado some da lista
+  // inteira. Este é o ponto por onde o estado passa a ser compartilhado
+  // entre aparelhos quando houver banco: só estas quatro funções mudam.
+  const chaveEstado = nicho => 'radar-estado:' + (nicho || 'padrao');
+  const estadoAgenda = nicho => ler(chaveEstado(nicho), {});
+  const gravarEstadoAgenda = (nicho, estado) => gravar(chaveEstado(nicho), estado);
+
   // ── escolhas na agenda (feedback) ─────────────────────────────────
   const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
   function registrarFeedback(nicho, semana, ideias) {
@@ -420,6 +431,10 @@ const Radar = (() => {
     return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
   }
 
+  // As ideias do estúdio, que agora aparecem na própria agenda.
+  const minhasIdeias = (nicho, publicadas) => galeriaTodos(nicho, publicadas || []);
+  const apagarMinhaIdeia = (nicho, id) => galeriaApagar(nicho, id);
+
   function limparRoteiro(r) {
     return {
       titulo: String(r.titulo || '').trim(), angulo: String(r.angulo || '').trim(),
@@ -479,11 +494,11 @@ const Radar = (() => {
       const r = await fetch('/api/ia', {method: 'GET', headers: {'accept': 'application/json'}});
       if (r.ok) {
         const d = await r.json();
-        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, servidor: true};
+        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, painel: !!d.painel, servidor: true};
         return estadoCache;
       }
     } catch (_) {}
-    estadoCache = {configurada: false, senha: false, servidor: false};
+    estadoCache = {configurada: false, senha: false, painel: false, servidor: false};
     return estadoCache;
   }
 
@@ -602,6 +617,7 @@ const Radar = (() => {
   return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
           chave, salvarChave, apagarChave, senha, salvarSenha, apagarSenha, estadoIA,
           registrarFeedback, feedback, preferencias,
+          estadoAgenda, gravarEstadoAgenda, minhasIdeias, apagarMinhaIdeia,
           galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
           limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
           exportarTudo, importarTudo, chamarIA, extrairJson};
