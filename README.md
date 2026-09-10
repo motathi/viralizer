@@ -189,6 +189,9 @@ deixa viva nos outros. Com banco, o estado é um só.
    publicável — a secreta nunca chega ao navegador.
 3. Na Vercel, em **Settings → Environment Variables**, crie `SUPABASE_URL` e
    `SUPABASE_SECRET_KEY`, marque *Production* e *Preview*, e publique de novo.
+   (A integração Supabase da Vercel cria também `SUPABASE_PUBLISHABLE_KEY` e
+   `SUPABASE_JWKS_URL`. Este projeto não usa nenhuma das duas — o navegador não fala
+   com o banco, e não há login de usuário. Podem ficar lá, não atrapalham.)
 4. No GitHub, em **Settings → Secrets and variables → Actions**, crie os mesmos dois
    secrets. É o que alimenta o fluxo que mantém o banco acordado (abaixo).
 5. Para o painel local sincronizar também, copie as duas linhas para o seu `.env`.

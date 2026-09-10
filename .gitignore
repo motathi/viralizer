@@ -10,3 +10,6 @@ dados/playbook-*.json
 dados/manual-*.md
 dados/feedback-*.json
 node_modules/
+
+# skills instaladas com "npx skills add" (o link em .claude aponta para .agents)
+.claude/skills/
