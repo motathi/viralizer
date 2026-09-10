@@ -1,7 +1,11 @@
 {
   "name": "radar-conteudo-viral",
   "private": true,
+  "type": "module",
   "engines": {
     "node": "24.x"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0"
   }
 }

@@ -2,10 +2,10 @@
 ferramentas.
 
 Tudo aqui roda no navegador de quem abre o site, sem depender do
-computador onde o painel foi instalado. O estúdio chama a API da Anthropic
-direto do navegador, com a chave que a pessoa guarda em Ferramentas; a
-galeria e as escolhas ficam no armazenamento local do navegador, com
-exportação para levar ao painel quando quiser.
+computador onde o painel foi instalado. O estúdio fala com a IA por
+/api/ia, onde a chave da Anthropic fica no servidor — uma só para todo
+mundo que abre o site (ver api/ia.js). A galeria e as escolhas ficam no
+armazenamento local do navegador, com exportação para levar ao painel.
 """
 
 import json
@@ -108,11 +108,11 @@ CORPO_ESTUDIO = """
   <div class="selo">Estúdio de roteiros</div>
   <h1>Sua ideia, <span>três roteiros</span></h1>
   <p class="sub">Você dá a ideia e escolhe formato, estilo e tom. A IA escreve três opções em ângulos
-  diferentes; você escolhe uma, ajusta conversando e salva na galeria. Roda aqui no navegador, com a sua chave.</p>
+  diferentes; você escolhe uma, ajusta conversando e salva na galeria. Não precisa configurar nada.</p>
 </header>
 <section class="estudio container">
-  <div class="banner-aviso alerta" id="aviso-chave"><span>🔑 Falta a chave da Anthropic. Sem ela o estúdio não escreve.</span>
-    <a class="btn" href="ferramentas.html#chave">Guardar a chave</a></div>
+  <div class="banner-aviso alerta" id="aviso-chave"><span id="aviso-chave-texto"></span>
+    <a class="btn" href="ferramentas.html#chave">Ver o estado da IA</a></div>
 
   <div class="etapas">
     <span class="etapa ativa" id="et1">1 · Ideia e formato</span>
@@ -174,7 +174,14 @@ const $ = s => document.querySelector(s);
 const escapar = Radar.escapar;
 let opcoes = [], roteiro = null, conversa = [], idSalvo = null, params = {};
 
-function conferirChave() { $('#aviso-chave').classList.toggle('visivel', !Radar.chave()); }
+async function conferirIA(recarregar) {
+  const estado = await Radar.estadoIA(recarregar);
+  const pronta = estado.configurada || !!Radar.chave();
+  $('#aviso-chave').classList.toggle('visivel', !pronta);
+  $('#aviso-chave-texto').textContent = estado.servidor
+    ? '🔑 O site ainda não tem uma chave da Anthropic configurada — sem ela o estúdio não escreve.'
+    : '🔑 Esta página não está ligada ao servidor da IA. Abra pelo site publicado ou pelo painel.';
+}
 function contexto() {
   const ctx = {...CFG.contexto};
   const prefs = Radar.preferencias(CFG.nicho);
@@ -205,8 +212,9 @@ function lerParams() {
   return params;
 }
 function mostrarErro(sel, e) {
-  const el = $(sel); el.innerHTML = '⚠️ ' + escapar(e.message || e) +
-    (e.semChave ? ' <a href="ferramentas.html#chave">Guardar a chave</a>' : '');
+  const el = $(sel);
+  const link = (e.semChave || e.pedeSenha) ? ' <a href="ferramentas.html#chave">Ver o estado da IA</a>' : '';
+  el.innerHTML = '⚠️ ' + escapar(e.message || e) + link;
   el.hidden = false;
 }
 
@@ -316,8 +324,8 @@ function reabrir(id) {
   renderRoteiro(); etapa(3);
 }
 montarMenus();
-conferirChave();
-window.addEventListener('focus', conferirChave);
+conferirIA();
+window.addEventListener('focus', () => conferirIA(true));
 const idInicial = new URLSearchParams(location.search).get('id');
 if (idInicial) reabrir(idInicial);
 """
@@ -553,18 +561,38 @@ def pagina_ferramentas(config: dict, raiz: Path, nicho: str) -> str:
 <section class="ferramentas container">
 
   <div class="cartao-ferramenta" id="chave">
-    <h2><span class="icone">🔑</span> Chave da IA (Anthropic)</h2>
-    <p>O estúdio escreve com a sua chave, direto do navegador para a Anthropic. Ela fica guardada
-       só neste navegador — não vai para o site nem para ninguém. Pegue em console.anthropic.com →
-       Settings → API keys.</p>
-    <div class="linha-campos" style="margin-top:12px">
-      <input type="password" id="chave-valor" placeholder="sk-ant-..." autocomplete="off" aria-label="Chave da Anthropic">
-      <button class="btn primario" id="chave-salvar">Guardar</button>
-      <button class="btn" id="chave-testar">Testar</button>
-      <button class="btn" id="chave-apagar">Esquecer</button>
+    <h2><span class="icone">🤖</span> Estado da IA</h2>
+    <p>O estúdio escreve com a chave da Anthropic guardada no servidor do site — a mesma para
+       todo mundo que abre aqui. Ninguém precisa ter chave, e a chave não passa pelo navegador
+       de ninguém.</p>
+    <div class="mensagem" id="ia-estado">carregando…</div>
+    <div class="acoes"><button class="btn" id="ia-testar">Testar a IA</button></div>
+
+    <div id="ia-senha" hidden>
+      <p class="nota" style="margin-top:16px"><b>Este site pede uma senha de acesso à IA.</b>
+         Guarde a sua aqui — ela fica só neste aparelho.</p>
+      <div class="linha-campos" style="margin-top:8px">
+        <input type="password" id="senha-valor" placeholder="senha do site" autocomplete="off" aria-label="Senha de acesso à IA">
+        <button class="btn primario" id="senha-salvar">Guardar</button>
+        <button class="btn" id="senha-apagar">Esquecer</button>
+      </div>
     </div>
+
+    <details id="ia-propria" style="margin-top:16px">
+      <summary style="cursor:pointer;font-size:.85rem;font-weight:700;color:var(--suave)">
+        Usar uma chave própria (só se o site estiver sem chave)</summary>
+      <p class="nota" style="margin-top:10px">Serve para quem abriu esta página fora do site
+         publicado. A chave fica guardada só neste navegador e é usada direto com a Anthropic.</p>
+      <div class="linha-campos" style="margin-top:8px">
+        <input type="password" id="chave-valor" placeholder="sk-ant-..." autocomplete="off" aria-label="Chave própria da Anthropic">
+        <button class="btn primario" id="chave-salvar">Guardar</button>
+        <button class="btn" id="chave-apagar">Esquecer</button>
+      </div>
+    </details>
+
     <div class="mensagem" id="chave-recado" hidden></div>
-    <p class="nota">Modelo do estúdio: <code>{escape(MODELO_ESCRITA)}</code>. Cada roteiro custa alguns centavos de dólar.</p>
+    <p class="nota">Modelo do estúdio: <code>{escape(MODELO_ESCRITA)}</code>. Cada roteiro custa alguns centavos de dólar,
+       na conta de quem configurou a chave do site.</p>
   </div>
 
   <div class="cartao-ferramenta" id="preferencias">
@@ -622,28 +650,59 @@ const $ = s => document.querySelector(s);
 const escapar = Radar.escapar;
 function recado(sel, tipo, texto) { const r = $(sel); r.className = 'mensagem ' + tipo; r.innerHTML = texto; r.hidden = false; }
 
-// ── chave ────────────────────────────────────────────────────────────
-function pintarChave() {
+// ── estado da IA ─────────────────────────────────────────────────────
+async function pintarIA(recarregar) {
+  const estado = await Radar.estadoIA(recarregar);
+  const el = $('#ia-estado');
+  if (estado.configurada) {
+    el.className = 'mensagem ok';
+    el.innerHTML = '✅ <b>A IA está pronta.</b> A chave fica no servidor do site — o estúdio funciona para quem abrir esta página, sem configurar nada.';
+  } else if (estado.servidor) {
+    el.className = 'mensagem alerta';
+    el.innerHTML = '⚠️ <b>O site ainda não tem chave da Anthropic.</b> Quem administra precisa criar a variável de ambiente <code>ANTHROPIC_API_KEY</code> na Vercel (Settings → Environment Variables) e publicar de novo.';
+  } else {
+    el.className = 'mensagem alerta';
+    el.innerHTML = '⚠️ <b>Esta página não está ligada ao servidor da IA.</b> Isso acontece ao abrir o arquivo direto do computador. Pelo site publicado ou pelo painel, a IA funciona sozinha.';
+  }
+  $('#ia-senha').hidden = !estado.senha;
+  $('#ia-propria').open = !estado.configurada;
+  $('#ia-testar').disabled = !estado.configurada && !Radar.chave();
+  pintarChavePropria();
+  pintarSenha();
+}
+function pintarChavePropria() {
   const tem = !!Radar.chave();
   $('#chave-valor').placeholder = tem ? 'chave guardada neste navegador (sk-ant-…)' : 'sk-ant-...';
-  $('#chave-apagar').hidden = !tem; $('#chave-testar').hidden = !tem;
+  $('#chave-apagar').hidden = !tem;
+}
+function pintarSenha() {
+  const tem = !!Radar.senha();
+  $('#senha-valor').placeholder = tem ? 'senha guardada neste aparelho' : 'senha do site';
+  $('#senha-apagar').hidden = !tem;
 }
 $('#chave-salvar').onclick = () => {
   const r = Radar.salvarChave($('#chave-valor').value);
-  recado('#chave-recado', r.ok ? 'ok' : 'erro', (r.ok ? '✅ ' : '⚠️ ') + r.recado);
-  if (r.ok) { $('#chave-valor').value = ''; pintarChave(); }
+  recado('#chave-recado', r.ok ? 'ok' : 'erro', (r.ok ? '✅ ' : '⚠️ ') + escapar(r.recado));
+  if (r.ok) { $('#chave-valor').value = ''; pintarIA(); }
 };
 $('#chave-valor').onkeydown = e => { if (e.key === 'Enter') $('#chave-salvar').click(); };
-$('#chave-apagar').onclick = () => { Radar.apagarChave(); pintarChave(); recado('#chave-recado', 'ok', 'Chave esquecida. O estúdio volta a pedir uma.'); };
-$('#chave-testar').onclick = async () => {
-  $('#chave-testar').disabled = true;
-  recado('#chave-recado', 'alerta', '<span class="girando"></span>Testando a chave com uma chamada mínima…');
+$('#chave-apagar').onclick = () => { Radar.apagarChave(); pintarIA(); recado('#chave-recado', 'ok', 'Chave própria esquecida.'); };
+$('#senha-salvar').onclick = () => {
+  Radar.salvarSenha($('#senha-valor').value);
+  $('#senha-valor').value = ''; pintarSenha();
+  recado('#chave-recado', 'ok', '✅ Senha guardada neste aparelho.');
+};
+$('#senha-valor').onkeydown = e => { if (e.key === 'Enter') $('#senha-salvar').click(); };
+$('#senha-apagar').onclick = () => { Radar.apagarSenha(); pintarSenha(); recado('#chave-recado', 'ok', 'Senha esquecida.'); };
+$('#ia-testar').onclick = async () => {
+  $('#ia-testar').disabled = true;
+  recado('#chave-recado', 'alerta', '<span class="girando"></span>Testando com uma chamada mínima…');
   try {
     await Radar.chamarIA({modelo: CFG.modelo_pesquisa, maxTokens: 8, system: 'Responda com uma palavra.',
                           messages: [{role: 'user', content: 'ok?'}]});
-    recado('#chave-recado', 'ok', '✅ A chave funciona. O estúdio está liberado.');
+    recado('#chave-recado', 'ok', '✅ A IA respondeu. O estúdio está liberado.');
   } catch (e) { recado('#chave-recado', 'erro', '⚠️ ' + escapar(e.message)); }
-  $('#chave-testar').disabled = false;
+  $('#ia-testar').disabled = false;
 };
 
 // ── preferências ─────────────────────────────────────────────────────
@@ -711,8 +770,8 @@ function pintarTermos() {
   $('#termos-corpo').innerHTML = html;
 }
 
-pintarChave(); pintarPreferencias(); pintarTermos();
-if (location.hash === '#chave') setTimeout(() => $('#chave-valor').focus(), 300);
+pintarIA(); pintarPreferencias(); pintarTermos();
+
 """
 
 

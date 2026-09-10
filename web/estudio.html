@@ -246,11 +246,11 @@
   <div class="selo">Estúdio de roteiros</div>
   <h1>Sua ideia, <span>três roteiros</span></h1>
   <p class="sub">Você dá a ideia e escolhe formato, estilo e tom. A IA escreve três opções em ângulos
-  diferentes; você escolhe uma, ajusta conversando e salva na galeria. Roda aqui no navegador, com a sua chave.</p>
+  diferentes; você escolhe uma, ajusta conversando e salva na galeria. Não precisa configurar nada.</p>
 </header>
 <section class="estudio container">
-  <div class="banner-aviso alerta" id="aviso-chave"><span>🔑 Falta a chave da Anthropic. Sem ela o estúdio não escreve.</span>
-    <a class="btn" href="ferramentas.html#chave">Guardar a chave</a></div>
+  <div class="banner-aviso alerta" id="aviso-chave"><span id="aviso-chave-texto"></span>
+    <a class="btn" href="ferramentas.html#chave">Ver o estado da IA</a></div>
 
   <div class="etapas">
     <span class="etapa ativa" id="et1">1 · Ideia e formato</span>
@@ -351,8 +351,10 @@ const Radar = (() => {
     });
   }
 
-  // ── chave da Anthropic (fica só neste navegador) ─────────────────
+  // ── chave própria (opcional): só entra em jogo quando o servidor do
+  //    site não tem chave configurada. A chave do site fica no servidor.
   const CHAVE = 'radar-chave-anthropic';
+  const SENHA = 'radar-senha-ia';
   const chave = () => { try { return (localStorage.getItem(CHAVE) || '').trim(); } catch (_) { return ''; } };
   function salvarChave(valor) {
     valor = String(valor || '').trim().replace(/^["']|["']$/g, '');
@@ -363,6 +365,9 @@ const Radar = (() => {
     return {ok: true, recado: 'Chave guardada neste navegador.'};
   }
   const apagarChave = () => { try { localStorage.removeItem(CHAVE); } catch (_) {} };
+  const senha = () => { try { return (localStorage.getItem(SENHA) || '').trim(); } catch (_) { return ''; } };
+  const salvarSenha = v => { try { localStorage.setItem(SENHA, String(v || '').trim()); return true; } catch (_) { return false; } };
+  const apagarSenha = () => { try { localStorage.removeItem(SENHA); } catch (_) {} };
 
   // ── escolhas na agenda (feedback) ─────────────────────────────────
   const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
@@ -498,38 +503,38 @@ const Radar = (() => {
     return n;
   }
 
-  // ── IA direto do navegador ────────────────────────────────────────
+  // ── IA ────────────────────────────────────────────────────────────
+  // Caminho normal: /api/ia, com a chave guardada no servidor (uma só para
+  // todo mundo). Só se esse servidor não tiver chave é que entra a chave
+  // própria de quem está usando, direto do navegador para a Anthropic.
+  let estadoCache = null;
+  async function estadoIA(recarregar) {
+    if (estadoCache && !recarregar) return estadoCache;
+    try {
+      const r = await fetch('/api/ia', {method: 'GET', headers: {'accept': 'application/json'}});
+      if (r.ok) {
+        const d = await r.json();
+        estadoCache = {configurada: !!d.configurada, senha: !!d.senha, servidor: true};
+        return estadoCache;
+      }
+    } catch (_) {}
+    estadoCache = {configurada: false, senha: false, servidor: false};
+    return estadoCache;
+  }
+
   function traduzirErroIA(status, mensagem) {
     const m = (mensagem || '').toLowerCase();
-    if (status === 401 || m.includes('invalid x-api-key') || m.includes('authentication')) return 'A chave da Anthropic não foi aceita. Confira em Ferramentas → Chave da IA.';
+    if (status === 401 || m.includes('invalid x-api-key') || m.includes('authentication')) return 'A chave da Anthropic não foi aceita. Confira em Ferramentas → Estado da IA.';
     if (m.includes('credit balance')) return 'Os créditos da Anthropic acabaram. Recarregue em console.anthropic.com (Plans & Billing).';
     if (status === 429) return 'A Anthropic pediu para esperar um pouco (limite de uso). Tente de novo em um minuto.';
     if (status === 529 || status === 503) return 'A Anthropic está sobrecarregada agora. Tente de novo em instantes.';
     if (status === 404 && m.includes('model')) return 'O modelo configurado não está disponível para esta chave.';
     return mensagem ? `A IA respondeu com erro: ${mensagem.slice(0, 200)}` : `A IA respondeu com erro (${status}).`;
   }
-  async function chamarIA({modelo, system, messages, maxTokens, thinking, aoProgresso}) {
-    const k = chave();
-    if (!k) { const e = new Error('Falta a chave da Anthropic. Guarde a sua em Ferramentas → Chave da IA.'); e.semChave = true; throw e; }
-    const corpo = {model: modelo, max_tokens: maxTokens || 16000, system, messages, stream: true};
-    if (thinking) corpo.thinking = thinking;
-    let r;
-    try {
-      r = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {'content-type': 'application/json', 'x-api-key': k, 'anthropic-version': '2023-06-01',
-                  'anthropic-dangerous-direct-browser-access': 'true'},
-        body: JSON.stringify(corpo),
-      });
-    } catch (_) {
-      throw new Error('Não consegui falar com a Anthropic — sem internet, ou um bloqueador impediu a chamada.');
-    }
-    if (!r.ok) {
-      let msg = '';
-      try { msg = (await r.json()).error?.message || ''; } catch (_) {}
-      throw new Error(traduzirErroIA(r.status, msg));
-    }
-    const leitor = r.body.getReader(), dec = new TextDecoder();
+
+  // Lê o fluxo de eventos (o mesmo formato dos dois caminhos) até o fim.
+  async function lerFluxo(resposta, aoProgresso) {
+    const leitor = resposta.body.getReader(), dec = new TextDecoder();
     let sobra = '', texto = '', parada = '';
     while (true) {
       const {value, done} = await leitor.read();
@@ -544,7 +549,7 @@ const Radar = (() => {
         } else if (ev.type === 'message_delta' && ev.delta && ev.delta.stop_reason) {
           parada = ev.delta.stop_reason;
         } else if (ev.type === 'error') {
-          throw new Error(traduzirErroIA(0, ev.error && ev.error.message));
+          throw new Error((ev.error && ev.error.message) || 'A IA respondeu com erro.');
         }
       }
     }
@@ -552,6 +557,60 @@ const Radar = (() => {
     if (parada === 'max_tokens') throw new Error('A resposta ficou longa demais e foi cortada. Tente um tamanho menor.');
     return texto;
   }
+
+  async function viaServidor(pedido, aoProgresso) {
+    let r;
+    try {
+      r = await fetch('/api/ia', {method: 'POST', headers: {'content-type': 'application/json'},
+        body: JSON.stringify({...pedido, senha: senha()})});
+    } catch (_) {
+      throw new Error('Não consegui falar com o servidor do site. Confira a internet e tente de novo.');
+    }
+    if (!r.ok || (r.headers.get('content-type') || '').includes('application/json')) {
+      let d = {}; try { d = await r.json(); } catch (_) {}
+      const e = new Error(d.recado || traduzirErroIA(r.status, ''));
+      if (d.erro === 'senha') e.pedeSenha = true;
+      if (d.erro === 'sem_chave') { estadoCache = null; e.semChave = true; }
+      throw e;
+    }
+    return lerFluxo(r, aoProgresso);
+  }
+
+  async function viaChavePropria(pedido, aoProgresso) {
+    const corpo = {model: pedido.modelo, max_tokens: pedido.max_tokens || 16000,
+                   system: pedido.system, messages: pedido.messages, stream: true};
+    if (pedido.thinking) corpo.thinking = pedido.thinking;
+    let r;
+    try {
+      r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {'content-type': 'application/json', 'x-api-key': chave(), 'anthropic-version': '2023-06-01',
+                  'anthropic-dangerous-direct-browser-access': 'true'},
+        body: JSON.stringify(corpo),
+      });
+    } catch (_) {
+      throw new Error('Não consegui falar com a Anthropic — sem internet, ou um bloqueador impediu a chamada.');
+    }
+    if (!r.ok) {
+      let msg = '';
+      try { msg = (await r.json()).error?.message || ''; } catch (_) {}
+      throw new Error(traduzirErroIA(r.status, msg));
+    }
+    return lerFluxo(r, aoProgresso);
+  }
+
+  async function chamarIA({modelo, system, messages, maxTokens, thinking, aoProgresso}) {
+    const pedido = {modelo, system, messages, max_tokens: maxTokens || 16000, thinking};
+    const estado = await estadoIA();
+    if (estado.configurada) return viaServidor(pedido, aoProgresso);
+    if (chave()) return viaChavePropria(pedido, aoProgresso);
+    const e = new Error(estado.servidor
+      ? 'O site ainda não tem uma chave da Anthropic configurada. Quem administra precisa criar a variável ANTHROPIC_API_KEY na Vercel.'
+      : 'Esta página não está ligada ao servidor da IA. Abra o site publicado, ou guarde uma chave própria em Ferramentas.');
+    e.semChave = true;
+    throw e;
+  }
+
   // Extrai o maior objeto JSON válido de uma resposta com ruído ao redor
   function extrairJson(texto) {
     let limpo = String(texto || '').trim();
@@ -576,7 +635,7 @@ const Radar = (() => {
   }
 
   return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
-          chave, salvarChave, apagarChave,
+          chave, salvarChave, apagarChave, senha, salvarSenha, apagarSenha, estadoIA,
           registrarFeedback, feedback, preferencias,
           galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
           limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
@@ -589,7 +648,14 @@ const $ = s => document.querySelector(s);
 const escapar = Radar.escapar;
 let opcoes = [], roteiro = null, conversa = [], idSalvo = null, params = {};
 
-function conferirChave() { $('#aviso-chave').classList.toggle('visivel', !Radar.chave()); }
+async function conferirIA(recarregar) {
+  const estado = await Radar.estadoIA(recarregar);
+  const pronta = estado.configurada || !!Radar.chave();
+  $('#aviso-chave').classList.toggle('visivel', !pronta);
+  $('#aviso-chave-texto').textContent = estado.servidor
+    ? '🔑 O site ainda não tem uma chave da Anthropic configurada — sem ela o estúdio não escreve.'
+    : '🔑 Esta página não está ligada ao servidor da IA. Abra pelo site publicado ou pelo painel.';
+}
 function contexto() {
   const ctx = {...CFG.contexto};
   const prefs = Radar.preferencias(CFG.nicho);
@@ -620,8 +686,9 @@ function lerParams() {
   return params;
 }
 function mostrarErro(sel, e) {
-  const el = $(sel); el.innerHTML = '⚠️ ' + escapar(e.message || e) +
-    (e.semChave ? ' <a href="ferramentas.html#chave">Guardar a chave</a>' : '');
+  const el = $(sel);
+  const link = (e.semChave || e.pedeSenha) ? ' <a href="ferramentas.html#chave">Ver o estado da IA</a>' : '';
+  el.innerHTML = '⚠️ ' + escapar(e.message || e) + link;
   el.hidden = false;
 }
 
@@ -731,8 +798,8 @@ function reabrir(id) {
   renderRoteiro(); etapa(3);
 }
 montarMenus();
-conferirChave();
-window.addEventListener('focus', conferirChave);
+conferirIA();
+window.addEventListener('focus', () => conferirIA(true));
 const idInicial = new URLSearchParams(location.search).get('id');
 if (idInicial) reabrir(idInicial);
 </script>

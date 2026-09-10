@@ -9,6 +9,10 @@ abre o navegador com um painel de botões:
 - ☁️ Publicar no site — envia para o GitHub (a Vercel publica sozinha)
 - 🔄 Atualizar agora — aparece sozinho quando há versão nova do programa
 
+Também atende /api/ia, a mesma rota que o site publicado usa para falar com a
+Anthropic — aqui com a chave do .env. É o que faz o estúdio e as ferramentas do
+site funcionarem igual abertos daqui ou da internet (ver api/ia.js).
+
 Uso: dê um duplo clique em abrir-painel.bat (Windows), abrir-painel.command
 (Mac) ou abrir-painel.sh (Linux). Ou rode: python -m src.painel.servidor
 """
@@ -29,6 +33,7 @@ from dotenv import load_dotenv
 from src import feedback as feedback_mod
 from src.painel import estudio
 from src.roteiros import manual as manual_mod
+from src.roteiros.gerador import MODELO_ESCRITA, MODELO_PESQUISA
 
 RAIZ = Path(__file__).resolve().parent.parent.parent
 PORTA = 8777
@@ -572,6 +577,27 @@ setInterval(atualizar, 1500);
 """
 
 
+# ── proxy da IA (mesma rota do site publicado; ver api/ia.js) ────────────
+
+MODELOS_IA = (MODELO_PESQUISA, MODELO_ESCRITA)
+MAX_TOKENS_IA = 20000
+
+
+def _erro_ia(e: Exception) -> str:
+    """Erro técnico traduzido para quem vai ler na tela."""
+    texto = str(e).lower()
+    if "authentication" in texto or "x-api-key" in texto or "api_key" in texto:
+        return ("A chave da Anthropic no arquivo .env não foi aceita. "
+                "Confira em console.anthropic.com.")
+    if "credit balance" in texto:
+        return "Os créditos da Anthropic acabaram. Recarregue em console.anthropic.com."
+    if "rate_limit" in texto or "429" in texto:
+        return "A Anthropic pediu para esperar um pouco. Tente de novo em um minuto."
+    if "overloaded" in texto or "529" in texto:
+        return "A Anthropic está sobrecarregada agora. Tente de novo em instantes."
+    return f"A IA respondeu com erro: {str(e).splitlines()[0][:200]}"
+
+
 def _arquivo_do_site(caminho: str) -> Path | None:
     """Página de web/ correspondente ao caminho pedido, ou None."""
     from urllib.parse import unquote
@@ -620,6 +646,9 @@ class Painel(BaseHTTPRequestHandler):
                          'Ele é escrito ao fim de cada geração de agenda, a partir do que a '
                          'pesquisa da semana descobriu. Gere a primeira agenda e volte aqui.</div>')
             self._responder(PAGINA_MANUAL.replace("{{CORPO}}", corpo).encode("utf-8"))
+        elif caminho == "/api/ia":
+            self._json({"configurada": _tem_chave(), "senha": False,
+                        "modelos": list(MODELOS_IA), "max_tokens": MAX_TOKENS_IA})
         elif caminho == "/status":
             with trava:
                 self._json({**estado, "agenda": _info_agenda()})
@@ -642,6 +671,10 @@ class Painel(BaseHTTPRequestHandler):
             tamanho = int(self.headers.get("Content-Length") or 0)
             if estudio.tratar(self, "POST", caminho, consulta, self.rfile.read(tamanho)):
                 return
+        if caminho == "/api/ia":
+            tamanho = int(self.headers.get("Content-Length") or 0)
+            self._proxy_ia(self.rfile.read(tamanho))
+            return
         if caminho == "/gerar":
             nicho = dict(p.split("=", 1) for p in consulta.split("&") if "=" in p).get("nicho", "")
             nicho = nicho.replace("%20", " ")
@@ -699,6 +732,65 @@ class Painel(BaseHTTPRequestHandler):
             self._json({"ok": ok})
         else:
             self._responder(b"nao encontrado", codigo=404)
+
+    def _proxy_ia(self, corpo: bytes) -> None:
+        """Repassa um pedido do site para a Anthropic, com a chave do .env.
+
+        Devolve os pedaços do texto no mesmo formato (SSE) que api/ia.js usa,
+        para as páginas não precisarem saber onde estão rodando.
+        """
+        if not _tem_chave():
+            self._json({"erro": "sem_chave", "recado": "Falta a chave da Anthropic no "
+                        "arquivo .env. Cole a chave no aviso do topo do painel."})
+            return
+        try:
+            pedido = json.loads(corpo.decode("utf-8", "ignore") or "{}")
+        except ValueError:
+            self._json({"erro": "pedido_invalido", "recado": "Pedido inválido."})
+            return
+        modelo = str(pedido.get("modelo", ""))
+        if modelo not in MODELOS_IA:
+            self._json({"erro": "modelo", "recado": "Modelo não permitido."})
+            return
+        mensagens = [{"role": "assistant" if m.get("role") == "assistant" else "user",
+                      "content": str(m.get("content", ""))}
+                     for m in (pedido.get("messages") or []) if isinstance(m, dict)]
+        if not mensagens:
+            self._json({"erro": "pedido_invalido", "recado": "Pedido sem mensagens."})
+            return
+
+        extras = {}
+        if pedido.get("thinking") and modelo == MODELO_ESCRITA:
+            extras["thinking"] = {"type": "adaptive"}
+
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream; charset=utf-8")
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+
+        def enviar(evento: dict) -> None:
+            self.wfile.write(f"data: {json.dumps(evento, ensure_ascii=False)}\n\n"
+                             .encode("utf-8"))
+            self.wfile.flush()
+
+        try:
+            import anthropic
+            cliente = anthropic.Anthropic()
+            with cliente.messages.stream(
+                model=modelo, system=str(pedido.get("system", "")), messages=mensagens,
+                max_tokens=min(int(pedido.get("max_tokens") or 16000), MAX_TOKENS_IA),
+                **extras,
+            ) as stream:
+                for texto in stream.text_stream:
+                    enviar({"type": "content_block_delta",
+                            "delta": {"type": "text_delta", "text": texto}})
+                parada = stream.get_final_message().stop_reason
+            enviar({"type": "message_delta", "delta": {"stop_reason": parada}})
+        except Exception as e:  # noqa: BLE001 - a página mostra o recado
+            try:
+                enviar({"type": "error", "error": {"message": _erro_ia(e)}})
+            except OSError:
+                pass
 
     def log_message(self, *_args) -> None:
         """Silencia o log de acessos do servidor (o painel já mostra o que importa)."""

@@ -9,3 +9,4 @@ config/nichos/*.anterior
 dados/playbook-*.json
 dados/manual-*.md
 dados/feedback-*.json
+node_modules/

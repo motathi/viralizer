@@ -76,6 +76,10 @@ cp .env.example .env   # e preencha as chaves
 | `APIFY_API_TOKEN` | [Apify Console](https://console.apify.com/) | Recomendada (virais de TikTok/Instagram) |
 | `YOUTUBE_API_KEY` | [Google Cloud Console](https://console.cloud.google.com/apis/library/youtube.googleapis.com) | Opcional |
 
+No **site publicado** as variáveis não vêm do `.env`, e sim do painel da Vercel
+(*Settings → Environment Variables*): `ANTHROPIC_API_KEY` liga o estúdio para todo mundo, e
+`RADAR_SENHA` (opcional) protege esse uso com uma senha. Ver "A chave da IA".
+
 ## Instalação na sua máquina (uma vez só)
 
 Baixe o projeto **com o Git** — assim ele se mantém atualizado sozinho depois:
@@ -131,6 +135,7 @@ Saídas:
 |---|---|
 | `web/index.html` | Agenda da semana (site publicado na Vercel) |
 | `web/estudio.html`, `galeria.html`, `manual.html`, `ferramentas.html` | Ferramentas do site que rodam no navegador (ver "O site") |
+| `api/ia.js` | Proxy da IA no servidor da Vercel — guarda a chave fora do navegador |
 | `web/semanas/<data>.html` | Agendas arquivadas, acessíveis pelo seletor no painel |
 | `dados/<nicho>.json` | Última geração, usada pelo `rerender` |
 | `dados/historico-<nicho>.json` | Memória anti-repetição |
@@ -147,14 +152,45 @@ páginas, todas estáticas, geradas pelo pipeline e pelo `rerender`:
 | Página | O que faz | Onde roda |
 |---|---|---|
 | **📅 Agenda** (`index.html`) | Cards que expandem, 3 ganchos por ideia, Reels ⇄ Carrossel, fila de produção (lista → feita), descarte com restauração, copiar roteiro, link compartilhável (`#rN`), semanas anteriores, aviso de agenda desatualizada | no navegador |
-| **✨ Estúdio** (`estudio.html`) | Sua ideia vira três roteiros em ângulos diferentes (vídeo, carrossel ou stories; estilo, tom e tamanho); você escolhe um, ajusta conversando e salva. Usa os mesmos prompts do painel, o manual do nicho e suas preferências | no navegador, chamando a API da Anthropic direto com a **sua chave** |
+| **✨ Estúdio** (`estudio.html`) | Sua ideia vira três roteiros em ângulos diferentes (vídeo, carrossel ou stories; estilo, tom e tamanho); você escolhe um, ajusta conversando e salva. Usa os mesmos prompts do painel, o manual do nicho e suas preferências | no navegador, falando com a IA por `/api/ia` — **a chave fica no servidor**, uma só para todos |
 | **💡 Galeria** (`galeria.html`) | Roteiros publicados pelo painel + os salvos neste navegador. Copiar, reabrir no estúdio, apagar, exportar/importar JSON (o mesmo formato de `dados/galeria-<nicho>.json`) | no navegador |
 | **📘 Manual** (`manual.html`) | O manual do nicho (o que o radar aprendeu com os virais), embutido na publicação | estático |
-| **🧰 Ferramentas** (`ferramentas.html`) | Guardar/testar a chave da IA; **preferências reveladas** calculadas a partir das suas escolhas na agenda (com exportação para `dados/feedback-<nicho>.json`); backup e restauração de tudo o que está no navegador; disparo da agenda na nuvem (GitHub Actions); termos de busca e o rendimento de cada um; e a lista do que só roda pelo painel, com o motivo | no navegador |
+| **🧰 Ferramentas** (`ferramentas.html`) | Estado da IA do site (e teste); **preferências reveladas** calculadas a partir das suas escolhas na agenda (com exportação para `dados/feedback-<nicho>.json`); backup e restauração de tudo o que está no navegador; disparo da agenda na nuvem (GitHub Actions); termos de busca e o rendimento de cada um; e a lista do que só roda pelo painel, com o motivo | no navegador |
 
 Tudo o que a pessoa faz no site fica no `localStorage` do navegador dela (escolhas por
-semana, feedback, galeria, chave). A chave da Anthropic nunca entra no backup nem sai do
-navegador — a chamada vai do navegador para `api.anthropic.com`, sem servidor no meio.
+semana, feedback, galeria). **A chave da Anthropic não fica no navegador de ninguém**: ela
+mora no servidor, e o navegador só conversa com `/api/ia` — ver "A chave da IA" abaixo.
+
+### A chave da IA
+
+O estúdio é para todo mundo que abre o site usar, sem cada pessoa ter uma chave.
+Por isso a chave da Anthropic fica **no servidor**, em variável de ambiente, e o
+navegador nunca a recebe:
+
+| Onde o site está aberto | Quem atende `/api/ia` | De onde vem a chave |
+|---|---|---|
+| Site publicado (Vercel) | `api/ia.js` (função serverless) | Variável de ambiente `ANTHROPIC_API_KEY` |
+| Painel local (`127.0.0.1:8777`) | `src/painel/servidor.py` | O `.env` da pasta do projeto |
+
+**Configurar na Vercel** (uma vez): projeto → *Settings* → *Environment Variables* →
+`ANTHROPIC_API_KEY` = a chave (`sk-ant-...`), marcando *Production* e *Preview*; depois
+publique de novo, porque a variável só entra num novo deploy. A página **Ferramentas**
+mostra se deu certo, e tem um botão que testa com uma chamada mínima.
+
+> ⚠️ **O endereço `/api/ia` é público.** Quem descobrir o endereço do site pode gastar os
+> créditos da chave. As travas embutidas ajudam (só os dois modelos que o site usa, teto de
+> tokens e de tamanho, 40 pedidos por hora por IP), mas o limite por IP é aproximado: em
+> serverless a contagem vive na memória de cada instância. Duas proteções valem de verdade:
+>
+> 1. **Senha de acesso** — crie também a variável `RADAR_SENHA` com uma senha qualquer. O site
+>    passa a exigi-la, e cada pessoa a guarda uma vez em Ferramentas. Recomendado se o
+>    endereço do site circular.
+> 2. **Limite de gasto** na Anthropic (console.anthropic.com → *Plans & Billing*), que é o
+>    teto que ninguém contorna. Vale usar uma chave só para o site, separada da pessoal.
+
+Sem `ANTHROPIC_API_KEY` no servidor o site continua abrindo: a agenda, a galeria, o manual e
+as ferramentas funcionam, e só o estúdio fica parado, avisando o que falta. Quem quiser pode,
+nesse caso, guardar uma chave própria em Ferramentas — ela fica só no aparelho dela.
 
 **O que continua só no painel local** (precisa da máquina): gerar a agenda pelo IP residencial,
 conectar TikTok, testar coleta, otimizar termos (grava no YAML), publicar (git push) e atualizar
