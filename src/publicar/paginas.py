@@ -505,6 +505,16 @@ def pagina_ferramentas(config: dict, raiz: Path, nicho: str) -> str:
        na conta de quem configurou a chave do site.</p>
   </div>
 
+  <div class="cartao-ferramenta" id="banco">
+    <h2><span class="icone">🗄️</span> Estado do banco</h2>
+    <p>É o banco que faz uma marcação valer em todos os aparelhos: o que uma pessoa põe na
+       lista, marca como feita ou apaga, todas veem. Sem ele, cada navegador guarda o seu.</p>
+    <div class="mensagem" id="banco-estado">carregando…</div>
+    <div class="acoes"><button class="btn" id="banco-testar">Testar de novo</button></div>
+    <p class="nota">Configuração: <code>SUPABASE_URL</code> e <code>SUPABASE_SECRET_KEY</code> na Vercel,
+       mais o <code>supabase/schema.sql</code> rodado uma vez no SQL Editor.</p>
+  </div>
+
   <div class="cartao-ferramenta" id="preferencias">
     <h2><span class="icone">🧭</span> Suas preferências reveladas</h2>
     <p>O que você põe na lista, marca como feita ou descarta na agenda vira um sinal de gosto —
@@ -615,6 +625,28 @@ $('#ia-testar').onclick = async () => {
   $('#ia-testar').disabled = false;
 };
 
+// ── banco ────────────────────────────────────────────────────────────
+async function pintarBanco() {
+  const el = $('#banco-estado');
+  el.className = 'mensagem alerta';
+  el.innerHTML = '<span class="girando"></span>Conferindo…';
+  const r = await Radar.abrirEstado(CFG.nicho);
+  if (r.banco) {
+    el.className = 'mensagem ok';
+    el.innerHTML = `✅ <b>O banco está ligado.</b> ${Object.keys(r.estado).length} marcação(ões) e `
+      + `${r.ideias.filter(i => i.origem === 'banco').length} ideia(s) guardadas — valem em qualquer aparelho.`;
+  } else if (r.recado) {
+    el.className = 'mensagem erro';
+    el.innerHTML = '⚠️ ' + escapar(r.recado);
+  } else {
+    el.className = 'mensagem alerta';
+    el.innerHTML = '⚠️ <b>Sem banco configurado.</b> As marcações ficam só neste aparelho, e apagar '
+      + 'uma ideia não a apaga para os outros. Falta criar <code>SUPABASE_URL</code> e '
+      + '<code>SUPABASE_SECRET_KEY</code> na Vercel e publicar de novo.';
+  }
+}
+$('#banco-testar').onclick = pintarBanco;
+
 // ── preferências ─────────────────────────────────────────────────────
 function lista(obj) {
   const itens = Object.entries(obj || {});
@@ -680,7 +712,7 @@ function pintarTermos() {
   $('#termos-corpo').innerHTML = html;
 }
 
-pintarIA(); pintarPreferencias(); pintarTermos();
+pintarIA(); pintarBanco(); pintarPreferencias(); pintarTermos();
 
 """
 
