@@ -181,9 +181,11 @@ deixa viva nos outros. Com banco, o estado é um só.
 
 **Passo a passo, uma vez:**
 
-1. No seu projeto Supabase, abra **SQL Editor → New query**, cole o conteúdo de
-   [`supabase/schema.sql`](supabase/schema.sql) e clique em **Run**. Isso cria as duas
-   tabelas e as funções de escrita.
+1. Abra o arquivo [`supabase/schema.sql`](supabase/schema.sql), **copie o texto de dentro
+   dele** (no GitHub, botão *Copy raw file*) e cole no seu projeto Supabase em
+   **SQL Editor → New query**; clique em **Run**. Isso cria as duas tabelas e as funções.
+   Colar o *caminho* do arquivo dá `syntax error at or near "supabase"` — o que vai no
+   editor é o conteúdo, não o nome. Rodar de novo é seguro: o script é repetível.
 2. Vá em **Settings → API Keys** e copie duas coisas: a URL do projeto
    (`https://<ref>.supabase.co`) e a **chave secreta** (`sb_secret_...`). Não é a
    publicável — a secreta nunca chega ao navegador.

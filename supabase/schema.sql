@@ -45,6 +45,13 @@ create index if not exists radar_ideias_nicho_idx on public.radar_ideias (nicho,
 alter table public.radar_estado enable row level security;
 alter table public.radar_ideias enable row level security;
 
+-- O Supabase já concede isso por padrão em tabelas novas do schema public;
+-- deixar explícito garante que funcione mesmo em projeto com o padrão mexido.
+-- A RLS acima continua valendo para todos: a chave secreta passa por ela
+-- porque service_role tem BYPASSRLS, não porque tem estes grants.
+grant select, insert, update, delete on public.radar_estado to service_role;
+grant select, insert, update, delete on public.radar_ideias to service_role;
+
 -- ── escritas ────────────────────────────────────────────────────────────
 -- Feitas por função, e não por upsert do PostgREST, para o "insere ou
 -- atualiza" ficar explícito aqui, num lugar só.
@@ -98,12 +105,20 @@ create or replace function public.radar_apagar_ideia(
 $$;
 
 -- Só o servidor (chave secreta) chama estas funções.
-revoke execute on function public.radar_definir_estado(text, text, jsonb) from anon, authenticated;
-revoke execute on function public.radar_salvar_ideia(text, text, jsonb)   from anon, authenticated;
-revoke execute on function public.radar_apagar_ideia(text, text)          from anon, authenticated;
+--
+-- Tem de revogar de PUBLIC, e não de anon: no Postgres toda função nasce
+-- executável por PUBLIC, e anon herda daí — revogar só de anon não tira
+-- nada. Depois o grant devolve o acesso a quem deve ter.
+revoke execute on function public.radar_definir_estado(text, text, jsonb) from public;
+revoke execute on function public.radar_salvar_ideia(text, text, jsonb)   from public;
+revoke execute on function public.radar_apagar_ideia(text, text)          from public;
+grant execute on function public.radar_definir_estado(text, text, jsonb) to service_role;
+grant execute on function public.radar_salvar_ideia(text, text, jsonb)   to service_role;
+grant execute on function public.radar_apagar_ideia(text, text)          to service_role;
 
 -- Mantém o projeto gratuito acordado: o GitHub Actions chama isto todo dia.
 -- Projeto do plano grátis que passa 7 dias sem consultas é pausado.
 create or replace function public.radar_ping() returns timestamptz
   language sql as $$ select now(); $$;
-revoke execute on function public.radar_ping() from anon, authenticated;
+revoke execute on function public.radar_ping() from public;
+grant execute on function public.radar_ping() to service_role;
