@@ -77,8 +77,10 @@ cp .env.example .env   # e preencha as chaves
 | `YOUTUBE_API_KEY` | [Google Cloud Console](https://console.cloud.google.com/apis/library/youtube.googleapis.com) | Opcional |
 
 No **site publicado** as variáveis não vêm do `.env`, e sim do painel da Vercel
-(*Settings → Environment Variables*): `ANTHROPIC_API_KEY` liga o estúdio para todo mundo, e
-`RADAR_SENHA` (opcional) protege esse uso com uma senha. Ver "A chave da IA".
+(*Settings → Environment Variables*): `ANTHROPIC_API_KEY` liga o estúdio para todo mundo,
+`RADAR_SENHA` (opcional) protege esse uso com uma senha, e `SUPABASE_URL` mais
+`SUPABASE_SECRET_KEY` ligam o estado compartilhado. Ver "O banco compartilhado" e
+"A chave da IA".
 
 ## Instalação na sua máquina (uma vez só)
 
@@ -136,6 +138,8 @@ Saídas:
 | `web/index.html` | Agenda com todas as ideias (site publicado na Vercel) |
 | `web/estudio.html`, `manual.html`, `ferramentas.html` | Ferramentas do site que rodam no navegador (ver "O site") |
 | `api/ia.js` | Proxy da IA no servidor da Vercel — guarda a chave fora do navegador |
+| `api/estado.js` | Estado compartilhado no servidor — é o que faz apagar valer em todo lugar |
+| `supabase/schema.sql` | As tabelas e funções do banco; rode uma vez no SQL Editor |
 | `dados/agendas-<nicho>.json` | Todas as gerações já feitas — é o que a agenda mostra |
 | `dados/<nicho>.json` | Última geração, usada pelo `rerender` |
 | `dados/historico-<nicho>.json` | Memória anti-repetição |
@@ -160,15 +164,48 @@ Não há mais galeria à parte nem página por semana: o que o estúdio cria e o
 semana gerou vivem na mesma lista. As gerações passadas ficam em
 `dados/agendas-<nicho>.json` (ver `src/publicar/arquivo.py`), acumuladas a cada rodada.
 
-**Onde o estado mora.** Hoje as escolhas (lista, feita, descartada, gancho) e as ideias do
-estúdio ficam no `localStorage` de cada navegador, sob uma chave só para todas as semanas.
-Isso significa que **apagar uma ideia só apaga naquele aparelho** — para apagar em todo
-lugar falta um banco compartilhado. O código já está preparado: tudo passa por quatro
-funções em `src/publicar/base.py` (`estadoAgenda`, `gravarEstadoAgenda`, `minhasIdeias`,
-`apagarMinhaIdeia`), e é só ali que a troca acontece.
+**Onde o estado mora.** As escolhas (lista, feita, descartada, gancho) e as ideias do
+estúdio ficam no **Supabase**, alcançado por `/api/estado`. O que uma pessoa marca ou apaga
+vale em todos os aparelhos: apagar apaga para todo mundo. Ver "O banco compartilhado".
+
+Sem o Supabase configurado nada quebra — o site volta a guardar tudo no `localStorage` de
+cada navegador e mostra um aviso dizendo que as marcações valem só naquele aparelho.
 
 Para mudar o design sem gerar roteiros de novo: `python -m src.publicar.rerender --nicho <nicho>`
 reconstrói todas as páginas a partir do que já foi gerado.
+
+### O banco compartilhado (Supabase)
+
+Sem banco, cada navegador guarda as próprias marcações, e apagar uma ideia num aparelho a
+deixa viva nos outros. Com banco, o estado é um só.
+
+**Passo a passo, uma vez:**
+
+1. No seu projeto Supabase, abra **SQL Editor → New query**, cole o conteúdo de
+   [`supabase/schema.sql`](supabase/schema.sql) e clique em **Run**. Isso cria as duas
+   tabelas e as funções de escrita.
+2. Vá em **Settings → API Keys** e copie duas coisas: a URL do projeto
+   (`https://<ref>.supabase.co`) e a **chave secreta** (`sb_secret_...`). Não é a
+   publicável — a secreta nunca chega ao navegador.
+3. Na Vercel, em **Settings → Environment Variables**, crie `SUPABASE_URL` e
+   `SUPABASE_SECRET_KEY`, marque *Production* e *Preview*, e publique de novo.
+4. No GitHub, em **Settings → Secrets and variables → Actions**, crie os mesmos dois
+   secrets. É o que alimenta o fluxo que mantém o banco acordado (abaixo).
+5. Para o painel local sincronizar também, copie as duas linhas para o seu `.env`.
+
+**Por que só o servidor toca no banco.** As tabelas têm RLS ligado e nenhuma policy: a chave
+publicável não lê nem escreve nada. Quem acessa é `api/estado.js` (na Vercel) ou o painel,
+com a chave secreta. Mesmo desenho da chave da Anthropic.
+
+| Onde o site está aberto | Quem atende `/api/estado` | De onde vêm as chaves |
+|---|---|---|
+| Site publicado (Vercel) | `api/estado.js` | Variáveis de ambiente da Vercel |
+| Painel local | `src/painel/servidor.py` | O `.env` da pasta do projeto |
+
+> ⚠️ **Projeto grátis do Supabase é pausado após 7 dias sem consultas**, e aí o site perde o
+> estado até alguém clicar em *Resume* no painel do Supabase. Por isso existe o fluxo
+> `.github/workflows/manter-banco-acordado.yml`, que faz uma consulta por dia. Ele só
+> funciona depois do passo 4; sem os secrets, ele avisa e termina sem erro.
 
 ### A chave da IA
 

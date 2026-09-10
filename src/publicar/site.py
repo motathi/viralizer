@@ -161,9 +161,10 @@ const DADOS = JSON.parse(document.getElementById('dados-agenda').textContent);
 const IDEIAS = {};
 DADOS.ideias.forEach(d => { IDEIAS[d.id] = d; });
 
-// O estado é um só para todas as semanas: uma ideia descartada some da
-// lista inteira, não só da semana em que nasceu.
-const estado = Radar.estadoAgenda(DADOS.nicho);
+// O estado é um só para todas as semanas e para todos os aparelhos: uma
+// ideia descartada some da lista inteira, para quem quer que abra o site.
+let estado = {};
+let temBanco = false;
 const abertas = new Set();
 let filtro = 'todas';
 let foco = null;
@@ -172,9 +173,16 @@ function st(id) {
   return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false,
                                       formato: 'reels', gancho: 0});
 }
-function salvar() {
-  Radar.gravarEstadoAgenda(DADOS.nicho, estado);
-  registrarEscolhas();
+// Grava só a ideia que mudou — o resto do estado já está no lugar.
+async function salvarIdeia(id) {
+  if (!id) return;
+  const r = await Radar.gravarEstadoIdeia(DADOS.nicho, id, st(id), estado);
+  mostrarAvisoBanco(r && r.ok === false ? r.recado : '');
+}
+function mostrarAvisoBanco(recado) {
+  const el = document.getElementById('aviso-banco');
+  el.classList.toggle('visivel', !!recado);
+  if (recado) el.querySelector('span').textContent = '⚠️ ' + recado;
 }
 let aviso = null;
 // As escolhas viram sinal de gosto para o estúdio; no painel, também vão
@@ -256,7 +264,7 @@ function montarMinhas() {
   lista.insertAdjacentHTML('afterbegin', itens.map(cartaoMinhaIdeia).join(''));
 }
 
-function render() {
+function render(idAlterado) {
   let naLista = 0, feitas = 0, visiveis = 0, descartadas = 0;
   document.querySelectorAll('.cartao').forEach(c => {
     const id = c.dataset.id, s = st(id), d = IDEIAS[id];
@@ -306,7 +314,8 @@ function render() {
     `${descartadas} ideia${descartadas === 1 ? '' : 's'} descartada${descartadas === 1 ? '' : 's'}`;
   document.querySelectorAll('.aba').forEach(a => a.classList.toggle('ativa', a.dataset.filtro === filtro));
   document.getElementById('vazio').style.display = visiveis ? 'none' : 'block';
-  salvar();
+  if (idAlterado) salvarIdeia(idAlterado);
+  registrarEscolhas();
 }
 
 function textoRoteiro(id) {
@@ -333,10 +342,12 @@ function textoRoteiro(id) {
   return out;
 }
 
-document.getElementById('restaurar').addEventListener('click', () => {
-  Object.values(estado).forEach(e => { e.descartada = false; });
+document.getElementById('restaurar').addEventListener('click', async () => {
+  const voltando = Object.keys(estado).filter(id => estado[id].descartada);
+  voltando.forEach(id => { estado[id].descartada = false; });
   toast('Ideias restauradas');
   render();
+  for (const id of voltando) await salvarIdeia(id);
 });
 
 // Aviso quando a agenda mais recente não é atualizada há mais de 8 dias
@@ -365,10 +376,12 @@ document.addEventListener('click', e => {
   const id = c.dataset.id, s = st(id);
   if (e.target.closest('.descartar')) {
     if (c.classList.contains('minha') && !c.classList.contains('publicada')) {
-      if (!confirm('Apagar esta ideia?')) return;
-      Radar.apagarMinhaIdeia(DADOS.nicho, id);
+      const onde = temBanco ? 'Ela some para todos os aparelhos.' : 'Ela some deste navegador.';
+      if (!confirm('Apagar esta ideia? ' + onde)) return;
       delete estado[id];
-      c.remove(); toast('Ideia apagada'); render(); return;
+      c.remove(); toast('Ideia apagada'); render();
+      Radar.apagarMinhaIdeia(DADOS.nicho, id).then(r => mostrarAvisoBanco(r && r.ok === false ? r.recado : ''));
+      return;
     }
     s.descartada = true; abertas.delete(id);
     toast('Ideia descartada — dá pra restaurar no topo');
@@ -391,12 +404,25 @@ document.addEventListener('click', e => {
   } else if (e.target.closest('.compartilhar-btn')) {
     copiar(location.origin + location.pathname + '#r' + id, 'Link do roteiro copiado 🔗'); return;
   } else { return; }
-  render();
+  render(id);
 });
 
-montarMinhas();
-lerHash();
-render();
+async function iniciar() {
+  const abertura = await Radar.abrirEstado(DADOS.nicho);
+  estado = abertura.estado || {};
+  temBanco = abertura.banco;
+  if (!temBanco) {
+    const el = document.getElementById('aviso-banco');
+    el.classList.add('visivel');
+    el.querySelector('span').textContent = abertura.recado
+      ? '⚠️ ' + abertura.recado
+      : 'ℹ️ As suas marcações estão salvas só neste aparelho. Para valerem em todos, falta ligar o banco do site.';
+  }
+  montarMinhas();
+  lerHash();
+  render();
+}
+iniciar();
 """
 
 
@@ -666,6 +692,7 @@ def publicar_site(config: dict, agendas: list[dict], destino: Path,
     <button class="btn" id="sair-foco">Ver a agenda completa</button>
   </div>
   <div class="banner-aviso alerta" id="aviso-antiga"><span></span></div>
+  <div class="banner-aviso neutro" id="aviso-banco"><span></span></div>
   <div class="banner-aviso neutro" id="barra-descartadas"><span></span>
     <button class="btn" id="restaurar">Restaurar descartadas</button></div>
   <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre

@@ -1,0 +1,42 @@
+name: Manter o banco acordado
+
+# Projeto do plano gratuito do Supabase é pausado depois de 7 dias sem
+# consultas, e aí o site perde o estado compartilhado até alguém clicar em
+# Resume no painel. Uma consulta por dia evita isso.
+#
+# Precisa dos secrets SUPABASE_URL e SUPABASE_SECRET_KEY no repositório
+# (Settings → Secrets and variables → Actions). Sem eles, o job só avisa
+# e termina bem — não fica falhando todo dia.
+
+on:
+  schedule:
+    - cron: "17 9 * * *"   # todo dia, 06h17 de Brasília
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Consultar o banco
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SECRET_KEY" ]; then
+            echo "Supabase não configurado nos secrets — nada a fazer."
+            exit 0
+          fi
+          codigo=$(curl -s -o /tmp/resposta -w "%{http_code}" -X POST \
+            "${SUPABASE_URL%/}/rest/v1/rpc/radar_ping" \
+            -H "apikey: $SUPABASE_SECRET_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{}')
+          echo "HTTP $codigo"
+          cat /tmp/resposta; echo
+          if [ "$codigo" = "540" ]; then
+            echo "::warning::O projeto do Supabase está pausado. Abra o painel e clique em Resume."
+            exit 1
+          fi
+          [ "$codigo" = "200" ] || { echo "::error::O banco não respondeu como esperado."; exit 1; }
+          echo "Banco acordado."

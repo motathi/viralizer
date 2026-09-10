@@ -303,11 +303,16 @@ async function enviar() {
 }
 $('#enviar').onclick = enviar;
 $('#pedido').onkeydown = e => { if (e.key === 'Enter') enviar(); };
-$('#salvar').onclick = () => {
-  idSalvo = Radar.galeriaSalvar(CFG.nicho, {id: idSalvo, ideia: params.ideia, formato: params.formato,
+$('#salvar').onclick = async () => {
+  $('#salvar').disabled = true;
+  const r = await Radar.salvarMinhaIdeia(CFG.nicho, {id: idSalvo, ideia: params.ideia, formato: params.formato,
     estilo: params.estilo, tom: params.tom, tamanho: params.tamanho, roteiro});
-  $('#salvo').innerHTML = '✅ Salvo. <a href="index.html">Ver na agenda</a> · <a href="estudio.html">Criar outra</a>';
+  idSalvo = r.id;
+  $('#salvo').className = 'mensagem ' + (r.ok ? 'ok' : 'alerta');
+  $('#salvo').innerHTML = (r.ok ? '✅ Salvo. ' : '⚠️ ' + escapar(r.recado || '') + ' A ideia ficou guardada aqui. ')
+    + '<a href="index.html">Ver na agenda</a> · <a href="estudio.html">Criar outra</a>';
   $('#salvo').hidden = false;
+  $('#salvar').disabled = false;
 };
 $('#copiar').onclick = () => Radar.copiar(Radar.textoRoteiro(roteiro), 'Roteiro copiado 📋');
 $('#voltar1').onclick = () => etapa(1);
@@ -323,11 +328,17 @@ function reabrir(id) {
   bolha('ia', 'Reabri a ideia. O que você quer mudar?');
   renderRoteiro(); etapa(3);
 }
-montarMenus();
-conferirIA();
-window.addEventListener('focus', () => conferirIA(true));
-const idInicial = new URLSearchParams(location.search).get('id');
-if (idInicial) reabrir(idInicial);
+async function iniciar() {
+  montarMenus();
+  conferirIA();
+  window.addEventListener('focus', () => conferirIA(true));
+  // abre a ligação com o banco antes de qualquer gravação, senão a ideia
+  // criada aqui ficaria só neste navegador
+  await Radar.abrirEstado(CFG.nicho);
+  const idInicial = new URLSearchParams(location.search).get('id');
+  if (idInicial) reabrir(idInicial);
+}
+iniciar();
 """
 
 

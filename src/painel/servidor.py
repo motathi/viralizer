@@ -569,6 +569,42 @@ setInterval(atualizar, 1500);
 """
 
 
+# ── estado compartilhado (mesma rota do site; ver api/estado.js) ────────
+
+def _supabase() -> tuple[str, str]:
+    return (os.environ.get("SUPABASE_URL", "").strip().rstrip("/"),
+            os.environ.get("SUPABASE_SECRET_KEY", "").strip())
+
+
+def _cabecalhos_supabase(chave: str) -> dict:
+    """Chave nova (sb_secret_…) não é JWT: vai só em apikey. A antiga, nos dois."""
+    cabecalhos = {"apikey": chave, "Content-Type": "application/json"}
+    if chave.startswith("ey"):
+        cabecalhos["Authorization"] = f"Bearer {chave}"
+    return cabecalhos
+
+
+def _chamar_supabase(caminho: str, metodo: str = "GET", corpo: dict | None = None):
+    import requests
+    url, chave = _supabase()
+    r = requests.request(metodo, f"{url}/rest/v1/{caminho}",
+                         headers=_cabecalhos_supabase(chave), json=corpo, timeout=20)
+    r.raise_for_status()
+    return r.json() if r.status_code != 204 and r.content else None
+
+
+def _erro_banco(e: Exception) -> str:
+    codigo = getattr(getattr(e, "response", None), "status_code", 0)
+    if codigo in (401, 403):
+        return ("O Supabase recusou a chave. Confira SUPABASE_SECRET_KEY no .env — "
+                "tem de ser a chave secreta, não a publicável.")
+    if codigo == 404:
+        return "As tabelas do Radar não existem neste projeto. Rode supabase/schema.sql no SQL Editor."
+    if codigo == 540:
+        return "O projeto do Supabase está pausado. Clique em Resume no painel do Supabase."
+    return f"Não consegui falar com o banco: {str(e).splitlines()[0][:200]}"
+
+
 # ── proxy da IA (mesma rota do site publicado; ver api/ia.js) ────────────
 
 MODELOS_IA = (MODELO_PESQUISA, MODELO_ESCRITA)
@@ -641,6 +677,8 @@ class Painel(BaseHTTPRequestHandler):
         elif caminho == "/api/ia":
             self._json({"configurada": _tem_chave(), "senha": False, "painel": True,
                         "modelos": list(MODELOS_IA), "max_tokens": MAX_TOKENS_IA})
+        elif caminho == "/api/estado":
+            self._estado_get(consulta)
         elif caminho == "/status":
             with trava:
                 self._json({**estado, "agenda": _info_agenda()})
@@ -663,6 +701,10 @@ class Painel(BaseHTTPRequestHandler):
             tamanho = int(self.headers.get("Content-Length") or 0)
             if estudio.tratar(self, "POST", caminho, consulta, self.rfile.read(tamanho)):
                 return
+        if caminho == "/api/estado":
+            tamanho = int(self.headers.get("Content-Length") or 0)
+            self._estado_post(self.rfile.read(tamanho))
+            return
         if caminho == "/api/ia":
             tamanho = int(self.headers.get("Content-Length") or 0)
             self._proxy_ia(self.rfile.read(tamanho))
@@ -724,6 +766,55 @@ class Painel(BaseHTTPRequestHandler):
             self._json({"ok": ok})
         else:
             self._responder(b"nao encontrado", codigo=404)
+
+    def _estado_get(self, consulta: str) -> None:
+        """O estado e as ideias guardadas no banco, como o site espera."""
+        from urllib.parse import parse_qs, quote
+        nicho = (parse_qs(consulta).get("nicho") or ["padrao"])[0]
+        url, chave = _supabase()
+        if not (url and chave):
+            self._json({"configurado": False, "estado": {}, "ideias": []})
+            return
+        try:
+            linhas = _chamar_supabase(f"radar_estado?nicho=eq.{quote(nicho)}&select=*") or []
+            ideias = _chamar_supabase(
+                f"radar_ideias?nicho=eq.{quote(nicho)}&select=*&order=atualizado_em.desc") or []
+        except Exception as e:  # noqa: BLE001 - a página mostra o recado
+            self._json({"configurado": True, "erro": "banco", "recado": _erro_banco(e),
+                        "estado": {}, "ideias": []})
+            return
+        estado = {l["ideia_id"]: {"lista": l["lista"], "feito": l["feita"],
+                                  "descartada": l["descartada"], "gancho": l["gancho"],
+                                  "formato": l["formato"]} for l in linhas}
+        self._json({"configurado": True, "estado": estado,
+                    "ideias": [{**i, "origem": "banco"} for i in ideias]})
+
+    def _estado_post(self, corpo: bytes) -> None:
+        url, chave = _supabase()
+        if not (url and chave):
+            self._json({"ok": False, "configurado": False})
+            return
+        try:
+            pedido = json.loads(corpo.decode("utf-8", "ignore") or "{}")
+        except ValueError:
+            self._json({"ok": False, "recado": "Pedido inválido."}); return
+        nicho = str(pedido.get("nicho") or "padrao")
+        item = str(pedido.get("id") or "")
+        if not item:
+            self._json({"ok": False, "recado": "Pedido sem id."}); return
+        rotas = {"estado": ("radar_definir_estado",
+                            {"p_nicho": nicho, "p_ideia_id": item, "p_estado": pedido.get("dados") or {}}),
+                 "ideia": ("radar_salvar_ideia",
+                           {"p_nicho": nicho, "p_id": item, "p_dados": pedido.get("dados") or {}}),
+                 "apagar": ("radar_apagar_ideia", {"p_nicho": nicho, "p_id": item})}
+        if pedido.get("acao") not in rotas:
+            self._json({"ok": False, "recado": "Ação desconhecida."}); return
+        funcao, argumentos = rotas[pedido["acao"]]
+        try:
+            _chamar_supabase(f"rpc/{funcao}", "POST", argumentos)
+        except Exception as e:  # noqa: BLE001
+            self._json({"ok": False, "recado": _erro_banco(e)}); return
+        self._json({"ok": True})
 
     def _proxy_ia(self, corpo: bytes) -> None:
         """Repassa um pedido do site para a Anthropic, com a chave do .env.

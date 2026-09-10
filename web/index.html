@@ -359,6 +359,7 @@
     <button class="btn" id="sair-foco">Ver a agenda completa</button>
   </div>
   <div class="banner-aviso alerta" id="aviso-antiga"><span></span></div>
+  <div class="banner-aviso neutro" id="aviso-banco"><span></span></div>
   <div class="banner-aviso neutro" id="barra-descartadas"><span></span>
     <button class="btn" id="restaurar">Restaurar descartadas</button></div>
   <div class="aviso">⚕️ Todo conteúdo é um rascunho embasado: a palavra final sobre
@@ -1356,12 +1357,92 @@ const Radar = (() => {
   const apagarSenha = () => { try { localStorage.removeItem(SENHA); } catch (_) {} };
 
   // ── estado da agenda: lista, feita, descartada, gancho e formato ──
-  // Uma chave só para todas as semanas — o que é descartado some da lista
-  // inteira. Este é o ponto por onde o estado passa a ser compartilhado
-  // entre aparelhos quando houver banco: só estas quatro funções mudam.
+  // Mora no banco (via /api/estado), para valer em todos os aparelhos: o
+  // que uma pessoa apaga some para todas. Sem banco configurado, cai no
+  // localStorage e volta a ser por navegador, como antes.
   const chaveEstado = nicho => 'radar-estado:' + (nicho || 'padrao');
-  const estadoAgenda = nicho => ler(chaveEstado(nicho), {});
-  const gravarEstadoAgenda = (nicho, estado) => gravar(chaveEstado(nicho), estado);
+  const chaveIdeias = nicho => 'radar-galeria:' + (nicho || 'padrao');
+  let banco = null;   // {estado, ideias} carregados do servidor
+  let recadoBanco = '';
+
+  async function abrirEstado(nicho) {
+    try {
+      const r = await fetch('/api/estado?nicho=' + encodeURIComponent(nicho || 'padrao'),
+                            {headers: {accept: 'application/json'}});
+      if (r.ok) {
+        const d = await r.json();
+        if (d.configurado && !d.erro) {
+          banco = {estado: d.estado || {}, ideias: d.ideias || []};
+          recadoBanco = '';
+          return {estado: banco.estado, ideias: banco.ideias, banco: true, recado: ''};
+        }
+        if (d.erro) recadoBanco = d.recado || '';
+      }
+    } catch (_) {}
+    banco = null;
+    return {estado: ler(chaveEstado(nicho), {}),
+            ideias: (ler(chaveIdeias(nicho), {itens: []}).itens || []).map(i => ({...i, origem: 'navegador'})),
+            banco: false, recado: recadoBanco};
+  }
+  const avisoBanco = () => recadoBanco;
+
+  async function escrever(nicho, acao, id, dados) {
+    if (!banco) return {ok: true, local: true};
+    try {
+      const r = await fetch('/api/estado', {method: 'POST', headers: {'content-type': 'application/json'},
+        body: JSON.stringify({nicho: nicho || 'padrao', acao, id, dados})});
+      const d = await r.json().catch(() => ({}));
+      if (!d.ok) { recadoBanco = d.recado || 'Não consegui salvar no banco.'; return {ok: false, recado: recadoBanco}; }
+      recadoBanco = '';
+      return {ok: true};
+    } catch (_) {
+      recadoBanco = 'Sem conexão com o servidor — esta mudança não foi salva para os outros aparelhos.';
+      return {ok: false, recado: recadoBanco};
+    }
+  }
+
+  // Grava o estado de uma ideia. Sempre guarda cópia local (serve de cache
+  // e de reserva); quando há banco, é ele quem manda.
+  async function gravarEstadoIdeia(nicho, id, estadoIdeia, todos) {
+    gravar(chaveEstado(nicho), todos);
+    return escrever(nicho, 'estado', id, estadoIdeia);
+  }
+
+  function minhasIdeias(nicho, publicadas) {
+    const locais = banco ? banco.ideias
+                         : (ler(chaveIdeias(nicho), {itens: []}).itens || []).map(i => ({...i, origem: 'navegador'}));
+    const ids = new Set(locais.map(i => i.id));
+    return [...locais, ...(publicadas || []).filter(i => !ids.has(i.id)).map(i => ({...i, origem: 'site'}))]
+      .sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
+  }
+
+  async function salvarMinhaIdeia(nicho, dados) {
+    const agora = new Date().toISOString().slice(0, 16);
+    const id = String(dados.id || Math.random().toString(16).slice(2, 12));
+    const item = {id, atualizado_em: agora, criado_em: dados.criado_em || agora,
+                  ideia: String(dados.ideia || '').slice(0, 500),
+                  formato: dados.formato || 'video', estilo: String(dados.estilo || ''),
+                  tom: String(dados.tom || ''), tamanho: String(dados.tamanho || ''),
+                  roteiro: limparRoteiro(dados.roteiro || {})};
+    const itens = ler(chaveIdeias(nicho), {itens: []}).itens || [];
+    const i = itens.findIndex(x => x.id === id);
+    if (i >= 0) itens[i] = item; else itens.push(item);
+    gravar(chaveIdeias(nicho), {itens});
+    if (banco) {
+      const j = banco.ideias.findIndex(x => x.id === id);
+      const noBanco = {...item, origem: 'banco'};
+      if (j >= 0) banco.ideias[j] = noBanco; else banco.ideias.unshift(noBanco);
+    }
+    const r = await escrever(nicho, 'ideia', id, item);
+    return {id, ...r};
+  }
+
+  async function apagarMinhaIdeia(nicho, id) {
+    const itens = (ler(chaveIdeias(nicho), {itens: []}).itens || []).filter(x => x.id !== id);
+    gravar(chaveIdeias(nicho), {itens});
+    if (banco) banco.ideias = banco.ideias.filter(x => x.id !== id);
+    return escrever(nicho, 'apagar', id, {});
+  }
 
   // ── escolhas na agenda (feedback) ─────────────────────────────────
   const chaveFeedback = nicho => 'radar-feedback:' + (nicho || 'padrao');
@@ -1405,53 +1486,6 @@ const Radar = (() => {
             vozes_que_ela_escolhe: top(vozSim, 4), vozes_que_ela_descarta: top(vozNao, 4),
             assuntos_descartados: descartados.slice(-12)};
   }
-
-  // ── galeria guardada neste navegador ──────────────────────────────
-  const chaveGaleria = nicho => 'radar-galeria:' + (nicho || 'padrao');
-  const galeriaLocal = nicho => (ler(chaveGaleria(nicho), {itens: []}).itens || []);
-  function galeriaSalvar(nicho, dados) {
-    const itens = galeriaLocal(nicho);
-    const agora = new Date().toISOString().slice(0, 16);
-    const id = String(dados.id || Math.random().toString(16).slice(2, 12));
-    const novo = {id, atualizado_em: agora, ideia: String(dados.ideia || '').slice(0, 500),
-                  formato: dados.formato || 'video', estilo: String(dados.estilo || ''),
-                  tom: String(dados.tom || ''), tamanho: String(dados.tamanho || ''),
-                  roteiro: limparRoteiro(dados.roteiro || {}), origem: 'navegador'};
-    const i = itens.findIndex(x => x.id === id);
-    if (i >= 0) { novo.criado_em = itens[i].criado_em || agora; itens[i] = novo; }
-    else { novo.criado_em = agora; itens.push(novo); }
-    gravar(chaveGaleria(nicho), {itens});
-    return id;
-  }
-  function galeriaApagar(nicho, id) {
-    const itens = galeriaLocal(nicho).filter(x => x.id !== id);
-    gravar(chaveGaleria(nicho), {itens});
-  }
-  function galeriaImportar(nicho, dados) {
-    const novos = Array.isArray(dados) ? dados : (dados && dados.itens) || [];
-    const itens = galeriaLocal(nicho);
-    let n = 0;
-    for (const item of novos) {
-      if (!item || typeof item !== 'object' || !item.roteiro) continue;
-      const id = String(item.id || Math.random().toString(16).slice(2, 12));
-      const i = itens.findIndex(x => x.id === id);
-      const limpo = {...item, id, roteiro: limparRoteiro(item.roteiro), origem: 'navegador'};
-      if (i >= 0) itens[i] = limpo; else itens.push(limpo);
-      n++;
-    }
-    gravar(chaveGaleria(nicho), {itens});
-    return n;
-  }
-  function galeriaTodos(nicho, publicados) {
-    const locais = galeriaLocal(nicho);
-    const ids = new Set(locais.map(i => i.id));
-    const todos = [...locais, ...(publicados || []).filter(i => !ids.has(i.id)).map(i => ({...i, origem: 'site'}))];
-    return todos.sort((a, b) => String(b.atualizado_em || '').localeCompare(String(a.atualizado_em || '')));
-  }
-
-  // As ideias do estúdio, que agora aparecem na própria agenda.
-  const minhasIdeias = (nicho, publicadas) => galeriaTodos(nicho, publicadas || []);
-  const apagarMinhaIdeia = (nicho, id) => galeriaApagar(nicho, id);
 
   function limparRoteiro(r) {
     return {
@@ -1635,8 +1669,8 @@ const Radar = (() => {
   return {ler, gravar, escapar, toast, copiar, baixar, lerArquivo,
           chave, salvarChave, apagarChave, senha, salvarSenha, apagarSenha, estadoIA,
           registrarFeedback, feedback, preferencias,
-          estadoAgenda, gravarEstadoAgenda, minhasIdeias, apagarMinhaIdeia,
-          galeriaLocal, galeriaSalvar, galeriaApagar, galeriaImportar, galeriaTodos,
+          abrirEstado, gravarEstadoIdeia, minhasIdeias, salvarMinhaIdeia,
+          apagarMinhaIdeia, avisoBanco,
           limparRoteiro, blocosHtml, roteiroHtml, textoRoteiro,
           exportarTudo, importarTudo, chamarIA, extrairJson};
 })();
@@ -1646,9 +1680,10 @@ const DADOS = JSON.parse(document.getElementById('dados-agenda').textContent);
 const IDEIAS = {};
 DADOS.ideias.forEach(d => { IDEIAS[d.id] = d; });
 
-// O estado é um só para todas as semanas: uma ideia descartada some da
-// lista inteira, não só da semana em que nasceu.
-const estado = Radar.estadoAgenda(DADOS.nicho);
+// O estado é um só para todas as semanas e para todos os aparelhos: uma
+// ideia descartada some da lista inteira, para quem quer que abra o site.
+let estado = {};
+let temBanco = false;
 const abertas = new Set();
 let filtro = 'todas';
 let foco = null;
@@ -1657,9 +1692,16 @@ function st(id) {
   return estado[id] || (estado[id] = {lista: false, feito: false, descartada: false,
                                       formato: 'reels', gancho: 0});
 }
-function salvar() {
-  Radar.gravarEstadoAgenda(DADOS.nicho, estado);
-  registrarEscolhas();
+// Grava só a ideia que mudou — o resto do estado já está no lugar.
+async function salvarIdeia(id) {
+  if (!id) return;
+  const r = await Radar.gravarEstadoIdeia(DADOS.nicho, id, st(id), estado);
+  mostrarAvisoBanco(r && r.ok === false ? r.recado : '');
+}
+function mostrarAvisoBanco(recado) {
+  const el = document.getElementById('aviso-banco');
+  el.classList.toggle('visivel', !!recado);
+  if (recado) el.querySelector('span').textContent = '⚠️ ' + recado;
 }
 let aviso = null;
 // As escolhas viram sinal de gosto para o estúdio; no painel, também vão
@@ -1741,7 +1783,7 @@ function montarMinhas() {
   lista.insertAdjacentHTML('afterbegin', itens.map(cartaoMinhaIdeia).join(''));
 }
 
-function render() {
+function render(idAlterado) {
   let naLista = 0, feitas = 0, visiveis = 0, descartadas = 0;
   document.querySelectorAll('.cartao').forEach(c => {
     const id = c.dataset.id, s = st(id), d = IDEIAS[id];
@@ -1791,7 +1833,8 @@ function render() {
     `${descartadas} ideia${descartadas === 1 ? '' : 's'} descartada${descartadas === 1 ? '' : 's'}`;
   document.querySelectorAll('.aba').forEach(a => a.classList.toggle('ativa', a.dataset.filtro === filtro));
   document.getElementById('vazio').style.display = visiveis ? 'none' : 'block';
-  salvar();
+  if (idAlterado) salvarIdeia(idAlterado);
+  registrarEscolhas();
 }
 
 function textoRoteiro(id) {
@@ -1818,10 +1861,12 @@ function textoRoteiro(id) {
   return out;
 }
 
-document.getElementById('restaurar').addEventListener('click', () => {
-  Object.values(estado).forEach(e => { e.descartada = false; });
+document.getElementById('restaurar').addEventListener('click', async () => {
+  const voltando = Object.keys(estado).filter(id => estado[id].descartada);
+  voltando.forEach(id => { estado[id].descartada = false; });
   toast('Ideias restauradas');
   render();
+  for (const id of voltando) await salvarIdeia(id);
 });
 
 // Aviso quando a agenda mais recente não é atualizada há mais de 8 dias
@@ -1850,10 +1895,12 @@ document.addEventListener('click', e => {
   const id = c.dataset.id, s = st(id);
   if (e.target.closest('.descartar')) {
     if (c.classList.contains('minha') && !c.classList.contains('publicada')) {
-      if (!confirm('Apagar esta ideia?')) return;
-      Radar.apagarMinhaIdeia(DADOS.nicho, id);
+      const onde = temBanco ? 'Ela some para todos os aparelhos.' : 'Ela some deste navegador.';
+      if (!confirm('Apagar esta ideia? ' + onde)) return;
       delete estado[id];
-      c.remove(); toast('Ideia apagada'); render(); return;
+      c.remove(); toast('Ideia apagada'); render();
+      Radar.apagarMinhaIdeia(DADOS.nicho, id).then(r => mostrarAvisoBanco(r && r.ok === false ? r.recado : ''));
+      return;
     }
     s.descartada = true; abertas.delete(id);
     toast('Ideia descartada — dá pra restaurar no topo');
@@ -1876,12 +1923,25 @@ document.addEventListener('click', e => {
   } else if (e.target.closest('.compartilhar-btn')) {
     copiar(location.origin + location.pathname + '#r' + id, 'Link do roteiro copiado 🔗'); return;
   } else { return; }
-  render();
+  render(id);
 });
 
-montarMinhas();
-lerHash();
-render();
+async function iniciar() {
+  const abertura = await Radar.abrirEstado(DADOS.nicho);
+  estado = abertura.estado || {};
+  temBanco = abertura.banco;
+  if (!temBanco) {
+    const el = document.getElementById('aviso-banco');
+    el.classList.add('visivel');
+    el.querySelector('span').textContent = abertura.recado
+      ? '⚠️ ' + abertura.recado
+      : 'ℹ️ As suas marcações estão salvas só neste aparelho. Para valerem em todos, falta ligar o banco do site.';
+  }
+  montarMinhas();
+  lerHash();
+  render();
+}
+iniciar();
 </script>
 </body>
 </html>
