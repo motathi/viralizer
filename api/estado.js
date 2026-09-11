@@ -77,10 +77,24 @@ function recadoDoErro(e) {
   return `Não consegui falar com o banco: ${String(e?.message || e).slice(0, 200)}`;
 }
 
+/**
+ * Diagnóstico: quais variáveis de ambiente a função enxerga.
+ *
+ * Devolve só os NOMES, nunca os valores, e só dos prefixos que este
+ * projeto usa — nomes que já estão documentados no README. Serve para
+ * separar duas causas que dão o mesmo sintoma: a variável foi criada com
+ * outro nome, ou foi criada em outro projeto/ambiente da Vercel.
+ */
+function variaveisVistas() {
+  return Object.keys(process.env)
+    .filter((n) => /^(SUPABASE|ANTHROPIC|RADAR|POSTGRES)_/.test(n))
+    .sort();
+}
+
 const limpo = (v, max) => String(v ?? '').slice(0, max);
 
 export async function GET(request) {
-  if (!configurado()) return json({ configurado: false, estado: {}, ideias: [] });
+  if (!configurado()) return json({ configurado: false, estado: {}, ideias: [], variaveis: variaveisVistas() });
   const nicho = limpo(new URL(request.url).searchParams.get('nicho') || 'padrao', MAX_ID);
   try {
     const [linhas, ideias] = await Promise.all([

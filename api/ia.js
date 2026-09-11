@@ -79,8 +79,23 @@ function recadoDoErro(e) {
   return cru ? `A IA respondeu com erro: ${cru}` : 'A IA respondeu com erro.';
 }
 
+/**
+ * Diagnóstico: quais variáveis de ambiente a função enxerga.
+ *
+ * Devolve só os NOMES, nunca os valores, e só dos prefixos que este
+ * projeto usa — nomes que já estão documentados no README. Serve para
+ * separar duas causas que dão o mesmo sintoma: a variável foi criada com
+ * outro nome, ou foi criada em outro projeto/ambiente da Vercel.
+ */
+function variaveisVistas() {
+  return Object.keys(process.env)
+    .filter((n) => /^(SUPABASE|ANTHROPIC|RADAR|POSTGRES)_/.test(n))
+    .sort();
+}
+
 export function GET() {
   return json({
+    variaveis: variaveisVistas(),
     configurada: !!chave(),
     senha: !!senhaExigida(),
     painel: false,
