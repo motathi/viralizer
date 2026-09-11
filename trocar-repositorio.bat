@@ -3,14 +3,14 @@ chcp 65001 >nul
 cd /d "%~dp0"
 echo.
 echo  Este passo e feito UMA vez: aponta esta pasta para o repositorio novo
-echo  (radar-conteudo-viral) e alinha o conteudo a ele.
+echo  (viralizer) e alinha o conteudo a ele.
 echo  Seus arquivos locais (.env, dados, login do TikTok) ficam como estao.
 echo  FECHE o painel antes de continuar.
 echo.
 pause
 echo.
 echo  0/4  Conferindo se o repositorio novo ja existe e ja tem o codigo...
-git ls-remote --exit-code --heads https://github.com/motathi/radar-conteudo-viral.git master >nul 2>&1
+git ls-remote --exit-code --heads https://github.com/motathi/viralizer.git master >nul 2>&1
 if errorlevel 1 (
   echo.
   echo  O repositorio novo ainda nao existe ou ainda esta vazio. Nada foi alterado.
@@ -20,7 +20,7 @@ if errorlevel 1 (
   exit /b 1
 )
 echo  1/4  Apontando para o repositorio novo...
-git remote set-url origin https://github.com/motathi/radar-conteudo-viral.git
+git remote set-url origin https://github.com/motathi/viralizer.git
 if errorlevel 1 goto erro
 echo  2/4  Baixando (se pedir login do GitHub, faca o login)...
 git fetch origin master
