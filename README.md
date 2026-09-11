@@ -250,6 +250,30 @@ o programa. A página Ferramentas explica cada um.
 Para mudar o design sem gerar roteiros de novo: `python -m src.publicar.rerender --nicho <nicho>`
 reconstrói todas as páginas preservando a semana e a data da agenda que está no ar.
 
+## Se o site não atualizar
+
+O projeto na Vercel ligado a este repositório é o **`projeto-nft-qh4m`**, criado em 2022 para
+um app anterior e depois reaproveitado. Se um push para `master` não aparecer no ar, o
+problema quase sempre está nas configurações dele, não no código. Confira nesta ordem, em
+*Settings* do projeto:
+
+| O que olhar | O que tem de estar |
+|---|---|
+| **Git → Production Branch** | `master` |
+| **Git → Connected Repository** | `motathi/Projeto-NFT`, sem aviso de conexão quebrada |
+| **Build and Deployment → Root Directory** | vazio (a raiz do repositório) |
+| **Domains** | um domínio apontando para o último deploy de produção |
+| **Deployments** | o commit mais recente com estado *Ready*, não *Error* nem *Canceled* |
+
+O `vercel.json` deste repositório já fixa o resto: sem framework, sem build, saída em `web/`
+e `npm install` explícito, que é o que instala o SDK usado pela função da IA. Essas quatro
+linhas valem mais que o que estiver no painel, então não é preciso mexer em Build Command
+nem em Output Directory.
+
+Se a página do deploy responder **DEPLOYMENT_NOT_FOUND**, não existe deploy de produção
+naquele endereço — o caso é reconectar o repositório ou disparar um *Redeploy* pela aba
+*Deployments*.
+
 ## Automação
 
 `.github/workflows/agenda-semanal.yml` roda toda segunda às 3h (Brasília), ou manualmente pela aba **Actions**. As chaves ficam nos *secrets* do repositório; o commit da agenda dispara o deploy na Vercel.
