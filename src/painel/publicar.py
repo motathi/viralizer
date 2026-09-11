@@ -47,7 +47,14 @@ def main() -> int:
     print("📦 Alterações salvas.")
 
     print("☁️  Enviando para o GitHub...")
-    sync = _git("pull", "--rebase", "--autostash")
+    _git("fetch", "--quiet", "origin")
+    if _git("merge-base", "HEAD", "@{u}").returncode != 0:
+        # servidor com histórico reescrito: rebasear travaria em conflito.
+        # O commit de agora é reaplicado sozinho sobre o histórico novo.
+        print("🧭 O histórico no servidor foi reescrito — reaplicando sua publicação sobre ele.")
+        sync = _git("rebase", "--onto", "@{u}", "HEAD~1")
+    else:
+        sync = _git("pull", "--rebase", "--autostash")
     if sync.returncode != 0:
         print(f"❌ Não consegui juntar com a versão do servidor:\n{sync.stdout}{sync.stderr}")
         return 1

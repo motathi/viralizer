@@ -87,7 +87,7 @@ No **site publicado** as variáveis não vêm do `.env`, e sim do painel da Verc
 Baixe o projeto **com o Git** — assim ele se mantém atualizado sozinho depois:
 
 ```bash
-git clone https://github.com/motathi/Projeto-NFT.git
+git clone https://github.com/motathi/radar-conteudo-viral.git
 ```
 
 Depois copie o `.env.example` para `.env` e preencha a chave da Anthropic.
@@ -252,15 +252,14 @@ reconstrói todas as páginas preservando a semana e a data da agenda que está 
 
 ## Se o site não atualizar
 
-O projeto na Vercel ligado a este repositório é o **`projeto-nft-qh4m`**, criado em 2022 para
-um app anterior e depois reaproveitado. Se um push para `master` não aparecer no ar, o
+O projeto na Vercel ligado a este repositório é o **`radar-conteudo-viral`**. Se um push para `master` não aparecer no ar, o
 problema quase sempre está nas configurações dele, não no código. Confira nesta ordem, em
 *Settings* do projeto:
 
 | O que olhar | O que tem de estar |
 |---|---|
 | **Git → Production Branch** | `master` |
-| **Git → Connected Repository** | `motathi/Projeto-NFT`, sem aviso de conexão quebrada |
+| **Git → Connected Repository** | `motathi/radar-conteudo-viral`, sem aviso de conexão quebrada |
 | **Build and Deployment → Root Directory** | vazio (a raiz do repositório) |
 | **Domains** | um domínio apontando para o último deploy de produção |
 | **Deployments** | o commit mais recente com estado *Ready*, não *Error* nem *Canceled* |
