@@ -272,12 +272,18 @@ PROMPT_ESCRITA = (PROMPT_ESCRITA_MOLDE.replace("{REGRAS_SEM_SAL}", REGRAS_SEM_SA
                   .replace("{LIBERDADE_EDITORIAL}", LIBERDADE_EDITORIAL))
 
 
-def _extrair_json(texto: str) -> dict:
+def _extrair_json(texto: str, exigir: str | None = None) -> dict:
     """Extrai o objeto JSON da resposta, tolerando texto e ruído ao redor.
 
     O modelo às vezes devolve preâmbulo, cerca de markdown ou mais de um
     objeto; aqui varremos os candidatos e ficamos com o maior objeto válido
     que contenha conteúdo útil.
+
+    `exigir` é a chave que a resposta tem de trazer. Sem isso, uma resposta
+    cortada ao meio passava batido: o objeto de fora não fecha, mas qualquer
+    sub-objeto de dentro fecha, e o maior deles voltava como se fosse a
+    resposta inteira — sem a lista que importava. O erro só aparecia páginas
+    adiante, dizendo que a coleta tinha falhado.
     """
     limpo = texto.strip()
     if limpo.startswith("```"):  # cerca de markdown
@@ -296,6 +302,14 @@ def _extrair_json(texto: str) -> dict:
             candidatos.append(obj)
     if not candidatos:
         raise ValueError(f"Resposta sem JSON válido:\n{texto[:800]}")
+    if exigir is not None:
+        completos = [o for o in candidatos if exigir in o]
+        if not completos:
+            raise ValueError(
+                f"A resposta não traz o campo '{exigir}' — sinal de que veio "
+                f"cortada. Começo do que chegou:\n{texto[:800]}"
+            )
+        candidatos = completos
     return max(candidatos, key=lambda o: len(json.dumps(o)))
 
 
@@ -317,6 +331,11 @@ def _rodar(client, *, modelo, system, conteudo, tools=None, max_tokens=16000,
         if response.stop_reason == "pause_turn":
             messages.append({"role": "assistant", "content": response.content})
             continue
+        if response.stop_reason == "max_tokens":
+            raise RuntimeError(
+                f"A resposta bateu no teto de {max_tokens} tokens e veio cortada "
+                "no meio. Não é falha da coleta: o modelo simplesmente não coube."
+            )
         if response.stop_reason == "refusal":
             raise RuntimeError(
                 "O modelo recusou a solicitação: "
@@ -499,8 +518,9 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None,
             conteudo=json.dumps(pedido_pesquisa, ensure_ascii=False, indent=2),
             tools=[{"type": "web_search_20250305", "name": "web_search",
                     "max_uses": MAX_BUSCAS}],
-            max_tokens=16000,
-        )
+            max_tokens=32000,
+        ),
+        exigir="pautas",
     )
     propostas = len(briefing.get("pautas", []))
     briefing = _filtrar_pautas_fracas(briefing)
@@ -570,7 +590,8 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None,
             conteudo=json.dumps(pedido_escrita, ensure_ascii=False, indent=2),
             thinking={"type": "adaptive"},
             max_tokens=64000,
-        )
+        ),
+        exigir="ideias",
     )
     _conferir_voz(roteiros)
     return roteiros
