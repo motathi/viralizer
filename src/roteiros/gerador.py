@@ -502,11 +502,26 @@ def gerar_roteiros(config: dict, sinais: dict, historico: list | None = None,
             max_tokens=16000,
         )
     )
+    propostas = len(briefing.get("pautas", []))
     briefing = _filtrar_pautas_fracas(briefing)
     if not briefing["pautas"]:
+        # Dois becos diferentes, que a mesma mensagem escondia: a pesquisa não
+        # propôs nada, ou propôs e tudo caiu no filtro de âncora. Mandar conferir
+        # a coleta quando ela trouxe sinais de sobra faz procurar no lugar errado.
+        coletados = sum(len(v) for v in sinais.values())
+        if propostas:
+            raise RuntimeError(
+                f"As {propostas} pautas propostas caíram todas no filtro de âncora: "
+                "nenhuma se apoiou num viral com alcance de verdade (o mínimo é "
+                "10 mil). A coleta funcionou — o que faltou foi viral forte nela. "
+                "Tente mais tarde ou revise os termos do nicho."
+            )
         raise RuntimeError(
-            "Nenhuma pauta com âncora viral forte sobrou após o filtro — "
-            "verifique a coleta de sinais antes de gastar com a escrita."
+            "A etapa de pesquisa não devolveu pauta nenhuma. O problema está nela, "
+            f"não na coleta: vieram {coletados} sinais. Costuma ser passageiro — "
+            "rode de novo. Se repetir, o histórico de "
+            f"{len(historico or [])} ideias já publicadas pode estar fechando todos "
+            "os ângulos do nicho."
         )
     sem_linguagem = [p["tema"] for p in briefing["pautas"] if not p.get("linguagem")]
     if sem_linguagem:
