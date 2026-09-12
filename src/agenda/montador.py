@@ -4,9 +4,19 @@ from datetime import date, timedelta
 
 
 def normalizar_ideia(ideia: dict) -> dict:
-    """Aceita tanto o esquema novo (ganchos_3s, roteiro_reels, carrossel)
-    quanto o antigo (gancho_3s, roteiro em texto), devolvendo o novo."""
+    """Aceita o esquema novo (ganchos_3s, roteiro_reels, roteiro_carrossel,
+    legenda_post), o das agendas guardadas antes da renomeação (ganchos,
+    reels, carrossel, legenda) e o mais antigo de todos (gancho_3s, roteiro
+    em texto), devolvendo sempre o novo."""
     n = dict(ideia)
+    # As agendas guardadas antes da renomeação têm os mesmos dados com outros
+    # nomes. Sem isto elas caem nos defaults abaixo e a semana inteira aparece
+    # no site sem gancho, sem roteiro e sem legenda — com o conteúdo intacto
+    # no JSON, só invisível.
+    for antigo, atual in (("ganchos", "ganchos_3s"), ("reels", "roteiro_reels"),
+                          ("carrossel", "roteiro_carrossel"), ("legenda", "legenda_post")):
+        if atual not in n and antigo in n:
+            n[atual] = n[antigo]
     if "ganchos_3s" not in n:
         n["ganchos_3s"] = [n.get("gancho_3s", "")]
     if "roteiro_reels" not in n:
