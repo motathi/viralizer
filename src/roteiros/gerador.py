@@ -306,28 +306,44 @@ def _extrair_json(texto: str, exigir: str | None = None) -> dict:
         completos = [o for o in candidatos if exigir in o]
         if not completos:
             raise ValueError(
-                f"A resposta não traz o campo '{exigir}' — sinal de que veio "
-                f"cortada. Começo do que chegou:\n{texto[:800]}"
+                f"A resposta não traz o campo '{exigir}'. "
+                f"Vieram {len(texto)} caracteres e o modelo parou por "
+                f"'{_ULTIMO_MOTIVO['stop_reason']}'.\n"
+                f"--- começo ---\n{texto[:600]}\n"
+                f"--- fim ---\n{texto[-600:]}"
             )
         candidatos = completos
     return max(candidatos, key=lambda o: len(json.dumps(o)))
 
 
+# Por que a última chamada parou. Só para a mensagem de erro dizer o motivo em
+# vez de deixar adivinhando entre "cortou" e "o modelo respondeu outra coisa".
+_ULTIMO_MOTIVO: dict = {"stop_reason": "?"}
+
+
 def _rodar(client, *, modelo, system, conteudo, tools=None, max_tokens=16000,
            thinking=None) -> str:
-    """Executa uma chamada em streaming, retomando turnos pausados (busca web)."""
+    """Executa uma chamada em streaming, retomando turnos pausados (busca web).
+
+    O texto de TODOS os turnos é somado. Antes só o do último voltava: numa
+    busca web o modelo escreve, pausa para pesquisar e continua — e o que ele
+    tinha escrito antes da pausa era jogado fora, devolvendo um JSON sem
+    começo ou sem fim, que depois aparecia como "resposta vazia".
+    """
     messages = [{"role": "user", "content": conteudo}]
     extras = {}
     if tools:
         extras["tools"] = tools
     if thinking:
         extras["thinking"] = thinking
+    partes = []
     while True:
         with client.messages.stream(
             model=modelo, max_tokens=max_tokens, system=system,
             messages=messages, **extras,
         ) as stream:
             response = stream.get_final_message()
+        partes.extend(b.text for b in response.content if b.type == "text")
         if response.stop_reason == "pause_turn":
             messages.append({"role": "assistant", "content": response.content})
             continue
@@ -341,7 +357,8 @@ def _rodar(client, *, modelo, system, conteudo, tools=None, max_tokens=16000,
                 "O modelo recusou a solicitação: "
                 f"{getattr(response.stop_details, 'explanation', '')}"
             )
-        return "".join(b.text for b in response.content if b.type == "text")
+        _ULTIMO_MOTIVO["stop_reason"] = response.stop_reason
+        return "".join(partes)
 
 
 def _mesmo_assunto(a: set, b: set, limite: float) -> bool:
