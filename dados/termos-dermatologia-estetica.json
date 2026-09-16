@@ -106,6 +106,127 @@
         "#glassskin",
         "#glowup"
       ]
+    },
+    {
+      "data": "2026-09-16",
+      "termos": {
+        "#skincare": {
+          "coletados": 0,
+          "virais": 0
+        },
+        "#dermatologista": {
+          "coletados": 0,
+          "virais": 0
+        }
+      },
+      "sugeridos": []
+    },
+    {
+      "data": "2026-09-16",
+      "termos": {
+        "\"quanto custa preenchimento labial\"": {
+          "coletados": 24,
+          "virais": 0
+        },
+        "\"dermatologista responde\"": {
+          "coletados": 10,
+          "virais": 4
+        },
+        "#dermatologia": {
+          "coletados": 52,
+          "virais": 9
+        },
+        "\"harmonização facial arrependimento\"": {
+          "coletados": 22,
+          "virais": 3
+        },
+        "#skincare": {
+          "coletados": 115,
+          "virais": 18
+        },
+        "\"dermatologist reacts\"": {
+          "coletados": 21,
+          "virais": 14
+        },
+        "\"protetor solar mito\"": {
+          "coletados": 24,
+          "virais": 2
+        },
+        "\"skin barrier repair\"": {
+          "coletados": 24,
+          "virais": 3
+        },
+        "\"dermatologist explains\"": {
+          "coletados": 14,
+          "virais": 7
+        },
+        "#dermatologista": {
+          "coletados": 58,
+          "virais": 7
+        },
+        "#pelesaudavel": {
+          "coletados": 55,
+          "virais": 5
+        },
+        "\"retinol como usar\"": {
+          "coletados": 24,
+          "virais": 3
+        },
+        "#dermatologist": {
+          "coletados": 59,
+          "virais": 12
+        },
+        "\"dermatóloga explica\"": {
+          "coletados": 12,
+          "virais": 1
+        },
+        "#skincareroutine": {
+          "coletados": 43,
+          "virais": 11
+        },
+        "\"acne adulta\"": {
+          "coletados": 21,
+          "virais": 2
+        },
+        "#dermtok": {
+          "coletados": 56,
+          "virais": 11
+        },
+        "\"preenchimento deu errado\"": {
+          "coletados": 23,
+          "virais": 4
+        },
+        "#cuidadodelapiel": {
+          "coletados": 52,
+          "virais": 10
+        },
+        "\"skincare caro vale a pena\"": {
+          "coletados": 24,
+          "virais": 0
+        },
+        "#harmonizacaofacial": {
+          "coletados": 60,
+          "virais": 5
+        },
+        "#skintok": {
+          "coletados": 54,
+          "virais": 14
+        },
+        "\"melasma tratamento\"": {
+          "coletados": 23,
+          "virais": 5
+        }
+      },
+      "sugeridos": [
+        "#duet",
+        "#dermatology",
+        "#dermdoctor",
+        "#learnontiktok",
+        "#dermreacts",
+        "#dermangelo",
+        "#nightroutine",
+        "#asmr"
+      ]
     }
   ]
 }
