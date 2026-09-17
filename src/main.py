@@ -33,6 +33,53 @@ def _chaves_carregadas() -> list[str]:
                   if n.startswith(("ANTHROPIC_", "APIFY_", "YOUTUBE_", "SUPABASE_", "RADAR_")))
 
 
+def _raio_x_do_env() -> list[str]:
+    """O que existe DENTRO do .env, linha a linha — só nomes, nunca valores.
+
+    Separa três causas que dão o mesmo sintoma: o arquivo não existe (ou tem
+    outro nome, como .env.txt), a linha está escrita de um jeito que o leitor
+    ignora, ou a linha está certa mas a chave veio do ambiente do Windows e o
+    arquivo nem chegou a ser usado.
+    """
+    env = RAIZ / ".env"
+    if not env.exists():
+        disfarcados = sorted(p.name for p in RAIZ.glob(".env*")
+                             if p.name not in (".env", ".env.example"))
+        achado = f" Achei {disfarcados[0]} — renomeie para .env, sem .txt." if disfarcados else ""
+        return [f"O arquivo {env} NÃO EXISTE.{achado}"]
+
+    try:
+        bruto = env.read_bytes()
+    except OSError as e:
+        return [f"Não consegui abrir {env}: {e}"]
+
+    saida = [f"Arquivo: {env} ({len(bruto)} bytes)"]
+    if bruto.startswith(b"\xff\xfe") or bruto.startswith(b"\xfe\xff"):
+        saida.append("⚠️  Está salvo em UTF-16 (opção 'Unicode' do Bloco de Notas). "
+                     "O leitor não entende: salve de novo como UTF-8.")
+        return saida
+
+    texto = bruto.decode("utf-8", errors="replace").lstrip("\ufeff")
+    saida.append("Linhas (só os nomes):")
+    for n, linha in enumerate(texto.splitlines(), 1):
+        crua = linha.strip()
+        if not crua or crua.startswith("#"):
+            continue
+        if "=" not in crua:
+            saida.append(f"  linha {n}: '{crua[:25]}…' — sem '=', o leitor ignora")
+            continue
+        nome = crua.split("=", 1)[0].removeprefix("export ").strip()
+        limpo = "".join(c for c in nome if c.isalnum() or c == "_")
+        if limpo != nome:
+            saida.append(f"  linha {n}: {limpo} — tem caractere estranho no nome "
+                         "(espaço, acento ou invisível colado no copiar/colar)")
+        elif os.environ.get(nome, "").strip():
+            saida.append(f"  linha {n}: {nome} ✓ chegou")
+        else:
+            saida.append(f"  linha {n}: {nome} ✗ NÃO chegou — reescreva esta linha à mão")
+    return saida
+
+
 def _virais_youtube(config: dict) -> list:
     """O YouTube nunca derruba a rodada — mas também nunca falha calado.
 
@@ -43,10 +90,9 @@ def _virais_youtube(config: dict) -> list:
     """
     if not os.environ.get("YOUTUBE_API_KEY", "").strip():
         print("      ⚠️  PULADO: não encontrei YOUTUBE_API_KEY.")
-        print(f"         O .env trouxe: {', '.join(_chaves_carregadas()) or '(nada)'}")
-        print(f"         Arquivo lido: {RAIZ / '.env'}")
-        print("         Se o nome não estiver na lista acima, é erro de escrita na "
-              "linha do .env (espaço, acento ou # no começo).")
+        print(f"         Chaves no ambiente: {', '.join(_chaves_carregadas()) or '(nenhuma)'}")
+        for linha in _raio_x_do_env():
+            print(f"         {linha}")
         return []
     try:
         return descobrir_virais(config)
