@@ -62,10 +62,40 @@ def transcricao(video_id: str, idiomas: tuple[str, ...] = IDIOMAS_PADRAO) -> str
 
 
 def _get(endpoint: str, params: dict) -> dict:
-    params = {**params, "key": os.environ["YOUTUBE_API_KEY"]}
+    params = {**params, "key": os.environ["YOUTUBE_API_KEY"].strip()}
     resp = requests.get(f"{API_BASE}/{endpoint}", params=params, timeout=30)
-    resp.raise_for_status()
+    if not resp.ok:
+        raise RuntimeError(_recado_do_erro(resp))
     return resp.json()
+
+
+def _recado_do_erro(resp) -> str:
+    """Traduz a recusa do Google para algo que diga o que fazer.
+
+    Sem isto, um 403 vira um traceback de requests no meio da coleta e não
+    diz se o problema é a chave, a API desligada ou a cota do dia.
+    """
+    try:
+        erro = resp.json().get("error", {})
+        motivo = (erro.get("errors") or [{}])[0].get("reason", "")
+        detalhe = erro.get("message", "")
+    except Exception:
+        motivo, detalhe = "", resp.text[:200]
+    recados = {
+        "accessNotConfigured":
+            "a YouTube Data API v3 não está ativada neste projeto do Google Cloud. "
+            "Ative em console.cloud.google.com → APIs e serviços → Biblioteca.",
+        "quotaExceeded":
+            "a cota do dia acabou (são 10 mil unidades grátis, e cada busca custa 100). "
+            "Volta a funcionar amanhã.",
+        "dailyLimitExceeded": "o limite diário da chave foi atingido. Volta amanhã.",
+        "keyInvalid": "a chave não é válida. Confira YOUTUBE_API_KEY no .env.",
+        "ipRefererBlocked":
+            "a chave tem restrição de uso (IP, site ou app) e este computador não passa. "
+            "Tire a restrição ou libere este uso no Google Cloud.",
+        "forbidden": "o Google recusou a chave. Confira se ela é de uma YouTube Data API v3.",
+    }
+    return recados.get(motivo, f"o Google respondeu {resp.status_code} ({motivo or 'sem motivo'}): {detalhe}"[:300])
 
 
 def _buscar_ids(palavra_chave: str, dias_janela: int, max_resultados: int) -> list[str]:
@@ -120,6 +150,12 @@ def descobrir_virais(config: dict) -> list[dict]:
     for palavra in config["palavras_chave"]:
         ids.extend(_buscar_ids(palavra, cfg["dias_janela"], cfg["max_por_palavra_chave"]))
     ids = list(dict.fromkeys(ids))  # remove duplicados preservando ordem
+    print(f"      {len(ids)} vídeos encontrados em {len(config['palavras_chave'])} buscas "
+          f"(últimos {cfg['dias_janela']} dias)")
+    if not ids:
+        print("      ⚠️  A busca não trouxe vídeo nenhum. Com palavras comuns do nicho "
+              "isso é estranho — confira a janela de dias e as palavras_chave do nicho.")
+        return []
 
     videos = _detalhes_videos(ids)
     medias_canal = _media_views_canais({v["snippet"]["channelId"] for v in videos})

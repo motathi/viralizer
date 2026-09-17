@@ -27,6 +27,36 @@ from src.roteiros.gerador import gerar_roteiros
 RAIZ = Path(__file__).resolve().parent.parent
 
 
+def _chaves_carregadas() -> list[str]:
+    """Os NOMES das chaves que o .env trouxe. Nunca os valores."""
+    return sorted(n for n in os.environ
+                  if n.startswith(("ANTHROPIC_", "APIFY_", "YOUTUBE_", "SUPABASE_", "RADAR_")))
+
+
+def _virais_youtube(config: dict) -> list:
+    """O YouTube nunca derruba a rodada — mas também nunca falha calado.
+
+    Antes isto era um `if os.environ.get(...) else []` numa linha: sem a
+    chave, devolvia lista vazia em silêncio logo depois de imprimir que ia
+    buscar. Ficava idêntico a "procurei e não achei nada", e é possível
+    passar semanas achando que o YouTube está entrando na conta.
+    """
+    if not os.environ.get("YOUTUBE_API_KEY", "").strip():
+        print("      ⚠️  PULADO: não encontrei YOUTUBE_API_KEY.")
+        print(f"         O .env trouxe: {', '.join(_chaves_carregadas()) or '(nada)'}")
+        print(f"         Arquivo lido: {RAIZ / '.env'}")
+        print("         Se o nome não estiver na lista acima, é erro de escrita na "
+              "linha do .env (espaço, acento ou # no começo).")
+        return []
+    try:
+        return descobrir_virais(config)
+    except Exception as e:
+        # A coleta do TikTok já veio; perder o YouTube não justifica jogar fora
+        # a rodada inteira. Mas o motivo tem de aparecer.
+        print(f"      ⚠️  O YouTube não entrou nesta rodada: {e}")
+        return []
+
+
 def main() -> None:
     load_dotenv(RAIZ / ".env")
 
@@ -76,7 +106,7 @@ def main() -> None:
         sinais["instagram_virais"] = virais_instagram(config)
 
     print("   YouTube Shorts — vídeos virais do nicho (API oficial, grátis)...")
-    sinais["youtube_virais"] = descobrir_virais(config) if os.environ.get("YOUTUBE_API_KEY") else []
+    sinais["youtube_virais"] = _virais_youtube(config)
 
     (saida / "sinais.json").write_text(
         json.dumps(sinais, ensure_ascii=False, indent=2), encoding="utf-8"
