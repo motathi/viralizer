@@ -1,6 +1,812 @@
 {
   "agendas": [
     {
+      "semana": "2026-09-21",
+      "gerado_em": "2026-09-17",
+      "ideias": [
+        {
+          "titulo": "Sebáceas não são cravos — e você não vai tirar elas nunca",
+          "pilar": "Mitos vs verdades",
+          "formato": "talking head em close do nariz + reação a vídeo de extração, legenda dinâmica",
+          "ganchos_3s": [
+            "Esse ponto escurinho que você aperta no nariz desde os quinze anos não é cravo. É sebácea. E ela não sai.",
+            "Você tá vendo sebácea e chamando de espinha. Deixa eu corrigir uma coisa antes que você compre mais um espremedor de metal.",
+            "Aquele vídeo de extração com um filamento de um centímetro saindo do nariz? Metade daquilo é anatomia normal."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-3s",
+              "fala": "Esse pontinho no seu nariz não é cravo. É sebácea. E sebácea não desaparece — ela volta em três dias.",
+              "direcao": "Close no próprio nariz, dedo apontando a zona T. Texto na tela: 'NÃO É CRAVO'."
+            },
+            {
+              "tempo": "3-13s",
+              "fala": "Cravo é poro entupido e oxidado: ponto isolado, preto de verdade, duro. Sebácea é o canal de óleo funcionando: cor de areia, mole, e vem em padrão — dezenas delas, espalhadas igual no nariz, na testa, na bochecha.",
+              "direcao": "Split screen: foto de cravo x foto de sebáceas. Setas apontando 'isolado' e 'em padrão'."
+            },
+            {
+              "tempo": "13-25s",
+              "fala": "É estrutura natural da sua pele. Todo mundo tem. Você não tem sebácea porque sua pele é suja — você tem porque você produz óleo, e produzir óleo é o que o rosto faz.",
+              "direcao": "Volta pro rosto, tom mais firme, sem corte. Texto: 'estrutura natural'."
+            },
+            {
+              "tempo": "25-36s",
+              "fala": "E aí vem a parte que ninguém te conta: aquele espremedor, aquela unha, aquele vácuo de farmácia não eliminam nada. Eles alargam a abertura do canal. Resultado: a sebácea volta e volta mais visível que antes.",
+              "direcao": "Mostrar espremedor de metal na mão e largar ele em cima da mesa. Som do metal na bancada."
+            },
+            {
+              "tempo": "36-48s",
+              "fala": "O que deixa menos aparente: retinoide à noite, ácido salicílico dois por cento, niacinamida. Repara no verbo: menos aparente, não some. Eu não indico sessão mensal de extração de nariz pra isso — é dinheiro pra piorar o que já era normal. Deixa em paz.",
+              "direcao": "Três produtos genéricos na mão, um por um. Texto final: 'menos aparente ≠ sumir'."
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Não é cravo. É sebácea. E ela não sai.",
+            "laminas": [
+              "Cravo: ponto isolado, preto, duro, poro entupido e oxidado.",
+              "Sebácea: cor de areia, mole, dezenas delas em padrão no nariz, testa e bochecha.",
+              "Sebácea é estrutura natural. Todo mundo tem. Não tem a ver com pele suja.",
+              "Espremeu e saiu um filamento cremoso? Em 72 horas tá cheio de novo.",
+              "O espremedor de metal não elimina: ele alarga a abertura e deixa mais visível.",
+              "O que ajuda de verdade: retinoide à noite, salicílico 2%, niacinamida — pra deixar menos aparente."
+            ],
+            "cta_final": "Comenta 'sebácea' se você passou a vida apertando isso achando que era cravo."
+          },
+          "legenda_post": "Sebácea não é cravo e não vai sumir — ela é parte da anatomia do seu rosto. O que você consegue é deixar menos aparente. O que você consegue mais rápido, apertando, é aumentar a abertura do canal e ficar com o nariz pior do que começou. Retinoide, salicílico e niacinamida fazem mais pelo seu nariz do que qualquer espremedor de metal.",
+          "duracao_estimada_seg": 48,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Dermatologista reage a vídeo viral satisfatório (padrão 1) + qualificação importante (padrão 3): 'Isso que você vê não é acne — é parte normal da sua pele. Deixa eu mostrar por quê.'",
+          "voz": {
+            "registro": "Dermatologista perita que já viu esse vídeo mil vezes e freia a audiência: 'não é isso que você tá vendo'",
+            "de_onde_veio": "dermdoctor (41.3M): copiei a mecânica de negar primeiro e nomear depois ('Sebaceous filaments. That's what you're seeing, not blackheads') e o fecho de 'não precisa fazer campanha pra expulsar isso do rosto' — virou 'deixa em paz'."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@dermdoctor/video/6949993329853549829",
+              "autor": "dermdoctor",
+              "metrica": "41.3M views, 9.8% engajamento, origem 'palavra' (não hashtag do nicho)",
+              "por_que_viralizou": "Mecânica de reação de dermatologista que desmente crença popular de que pele 'suja' causa sebácea; origem por palavra indica cruzamento de público além do nicho."
+            }
+          ],
+          "embasamento_viral": "Maior viral da coleta (41.3M, 9.8% engaj.) e sem versão BR consolidada: a confusão sebácea/cravo é universal e o formato 'não é X, é Y' gera comentário de identificação imediata.",
+          "embasamento_cientifico": [
+            "Sebaceous Filaments: Difference From Blackheads & Treatment — Cleveland Clinic — https://my.clevelandclinic.org/health/diseases/24571-sebaceous-filaments",
+            "Sebaceous Filaments vs. Blackheads – What's the Difference? — Paula's Choice (revisado por dermatologista certificada) — https://www.paulaschoice.com/expert-advice/skincare-advice/blackheads/blackheads-or-something-else.html"
+          ],
+          "cta": "Comenta 'sebácea' se você passou anos apertando isso — quero ver quantas somos.",
+          "hashtags": [
+            "#sebaceas",
+            "#cravos",
+            "#dermatologista",
+            "#skincare",
+            "#zonat"
+          ]
+        },
+        {
+          "titulo": "Calo ou verruga? Dá pra diferenciar em dez segundos",
+          "pilar": "Educação sobre procedimentos",
+          "formato": "talking head com close nas mãos/pés e três critérios numerados na tela",
+          "ganchos_3s": [
+            "Calo ou verruga? Aqui está como você diferencia em dez segundos, olhando as linhas da sua pele.",
+            "Se as linhas do seu dedo passam por cima daquela bolinha dura, é calo. Se elas param nela, é verruga.",
+            "Lixar verruga em casa é o jeito mais rápido de ter três em vez de uma."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-4s",
+              "fala": "Calo ou verruga? Três coisas diferenciam, e a primeira você checa agora, na sua própria mão.",
+              "direcao": "Close na palma da mão, luz lateral. Texto: 'CALO ou VERRUGA?'"
+            },
+            {
+              "tempo": "4-14s",
+              "fala": "Um: as linhas da pele. Calo mantém as linhas passando por cima dele. Verruga interrompe: as linhas chegam na borda e param.",
+              "direcao": "Zoom em imagem comparativa com as linhas desenhadas por cima. Texto: '1. linhas da pele'."
+            },
+            {
+              "tempo": "14-24s",
+              "fala": "Dois: a causa. Calo é pressão e fricção — sapato apertado, academia, violão, salto. Verruga é HPV, vírus, transmitido por contato. Por isso calo aparece sempre no mesmo ponto de atrito, e verruga aparece onde quiser e aumenta em número.",
+              "direcao": "Corte seco pra rosto. Texto: '2. pressão x HPV'."
+            },
+            {
+              "tempo": "24-36s",
+              "fala": "Três: a dor. Calo dói quando você pisa em cima, na pressão direta. Verruga normalmente incomoda quando você aperta pelos lados. E na verruga é comum ter pontinhos escuros no meio, que são vasinhos.",
+              "direcao": "Gesto: apertar por cima x apertar dos lados. Texto: '3. pressão em cima x nas laterais'."
+            },
+            {
+              "tempo": "36-50s",
+              "fala": "Tratamento é diferente pra cada um. Calo: tirar o atrito, palmilha, sapato certo, lixar com cuidado. Verruga: ácido salicílico em concentração de tratamento, crioterapia com nitrogênio no consultório, e às vezes mais de uma sessão porque verruga é chata mesmo. E o que eu peço: não sai lixando verruga em casa. Você espalha o vírus pros dedos do lado e vira três.",
+              "direcao": "Dois lados na tela: 'CALO: atrito' x 'VERRUGA: vírus'. Encerrar em close firme no rosto."
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Calo ou verruga? Olha as linhas da sua pele.",
+            "laminas": [
+              "Linhas da pele passando por cima = calo. Linhas interrompidas = verruga.",
+              "Calo vem de pressão e fricção: sempre no mesmo ponto de atrito.",
+              "Verruga vem de HPV: aparece onde quiser e multiplica.",
+              "Calo dói na pressão direta. Verruga incomoda mais quando aperta pelos lados.",
+              "Pontinhos escuros no meio? São vasinhos — sinal de verruga.",
+              "Calo trata tirando o atrito. Verruga trata com salicílico de tratamento ou crioterapia."
+            ],
+            "cta_final": "Manda pra quem jura que aquilo no pé é 'só um calo' há dois anos."
+          },
+          "legenda_post": "As linhas da pele resolvem a dúvida antes de qualquer pomada: se elas passam por cima, é calo; se param na borda, é verruga. A diferença muda tudo, porque calo se resolve tirando atrito e verruga é vírus — HPV — e pede tratamento específico. Lixar verruga em casa espalha para os dedos vizinhos, e é assim que uma vira três.",
+          "duracao_estimada_seg": 50,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Estrutura antes/depois de educação (padrão 3) + stitch com conteúdo de beleza popular (padrão 1): impede confusão que vira problema de autodiagnóstico.",
+          "voz": {
+            "registro": "Dermatologista educador que resolve uma dúvida prática em critérios numerados, sem paternalismo",
+            "de_onde_veio": "denverskindoc (15.4M): imitei a construção de equação seca ('Warts = HPV + interrupt skin lines / Calluses = pressure') e a promessa de 'here's how to tell' no primeiro segundo."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@denverskindoc/video/7633016955082968351",
+              "autor": "denverskindoc",
+              "metrica": "15.4M views, 2.64% engajamento, origem 'palavra' ('dermatologist explains')",
+              "por_que_viralizou": "Responde uma dúvida que o público tem mas não formula; o formato de diferenciação aparece para quem não segue dermatologia."
+            }
+          ],
+          "embasamento_viral": "Conteúdo de diferenciação ('X ou Y? como saber') teve 15.4M views com origem por palavra-chave — ou seja, gera busca e salvamento, não só scroll.",
+          "embasamento_cientifico": [
+            "Warts and Molluscum Contagiosum — American Academy of Dermatology — https://www.aad.org/public/diseases/contagious-skin-conditions/warts"
+          ],
+          "cta": "Salva pra checar as linhas da pele na próxima vez que aparecer uma bolinha dura.",
+          "hashtags": [
+            "#verruga",
+            "#calo",
+            "#hpv",
+            "#dermatologia",
+            "#saudedapele"
+          ]
+        },
+        {
+          "titulo": "Voltou o short curtinho — e voltou o molusco contagioso",
+          "pilar": "Mitos vs verdades",
+          "formato": "talking head estilo bastidor de consultório, tom de aviso amigo",
+          "ganchos_3s": [
+            "Voltou a moda de short curtinho. E voltou junto uma coisa que eu tô vendo demais no consultório: molusco contagioso.",
+            "Mais pele exposta, mais contato com superfície pública. E é por isso que essas bolinhas apareceram na sua coxa.",
+            "Não, não é falta de banho. Molusco é vírus e pega por contato — inclusive no banco da academia."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-4s",
+              "fala": "Voltou o short curtinho, voltou o biquíni de lateral fina — e voltou uma coisa que eu tô vendo demais no consultório agora: molusco contagioso.",
+              "direcao": "Talking head no consultório, sem intro. Texto: 'molusco contagioso'."
+            },
+            {
+              "tempo": "4-14s",
+              "fala": "Mais pele exposta significa mais pele encostando em superfície pública. Banco de academia, tatame, borda de piscina, toalha dividida, cadeira de aula de spinning.",
+              "direcao": "Corte pra imagens ilustrativas rápidas dos lugares citados."
+            },
+            {
+              "tempo": "14-26s",
+              "fala": "Como é: bolinha da cor da pele ou perolada, brilhante, com uma covinha no meio. Não dói, não coça muito, e aparece em grupo. Quem está aparecendo mais é adulto, na coxa, na virilha, na parte de trás do braço.",
+              "direcao": "Close nas mãos desenhando a bolinha com covinha no papel ou tablet. Texto: 'covinha no centro'."
+            },
+            {
+              "tempo": "26-38s",
+              "fala": "E agora a parte que eu preciso que você escute: isso não é falta de higiene. É contato. Ninguém pega molusco porque tomou banho errado, pega porque encostou. E raspar ou depilar por cima espalha, porque você carrega o vírus pela lâmina.",
+              "direcao": "Corte seco, close no rosto, tom mais baixo e firme. Texto: 'não é higiene. é contato.'"
+            },
+            {
+              "tempo": "38-50s",
+              "fala": "O que eu faço no consultório: removo. Tem mais de uma técnica e a escolha depende de quantas e de onde. O que eu não faço é esperar pra ver, porque cada semana a mais é semana de espalhar pra você mesmo e pra quem divide toalha com você. Toalha no banco da academia, e depilação só depois de tratar.",
+              "direcao": "Encerrar mostrando toalha dobrada na mão. Texto final: 'toalha no banco. sempre.'"
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Voltou o short curtinho. Voltou o molusco.",
+            "laminas": [
+              "Molusco contagioso é vírus e passa por contato direto pele a pele ou com superfície.",
+              "Bolinha da cor da pele, brilhante, com covinha no centro, em grupo.",
+              "Onde eu tô vendo em adulto: coxa, virilha, parte de trás do braço.",
+              "Mais pele exposta = mais contato com banco de academia, tatame e borda de piscina.",
+              "Não é falta de higiene. Ninguém pega isso por tomar banho errado.",
+              "Depilar ou raspar por cima espalha: a lâmina carrega o vírus pela perna.",
+              "Tratamento é remoção no consultório — esperar só dá tempo de multiplicar."
+            ],
+            "cta_final": "Manda pra sua amiga que treina de short e senta no banco sem toalha."
+          },
+          "legenda_post": "Molusco contagioso não é sujeira, é contato. Com mais pele exposta no verão, mais gente encostando em banco de academia, tatame e borda de piscina — e as bolinhas com covinha no centro estão aparecendo na coxa e na virilha de adultos. O erro mais comum que eu vejo é depilar por cima, porque a lâmina carrega o vírus perna abaixo.",
+          "duracao_estimada_seg": 50,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Docente que conecta observação de tendência (verão → shorts) a problema dermatológico (padrão 1 + 3): educação baseada em realidade consultatória, não hype.",
+          "voz": {
+            "registro": "Dermatologista observadora de consultório que avisa com base no que está entrando na sala esta semana",
+            "de_onde_veio": "mariwalladermatology (10.7M, 8.33%): imitei a virada 'mais pele exposta = mais contato com superfície pública' e o 'ultimamente eu tenho visto muito disso', mais o gancho de moda antes do assunto clínico."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@mariwalladermatology/video/7665868005674372365",
+              "autor": "mariwalladermatology",
+              "metrica": "10.7M views, 8.33% engajamento, origem 'palavra' ('dermatologist explains')",
+              "por_que_viralizou": "Conecta fenômeno social (volta das roupas curtas) a problema de saúde visível e qualifica sem culpabilizar: é contato, não higiene."
+            }
+          ],
+          "embasamento_viral": "8.33% de engajamento com 10.7M views: a combinação 'observação de tendência + desestigmatização' é a de maior taxa entre os virais educativos da semana.",
+          "embasamento_cientifico": [
+            "Molluscum Contagiosum: An Overview — American Academy of Dermatology — https://www.aad.org/public/diseases/contagious-skin-conditions/molluscum-contagiosum",
+            "Molluscum Contagiosum and Warts — American Family Physician — https://www.aafp.org/pubs/afp/issues/2003/0315/p1233.html"
+          ],
+          "cta": "Compartilha com quem treina de short — toalha no banco resolve metade disso.",
+          "hashtags": [
+            "#moluscocontagioso",
+            "#dermatologia",
+            "#verao",
+            "#peledeverdade",
+            "#saudedapele"
+          ]
+        },
+        {
+          "titulo": "Bolhinhas que coçam na lateral do dedo: você erra na secagem",
+          "pilar": "Educação sobre procedimentos",
+          "formato": "talking head com demonstração nas mãos, ritmo rápido",
+          "ganchos_3s": [
+            "Bolhinhas minúsculas que coçam na lateral do dedo? Deixa te falar da coisa boba que você tá fazendo errado: a secagem.",
+            "Não é falta de hidratante. É excesso de água. Eczema dishidrótica é isso.",
+            "Se sua mão tem bolhinhas com líquido e coça de doer, a água quente da louça é sua inimiga número um."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-4s",
+              "fala": "Bolhinhas pequenas, com líquido, na lateral do dedo e na palma, coçando de doer? Isso tem nome: eczema dishidrótica. E tem um erro que quase todo mundo comete.",
+              "direcao": "Close nas mãos, dedos abertos. Texto: 'eczema dishidrótica'."
+            },
+            {
+              "tempo": "4-13s",
+              "fala": "O erro é achar que a mão tá seca e resolver com mais hidratante. O gatilho na maioria dos casos é o contrário: molha, seca, molha, seca. Louça, sabão, álcool em gel, luva suando por dentro.",
+              "direcao": "Corte pra torneira aberta com água quente. Texto: 'molha → seca → molha'."
+            },
+            {
+              "tempo": "13-24s",
+              "fala": "O ciclo de umidade quebra a barreira e a pele responde com vesícula. Então a dica prática: depois de lavar, seca de verdade — inclusive entre os dedos, que é onde todo mundo deixa úmido — e passa emoliente espesso ainda com a mão morna.",
+              "direcao": "Demonstrar secando entre os dedos com toalha, depois pote de creme espesso. Texto: 'seca ENTRE os dedos'."
+            },
+            {
+              "tempo": "24-36s",
+              "fala": "Segunda coisa: luva de borracha sem luva de algodão por dentro é estufa. Sua mão sua, fica encharcada, e você achou que estava protegendo. Água morna em vez de quente, sabão sem perfume, e o creme de bolsa cheiroso fica longe da mão em crise — na crise, perfume é fósforo em gasolina.",
+              "direcao": "Mostrar luva de algodão entrando dentro da de borracha. Texto: 'algodão por dentro'."
+            },
+            {
+              "tempo": "36-48s",
+              "fala": "E o que resolve crise é corticoide tópico na potência certa, pelo tempo certo, prescrito. Pomadinha de balcão passada por três meses seguidos não é tratamento, é problema novo. Se volta toda vez no mesmo dedo, vale investigar contato com níquel e produto de limpeza.",
+              "direcao": "Close no rosto, sem corte, tom firme. Texto final: 'crise = prescrição. prevenção = secagem.'"
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Bolhinhas que coçam na mão? O erro é a secagem.",
+            "laminas": [
+              "Eczema dishidrótica: vesículas pequenas com líquido, na palma e na lateral dos dedos, coceira intensa.",
+              "O gatilho não é falta de hidratante — é o ciclo molha/seca do dia inteiro.",
+              "Seca de verdade, inclusive entre os dedos. É ali que fica úmido.",
+              "Emoliente espesso logo depois de secar, com a mão ainda morna.",
+              "Luva de borracha sem algodão por dentro = estufa. Sua mão encharca.",
+              "Creme perfumado em crise arde e piora. Sabão sem perfume, água morna.",
+              "Crise se trata com corticoide tópico prescrito — não com pomada de balcão por meses."
+            ],
+            "cta_final": "Comenta 'mão' que eu faço a parte 2 sobre o que testar quando volta sempre no mesmo dedo."
+          },
+          "legenda_post": "Eczema dishidrótica não é mão seca: é mão encharcada o dia inteiro. O ciclo molha-seca da louça, do álcool em gel e da luva suando por dentro quebra a barreira, e a pele responde com aquelas vesículas que coçam de doer. Secar entre os dedos e usar luva de algodão por dentro da de borracha muda mais o quadro do que trocar de hidratante.",
+          "duracao_estimada_seg": 48,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Educador com 'tip' específico (padrão 3): 'Uma coisa que funciona' — estrutura vence porque promete solução sem promessa exagerada.",
+          "voz": {
+            "registro": "Dermatologista prática de dica única, que aponta o erro comum e entrega a correção sem rodeio",
+            "de_onde_veio": "denverskindoc (9.9M): mantive a arquitetura do gancho 'Hand eczema? Don't forget to try this one simple tip' — pergunta curta com o sintoma + promessa de uma coisa simples, preenchida com o erro da secagem."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@denverskindoc/video/7682060415630675231",
+              "autor": "denverskindoc",
+              "metrica": "9.9M views, 2.51% engajamento, origem 'palavra' ('dermatologist reacts')",
+              "por_que_viralizou": "Problema muito específico com audiência ativa buscando solução; gancho promete simplicidade sem exagerar no resultado."
+            }
+          ],
+          "embasamento_viral": "9.9M views num tema de nicho mostra demanda por solução prática; o formato 'uma dica simples' é o que converte busca em visualização.",
+          "embasamento_cientifico": [
+            "Dyshidrotic Eczema: Symptoms, Causes & Treatment — National Eczema Association — https://nationaleczema.org/types-of-eczema/dyshidrotic-eczema/",
+            "Dyshidrotic Eczema (Pompholyx): Background, Etiology, Epidemiology — Medscape — https://emedicine.medscape.com/article/1122527-overview"
+          ],
+          "cta": "Comenta 'mão' se você quer a parte 2 sobre o que investigar quando a crise volta sempre.",
+          "hashtags": [
+            "#eczema",
+            "#eczemadishidrotica",
+            "#dermatite",
+            "#maossecas",
+            "#dermatologia"
+          ]
+        },
+        {
+          "titulo": "Isso NÃO é cicatriz de acne — e é por isso que nada funciona",
+          "pilar": "Mitos vs verdades",
+          "formato": "resposta a comentário + teste na tela com luz lateral",
+          "ganchos_3s": [
+            "Você acha que são cicatrizes. Tá errado. E essa confusão é exatamente por que o seu tratamento não funciona.",
+            "Mancha escura que a espinha deixou não é cicatriz. É hiperpigmentação. Uma sai, a outra não.",
+            "Acende a luz do celular do lado do seu rosto. O que você vê nos próximos dez segundos define seu tratamento."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-4s",
+              "fala": "Essas marcas que a espinha deixou não são cicatrizes. E enquanto você tratar como cicatriz, não vai melhorar.",
+              "direcao": "Close no rosto com luz frontal. Texto: 'NÃO é cicatriz'."
+            },
+            {
+              "tempo": "4-14s",
+              "fala": "O teste é de dez segundos: pega a luz do celular e ilumina o rosto de lado, bem rasante. Se a marca é só cor — marrom ou vermelha — e a pele continua lisa, é hiperpigmentação pós-inflamatória. Se aparece sombra, buraco, ondulação, aí sim é cicatriz.",
+              "direcao": "Demonstrar com a lanterna do celular em luz rasante. Texto: 'só cor = mancha / sombra = cicatriz'."
+            },
+            {
+              "tempo": "14-25s",
+              "fala": "Por que importa? Porque mancha é melanina depositada depois da inflamação. Isso sai. Com protetor solar todo dia, retinoide à noite, vitamina C, ácido azelaico. Devagar, em semanas e meses, mas sai.",
+              "direcao": "Corte pra três frascos genéricos na bancada. Texto: 'PIH: sai'."
+            },
+            {
+              "tempo": "25-36s",
+              "fala": "Cicatriz é perda de estrutura. Nenhum clareador levanta um buraco. Isso pede microagulhamento, laser, subcisão, preenchimento — procedimento que reconstrói, não creme que clareia.",
+              "direcao": "Volta pro rosto, tom mais seco. Texto: 'cicatriz: relevo'."
+            },
+            {
+              "tempo": "36-48s",
+              "fala": "Então, minha opinião: clareador em cima de buraco é dinheiro no lixo, e laser ablativo em cima de mancha inflamada só escurece mais. A mesma paciente pode ter os dois no mesmo rosto, e são dois planos diferentes. Faz o teste da luz antes de comprar o próximo vidrinho.",
+              "direcao": "Close final, sem corte. Texto: 'faz o teste antes de comprar'."
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Isso não é cicatriz de acne. É mancha.",
+            "laminas": [
+              "Teste da luz rasante: ilumina o rosto de lado com o celular.",
+              "Só cor, pele lisa = hiperpigmentação pós-inflamatória (PIH).",
+              "Sombra, relevo, buraco = cicatriz de verdade.",
+              "PIH é melanina depositada depois da inflamação. Ela sai com tempo e tratamento.",
+              "PIH: protetor solar diário, retinoide, vitamina C, ácido azelaico.",
+              "Cicatriz é perda de estrutura: microagulhamento, laser, subcisão. Creme não levanta buraco.",
+              "Dá pra ter os dois no mesmo rosto — e são dois planos diferentes."
+            ],
+            "cta_final": "Faz o teste da luz agora e me conta no comentário o que você viu: cor ou sombra?"
+          },
+          "legenda_post": "A maior parte das 'cicatrizes de acne' que chegam no consultório não é cicatriz: é hiperpigmentação pós-inflamatória. E isso é boa notícia, porque mancha sai — com protetor solar diário, retinoide, vitamina C e ácido azelaico, em semanas e meses. O que não sai com creme é relevo. Faz o teste da luz rasante antes de comprar o próximo clareador.",
+          "duracao_estimada_seg": 48,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Negação forte + educação (padrão 3): 'These are NOT X, they are Y' — estrutura vence porque corrige crença e oferece alternativa prática.",
+          "voz": {
+            "registro": "Dermatologista corretora de diagnóstico, que nega o rótulo errado e devolve esperança com o rótulo certo",
+            "de_onde_veio": "dermarkologist (8.1M): copiei a mecânica de negação em caixa alta no primeiro segundo ('These are NOT acne scars!') seguida de 'aqui está o que você pode fazer de verdade'."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@dermarkologist/video/7459754311032048927",
+              "autor": "dermarkologist",
+              "metrica": "8.1M views, 4.49% engajamento, origem hashtag",
+              "por_que_viralizou": "A confusão PIH x cicatriz é real e leva a tratamento errado; vídeo que nega primeiro colhe engajamento porque a audiência sente que foi esclarecida."
+            }
+          ],
+          "embasamento_viral": "4.49% de engajamento em tema de acne (categoria saturada) indica que a negação explícita mais teste prático é o diferencial de retenção.",
+          "embasamento_cientifico": [
+            "Acne-induced Post-inflammatory Hyperpigmentation: From Grading to Treatment — Journal of Clinical Medicine — https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12041799/",
+            "Post-Inflammatory Hyperpigmentation: Causes, Management, and Prevention — Medscape — https://emedicine.medscape.com/article/1069191-overview"
+          ],
+          "cta": "Faz o teste da luz e comenta: cor ou sombra?",
+          "hashtags": [
+            "#manchasdeacne",
+            "#hiperpigmentacao",
+            "#cicatrizdeacne",
+            "#acne",
+            "#dermatologia"
+          ]
+        },
+        {
+          "titulo": "Seu sérum de 300 reais não funciona porque a barreira está quebrada",
+          "pilar": "Rotina e prevenção",
+          "formato": "talking head com produtos na bancada, tom de tradução científica",
+          "ganchos_3s": [
+            "Você gastou trezentos reais num sérum e a pele continua ardendo. Deixa te contar por quê.",
+            "Não é o sérum que é ruim. É que você está passando ativo em cima de barreira quebrada.",
+            "Se qualquer coisa que você passa no rosto arde por dez segundos, pare tudo por duas semanas. Eu explico o que acontece depois."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-4s",
+              "fala": "Você gastou trezentos reais num sérum, usa religiosamente, e a pele continua vermelha e ardendo. O problema não é o sérum.",
+              "direcao": "Segurar um frasco de sérum e colocar de lado na bancada. Texto: 'não é o sérum'."
+            },
+            {
+              "tempo": "4-14s",
+              "fala": "Sua barreira cutânea tá quebrada. Ela é o que segura água dentro da pele e segura irritante fora. Quando ela falha, a água evapora — perda de água transepidérmica — e tudo que você passa entra onde não devia e arde.",
+              "direcao": "Corte pra animação simples de tijolo/cimento ou gesto com as mãos. Texto: 'TEWL: a água vai embora'."
+            },
+            {
+              "tempo": "14-26s",
+              "fala": "Os sinais: arde ao passar qualquer coisa, repuxa depois do banho, descama em placa fininha, vermelhidão que não passa e, do nada, espinha inflamada. Se você reconheceu três, é barreira, não é falta de produto.",
+              "direcao": "Lista rápida aparecendo na tela, um item por segundo, com a médica assentindo."
+            },
+            {
+              "tempo": "26-38s",
+              "fala": "Protocolo: pausa de duas semanas em ácido, retinoide e esfoliante. Só sabonete suave, creme reparador com ceramida e ácido hialurônico duas vezes por dia, protetor solar. Zinco é subestimado, funciona — mas eu prefiro creme reparador de rosto, tipo Cicalfate ou Cicaplast, porque entrega mais coisa junto.",
+              "direcao": "Colocar três potes na bancada, um por um, e afastar os ácidos pra fora do quadro. Texto: 'pausa de 14 dias'."
+            },
+            {
+              "tempo": "38-50s",
+              "fala": "Em duas semanas a ardência cai, e aí você reintroduz o ativo: duas vezes na semana, em cima do hidratante. E a frase que eu mais repito no consultório: ninguém tem barreira ruim por falta de sérum. Tem por excesso.",
+              "direcao": "Close final no rosto, sem corte. Texto: 'não é falta. é excesso.'"
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Seu sérum caro não funciona. A culpa é da barreira.",
+            "laminas": [
+              "Barreira cutânea segura água dentro e irritante fora. Quando falha, tudo arde.",
+              "Perda de água transepidérmica (TEWL): a pele desidrata mesmo com hidratante.",
+              "Sinais: arde, repuxa, descama fino, vermelhidão que não passa, acne do nada.",
+              "Passo 1: pausa de 14 dias em ácido, retinoide e esfoliante.",
+              "Passo 2: sabonete suave + creme reparador com ceramida e ácido hialurônico, 2x/dia.",
+              "Zinco funciona e é subestimado — mas creme reparador de rosto entrega mais junto.",
+              "Passo 3: reintroduz o ativo 2x/semana, em cima do hidratante."
+            ],
+            "cta_final": "Salva pra consultar no dia 1 da sua pausa — e volta pra me contar como tava no dia 14."
+          },
+          "legenda_post": "Ativo bom em barreira quebrada não funciona: arde, inflama e você conclui que o produto é ruim. Antes de comprar o próximo sérum, faz 14 dias de reparo — sabonete suave, creme com ceramida e ácido hialurônico, protetor solar — e só depois reintroduz o ativo duas vezes por semana. Ninguém tem barreira ruim por falta de sérum; tem por excesso.",
+          "duracao_estimada_seg": 50,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Qualificação inteligente (padrão 3): 'zinco é bom, MAS eu prefiro cremes de barreira' — estrutura evita polêmica, oferece nuance prática.",
+          "voz": {
+            "registro": "Dermatologista tradutora, que dá a razão científica de uma queixa comum e nomeia produto sem vender",
+            "de_onde_veio": "drjennyliu (8.3M): imitei o movimento de 'X é subestimado, mas eu prefiro Y' e a confiança que vem de nomear produto específico em vez de falar 'um bom hidratante'."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@drjennyliu/video/7646584708993764622",
+              "autor": "drjennyliu",
+              "metrica": "8.3M views, 6.09% engajamento, origem 'palavra' ('skin barrier repair')",
+              "por_que_viralizou": "Responde a queixa real ('meu hidratante não funciona') com razão científica e ganha confiança ao nomear produtos específicos."
+            }
+          ],
+          "embasamento_viral": "6.09% de engajamento com origem por palavra-chave 'skin barrier repair': o tema tem busca ativa e o diferencial é a nuance ('funciona, mas eu prefiro'), que gera comentário em vez de ceticismo.",
+          "embasamento_cientifico": [
+            "Barrier creams — DermNet NZ — https://dermnetnz.org/topics/barrier-cream",
+            "Biomimetic hyaluronic acid-stabilized zinc oxide nanoparticles in acne treatment — ScienceDirect — https://www.sciencedirect.com/science/article/abs/pii/S0168365925003748"
+          ],
+          "cta": "Salva e começa a pausa de 14 dias hoje — me conta no dia 14 como tá a ardência.",
+          "hashtags": [
+            "#barreiracutanea",
+            "#ceramidas",
+            "#peleirritada",
+            "#skincare",
+            "#dermatologia"
+          ]
+        },
+        {
+          "titulo": "Minha rotina: 4 produtos, nenhum cult",
+          "pilar": "Rotina e prevenção",
+          "formato": "rotina visual sem fala, texto na tela, ritmo ASMR (som real de água, tampa, mãos)",
+          "ganchos_3s": [
+            "(texto na tela) Minha rotina real. 4 produtos. Nenhum cult.",
+            "(texto na tela) Dermatologista com 11 anos de consultório. Prateleira do banheiro: 4 frascos.",
+            "(texto na tela) Sem essência. Sem toner. Sem sheet mask. Assista até o fim e conta quantos passos faltaram."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-4s",
+              "fala": "(sem fala) Texto na tela: 'minha rotina. 4 produtos. nenhum cult.'",
+              "direcao": "Plano fixo da bancada com os 4 frascos alinhados. Som real: tampa abrindo. Zero música cantada, batida baixa."
+            },
+            {
+              "tempo": "4-14s",
+              "fala": "(sem fala) Texto: '1 · lavar — sabonete suave, 20 segundos, água morna'",
+              "direcao": "Close nas mãos espalhando o sabonete no rosto, contagem discreta no canto da tela. Som de água."
+            },
+            {
+              "tempo": "14-26s",
+              "fala": "(sem fala) Texto: '2 · noite — retinoide, tamanho de uma ervilha, pele seca'",
+              "direcao": "Squeeze do tubo na ponta do dedo, mostrar a quantidade em close absoluto (a ervilha é o conteúdo). Texto complementar: 'rosto TODO com isso'."
+            },
+            {
+              "tempo": "26-36s",
+              "fala": "(sem fala) Texto: '3 · hidratante por cima — sim, em cima do retinoide'",
+              "direcao": "Pote abrindo, dedo retirando, quatro pontos no rosto, espalhar devagar. Som da tampa fechando."
+            },
+            {
+              "tempo": "36-50s",
+              "fala": "(sem fala) Texto: '4 · manhã — protetor solar, 2 dedos, todo dia, chuva inclusive' → tela final: 'se sua prateleira tem 11 produtos, você não tem rotina. tem coleção.'",
+              "direcao": "Medir os dois dedos de protetor na tela, aplicar, olhar pra câmera e dar de ombros. Corte seco no texto final em tela cheia."
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "4 produtos. É essa a rotina da dermatologista.",
+            "laminas": [
+              "1 · Sabonete suave. 20 segundos, água morna. Não precisa espumar até doer.",
+              "2 · Retinoide à noite, na pele seca, quantidade de uma ervilha para o rosto todo.",
+              "3 · Hidratante por cima do retinoide — isso reduz irritação, não 'anula' o ativo.",
+              "4 · Protetor solar de manhã, dois dedos, todo dia, inclusive em dia nublado.",
+              "O que não tem na minha prateleira: toner, essência, esfoliante semanal, sheet mask.",
+              "Resultado não vem do número de passos. Vem de fazer os 4 todos os dias por meses."
+            ],
+            "cta_final": "Conta nos comentários quantos produtos você usa hoje — e quais dá pra tirar."
+          },
+          "legenda_post": "Quatro produtos. É isso que tem na minha bancada depois de anos de consultório: sabonete suave, retinoide, hidratante e protetor solar. O que muda pele não é a quantidade de passos, é a repetição dos passos certos por meses. Se a sua prateleira tem onze frascos, provavelmente você não tem rotina — tem coleção.",
+          "duracao_estimada_seg": 50,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Rotina visual (padrão 2) + educação qualificada (padrão 3): 'aqui está como EU faço, não como vendem'",
+          "voz": {
+            "registro": "Dermatologista em modo confessional silencioso — só mãos, produto e texto na tela, nada de explicação",
+            "de_onde_veio": "drgazy (5.6M, 8.62%) e o padrão ASMR de olafflee (21.96% de engajamento, o maior da semana): imitei a ausência total de fala, a repetição de gesto e o texto curto na tela como única narração."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@drgazy/video/7195028262765022506",
+              "autor": "drgazy",
+              "metrica": "5.6M views, 8.62% engajamento, origem hashtag (#dermatologist)",
+              "por_que_viralizou": "Mostra rotina real e quebra expectativa de quantidade: o público acha que precisa de dez produtos e vê a médica usar quatro."
+            },
+            {
+              "url": "https://www.tiktok.com/@olafflee",
+              "autor": "olafflee",
+              "metrica": "5.2M views, 21.96% engajamento (maior taxa da coleta)",
+              "por_que_viralizou": "Rotina em ASMR, sem fala, sem justificativa científica: ganha por repetição de imagem e som satisfatório."
+            }
+          ],
+          "embasamento_viral": "O formato de maior engajamento da semana é rotina silenciosa (21.96%); aplicar isso com autoridade médica soma o alcance do ASMR à quebra de expectativa ('só 4 produtos').",
+          "embasamento_cientifico": [
+            "Best Skincare Routine for Healthy Skin — American Academy of Dermatology — https://www.aad.org/public/everyday-care/skin-care-basics/best-skincare-routine"
+          ],
+          "cta": "Comenta quantos produtos tem na sua prateleira hoje — eu digo quais sobram.",
+          "hashtags": [
+            "#skincareroutine",
+            "#rotinadepele",
+            "#protetorsolar",
+            "#retinoide",
+            "#dermatologia"
+          ]
+        },
+        {
+          "titulo": "Vitiligo: quem prometeu cura em 30 dias não te respeita",
+          "pilar": "Mitos vs verdades",
+          "formato": "talking head estático, luz suave, tom de conversa séria",
+          "ganchos_3s": [
+            "Se alguém te prometeu acabar com o vitiligo em 30 dias, essa pessoa não te respeita como paciente.",
+            "Vitiligo não é micose, não pega, e não sai com chá. Agora o que existe de verdade pra tratar.",
+            "Já atendi gente que gastou o salário em pomada milagrosa pra vitiligo. Vou te contar o que realmente muda a mancha."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-5s",
+              "fala": "Se alguém te prometeu fazer o vitiligo desaparecer em trinta dias, essa pessoa não te respeita como paciente. Vou te explicar o que acontece na sua pele e o que existe de verdade.",
+              "direcao": "Plano médio, olhando direto na câmera, sem trilha. Texto: 'cura em 30 dias não existe'."
+            },
+            {
+              "tempo": "5-16s",
+              "fala": "Vitiligo é quando o próprio sistema imune ataca os melanócitos, que são as células que fazem a cor da pele. Sem melanócito funcionando, a pele fica branca naquela área. Não é fungo, não é falta de vitamina mágica, e não pega em ninguém.",
+              "direcao": "Corte pra ilustração simples da pele com e sem pigmento. Texto: 'melanócitos'."
+            },
+            {
+              "tempo": "16-28s",
+              "fala": "O que muda o quadro: tópicos que freiam essa inflamação, fototerapia com UVB de banda estreita, e acompanhamento porque vitiligo tem fase de atividade e fase estável. Repigmentar é lento — a gente conta em meses, não em semanas. Rosto e tronco respondem melhor que mão e pé.",
+              "direcao": "Talking head, contando nos dedos os três pilares. Texto: 'tópicos · fototerapia · acompanhamento'."
+            },
+            {
+              "tempo": "28-40s",
+              "fala": "E uma coisa que quase ninguém fala: protetor solar é parte do tratamento. Não é vaidade. A área sem melanina não tem proteção nenhuma, e a pele ao redor bronzeia e aumenta o contraste.",
+              "direcao": "Close no frasco de protetor, depois volta pro rosto. Texto: 'protetor = tratamento'."
+            },
+            {
+              "tempo": "40-52s",
+              "fala": "E tem gente que decide não tratar, que olha pra própria pele e tá em paz. Isso é escolha legítima e eu respeito no consultório. O que não é legítimo é vender cura pra quem tá vulnerável. Se prometeram trinta dias, saia.",
+              "direcao": "Close final, tom baixo, pausa antes da última frase. Texto: 'não tratar também é escolha'."
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Vitiligo: quem promete cura em 30 dias não te respeita.",
+            "laminas": [
+              "Vitiligo é autoimune: o sistema imune ataca os melanócitos, as células que dão cor à pele.",
+              "Não é micose, não é falta de vitamina mágica, e não é contagioso.",
+              "Tratamentos reais: tópicos que freiam a inflamação e fototerapia com UVB de banda estreita.",
+              "Repigmentação se conta em meses. Rosto e tronco respondem melhor que mãos e pés.",
+              "Protetor solar é tratamento: a área sem melanina não tem proteção e o contraste aumenta com o bronzeado ao redor.",
+              "Vitiligo tem fase ativa e fase estável — por isso acompanhamento importa mais que produto novo.",
+              "Escolher não tratar é legítimo. Vender cura para quem está vulnerável, não."
+            ],
+            "cta_final": "Manda esse post pra quem está sendo assediado por promessa de cura."
+          },
+          "legenda_post": "Vitiligo é autoimune: o sistema imune ataca os melanócitos e a pele perde a cor naquela área. Existe tratamento de verdade — tópicos, fototerapia com UVB de banda estreita, acompanhamento das fases — e existe protetor solar, que aqui é tratamento e não vaidade. O que não existe é cura em 30 dias, e quem te promete isso está vendendo esperança pra bolso vulnerável.",
+          "duracao_estimada_seg": 52,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Humanização + mito desmentido (padrão 1 + 3): 'Se alguém te prometeu cura, essa pessoa não te respeita'",
+          "voz": {
+            "registro": "Dermatologista humanizadora, ritmo lento, que defende o paciente do charlatão antes de explicar a doença",
+            "de_onde_veio": "drsamanthaellis (7.0M, 6.87%): imitei a normalização da condição e o olhar direto na câmera sem trilha, trocando o 'do you have one?' por uma frase de defesa do paciente."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@drsamanthaellis/video/7671822725379394830",
+              "autor": "drsamanthaellis",
+              "metrica": "7.0M views, 6.87% engajamento, origem 'palavra' ('dermatologist explains')",
+              "por_que_viralizou": "Condição de forte impacto emocional; a audiência busca validação e informação real, e o vídeo combate estigma em vez de patologizar."
+            }
+          ],
+          "embasamento_viral": "6.87% de engajamento mostra que conteúdo que normaliza condição visível gera comentário e compartilhamento; o briefing também mostra que promessa de cura derruba engajamento (lorennyh 1.16%), então tomar partido contra a promessa é o movimento correto.",
+          "embasamento_cientifico": [
+            "Vitiligo: Clinical Presentation, Causes, and Treatment — American Academy of Dermatology — https://www.aad.org/public/diseases/color-disorders/vitiligo"
+          ],
+          "cta": "Compartilha com quem está recebendo promessa de cura — informação é a única defesa aqui.",
+          "hashtags": [
+            "#vitiligo",
+            "#dermatologia",
+            "#autoimune",
+            "#fototerapia",
+            "#peledeverdade"
+          ]
+        },
+        {
+          "titulo": "Retinol ardendo não é sinal de que está funcionando",
+          "pilar": "Rotina e prevenção",
+          "formato": "talking head com protocolo e timeline na tela",
+          "ganchos_3s": [
+            "Retinol ardendo e descascando não é sinal de que está funcionando. É sinal de que você exagerou.",
+            "Retinol funciona de verdade. Mas retinol exige cuidado — deixa te contar como começar sem detonar a pele.",
+            "Semana 1 você descasca, semana 4 muda a textura, semana 12 clareia a mancha. Quem para na semana 2 nunca vê nada."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-4s",
+              "fala": "Retinol ardendo, vermelho e descascando não é sinal de que tá funcionando. É sinal de que você passou demais, cedo demais.",
+              "direcao": "Segurar o frasco de retinol na frente da câmera. Texto: 'arder ≠ funcionar'."
+            },
+            {
+              "tempo": "4-14s",
+              "fala": "Retinol funciona de verdade: é um dos ativos mais bem estudados pra sinal de envelhecimento. Mas retinol exige cuidado, e o protocolo é chato de propósito. Comece com concentração baixa, tipo zero vírgula três por cento.",
+              "direcao": "Corte pra rótulo mostrando a concentração. Texto: '0,3% pra começar'."
+            },
+            {
+              "tempo": "14-27s",
+              "fala": "Duas a três vezes na semana, sempre à noite, na pele bem limpa e bem seca. Quantidade de uma ervilha pro rosto inteiro — não é uma ervilha por bochecha. E logo depois, caprichem na hidratação: hidratante em cima evita metade da vermelhidão.",
+              "direcao": "Demonstrar a ervilha no dedo, depois o hidratante por cima. Texto: '2-3x/semana · à noite · pele seca'."
+            },
+            {
+              "tempo": "27-39s",
+              "fala": "Timeline pra você não desistir no meio: semana um e dois é adaptação, pode descamar leve. Semana quatro a textura e o poro começam a mudar. Semana doze é quando mancha e linha fina respondem. Retinol é maratona.",
+              "direcao": "Três blocos na tela: 'sem 1-2 · sem 4 · sem 12'. Ritmo mais rápido."
+            },
+            {
+              "tempo": "39-52s",
+              "fala": "Agora o alerta que salva pele: descamação leve e ardência que passa em minutos é adaptação. Vermelhidão com inchaço, coceira, bolinha com líquido é dermatite — para. E usar todo dia no começo pra acelerar não acelera: você fica uma semana sem passar nada pra recuperar e perde o que ganhou. Protetor solar de manhã não é opcional aqui.",
+              "direcao": "Close no rosto, tom firme, sem corte. Texto final: 'adaptação passa. dermatite para.'"
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Retinol ardendo não é sinal de que funciona.",
+            "laminas": [
+              "Comece em concentração baixa: 0,3% resolve pra iniciante.",
+              "2 a 3 vezes por semana, sempre à noite, pele bem limpa e bem seca.",
+              "Quantidade de uma ervilha para o rosto inteiro. Não é uma por bochecha.",
+              "Hidratante depois do retinol evita metade da vermelhidão.",
+              "Semana 1-2: adaptação. Semana 4: textura e poro. Semana 12: mancha e linha fina.",
+              "Adaptação = descamação leve e ardência passageira. Dermatite = inchaço, coceira, bolinha com líquido → para.",
+              "Usar todo dia pra acelerar atrasa: você para uma semana pra recuperar e perde o ganho."
+            ],
+            "cta_final": "Salva esse protocolo e volta aqui na semana 4 me contar o que mudou."
+          },
+          "legenda_post": "Retinol é um dos ativos mais bem estudados que existem — e o mais mal usado. O protocolo é simples e chato: 0,3%, duas a três vezes na semana, à noite, pele limpa e seca, hidratante por cima, protetor de manhã. Ardência que passa em minutos é adaptação; inchaço, coceira e bolinhas com líquido são dermatite e pedem pausa. Quem usa todo dia no começo pra acelerar acaba perdendo semanas de progresso.",
+          "duracao_estimada_seg": 52,
+          "plataforma_origem_da_tendencia": "tiktok",
+          "padrao_aplicado": "Educação com aviso crítico (padrão 3): 'retinol exige cuidado' — estrutura ganha porque reconhece risco e oferece protocolo.",
+          "voz": {
+            "registro": "Educadora de skincare em modo protocolo, firme e sem sensacionalismo, tratando o ativo com respeito",
+            "de_onde_veio": "jardeledebran (8.2M): imitei o miolo do script — 'retinol exige cuidado', 'comecem devagar, duas a três vezes na semana, sempre à noite, pele limpa e seca', 'caprichem na hidratação depois' — e o uso de plural instrutivo no meio do roteiro."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@jardeledebran/video/7530660092178402616",
+              "autor": "jardeledebran",
+              "metrica": "8.2M views, 0.58% engajamento (alcance alto por busca da palavra 'retinol')",
+              "por_que_viralizou": "Retinol é procurado por todos e usado errado pela maioria; instrução correta de frequência e hidratação capta a busca pela palavra-chave."
+            }
+          ],
+          "embasamento_viral": "O alcance vem da palavra-chave 'retinol como usar' (8.2M); o engajamento baixo do original abre espaço pra versão com posicionamento e timeline, que é o que gera comentário e salvamento.",
+          "embasamento_cientifico": [
+            "Retinoids in the Treatment of Skin Aging: An Overview of Clinical Efficacy and Safety — Journal of Cosmetic Dermatology — https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6416841/"
+          ],
+          "cta": "Salva o protocolo e me marca na semana 4 pra contar o que mudou na textura.",
+          "hashtags": [
+            "#retinol",
+            "#retinoide",
+            "#antienvelhecimento",
+            "#skincare",
+            "#dermatologia"
+          ]
+        },
+        {
+          "titulo": "Assisti a rotina coreana de 10 passos até o fim: 3 fazem o trabalho",
+          "pilar": "Mitos vs verdades",
+          "formato": "reação a rotina viral com tela dividida e contagem dos passos",
+          "ganchos_3s": [
+            "Assisti uma rotina coreana de dez passos inteirinha. Três passos fazem o trabalho. Os outros sete são textura e prazer — o que também tem valor, mas não é resultado.",
+            "Glass skin não é produto. É pele hidratada, sem inflamação e com colágeno preservado. Nenhuma essência faz isso sozinha.",
+            "O passo mais importante da rotina coreana é o que quase nenhum vídeo de glass skin mostra: o protetor solar."
+          ],
+          "roteiro_reels": [
+            {
+              "tempo": "0-5s",
+              "fala": "Assisti uma rotina coreana de dez passos até o fim, sem pular. Três fazem o trabalho pesado. Vou te dizer quais e o que fazer com os outros sete.",
+              "direcao": "Split screen com vídeo de rotina em loop de um lado, médica do outro. Texto: '10 passos · 3 importam'."
+            },
+            {
+              "tempo": "5-16s",
+              "fala": "Passo que vale: dupla limpeza — mas só se você usa protetor solar resistente, base ou maquiagem à prova d'água. Se você lavou o rosto de manhã e passou hidratante, uma limpeza resolve. Não tem prêmio por lavar duas vezes.",
+              "direcao": "Close no óleo de limpeza e no gel, depois tirar o gel do quadro. Texto: 'dupla limpeza: condicional'."
+            },
+            {
+              "tempo": "16-28s",
+              "fala": "Segundo que vale: hidratação em camada. Essência e sérum aquoso são basicamente água mais umectante, e em pele desidratada isso muda o aspecto de verdade — aquele efeito vidro que você vê é pele cheia de água refletindo luz. Só não precisa de três toners diferentes pra isso.",
+              "direcao": "Mostrar camada fina batendo no rosto com as palmas, gesto igual ao da trend. Texto: 'camadas: sim. três toners: não'."
+            },
+            {
+              "tempo": "28-40s",
+              "fala": "Terceiro, e é o que os vídeos de glass skin menos mostram: protetor solar. O que dá aquele aspecto uniforme na pele coreana não é a máscara de folha, é uma cultura de fotoproteção desde criança. Mancha e textura vêm do sol, e nenhuma camada de essência compensa isso.",
+              "direcao": "Corte seco pra close do protetor solar na mão, aplicar dois dedos. Texto: 'o passo que ninguém filma'."
+            },
+            {
+              "tempo": "40-52s",
+              "fala": "E os sete restantes? Se te faz bem, faz. Rotina longa é autocuidado e eu não vou tirar isso de ninguém. Mas eu não misturo esfoliante com ativo no mesmo dia, e eu não uso máscara de folha todo dia — a barreira reclama. Glass skin não é prateleira cheia, é pele hidratada, sem inflamação e com colágeno preservado.",
+              "direcao": "Voltar pro plano médio, sorrindo, com a bancada cheia atrás. Texto final: 'glass skin não é produto'."
+            }
+          ],
+          "roteiro_carrossel": {
+            "capa": "Rotina coreana de 10 passos: 3 fazem o trabalho.",
+            "laminas": [
+              "Dupla limpeza vale se você usa maquiagem ou protetor resistente à água. Senão, uma limpeza basta.",
+              "Hidratação em camadas funciona: essência é água + umectante, e pele cheia de água reflete luz.",
+              "Não precisa de três toners diferentes pra fazer camada.",
+              "O passo decisivo é o que os vídeos não filmam: protetor solar, todo dia.",
+              "O aspecto uniforme da pele coreana vem de fotoproteção desde a infância, não de sheet mask.",
+              "Esfoliante junto com ativo no mesmo dia: não. Máscara de folha todo dia: também não.",
+              "Glass skin é pele hidratada, sem inflamação e com colágeno preservado — não é uma prateleira cheia."
+            ],
+            "cta_final": "Me manda por DM a sua rotina em ordem que eu digo quais passos dá pra cortar sem perder nada."
+          },
+          "legenda_post": "Dos dez passos da rotina coreana, três mudam a sua pele: limpeza adequada (dupla só se tiver maquiagem ou protetor resistente), hidratação em camadas e protetor solar todo dia. O efeito vidro é pele cheia de água refletindo luz somada a anos de fotoproteção — não é a sheet mask. Os outros sete passos podem ficar, se te fazem bem. Só não confunda autocuidado com resultado.",
+          "duracao_estimada_seg": 52,
+          "plataforma_origem_da_tendencia": "multiplataforma",
+          "padrao_aplicado": "Skincare coreano/glass skin com alcance sem barreira de língua (padrão 5) + dermatologista que assiste e qualifica a rotina viral (padrão 1 + 3): 'funciona, mas veja o que realmente faz o trabalho'",
+          "voz": {
+            "registro": "Dermatologista curiosa que consome a trend sem esnobar e separa o que é resultado do que é ritual",
+            "de_onde_veio": "georginagio, songofskin, milkydew e chrustal (4.9M a 16.5M views): imitei o vocabulário da bolha kbeauty (essência, camadas, efeito vidro, o gesto de bater com as palmas) e o ritmo da rotina, mas dentro de uma leitura médica dos passos."
+          },
+          "virais_origem": [
+            {
+              "url": "https://www.tiktok.com/@georginagio",
+              "autor": "georginagio",
+              "metrica": "16.5M views, origem hashtag, rotina noturna em espanhol",
+              "por_que_viralizou": "Rotina longa mostrada passo a passo, sem explicação: alcance amplo porque cuidado de pele não tem barreira de língua, só de abordagem."
+            },
+            {
+              "url": "https://www.tiktok.com/@songofskin",
+              "autor": "songofskin",
+              "metrica": "15.4M views, 7.31% engajamento, #skintok #koreanbeauty",
+              "por_que_viralizou": "Repetição de imagem e estética kbeauty; o público assiste pelo ritual, não pela informação."
+            },
+            {
+              "url": "https://www.tiktok.com/@milkydew",
+              "autor": "milkydew",
+              "metrica": "4.9M views, 'korean skincare routine #glassskin'",
+              "por_que_viralizou": "Palavra-chave glass skin capta busca ativa de quem quer o aspecto de pele de vidro."
+            }
+          ],
+          "embasamento_viral": "Padrão novo da semana: rotinas kbeauty e em espanhol acumulam de 4.9M a 16.5M views com engajamento alto (7.31%). Entrar na trend com leitura médica aproveita esse tráfego e cria a discordância que gera comentário.",
+          "embasamento_cientifico": [
+            "Best Skincare Routine for Healthy Skin — American Academy of Dermatology — https://www.aad.org/public/everyday-care/skin-care-basics/best-skincare-routine"
+          ],
+          "cta": "Manda a sua rotina em ordem nos comentários que eu aponto os passos descartáveis.",
+          "hashtags": [
+            "#glassskin",
+            "#kbeauty",
+            "#rotinacoreana",
+            "#skintok",
+            "#dermatologia"
+          ]
+        }
+      ]
+    },
+    {
       "semana": "2026-09-14",
       "gerado_em": "2026-09-08",
       "ideias": [
