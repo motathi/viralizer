@@ -4,822 +4,816 @@
   "roteiros": {
     "ideias": [
       {
-        "titulo": "Sebáceas não são cravos — e você não vai tirar elas nunca",
+        "titulo": "Voltou o short, voltou o molusco: não é verruga e o tratamento é outro",
         "pilar": "Mitos vs verdades",
-        "formato": "talking head em close do nariz + reação a vídeo de extração, legenda dinâmica",
+        "formato": "talking head de consultório com close nas lesões (imagem clínica) e legenda dinâmica",
         "ganchos_3s": [
-          "Esse ponto escurinho que você aperta no nariz desde os quinze anos não é cravo. É sebácea. E ela não sai.",
-          "Você tá vendo sebácea e chamando de espinha. Deixa eu corrigir uma coisa antes que você compre mais um espremedor de metal.",
-          "Aquele vídeo de extração com um filamento de um centímetro saindo do nariz? Metade daquilo é anatomia normal."
+          "Voltou o short curtinho... e voltou junto uma coisa que tô vendo demais na agenda dessa semana.",
+          "Essa bolinha com um furinho no meio não é verruga. E se você tratar como verruga, não sai.",
+          "Molusco não vem de falta de banho. Vem de vírus. E não é o vírus que você tá pensando."
         ],
         "roteiro_reels": [
           {
             "tempo": "0-3s",
-            "fala": "Esse pontinho no seu nariz não é cravo. É sebácea. E sebácea não desaparece — ela volta em três dias.",
-            "direcao": "Close no próprio nariz, dedo apontando a zona T. Texto na tela: 'NÃO É CRAVO'."
+            "fala": "Voltou o short curtinho... e voltou junto uma coisa que tô vendo demais no consultório: molusco.",
+            "direcao": "Plano médio, jaleco, fala direto pra câmera. Texto na tela: MOLUSCO ≠ VERRUGA"
           },
           {
-            "tempo": "3-13s",
-            "fala": "Cravo é poro entupido e oxidado: ponto isolado, preto de verdade, duro. Sebácea é o canal de óleo funcionando: cor de areia, mole, e vem em padrão — dezenas delas, espalhadas igual no nariz, na testa, na bochecha.",
-            "direcao": "Split screen: foto de cravo x foto de sebáceas. Setas apontando 'isolado' e 'em padrão'."
+            "tempo": "3-12s",
+            "fala": "Molusco contagioso é causado por poxvirus. Não é HPV. E isso importa porque o tratamento é completamente diferente do da verruga.",
+            "direcao": "Corte pra imagem clínica ampliada da lesão dome-shaped. Legenda: poxvirus ≠ HPV"
           },
           {
-            "tempo": "13-25s",
-            "fala": "É estrutura natural da sua pele. Todo mundo tem. Você não tem sebácea porque sua pele é suja — você tem porque você produz óleo, e produzir óleo é o que o rosto faz.",
-            "direcao": "Volta pro rosto, tom mais firme, sem corte. Texto: 'estrutura natural'."
+            "tempo": "12-25s",
+            "fala": "Olha a diferença: molusco é uma bolinha lisa, brilhante, cor da pele, com um furinho no centro — a umbilicação. Verruga é áspera, seca, cheia de pontinhos escuros, e costuma aparecer em mão, pé, dedo. Molusco gosta de dobra: virilha, atrás do joelho, axila, coxa que atrita com a outra.",
+            "direcao": "Split screen: molusco à esquerda, verruga à direita. Setas apontando pro furinho central e pra superfície áspera."
           },
           {
-            "tempo": "25-36s",
-            "fala": "E aí vem a parte que ninguém te conta: aquele espremedor, aquela unha, aquele vácuo de farmácia não eliminam nada. Eles alargam a abertura do canal. Resultado: a sebácea volta e volta mais visível que antes.",
-            "direcao": "Mostrar espremedor de metal na mão e largar ele em cima da mesa. Som do metal na bancada."
+            "tempo": "25-38s",
+            "fala": "A confusão acontece porque as duas coçam pouco, as duas são contagiosas e as duas são bolinhas. Só que ácido salicílico de verruga em cima de molusco em dobra é irritação garantida e espalha mais. Molusco se resolve com curetagem, crioterapia, cantaridina — coisa de consultório.",
+            "direcao": "Volta pro rosto, tom de aviso carinhoso. Texto: 'ácido de verruga em dobra = espalha'"
           },
           {
-            "tempo": "36-48s",
-            "fala": "O que deixa menos aparente: retinoide à noite, ácido salicílico dois por cento, niacinamida. Repara no verbo: menos aparente, não some. Eu não indico sessão mensal de extração de nariz pra isso — é dinheiro pra piorar o que já era normal. Deixa em paz.",
-            "direcao": "Três produtos genéricos na mão, um por um. Texto final: 'menos aparente ≠ sumir'."
+            "tempo": "38-48s",
+            "fala": "E olha: molusco não é falta de higiene. Pegou na piscina, no tatame, na toalha compartilhada, na cera da perna. Não é culpa sua. Mas quanto mais você espera e mais você coça, mais bolinha você faz.",
+            "direcao": "Close, olhar firme. Texto final: NÃO É FALTA DE BANHO. Congela no rosto."
           }
         ],
         "roteiro_carrossel": {
-          "capa": "Não é cravo. É sebácea. E ela não sai.",
+          "capa": "Não é verruga. É molusco. E o tratamento é outro.",
           "laminas": [
-            "Cravo: ponto isolado, preto, duro, poro entupido e oxidado.",
-            "Sebácea: cor de areia, mole, dezenas delas em padrão no nariz, testa e bochecha.",
-            "Sebácea é estrutura natural. Todo mundo tem. Não tem a ver com pele suja.",
-            "Espremeu e saiu um filamento cremoso? Em 72 horas tá cheio de novo.",
-            "O espremedor de metal não elimina: ele alarga a abertura e deixa mais visível.",
-            "O que ajuda de verdade: retinoide à noite, salicílico 2%, niacinamida — pra deixar menos aparente."
+            "Molusco contagioso = poxvirus. Verruga = HPV. Vírus diferente, tratamento diferente.",
+            "Molusco: bolinha lisa, brilhante, cor da pele, com um furinho no centro (umbilicação).",
+            "Verruga: áspera, seca, com pontinhos escuros dentro — os capilares.",
+            "Localização entrega: molusco ama dobra (virilha, axila, atrás do joelho). Verruga ama mão e pé.",
+            "Por que confunde: as duas são contagiosas, as duas são bolinha. Só isso.",
+            "Ácido de verruga em molusco de dobra? Irrita, inflama e espalha mais.",
+            "Molusco não vem de sujeira. Vem de contato: piscina, toalha, tatame, cera."
           ],
-          "cta_final": "Comenta 'sebácea' se você passou a vida apertando isso achando que era cravo."
+          "cta_final": "Tira uma foto boa da bolinha e mostra pra um dermatologista antes de comprar ácido. É literalmente vírus diferente."
         },
-        "legenda_post": "Sebácea não é cravo e não vai sumir — ela é parte da anatomia do seu rosto. O que você consegue é deixar menos aparente. O que você consegue mais rápido, apertando, é aumentar a abertura do canal e ficar com o nariz pior do que começou. Retinoide, salicílico e niacinamida fazem mais pelo seu nariz do que qualquer espremedor de metal.",
+        "legenda_post": "Molusco contagioso é poxvirus, não HPV — e por isso o ácido de verruga não resolve, só irrita. O detalhe que entrega é o furinho no centro da bolinha. Verão é temporada de molusco: piscina, tatame, toalha dividida, cera. E não, não tem nada a ver com falta de banho.",
         "duracao_estimada_seg": 48,
         "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Dermatologista reage a vídeo viral satisfatório (padrão 1) + qualificação importante (padrão 3): 'Isso que você vê não é acne — é parte normal da sua pele. Deixa eu mostrar por quê.'",
+        "padrao_aplicado": "Diagnóstico diferencial (padrão 3) + educação baseada em tendência real (shorts/verão de 2026 viralizando molusco no consultório)",
         "voz": {
-          "registro": "Dermatologista perita que já viu esse vídeo mil vezes e freia a audiência: 'não é isso que você tá vendo'",
-          "de_onde_veio": "dermdoctor (41.3M): copiei a mecânica de negar primeiro e nomear depois ('Sebaceous filaments. That's what you're seeing, not blackheads') e o fecho de 'não precisa fazer campanha pra expulsar isso do rosto' — virou 'deixa em paz'."
-        },
-        "virais_origem": [
-          {
-            "url": "https://www.tiktok.com/@dermdoctor/video/6949993329853549829",
-            "autor": "dermdoctor",
-            "metrica": "41.3M views, 9.8% engajamento, origem 'palavra' (não hashtag do nicho)",
-            "por_que_viralizou": "Mecânica de reação de dermatologista que desmente crença popular de que pele 'suja' causa sebácea; origem por palavra indica cruzamento de público além do nicho."
-          }
-        ],
-        "embasamento_viral": "Maior viral da coleta (41.3M, 9.8% engaj.) e sem versão BR consolidada: a confusão sebácea/cravo é universal e o formato 'não é X, é Y' gera comentário de identificação imediata.",
-        "embasamento_cientifico": [
-          "Sebaceous Filaments: Difference From Blackheads & Treatment — Cleveland Clinic — https://my.clevelandclinic.org/health/diseases/24571-sebaceous-filaments",
-          "Sebaceous Filaments vs. Blackheads – What's the Difference? — Paula's Choice (revisado por dermatologista certificada) — https://www.paulaschoice.com/expert-advice/skincare-advice/blackheads/blackheads-or-something-else.html"
-        ],
-        "cta": "Comenta 'sebácea' se você passou anos apertando isso — quero ver quantas somos.",
-        "hashtags": [
-          "#sebaceas",
-          "#cravos",
-          "#dermatologista",
-          "#skincare",
-          "#zonat"
-        ]
-      },
-      {
-        "titulo": "Calo ou verruga? Dá pra diferenciar em dez segundos",
-        "pilar": "Educação sobre procedimentos",
-        "formato": "talking head com close nas mãos/pés e três critérios numerados na tela",
-        "ganchos_3s": [
-          "Calo ou verruga? Aqui está como você diferencia em dez segundos, olhando as linhas da sua pele.",
-          "Se as linhas do seu dedo passam por cima daquela bolinha dura, é calo. Se elas param nela, é verruga.",
-          "Lixar verruga em casa é o jeito mais rápido de ter três em vez de uma."
-        ],
-        "roteiro_reels": [
-          {
-            "tempo": "0-4s",
-            "fala": "Calo ou verruga? Três coisas diferenciam, e a primeira você checa agora, na sua própria mão.",
-            "direcao": "Close na palma da mão, luz lateral. Texto: 'CALO ou VERRUGA?'"
-          },
-          {
-            "tempo": "4-14s",
-            "fala": "Um: as linhas da pele. Calo mantém as linhas passando por cima dele. Verruga interrompe: as linhas chegam na borda e param.",
-            "direcao": "Zoom em imagem comparativa com as linhas desenhadas por cima. Texto: '1. linhas da pele'."
-          },
-          {
-            "tempo": "14-24s",
-            "fala": "Dois: a causa. Calo é pressão e fricção — sapato apertado, academia, violão, salto. Verruga é HPV, vírus, transmitido por contato. Por isso calo aparece sempre no mesmo ponto de atrito, e verruga aparece onde quiser e aumenta em número.",
-            "direcao": "Corte seco pra rosto. Texto: '2. pressão x HPV'."
-          },
-          {
-            "tempo": "24-36s",
-            "fala": "Três: a dor. Calo dói quando você pisa em cima, na pressão direta. Verruga normalmente incomoda quando você aperta pelos lados. E na verruga é comum ter pontinhos escuros no meio, que são vasinhos.",
-            "direcao": "Gesto: apertar por cima x apertar dos lados. Texto: '3. pressão em cima x nas laterais'."
-          },
-          {
-            "tempo": "36-50s",
-            "fala": "Tratamento é diferente pra cada um. Calo: tirar o atrito, palmilha, sapato certo, lixar com cuidado. Verruga: ácido salicílico em concentração de tratamento, crioterapia com nitrogênio no consultório, e às vezes mais de uma sessão porque verruga é chata mesmo. E o que eu peço: não sai lixando verruga em casa. Você espalha o vírus pros dedos do lado e vira três.",
-            "direcao": "Dois lados na tela: 'CALO: atrito' x 'VERRUGA: vírus'. Encerrar em close firme no rosto."
-          }
-        ],
-        "roteiro_carrossel": {
-          "capa": "Calo ou verruga? Olha as linhas da sua pele.",
-          "laminas": [
-            "Linhas da pele passando por cima = calo. Linhas interrompidas = verruga.",
-            "Calo vem de pressão e fricção: sempre no mesmo ponto de atrito.",
-            "Verruga vem de HPV: aparece onde quiser e multiplica.",
-            "Calo dói na pressão direta. Verruga incomoda mais quando aperta pelos lados.",
-            "Pontinhos escuros no meio? São vasinhos — sinal de verruga.",
-            "Calo trata tirando o atrito. Verruga trata com salicílico de tratamento ou crioterapia."
-          ],
-          "cta_final": "Manda pra quem jura que aquilo no pé é 'só um calo' há dois anos."
-        },
-        "legenda_post": "As linhas da pele resolvem a dúvida antes de qualquer pomada: se elas passam por cima, é calo; se param na borda, é verruga. A diferença muda tudo, porque calo se resolve tirando atrito e verruga é vírus — HPV — e pede tratamento específico. Lixar verruga em casa espalha para os dedos vizinhos, e é assim que uma vira três.",
-        "duracao_estimada_seg": 50,
-        "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Estrutura antes/depois de educação (padrão 3) + stitch com conteúdo de beleza popular (padrão 1): impede confusão que vira problema de autodiagnóstico.",
-        "voz": {
-          "registro": "Dermatologista educador que resolve uma dúvida prática em critérios numerados, sem paternalismo",
-          "de_onde_veio": "denverskindoc (15.4M): imitei a construção de equação seca ('Warts = HPV + interrupt skin lines / Calluses = pressure') e a promessa de 'here's how to tell' no primeiro segundo."
-        },
-        "virais_origem": [
-          {
-            "url": "https://www.tiktok.com/@denverskindoc/video/7633016955082968351",
-            "autor": "denverskindoc",
-            "metrica": "15.4M views, 2.64% engajamento, origem 'palavra' ('dermatologist explains')",
-            "por_que_viralizou": "Responde uma dúvida que o público tem mas não formula; o formato de diferenciação aparece para quem não segue dermatologia."
-          }
-        ],
-        "embasamento_viral": "Conteúdo de diferenciação ('X ou Y? como saber') teve 15.4M views com origem por palavra-chave — ou seja, gera busca e salvamento, não só scroll.",
-        "embasamento_cientifico": [
-          "Warts and Molluscum Contagiosum — American Academy of Dermatology — https://www.aad.org/public/diseases/contagious-skin-conditions/warts"
-        ],
-        "cta": "Salva pra checar as linhas da pele na próxima vez que aparecer uma bolinha dura.",
-        "hashtags": [
-          "#verruga",
-          "#calo",
-          "#hpv",
-          "#dermatologia",
-          "#saudedapele"
-        ]
-      },
-      {
-        "titulo": "Voltou o short curtinho — e voltou o molusco contagioso",
-        "pilar": "Mitos vs verdades",
-        "formato": "talking head estilo bastidor de consultório, tom de aviso amigo",
-        "ganchos_3s": [
-          "Voltou a moda de short curtinho. E voltou junto uma coisa que eu tô vendo demais no consultório: molusco contagioso.",
-          "Mais pele exposta, mais contato com superfície pública. E é por isso que essas bolinhas apareceram na sua coxa.",
-          "Não, não é falta de banho. Molusco é vírus e pega por contato — inclusive no banco da academia."
-        ],
-        "roteiro_reels": [
-          {
-            "tempo": "0-4s",
-            "fala": "Voltou o short curtinho, voltou o biquíni de lateral fina — e voltou uma coisa que eu tô vendo demais no consultório agora: molusco contagioso.",
-            "direcao": "Talking head no consultório, sem intro. Texto: 'molusco contagioso'."
-          },
-          {
-            "tempo": "4-14s",
-            "fala": "Mais pele exposta significa mais pele encostando em superfície pública. Banco de academia, tatame, borda de piscina, toalha dividida, cadeira de aula de spinning.",
-            "direcao": "Corte pra imagens ilustrativas rápidas dos lugares citados."
-          },
-          {
-            "tempo": "14-26s",
-            "fala": "Como é: bolinha da cor da pele ou perolada, brilhante, com uma covinha no meio. Não dói, não coça muito, e aparece em grupo. Quem está aparecendo mais é adulto, na coxa, na virilha, na parte de trás do braço.",
-            "direcao": "Close nas mãos desenhando a bolinha com covinha no papel ou tablet. Texto: 'covinha no centro'."
-          },
-          {
-            "tempo": "26-38s",
-            "fala": "E agora a parte que eu preciso que você escute: isso não é falta de higiene. É contato. Ninguém pega molusco porque tomou banho errado, pega porque encostou. E raspar ou depilar por cima espalha, porque você carrega o vírus pela lâmina.",
-            "direcao": "Corte seco, close no rosto, tom mais baixo e firme. Texto: 'não é higiene. é contato.'"
-          },
-          {
-            "tempo": "38-50s",
-            "fala": "O que eu faço no consultório: removo. Tem mais de uma técnica e a escolha depende de quantas e de onde. O que eu não faço é esperar pra ver, porque cada semana a mais é semana de espalhar pra você mesmo e pra quem divide toalha com você. Toalha no banco da academia, e depilação só depois de tratar.",
-            "direcao": "Encerrar mostrando toalha dobrada na mão. Texto final: 'toalha no banco. sempre.'"
-          }
-        ],
-        "roteiro_carrossel": {
-          "capa": "Voltou o short curtinho. Voltou o molusco.",
-          "laminas": [
-            "Molusco contagioso é vírus e passa por contato direto pele a pele ou com superfície.",
-            "Bolinha da cor da pele, brilhante, com covinha no centro, em grupo.",
-            "Onde eu tô vendo em adulto: coxa, virilha, parte de trás do braço.",
-            "Mais pele exposta = mais contato com banco de academia, tatame e borda de piscina.",
-            "Não é falta de higiene. Ninguém pega isso por tomar banho errado.",
-            "Depilar ou raspar por cima espalha: a lâmina carrega o vírus pela perna.",
-            "Tratamento é remoção no consultório — esperar só dá tempo de multiplicar."
-          ],
-          "cta_final": "Manda pra sua amiga que treina de short e senta no banco sem toalha."
-        },
-        "legenda_post": "Molusco contagioso não é sujeira, é contato. Com mais pele exposta no verão, mais gente encostando em banco de academia, tatame e borda de piscina — e as bolinhas com covinha no centro estão aparecendo na coxa e na virilha de adultos. O erro mais comum que eu vejo é depilar por cima, porque a lâmina carrega o vírus perna abaixo.",
-        "duracao_estimada_seg": 50,
-        "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Docente que conecta observação de tendência (verão → shorts) a problema dermatológico (padrão 1 + 3): educação baseada em realidade consultatória, não hype.",
-        "voz": {
-          "registro": "Dermatologista observadora de consultório que avisa com base no que está entrando na sala esta semana",
-          "de_onde_veio": "mariwalladermatology (10.7M, 8.33%): imitei a virada 'mais pele exposta = mais contato com superfície pública' e o 'ultimamente eu tenho visto muito disso', mais o gancho de moda antes do assunto clínico."
+          "registro": "Perita observadora que reporta o que está vendo na agenda — dermatologista documentando tendência, não influencer",
+          "de_onde_veio": "Do viral da mariwalladermatology (molusco em shorts/verão): imitei a abertura de observação sazonal do consultório e a estrutura 'o que é / como diferencia / por que confunde'; do denverskindoc peguei o formato de contraste em duas frases simétricas."
         },
         "virais_origem": [
           {
             "url": "https://www.tiktok.com/@mariwalladermatology/video/7665868005674372365",
             "autor": "mariwalladermatology",
-            "metrica": "10.7M views, 8.33% engajamento, origem 'palavra' ('dermatologist explains')",
-            "por_que_viralizou": "Conecta fenômeno social (volta das roupas curtas) a problema de saúde visível e qualifica sem culpabilizar: é contato, não higiene."
+            "metrica": "10.7M views, 8.33% engaj",
+            "por_que_viralizou": "Origem 'palavra' (dermatologist explains), padrão seasonal/observação de consultório — shorts voltou, molusco e verrugas voltaram. Educação sobre O QUE É, não promessa de cura."
+          },
+          {
+            "url": "https://www.tiktok.com/@denverskindoc/video/7633016955082968351",
+            "autor": "denverskindoc",
+            "metrica": "15.4M views, 2.64% engaj",
+            "por_que_viralizou": "Padrão diagnóstico diferencial — 'Warts = HPV + interrupt skin lines. Calluses = friction + keep normal lines.'"
           }
         ],
-        "embasamento_viral": "8.33% de engajamento com 10.7M views: a combinação 'observação de tendência + desestigmatização' é a de maior taxa entre os virais educativos da semana.",
+        "embasamento_viral": "Diagnóstico diferencial é o padrão com maior alcance da semana (15.4M e 10.7M) porque resolve uma confusão coletiva em segundos. A camada sazonal (short/verão) dá motivo pra assistir agora.",
         "embasamento_cientifico": [
-          "Molluscum Contagiosum: An Overview — American Academy of Dermatology — https://www.aad.org/public/diseases/contagious-skin-conditions/molluscum-contagiosum",
-          "Molluscum Contagiosum and Warts — American Family Physician — https://www.aafp.org/pubs/afp/issues/2003/0315/p1233.html"
+          "Molluscum Contagiosum — StatPearls, NCBI/NIH: https://www.ncbi.nlm.nih.gov/books/NBK441898/",
+          "Molluscum Contagiosum vs Genital Warts — Clarewell Clinics: https://clarewellclinics.co.uk/genital-dermatology/molluscum-contagiosum/molluscum-contagiosum-vs-genital-warts/"
         ],
-        "cta": "Compartilha com quem treina de short — toalha no banco resolve metade disso.",
+        "cta": "Tira foto da bolinha e leva pro dermatologista antes de comprar ácido de farmácia.",
         "hashtags": [
+          "#molusco",
           "#moluscocontagioso",
           "#dermatologia",
-          "#verao",
-          "#peledeverdade",
-          "#saudedapele"
+          "#verruga",
+          "#pele"
         ]
       },
       {
-        "titulo": "Bolhinhas que coçam na lateral do dedo: você erra na secagem",
-        "pilar": "Educação sobre procedimentos",
-        "formato": "talking head com demonstração nas mãos, ritmo rápido",
+        "titulo": "Bolhinhas que coçam na lateral do dedo: não é infecção, é eczema dishidrótico",
+        "pilar": "Mitos vs verdades",
+        "formato": "talking head resposta-rápida com close na mão e texto de etapa na tela",
         "ganchos_3s": [
-          "Bolhinhas minúsculas que coçam na lateral do dedo? Deixa te falar da coisa boba que você tá fazendo errado: a secagem.",
-          "Não é falta de hidratante. É excesso de água. Eczema dishidrótica é isso.",
-          "Se sua mão tem bolhinhas com líquido e coça de doer, a água quente da louça é sua inimiga número um."
+          "Se você tem bolhinhas minúsculas que coçam na lateral do dedo, deixa eu te falar uma coisa importante.",
+          "Essas bolhinhas de água na mão não são verruga, não são molusco e não são fungo. E o pior que você pode fazer é passar ácido.",
+          "Coçou a lateral do dedo, apareceram bolhinhas do tamanho de cabeça de alfinete? Isso tem nome e tem gatilho."
         ],
         "roteiro_reels": [
           {
-            "tempo": "0-4s",
-            "fala": "Bolhinhas pequenas, com líquido, na lateral do dedo e na palma, coçando de doer? Isso tem nome: eczema dishidrótica. E tem um erro que quase todo mundo comete.",
-            "direcao": "Close nas mãos, dedos abertos. Texto: 'eczema dishidrótica'."
+            "tempo": "0-3s",
+            "fala": "Se você tem bolhinhas minúsculas que coçam na lateral do dedo, deixa eu te falar uma coisa importante.",
+            "direcao": "Close na mão da própria médica, dedo em evidência. Texto: LATERAL DO DEDO + COÇA"
           },
           {
-            "tempo": "4-13s",
-            "fala": "O erro é achar que a mão tá seca e resolver com mais hidratante. O gatilho na maioria dos casos é o contrário: molha, seca, molha, seca. Louça, sabão, álcool em gel, luva suando por dentro.",
-            "direcao": "Corte pra torneira aberta com água quente. Texto: 'molha → seca → molha'."
+            "tempo": "3-13s",
+            "fala": "Isso quase sempre é eczema dishidrótico. Não é uma infecção — é uma reação inflamatória. Ou seja: não tem vírus, não tem fungo, não tem o que matar.",
+            "direcao": "Corte pro rosto. Texto na tela: NÃO É INFECÇÃO"
           },
           {
-            "tempo": "13-24s",
-            "fala": "O ciclo de umidade quebra a barreira e a pele responde com vesícula. Então a dica prática: depois de lavar, seca de verdade — inclusive entre os dedos, que é onde todo mundo deixa úmido — e passa emoliente espesso ainda com a mão morna.",
-            "direcao": "Demonstrar secando entre os dedos com toalha, depois pote de creme espesso. Texto: 'seca ENTRE os dedos'."
+            "tempo": "13-26s",
+            "fala": "Aparece como vesícula: bolhinha de água, tensa, do tamanho de uma cabeça de alfinete, na lateral dos dedos e na palma. Coça antes de aparecer. E o gatilho mais comum é a dupla stress mais umidade — mão suada, mão molhada o dia todo, luva sem forro, detergente. Alergia a níquel também entra na lista.",
+            "direcao": "Split: foto clínica das vesículas / imagem de mão dentro de luva. Legenda: stress + umidade"
           },
           {
-            "tempo": "24-36s",
-            "fala": "Segunda coisa: luva de borracha sem luva de algodão por dentro é estufa. Sua mão sua, fica encharcada, e você achou que estava protegendo. Água morna em vez de quente, sabão sem perfume, e o creme de bolsa cheiroso fica longe da mão em crise — na crise, perfume é fósforo em gasolina.",
-            "direcao": "Mostrar luva de algodão entrando dentro da de borracha. Texto: 'algodão por dentro'."
+            "tempo": "26-38s",
+            "fala": "O que faz piorar: espremer as bolhinhas, passar ácido, esfregar, usar antifúngico por conta. O que ajuda de verdade: compressa fria, hidratante espesso depois de cada lavagem, luva de algodão embaixo da luva de borracha, e corticoide tópico na fase aguda.",
+            "direcao": "Corte seco a cada item. Lista aparecendo na tela em duas colunas: PIORA / AJUDA"
           },
           {
-            "tempo": "36-48s",
-            "fala": "E o que resolve crise é corticoide tópico na potência certa, pelo tempo certo, prescrito. Pomadinha de balcão passada por três meses seguidos não é tratamento, é problema novo. Se volta toda vez no mesmo dedo, vale investigar contato com níquel e produto de limpeza.",
-            "direcao": "Close no rosto, sem corte, tom firme. Texto final: 'crise = prescrição. prevenção = secagem.'"
+            "tempo": "38-46s",
+            "fala": "E não, isso não é sujeira. É a sua pele reagindo. Eu não passo peeling agressivo em mão em crise — isso é jogar gasolina.",
+            "direcao": "Volta pro rosto, tom firme. Texto final: eczema dishidrótico"
           }
         ],
         "roteiro_carrossel": {
-          "capa": "Bolhinhas que coçam na mão? O erro é a secagem.",
+          "capa": "Bolhinhas que coçam na lateral do dedo têm nome: eczema dishidrótico.",
           "laminas": [
-            "Eczema dishidrótica: vesículas pequenas com líquido, na palma e na lateral dos dedos, coceira intensa.",
-            "O gatilho não é falta de hidratante — é o ciclo molha/seca do dia inteiro.",
-            "Seca de verdade, inclusive entre os dedos. É ali que fica úmido.",
-            "Emoliente espesso logo depois de secar, com a mão ainda morna.",
-            "Luva de borracha sem algodão por dentro = estufa. Sua mão encharca.",
-            "Creme perfumado em crise arde e piora. Sabão sem perfume, água morna.",
-            "Crise se trata com corticoide tópico prescrito — não com pomada de balcão por meses."
+            "Não é infecção. É uma reação inflamatória da pele.",
+            "O sinal: vesículas minúsculas, tensas, na lateral dos dedos e na palma. Coça antes de aparecer.",
+            "Gatilho campeão: stress + umidade. Mão suada, mão molhada, luva sem forro, detergente.",
+            "Alergia de contato (níquel, por exemplo) também dispara.",
+            "Piora: espremer, esfregar, passar ácido, antifúngico por conta própria.",
+            "Ajuda: compressa fria, hidratante espesso depois de lavar as mãos, luva de algodão embaixo da de borracha, corticoide tópico na crise.",
+            "Peeling agressivo em mão em crise é gasolina no fogo. Não faço."
           ],
-          "cta_final": "Comenta 'mão' que eu faço a parte 2 sobre o que testar quando volta sempre no mesmo dedo."
+          "cta_final": "Se isso volta toda vez que sua rotina aperta, fotografa na fase da bolhinha e mostra — o diagnóstico é visual."
         },
-        "legenda_post": "Eczema dishidrótica não é mão seca: é mão encharcada o dia inteiro. O ciclo molha-seca da louça, do álcool em gel e da luva suando por dentro quebra a barreira, e a pele responde com aquelas vesículas que coçam de doer. Secar entre os dedos e usar luva de algodão por dentro da de borracha muda mais o quadro do que trocar de hidratante.",
-        "duracao_estimada_seg": 48,
+        "legenda_post": "Bolhinha de água que coça na lateral do dedo não é verruga, não é fungo e não é molusco. Eczema dishidrótico é reação inflamatória — a dupla que mais dispara é stress com umidade. Compressa fria, hidratante depois de cada lavagem e corticoide na crise resolvem muito mais que ácido.",
+        "duracao_estimada_seg": 46,
         "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Educador com 'tip' específico (padrão 3): 'Uma coisa que funciona' — estrutura vence porque promete solução sem promessa exagerada.",
+        "padrao_aplicado": "Diagnóstico diferencial + observação de tendência (verão, umidade, stress desencadeador)",
         "voz": {
-          "registro": "Dermatologista prática de dica única, que aponta o erro comum e entrega a correção sem rodeio",
-          "de_onde_veio": "denverskindoc (9.9M): mantive a arquitetura do gancho 'Hand eczema? Don't forget to try this one simple tip' — pergunta curta com o sintoma + promessa de uma coisa simples, preenchida com o erro da secagem."
+          "registro": "Educadora clínica resposta-rápida: esclarece uma confusão visual em menos de 30 segundos, sem aquecimento",
+          "de_onde_veio": "Do viral do denverskindoc sobre eczema de mão (9.9M): imitei o formato de abertura condicional ('se você tem X, ouve isso') e a diferenciação em três pontos curtos, sem promessa de cura."
         },
         "virais_origem": [
           {
             "url": "https://www.tiktok.com/@denverskindoc/video/7682060415630675231",
             "autor": "denverskindoc",
-            "metrica": "9.9M views, 2.51% engajamento, origem 'palavra' ('dermatologist reacts')",
-            "por_que_viralizou": "Problema muito específico com audiência ativa buscando solução; gancho promete simplicidade sem exagerar no resultado."
+            "metrica": "9.9M views, 2.52% engaj",
+            "por_que_viralizou": "Padrão de educação rápida (dermtok) — eczema de mão é comum e muito confundido. Origem 'palavra', atinge público além do nicho."
           }
         ],
-        "embasamento_viral": "9.9M views num tema de nicho mostra demanda por solução prática; o formato 'uma dica simples' é o que converte busca em visualização.",
+        "embasamento_viral": "Queixa altíssima prevalência + autodiagnóstico errado frequente. O briefing mostra que esse mesmo perfil de conteúdo (educação em <30s, origem 'palavra') estourou fora do nicho.",
         "embasamento_cientifico": [
-          "Dyshidrotic Eczema: Symptoms, Causes & Treatment — National Eczema Association — https://nationaleczema.org/types-of-eczema/dyshidrotic-eczema/",
-          "Dyshidrotic Eczema (Pompholyx): Background, Etiology, Epidemiology — Medscape — https://emedicine.medscape.com/article/1122527-overview"
+          "Dyshidrotic Eczema — DermNet NZ: https://dermnetnz.org/topics/dyshidrotic-eczema",
+          "Dyshidrotic Eczema: Treatment — American Academy of Dermatology: https://www.aad.org/public/diseases/eczema/types/dyshidrotic-eczema/treatment"
         ],
-        "cta": "Comenta 'mão' se você quer a parte 2 sobre o que investigar quando a crise volta sempre.",
+        "cta": "Comenta 'MÃO' se isso aparece sempre que sua semana fica pesada — quero saber quantas de vocês.",
         "hashtags": [
           "#eczema",
-          "#eczemadishidrotica",
-          "#dermatite",
-          "#maossecas",
-          "#dermatologia"
+          "#eczemadishidrotico",
+          "#maos",
+          "#dermatologia",
+          "#pele"
         ]
       },
       {
-        "titulo": "Isso NÃO é cicatriz de acne — e é por isso que nada funciona",
+        "titulo": "Isso não é cicatriz de acne. É PIH — e é por isso que seu tratamento não funciona",
         "pilar": "Mitos vs verdades",
-        "formato": "resposta a comentário + teste na tela com luz lateral",
+        "formato": "talking head corretivo com luz lateral demonstrando relevo da pele",
         "ganchos_3s": [
-          "Você acha que são cicatrizes. Tá errado. E essa confusão é exatamente por que o seu tratamento não funciona.",
-          "Mancha escura que a espinha deixou não é cicatriz. É hiperpigmentação. Uma sai, a outra não.",
-          "Acende a luz do celular do lado do seu rosto. O que você vê nos próximos dez segundos define seu tratamento."
+          "Você acha que são cicatrizes. Tá errado. E essa confusão é exatamente por que seu tratamento não funciona.",
+          "Se a marca é escura mas a pele é lisa, não é cicatriz. É pigmento. E pigmento vai embora.",
+          "Tem gente gastando dinheiro em laser de cicatriz pra tratar uma marca que ia sair sozinha em um ano."
         ],
         "roteiro_reels": [
           {
             "tempo": "0-4s",
-            "fala": "Essas marcas que a espinha deixou não são cicatrizes. E enquanto você tratar como cicatriz, não vai melhorar.",
-            "direcao": "Close no rosto com luz frontal. Texto: 'NÃO é cicatriz'."
+            "fala": "Você acha que são cicatrizes de acne. Tá errado. E essa confusão é exatamente o motivo de o seu tratamento não estar funcionando.",
+            "direcao": "Plano médio, luz frontal. Texto: ISSO NÃO É CICATRIZ"
           },
           {
             "tempo": "4-14s",
-            "fala": "O teste é de dez segundos: pega a luz do celular e ilumina o rosto de lado, bem rasante. Se a marca é só cor — marrom ou vermelha — e a pele continua lisa, é hiperpigmentação pós-inflamatória. Se aparece sombra, buraco, ondulação, aí sim é cicatriz.",
-            "direcao": "Demonstrar com a lanterna do celular em luz rasante. Texto: 'só cor = mancha / sombra = cicatriz'."
+            "fala": "Teste simples: passa o dedo. Se a pele é lisa e a marca é só escura, roxa ou avermelhada, isso é hiperpigmentação pós-inflamatória — PIH. É pigmento. E pigmento sai.",
+            "direcao": "Close na bochecha com luz lateral rasante, mostrando superfície lisa. Legenda: PELE LISA = PIGMENTO"
           },
           {
-            "tempo": "14-25s",
-            "fala": "Por que importa? Porque mancha é melanina depositada depois da inflamação. Isso sai. Com protetor solar todo dia, retinoide à noite, vitamina C, ácido azelaico. Devagar, em semanas e meses, mas sai.",
-            "direcao": "Corte pra três frascos genéricos na bancada. Texto: 'PIH: sai'."
+            "tempo": "14-26s",
+            "fala": "Cicatriz é outra coisa. Cicatriz é um buraco na pele, uma depressão que aparece quando você acende a luz de lado. Ali houve perda de tecido. Isso não desaparece sozinho.",
+            "direcao": "Segunda imagem com luz de 45 graus evidenciando depressão. Texto: CICATRIZ = RELEVO"
           },
           {
-            "tempo": "25-36s",
-            "fala": "Cicatriz é perda de estrutura. Nenhum clareador levanta um buraco. Isso pede microagulhamento, laser, subcisão, preenchimento — procedimento que reconstrói, não creme que clareia.",
-            "direcao": "Volta pro rosto, tom mais seco. Texto: 'cicatriz: relevo'."
+            "tempo": "26-38s",
+            "fala": "Por que importa: PIH você trata com protetor solar, clareador e paciência. Cicatriz precisa de estímulo de colágeno — microagulhamento, laser, subcisão. Se você fizer laser de cicatriz em cima de uma inflamação ainda ativa, você pode escurecer mais.",
+            "direcao": "Corte em duas colunas na tela: PIH → FPS + clareador / CICATRIZ → colágeno"
           },
           {
-            "tempo": "36-48s",
-            "fala": "Então, minha opinião: clareador em cima de buraco é dinheiro no lixo, e laser ablativo em cima de mancha inflamada só escurece mais. A mesma paciente pode ter os dois no mesmo rosto, e são dois planos diferentes. Faz o teste da luz antes de comprar o próximo vidrinho.",
-            "direcao": "Close final, sem corte. Texto: 'faz o teste antes de comprar'."
+            "tempo": "38-50s",
+            "fala": "E a parte que ninguém te conta: PIH leva de 6 a 12 meses. Você não fracassou no mês dois. Você só olhou no espelho antes da hora.",
+            "direcao": "Close final, tom de descoberta. Texto: 6 A 12 MESES"
           }
         ],
         "roteiro_carrossel": {
-          "capa": "Isso não é cicatriz de acne. É mancha.",
+          "capa": "Se a pele é lisa e a marca é escura, isso não é cicatriz.",
           "laminas": [
-            "Teste da luz rasante: ilumina o rosto de lado com o celular.",
-            "Só cor, pele lisa = hiperpigmentação pós-inflamatória (PIH).",
-            "Sombra, relevo, buraco = cicatriz de verdade.",
-            "PIH é melanina depositada depois da inflamação. Ela sai com tempo e tratamento.",
-            "PIH: protetor solar diário, retinoide, vitamina C, ácido azelaico.",
-            "Cicatriz é perda de estrutura: microagulhamento, laser, subcisão. Creme não levanta buraco.",
-            "Dá pra ter os dois no mesmo rosto — e são dois planos diferentes."
+            "PIH é uma marca de pigmento — vai desaparecer.",
+            "Cicatriz é um buraco na pele — isso não desaparece sozinho.",
+            "Teste caseiro: acende uma luz de lado. Se aparece relevo, é cicatriz. Se a mancha continua plana, é pigmento.",
+            "PIH acontece porque a inflamação da espinha mandou o melanócito produzir melanina em excesso.",
+            "Tratamento de PIH: FPS todos os dias, clareador, retinoide, tempo.",
+            "Tratamento de cicatriz: estímulo de colágeno — microagulhamento, laser, subcisão.",
+            "Timeline honesta do PIH: 6 a 12 meses. Desistir no mês 2 é o erro mais comum."
           ],
-          "cta_final": "Faz o teste da luz agora e me conta no comentário o que você viu: cor ou sombra?"
+          "cta_final": "Antes de marcar laser de cicatriz, descubra o que você tem de verdade. Salva pra fazer o teste da luz hoje à noite."
         },
-        "legenda_post": "A maior parte das 'cicatrizes de acne' que chegam no consultório não é cicatriz: é hiperpigmentação pós-inflamatória. E isso é boa notícia, porque mancha sai — com protetor solar diário, retinoide, vitamina C e ácido azelaico, em semanas e meses. O que não sai com creme é relevo. Faz o teste da luz rasante antes de comprar o próximo clareador.",
-        "duracao_estimada_seg": 48,
+        "legenda_post": "A maioria das 'cicatrizes de acne' que chegam no consultório não são cicatrizes — são manchas de pigmento. Uma é plana e sai; a outra é um buraco e precisa de colágeno. Confundir as duas é o que faz você gastar com o procedimento errado e desistir no mês dois.",
+        "duracao_estimada_seg": 50,
         "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Negação forte + educação (padrão 3): 'These are NOT X, they are Y' — estrutura vence porque corrige crença e oferece alternativa prática.",
+        "padrao_aplicado": "Diagnóstico diferencial demistificador + educação sobre timeline realista (padrão novo em coleta, viral em 'palavra' sobre skincare educativo)",
         "voz": {
-          "registro": "Dermatologista corretora de diagnóstico, que nega o rótulo errado e devolve esperança com o rótulo certo",
-          "de_onde_veio": "dermarkologist (8.1M): copiei a mecânica de negação em caixa alta no primeiro segundo ('These are NOT acne scars!') seguida de 'aqui está o que você pode fazer de verdade'."
+          "registro": "Dermatologista que corrige autodiagnóstico — quem chega com certeza errada sai com informação nova, sem levar culpa",
+          "de_onde_veio": "Do viral do dermarkologist 'These are NOT acne scars' (8.1M): imitei a abertura em três frases secas que derrubam a crença e o tom de descoberta em vez de repreensão."
         },
         "virais_origem": [
           {
             "url": "https://www.tiktok.com/@dermarkologist/video/7459754311032048927",
             "autor": "dermarkologist",
-            "metrica": "8.1M views, 4.49% engajamento, origem hashtag",
-            "por_que_viralizou": "A confusão PIH x cicatriz é real e leva a tratamento errado; vídeo que nega primeiro colhe engajamento porque a audiência sente que foi esclarecida."
+            "metrica": "8.1M views, 4.49% engaj",
+            "por_que_viralizou": "Padrão de educação demistificadora — 'These are NOT acne scars'. Responde dúvida coletiva: as pessoas confundem PIH com cicatriz e desistem do tratamento."
           }
         ],
-        "embasamento_viral": "4.49% de engajamento em tema de acne (categoria saturada) indica que a negação explícita mais teste prático é o diferencial de retenção.",
+        "embasamento_viral": "Correção de autodiagnóstico gera comentário defensivo e salvamento ao mesmo tempo — o viral de origem fez 4,49% de engajamento, acima da média da semana em vídeos educativos.",
         "embasamento_cientifico": [
-          "Acne-induced Post-inflammatory Hyperpigmentation: From Grading to Treatment — Journal of Clinical Medicine — https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12041799/",
-          "Post-Inflammatory Hyperpigmentation: Causes, Management, and Prevention — Medscape — https://emedicine.medscape.com/article/1069191-overview"
+          "Treatment of Post-Inflammatory Hyperpigmentation in Skin of Colour: A Systematic Review — NCBI/PMC: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11514325/",
+          "Postinflammatory Hyperpigmentation — Medscape/eMedicine: https://emedicine.medscape.com/article/1069191-overview"
         ],
-        "cta": "Faz o teste da luz e comenta: cor ou sombra?",
+        "cta": "Faz o teste da luz lateral hoje e me conta nos comentários: relevo ou mancha plana?",
         "hashtags": [
-          "#manchasdeacne",
+          "#acne",
+          "#manchasnapele",
           "#hiperpigmentacao",
           "#cicatrizdeacne",
-          "#acne",
           "#dermatologia"
         ]
       },
       {
-        "titulo": "Seu sérum de 300 reais não funciona porque a barreira está quebrada",
-        "pilar": "Rotina e prevenção",
-        "formato": "talking head com produtos na bancada, tom de tradução científica",
+        "titulo": "Melasma em 30 dias é venda. O roteiro que funciona leva de 6 a 12 meses",
+        "pilar": "Educação sobre procedimentos",
+        "formato": "POV educadora com registro de processo (fotos mês a mês) e narração realista",
         "ganchos_3s": [
-          "Você gastou trezentos reais num sérum e a pele continua ardendo. Deixa te contar por quê.",
-          "Não é o sérum que é ruim. É que você está passando ativo em cima de barreira quebrada.",
-          "Se qualquer coisa que você passa no rosto arde por dez segundos, pare tudo por duas semanas. Eu explico o que acontece depois."
+          "Se te prometeram sumir com melasma em 30 dias, alguém te vendeu expectativa.",
+          "Melasma é profundo — não é marca superficial. Por isso nenhum creme resolve em um mês.",
+          "Você não falhou no tratamento de melasma. Você olhou o resultado no mês errado."
         ],
         "roteiro_reels": [
           {
             "tempo": "0-4s",
-            "fala": "Você gastou trezentos reais num sérum, usa religiosamente, e a pele continua vermelha e ardendo. O problema não é o sérum.",
-            "direcao": "Segurar um frasco de sérum e colocar de lado na bancada. Texto: 'não é o sérum'."
+            "fala": "Se te prometeram sumir com melasma em 30 dias, alguém te vendeu expectativa.",
+            "direcao": "Plano médio, luz natural, sem jaleco. Texto: 30 DIAS? NÃO."
           },
           {
-            "tempo": "4-14s",
-            "fala": "Sua barreira cutânea tá quebrada. Ela é o que segura água dentro da pele e segura irritante fora. Quando ela falha, a água evapora — perda de água transepidérmica — e tudo que você passa entra onde não devia e arde.",
-            "direcao": "Corte pra animação simples de tijolo/cimento ou gesto com as mãos. Texto: 'TEWL: a água vai embora'."
+            "tempo": "4-15s",
+            "fala": "Melasma é profundo — não é marca superficial. O pigmento não está só na camada de cima; ele desce. E como a pele renova devagar, cada milímetro de clareamento é conquistado em semanas, não em dias.",
+            "direcao": "Ilustração simples de camadas da pele com pigmento em dois níveis. Legenda: hiperpigmentação dermal"
           },
           {
-            "tempo": "14-26s",
-            "fala": "Os sinais: arde ao passar qualquer coisa, repuxa depois do banho, descama em placa fininha, vermelhidão que não passa e, do nada, espinha inflamada. Se você reconheceu três, é barreira, não é falta de produto.",
-            "direcao": "Lista rápida aparecendo na tela, um item por segundo, com a médica assentindo."
+            "tempo": "15-28s",
+            "fala": "O que funciona de verdade são quatro coisas juntas: FPS 50 ou mais todos os dias, hidroquinona ou outro clareador prescrito, retinoide à noite e paciência. FPS é não-negociável — ou tudo que você fizer desfaz na primeira semana de sol.",
+            "direcao": "Corte a cada item, produto na mão. Texto acumulando na tela: FPS 50+ / CLAREADOR / RETINOIDE / TEMPO"
           },
           {
-            "tempo": "26-38s",
-            "fala": "Protocolo: pausa de duas semanas em ácido, retinoide e esfoliante. Só sabonete suave, creme reparador com ceramida e ácido hialurônico duas vezes por dia, protetor solar. Zinco é subestimado, funciona — mas eu prefiro creme reparador de rosto, tipo Cicalfate ou Cicaplast, porque entrega mais coisa junto.",
-            "direcao": "Colocar três potes na bancada, um por um, e afastar os ácidos pra fora do quadro. Texto: 'pausa de 14 dias'."
+            "tempo": "28-42s",
+            "fala": "A linha do tempo honesta: mês 1 e 2, quase nada — você só está segurando a piora. Mês 3, começa a clarear nas bordas. Mês 6 a 12, a diferença aparece na foto. Quem desiste, desiste no mês 2.",
+            "direcao": "Fotos de progressão datadas (mês 0, 3, 6). Texto: MÊS 3 COMEÇA"
           },
           {
-            "tempo": "38-50s",
-            "fala": "Em duas semanas a ardência cai, e aí você reintroduz o ativo: duas vezes na semana, em cima do hidratante. E a frase que eu mais repito no consultório: ninguém tem barreira ruim por falta de sérum. Tem por excesso.",
-            "direcao": "Close final no rosto, sem corte. Texto: 'não é falta. é excesso.'"
+            "tempo": "42-52s",
+            "fala": "E olha: laser não é a primeira linha em melasma. Feito na pele errada, na hora errada, ele inflama e escurece mais. Eu prefiro começar chato e devagar do que ter que consertar depois.",
+            "direcao": "Close, tom firme e apoiador. Texto final: MELASMA É CONTROLE, NÃO CORRIDA"
           }
         ],
         "roteiro_carrossel": {
-          "capa": "Seu sérum caro não funciona. A culpa é da barreira.",
+          "capa": "Melasma não some em 30 dias. Mas tem roteiro.",
           "laminas": [
-            "Barreira cutânea segura água dentro e irritante fora. Quando falha, tudo arde.",
-            "Perda de água transepidérmica (TEWL): a pele desidrata mesmo com hidratante.",
-            "Sinais: arde, repuxa, descama fino, vermelhidão que não passa, acne do nada.",
-            "Passo 1: pausa de 14 dias em ácido, retinoide e esfoliante.",
-            "Passo 2: sabonete suave + creme reparador com ceramida e ácido hialurônico, 2x/dia.",
-            "Zinco funciona e é subestimado — mas creme reparador de rosto entrega mais junto.",
-            "Passo 3: reintroduz o ativo 2x/semana, em cima do hidratante."
+            "Melasma é profundo. Não é marca superficial — e é por isso que demora.",
+            "A pele renova devagar. Cada tom de clareamento leva semanas.",
+            "Pilar 1: FPS 50+ todos os dias. É não-negociável, ou tudo que você fizer desfaz.",
+            "Pilar 2: clareador prescrito (hidroquinona é a referência).",
+            "Pilar 3: retinoide à noite, pra acelerar a renovação.",
+            "Pilar 4: tempo. Mês 3 começa a virar, mês 6 a 12 aparece na foto.",
+            "Laser não é a primeira linha. Na hora errada, inflama e escurece mais."
           ],
-          "cta_final": "Salva pra consultar no dia 1 da sua pausa — e volta pra me contar como tava no dia 14."
+          "cta_final": "Se você tem melasma, tira uma foto hoje com a mesma luz e guarda. Daqui a 90 dias você vai agradecer ter um ponto de comparação."
         },
-        "legenda_post": "Ativo bom em barreira quebrada não funciona: arde, inflama e você conclui que o produto é ruim. Antes de comprar o próximo sérum, faz 14 dias de reparo — sabonete suave, creme com ceramida e ácido hialurônico, protetor solar — e só depois reintroduz o ativo duas vezes por semana. Ninguém tem barreira ruim por falta de sérum; tem por excesso.",
-        "duracao_estimada_seg": 50,
-        "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Qualificação inteligente (padrão 3): 'zinco é bom, MAS eu prefiro cremes de barreira' — estrutura evita polêmica, oferece nuance prática.",
+        "legenda_post": "Melasma não é falta de esforço seu — é biologia. O pigmento é profundo e a pele renova devagar, então o resultado aparece entre o sexto e o décimo segundo mês, não no trigésimo dia. FPS 50+, clareador, retinoide e constância. E laser não é o primeiro passo: na pele inflamada ele escurece.",
+        "duracao_estimada_seg": 52,
+        "plataforma_origem_da_tendencia": "multiplataforma",
+        "padrao_aplicado": "Educação antes/depois + honestidade sobre timeline (padrão melasma em espanhol viraliza, adaptado para BR com evidência)",
         "voz": {
-          "registro": "Dermatologista tradutora, que dá a razão científica de uma queixa comum e nomeia produto sem vender",
-          "de_onde_veio": "drjennyliu (8.3M): imitei o movimento de 'X é subestimado, mas eu prefiro Y' e a confiança que vem de nomear produto específico em vez de falar 'um bom hidratante'."
+          "registro": "Educadora que mostra o caminho e documenta o processo — voz de quem trata melasma de perto, não de quem vende milagre",
+          "de_onde_veio": "Dos virais de melasma da lorennyh e da indiqueiii: imitei o antes/depois com processo visível e a expectativa corrigida logo na primeira frase, em vez de promessa de cura."
         },
         "virais_origem": [
           {
-            "url": "https://www.tiktok.com/@drjennyliu/video/7646584708993764622",
-            "autor": "drjennyliu",
-            "metrica": "8.3M views, 6.09% engajamento, origem 'palavra' ('skin barrier repair')",
-            "por_que_viralizou": "Responde a queixa real ('meu hidratante não funciona') com razão científica e ganha confiança ao nomear produtos específicos."
+            "url": "https://www.tiktok.com/@lorennyh/video/7481087800067034373",
+            "autor": "lorennyh",
+            "metrica": "8.5M views, 1.16% engaj",
+            "por_que_viralizou": "Origem 'palavra' (melasma tratamento), antes/depois com expectativa real. Não promete cura em 30 dias, mostra processo. Padrão em espanhol, sem versão BR consolidada."
+          },
+          {
+            "url": "https://www.tiktok.com/@indiqueiii/video/7581611263965318407",
+            "autor": "indiqueiii",
+            "metrica": "13.1M views, 0.43% engaj",
+            "por_que_viralizou": "Origem 'palavra' (melasma tratamento), influenciadora BR mostrando cuidado pessoal. Resgata a busca 'melasma' sem saturação."
           }
         ],
-        "embasamento_viral": "6.09% de engajamento com origem por palavra-chave 'skin barrier repair': o tema tem busca ativa e o diferencial é a nuance ('funciona, mas eu prefiro'), que gera comentário em vez de ceticismo.",
+        "embasamento_viral": "Melasma é pauta que transcende o SkinTok (8,5M e 13,1M vindos de busca por palavra) e o briefing aponta ausência de versão consolidada em português — espaço aberto.",
         "embasamento_cientifico": [
-          "Barrier creams — DermNet NZ — https://dermnetnz.org/topics/barrier-cream",
-          "Biomimetic hyaluronic acid-stabilized zinc oxide nanoparticles in acne treatment — ScienceDirect — https://www.sciencedirect.com/science/article/abs/pii/S0168365925003748"
+          "Treatment of Post-Inflammatory Hyperpigmentation in Skin of Colour — NCBI: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11514325/",
+          "Postinflammatory Hyperpigmentation — Overview, Medscape: https://emedicine.medscape.com/article/1069191-overview"
         ],
-        "cta": "Salva e começa a pausa de 14 dias hoje — me conta no dia 14 como tá a ardência.",
+        "cta": "Tira a foto do mês zero hoje. Volta aqui em 90 dias pra comparar.",
         "hashtags": [
-          "#barreiracutanea",
-          "#ceramidas",
-          "#peleirritada",
-          "#skincare",
-          "#dermatologia"
-        ]
-      },
-      {
-        "titulo": "Minha rotina: 4 produtos, nenhum cult",
-        "pilar": "Rotina e prevenção",
-        "formato": "rotina visual sem fala, texto na tela, ritmo ASMR (som real de água, tampa, mãos)",
-        "ganchos_3s": [
-          "(texto na tela) Minha rotina real. 4 produtos. Nenhum cult.",
-          "(texto na tela) Dermatologista com 11 anos de consultório. Prateleira do banheiro: 4 frascos.",
-          "(texto na tela) Sem essência. Sem toner. Sem sheet mask. Assista até o fim e conta quantos passos faltaram."
-        ],
-        "roteiro_reels": [
-          {
-            "tempo": "0-4s",
-            "fala": "(sem fala) Texto na tela: 'minha rotina. 4 produtos. nenhum cult.'",
-            "direcao": "Plano fixo da bancada com os 4 frascos alinhados. Som real: tampa abrindo. Zero música cantada, batida baixa."
-          },
-          {
-            "tempo": "4-14s",
-            "fala": "(sem fala) Texto: '1 · lavar — sabonete suave, 20 segundos, água morna'",
-            "direcao": "Close nas mãos espalhando o sabonete no rosto, contagem discreta no canto da tela. Som de água."
-          },
-          {
-            "tempo": "14-26s",
-            "fala": "(sem fala) Texto: '2 · noite — retinoide, tamanho de uma ervilha, pele seca'",
-            "direcao": "Squeeze do tubo na ponta do dedo, mostrar a quantidade em close absoluto (a ervilha é o conteúdo). Texto complementar: 'rosto TODO com isso'."
-          },
-          {
-            "tempo": "26-36s",
-            "fala": "(sem fala) Texto: '3 · hidratante por cima — sim, em cima do retinoide'",
-            "direcao": "Pote abrindo, dedo retirando, quatro pontos no rosto, espalhar devagar. Som da tampa fechando."
-          },
-          {
-            "tempo": "36-50s",
-            "fala": "(sem fala) Texto: '4 · manhã — protetor solar, 2 dedos, todo dia, chuva inclusive' → tela final: 'se sua prateleira tem 11 produtos, você não tem rotina. tem coleção.'",
-            "direcao": "Medir os dois dedos de protetor na tela, aplicar, olhar pra câmera e dar de ombros. Corte seco no texto final em tela cheia."
-          }
-        ],
-        "roteiro_carrossel": {
-          "capa": "4 produtos. É essa a rotina da dermatologista.",
-          "laminas": [
-            "1 · Sabonete suave. 20 segundos, água morna. Não precisa espumar até doer.",
-            "2 · Retinoide à noite, na pele seca, quantidade de uma ervilha para o rosto todo.",
-            "3 · Hidratante por cima do retinoide — isso reduz irritação, não 'anula' o ativo.",
-            "4 · Protetor solar de manhã, dois dedos, todo dia, inclusive em dia nublado.",
-            "O que não tem na minha prateleira: toner, essência, esfoliante semanal, sheet mask.",
-            "Resultado não vem do número de passos. Vem de fazer os 4 todos os dias por meses."
-          ],
-          "cta_final": "Conta nos comentários quantos produtos você usa hoje — e quais dá pra tirar."
-        },
-        "legenda_post": "Quatro produtos. É isso que tem na minha bancada depois de anos de consultório: sabonete suave, retinoide, hidratante e protetor solar. O que muda pele não é a quantidade de passos, é a repetição dos passos certos por meses. Se a sua prateleira tem onze frascos, provavelmente você não tem rotina — tem coleção.",
-        "duracao_estimada_seg": 50,
-        "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Rotina visual (padrão 2) + educação qualificada (padrão 3): 'aqui está como EU faço, não como vendem'",
-        "voz": {
-          "registro": "Dermatologista em modo confessional silencioso — só mãos, produto e texto na tela, nada de explicação",
-          "de_onde_veio": "drgazy (5.6M, 8.62%) e o padrão ASMR de olafflee (21.96% de engajamento, o maior da semana): imitei a ausência total de fala, a repetição de gesto e o texto curto na tela como única narração."
-        },
-        "virais_origem": [
-          {
-            "url": "https://www.tiktok.com/@drgazy/video/7195028262765022506",
-            "autor": "drgazy",
-            "metrica": "5.6M views, 8.62% engajamento, origem hashtag (#dermatologist)",
-            "por_que_viralizou": "Mostra rotina real e quebra expectativa de quantidade: o público acha que precisa de dez produtos e vê a médica usar quatro."
-          },
-          {
-            "url": "https://www.tiktok.com/@olafflee",
-            "autor": "olafflee",
-            "metrica": "5.2M views, 21.96% engajamento (maior taxa da coleta)",
-            "por_que_viralizou": "Rotina em ASMR, sem fala, sem justificativa científica: ganha por repetição de imagem e som satisfatório."
-          }
-        ],
-        "embasamento_viral": "O formato de maior engajamento da semana é rotina silenciosa (21.96%); aplicar isso com autoridade médica soma o alcance do ASMR à quebra de expectativa ('só 4 produtos').",
-        "embasamento_cientifico": [
-          "Best Skincare Routine for Healthy Skin — American Academy of Dermatology — https://www.aad.org/public/everyday-care/skin-care-basics/best-skincare-routine"
-        ],
-        "cta": "Comenta quantos produtos tem na sua prateleira hoje — eu digo quais sobram.",
-        "hashtags": [
-          "#skincareroutine",
-          "#rotinadepele",
+          "#melasma",
+          "#manchasnorosto",
           "#protetorsolar",
-          "#retinoide",
+          "#hidroquinona",
           "#dermatologia"
         ]
       },
       {
-        "titulo": "Vitiligo: quem prometeu cura em 30 dias não te respeita",
-        "pilar": "Mitos vs verdades",
-        "formato": "talking head estático, luz suave, tom de conversa séria",
+        "titulo": "Peróxido de benzoíla arde, sim: o que acontece semana a semana",
+        "pilar": "Educação sobre procedimentos",
+        "formato": "talking head em formato calendário, com contagem de semanas na tela",
         "ganchos_3s": [
-          "Se alguém te prometeu acabar com o vitiligo em 30 dias, essa pessoa não te respeita como paciente.",
-          "Vitiligo não é micose, não pega, e não sai com chá. Agora o que existe de verdade pra tratar.",
-          "Já atendi gente que gastou o salário em pomada milagrosa pra vitiligo. Vou te contar o que realmente muda a mancha."
+          "Peróxido de benzoíla queima, sim. Mas deixa eu te contar o que acontece semana a semana pra você não desistir.",
+          "Semana 1 é a mais dura: sua pele pode ficar avermelhada e descascar. Isso não é alergia.",
+          "Todo mundo abandona o peróxido de benzoíla no dia 9. O resultado dele começa no dia 28."
         ],
         "roteiro_reels": [
           {
-            "tempo": "0-5s",
-            "fala": "Se alguém te prometeu fazer o vitiligo desaparecer em trinta dias, essa pessoa não te respeita como paciente. Vou te explicar o que acontece na sua pele e o que existe de verdade.",
-            "direcao": "Plano médio, olhando direto na câmera, sem trilha. Texto: 'cura em 30 dias não existe'."
+            "tempo": "0-4s",
+            "fala": "Peróxido de benzoíla queima, sim. Mas deixa eu te contar o que acontece semana a semana pra você não desistir no meio.",
+            "direcao": "Segurando o tubo do produto. Texto: SEMANA A SEMANA"
           },
           {
-            "tempo": "5-16s",
-            "fala": "Vitiligo é quando o próprio sistema imune ataca os melanócitos, que são as células que fazem a cor da pele. Sem melanócito funcionando, a pele fica branca naquela área. Não é fungo, não é falta de vitamina mágica, e não pega em ninguém.",
-            "direcao": "Corte pra ilustração simples da pele com e sem pigmento. Texto: 'melanócitos'."
+            "tempo": "4-16s",
+            "fala": "Semana 1 e 2: é a fase mais dura. Pele avermelhada, repuxando, descascando nos cantos da boca e do nariz. Isso não é alergia, é a barreira se adaptando. Alergia coça, incha e espalha — aí sim você para.",
+            "direcao": "Texto grande na tela: SEMANA 1-2. Close no canto da boca descamando (imagem ilustrativa)"
           },
           {
             "tempo": "16-28s",
-            "fala": "O que muda o quadro: tópicos que freiam essa inflamação, fototerapia com UVB de banda estreita, e acompanhamento porque vitiligo tem fase de atividade e fase estável. Repigmentar é lento — a gente conta em meses, não em semanas. Rosto e tronco respondem melhor que mão e pé.",
-            "direcao": "Talking head, contando nos dedos os três pilares. Texto: 'tópicos · fototerapia · acompanhamento'."
+            "fala": "Semana 4: a ardência cai e o número de inflamadas começa a baixar. O peróxido reduz a C. acnes e desentope o poro — ele trabalha por baixo antes de aparecer no espelho.",
+            "direcao": "Texto: SEMANA 4. Corte pro rosto, tom de coach"
           },
           {
             "tempo": "28-40s",
-            "fala": "E uma coisa que quase ninguém fala: protetor solar é parte do tratamento. Não é vaidade. A área sem melanina não tem proteção nenhuma, e a pele ao redor bronzeia e aumenta o contraste.",
-            "direcao": "Close no frasco de protetor, depois volta pro rosto. Texto: 'protetor = tratamento'."
+            "fala": "Semana 8 a 12: é aqui que mora o resultado máximo — a literatura fala em cerca de 55% de redução de acne em 12 semanas. Doze. Não duas.",
+            "direcao": "Texto: SEMANA 8-12 · ~55% EM 12 SEMANAS"
           },
           {
             "tempo": "40-52s",
-            "fala": "E tem gente que decide não tratar, que olha pra própria pele e tá em paz. Isso é escolha legítima e eu respeito no consultório. O que não é legítimo é vender cura pra quem tá vulnerável. Se prometeram trinta dias, saia.",
-            "direcao": "Close final, tom baixo, pausa antes da última frase. Texto: 'não tratar também é escolha'."
+            "fala": "Como eu oriento: comece com 2,5%, uma vez por dia, cinco minutos antes do hidratante. Se tolerar bem depois de uma semana, sobe pra duas vezes. Dez por cento em pele virgem não acelera nada — só te faz abandonar o tratamento com a cara ardendo.",
+            "direcao": "Mostra concentração no rótulo. Texto final: 2,5% JÁ RESOLVE"
           }
         ],
         "roteiro_carrossel": {
-          "capa": "Vitiligo: quem promete cura em 30 dias não te respeita.",
+          "capa": "Peróxido de benzoíla: o calendário que ninguém te deu.",
           "laminas": [
-            "Vitiligo é autoimune: o sistema imune ataca os melanócitos, as células que dão cor à pele.",
-            "Não é micose, não é falta de vitamina mágica, e não é contagioso.",
-            "Tratamentos reais: tópicos que freiam a inflamação e fototerapia com UVB de banda estreita.",
-            "Repigmentação se conta em meses. Rosto e tronco respondem melhor que mãos e pés.",
-            "Protetor solar é tratamento: a área sem melanina não tem proteção e o contraste aumenta com o bronzeado ao redor.",
-            "Vitiligo tem fase ativa e fase estável — por isso acompanhamento importa mais que produto novo.",
-            "Escolher não tratar é legítimo. Vender cura para quem está vulnerável, não."
+            "Semana 1-2: ardência, vermelhidão e descamação. É esperado.",
+            "Isso não é alergia, é a barreira se adaptando. Alergia coça, incha e espalha.",
+            "Semana 4: a ardência cai e as lesões inflamadas começam a reduzir.",
+            "Semana 8-12: resultado máximo. Literatura aponta cerca de 55% de redução em 12 semanas.",
+            "Comece com 2,5%, 1x ao dia. Suba pra 2x só se tolerar.",
+            "Hidratante não anula o ativo — ele é o que te faz continuar usando.",
+            "10% em pele virgem não acelera. Só faz você desistir."
           ],
-          "cta_final": "Manda esse post pra quem está sendo assediado por promessa de cura."
+          "cta_final": "Marca no celular a data em que você começou. No dia 28 você volta aqui e me conta se a ardência caiu."
         },
-        "legenda_post": "Vitiligo é autoimune: o sistema imune ataca os melanócitos e a pele perde a cor naquela área. Existe tratamento de verdade — tópicos, fototerapia com UVB de banda estreita, acompanhamento das fases — e existe protetor solar, que aqui é tratamento e não vaidade. O que não existe é cura em 30 dias, e quem te promete isso está vendendo esperança pra bolso vulnerável.",
+        "legenda_post": "Quem abandona o peróxido de benzoíla quase sempre abandona na semana 2 — exatamente a semana em que ele é mais desconfortável e menos visível. Ardência e descamação no começo não são alergia, são adaptação. O resultado grande mora entre a semana 8 e a 12, e 2,5% dá conta: concentração alta não acelera, só afasta você do tratamento.",
         "duracao_estimada_seg": 52,
         "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Humanização + mito desmentido (padrão 1 + 3): 'Se alguém te prometeu cura, essa pessoa não te respeita'",
+        "padrao_aplicado": "Educação + timing expectativa (padrão consolidado em coleta anterior, mantém-se viral). Preenche gap de confusão 'queimar = funcionar'",
         "voz": {
-          "registro": "Dermatologista humanizadora, ritmo lento, que defende o paciente do charlatão antes de explicar a doença",
-          "de_onde_veio": "drsamanthaellis (7.0M, 6.87%): imitei a normalização da condição e o olhar direto na câmera sem trilha, trocando o 'do you have one?' por uma frase de defesa do paciente."
+          "registro": "Dermatologista coach: valida o desconforto, entrega calendário e tira a pessoa do impulso de desistir",
+          "de_onde_veio": "Do viral do drmarcioferro (11.7M), que ganhou tração por transparência e bastidor humanizado: imitei a honestidade sobre a parte ruim do processo antes de falar do resultado."
+        },
+        "virais_origem": [
+          {
+            "url": "https://www.tiktok.com/@drmarcioferro/video/7428619746804780293",
+            "autor": "drmarcioferro",
+            "metrica": "11.7M views, 7.28% engaj",
+            "por_que_viralizou": "Origem 'palavra' (despreenchimento, confiança em dermatologista), bastidor humanizado. Padrão BR de educação por transparência."
+          }
+        ],
+        "embasamento_viral": "Transparência sobre a fase ruim gera 7%+ de engajamento no viral de origem; formato calendário cria retenção bloco a bloco porque cada semana é um mini-cliffhanger.",
+        "embasamento_cientifico": [
+          "Benzoyl Peroxide — NCBI StatPearls: https://www.ncbi.nlm.nih.gov/books/NBK537220/",
+          "Clinical Efficacy — Benzoyl Peroxide 2.5% + Salicylic Acid, ClinicalTrials.gov: https://clinicaltrials.gov/study/NCT01446237",
+          "Benzoyl Peroxide: 55% Acne Reduction in 12 Weeks — Acne.org: https://www.acne.org/treatment/benzoyl-peroxide"
+        ],
+        "cta": "Em que semana você tá? Escreve o número aí embaixo que eu digo o que esperar da próxima.",
+        "hashtags": [
+          "#acne",
+          "#peroxidodebenzoila",
+          "#skincare",
+          "#tratamentodeacne",
+          "#dermatologia"
+        ]
+      },
+      {
+        "titulo": "Quem promete curar vitiligo em 30 dias não te respeita como paciente",
+        "pilar": "Mitos vs verdades",
+        "formato": "talking head único, sem cortes, close médio — tom de conversa protetora",
+        "ganchos_3s": [
+          "Se alguém te prometeu curar vitiligo em 30 dias, essa pessoa não te respeita como paciente.",
+          "Vitiligo não é fungo, não é mancha de sol e não é contagioso. É o seu sistema imune atacando o melanócito.",
+          "Vitiligo tem tratamento sério. Cura, não. E quem te vende cura tá vendendo sua esperança."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-4s",
+            "fala": "Se alguém te prometeu curar vitiligo em 30 dias, essa pessoa não te respeita como paciente.",
+            "direcao": "Close médio, olhando direto na câmera, sem corte. Texto: NÃO EXISTE CURA EM 30 DIAS"
+          },
+          {
+            "tempo": "4-16s",
+            "fala": "Vitiligo é uma condição autoimune — o corpo está atacando as suas próprias células, os melanócitos, que são as células que fazem cor. Sem melanócito funcionando, a pele fica branca naquela área. Isso é despigmentação, não mancha de fungo, não mancha de sol.",
+            "direcao": "Mantém plano único. Legenda: autoimune · melanócitos"
+          },
+          {
+            "tempo": "16-26s",
+            "fala": "Não é contagioso, não é infecção e não vem de nada que você fez. Não foi comida, não foi banho frio, não foi nervoso mal curado.",
+            "direcao": "Corte suave pra close maior, tom mais baixo. Texto: NÃO É CULPA SUA"
+          },
+          {
+            "tempo": "26-40s",
+            "fala": "O tratamento real é longo e tem três frentes: FPS agressivo, porque pele sem pigmento queima em minutos e o contraste aumenta; corticoide ou imunomodulador tópico pra frear o ataque imune; e fototerapia pra estimular repigmentação. A meta é estabilizar e recuperar o que der.",
+            "direcao": "Três dedos contando. Texto acumulando: FPS / TÓPICO / FOTOTERAPIA"
+          },
+          {
+            "tempo": "40-50s",
+            "fala": "E eu vou ser clara: suplemento natural não repigmenta vitiligo. Se te venderam isso com foto de antes e depois, te venderam uma fantasia caríssima.",
+            "direcao": "Close final, firme. Texto: CONTROLE ≠ CURA"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Vitiligo: o que é verdade e o que é venda.",
+          "laminas": [
+            "Vitiligo é autoimune: o corpo ataca os melanócitos, as células que dão cor à pele.",
+            "Não é contagioso, não é infecção e não vem de nada que você fez.",
+            "Por isso não é 'mancha de fungo' e não responde a antifúngico.",
+            "FPS agressivo é obrigatório: pele sem pigmento queima rápido e o contraste aumenta.",
+            "Corticoide ou imunomodulador tópico freia o ataque imune.",
+            "Fototerapia estimula repigmentação — é processo longo, medido em meses.",
+            "A meta honesta é controle e repigmentação parcial. Cura em 30 dias é venda."
+          ],
+          "cta_final": "Se alguém te prometeu cura, peça o protocolo por escrito. Quem trata de verdade explica a meta antes de cobrar."
+        },
+        "legenda_post": "Vitiligo é autoimune: o corpo ataca os melanócitos. Não é contagioso, não é infecção, não vem de nada que você fez — e não some com suplemento natural. Existe tratamento sério, com FPS, tópicos que freiam o ataque imune e fototerapia, e a meta é estabilizar e repigmentar o que for possível. Promessa de cura em 30 dias é exploração de esperança.",
+        "duracao_estimada_seg": 50,
+        "plataforma_origem_da_tendencia": "tiktok",
+        "padrao_aplicado": "Educação demistificadora + humanização (padrão novo em coleta: afirmação clara sobre IMPOSSIBILIDADE de cura, não promessa)",
+        "voz": {
+          "registro": "Médica que protege o paciente de exploração — autoridade com empatia, sem tom distante",
+          "de_onde_veio": "Dos virais da drsamanthaellis (vitiligo vs mancha de nascimento) e do itsdrmax (normalização, 15.5M): peguei a clareza de 'não é isso que você pensa' e o tom de normalização sem vergonha, somados a uma abertura de defesa do paciente."
         },
         "virais_origem": [
           {
             "url": "https://www.tiktok.com/@drsamanthaellis/video/7671822725379394830",
             "autor": "drsamanthaellis",
-            "metrica": "7.0M views, 6.87% engajamento, origem 'palavra' ('dermatologist explains')",
-            "por_que_viralizou": "Condição de forte impacto emocional; a audiência busca validação e informação real, e o vídeo combate estigma em vez de patologizar."
+            "metrica": "7.0M views, 6.87% engaj",
+            "por_que_viralizou": "Padrão de educação desmistificadora — vitiligo vs mancha de nascimento, observação de consultório. Origem 'palavra' (educação dermatológica)."
+          },
+          {
+            "url": "https://www.tiktok.com/@itsdrmax/video/7256047135777377541",
+            "autor": "itsdrmax",
+            "metrica": "15.5M views, 2.42% engaj",
+            "por_que_viralizou": "Padrão de normalização — vitiligo é condição comum, não vergonha. Origem 'hashtag' (#dermatologist)."
           }
         ],
-        "embasamento_viral": "6.87% de engajamento mostra que conteúdo que normaliza condição visível gera comentário e compartilhamento; o briefing também mostra que promessa de cura derruba engajamento (lorennyh 1.16%), então tomar partido contra a promessa é o movimento correto.",
+        "embasamento_viral": "Os dois virais de origem somam 22,5M com o mesmo motor: tirar o estigma e corrigir crença. Tomar partido contra promessa de cura adiciona a fricção que o algoritmo premia em comentários.",
         "embasamento_cientifico": [
-          "Vitiligo: Clinical Presentation, Causes, and Treatment — American Academy of Dermatology — https://www.aad.org/public/diseases/color-disorders/vitiligo"
+          "Vitiligo — Overview, NIH/NCBI: https://www.ncbi.nlm.nih.gov/books/NBK470004/"
         ],
-        "cta": "Compartilha com quem está recebendo promessa de cura — informação é a única defesa aqui.",
+        "cta": "Manda esse vídeo pra quem tá gastando com promessa de cura.",
         "hashtags": [
           "#vitiligo",
-          "#dermatologia",
           "#autoimune",
-          "#fototerapia",
-          "#peledeverdade"
+          "#dermatologia",
+          "#pele",
+          "#fototerapia"
         ]
       },
       {
-        "titulo": "Retinol ardendo não é sinal de que está funcionando",
-        "pilar": "Rotina e prevenção",
-        "formato": "talking head com protocolo e timeline na tela",
+        "titulo": "Vaselina com bicarbonato funciona — mas o vídeo parou antes da parte importante",
+        "pilar": "Mitos vs verdades",
+        "formato": "resposta a trend, com demonstração dos dois ingredientes na bancada",
         "ganchos_3s": [
-          "Retinol ardendo e descascando não é sinal de que está funcionando. É sinal de que você exagerou.",
-          "Retinol funciona de verdade. Mas retinol exige cuidado — deixa te contar como começar sem detonar a pele.",
-          "Semana 1 você descasca, semana 4 muda a textura, semana 12 clareia a mancha. Quem para na semana 2 nunca vê nada."
+          "Vaselina com bicarbonato? Funciona. Mas deixa eu te falar o que realmente tá acontecendo na tua pele.",
+          "Não vim aqui dizer que receita caseira é burrice. Vim dizer onde essa receita te machuca.",
+          "Vaselina sela, não hidrata. Se você passa em pele seca, você acabou de lacrar a secura dentro."
         ],
         "roteiro_reels": [
           {
             "tempo": "0-4s",
-            "fala": "Retinol ardendo, vermelho e descascando não é sinal de que tá funcionando. É sinal de que você passou demais, cedo demais.",
-            "direcao": "Segurar o frasco de retinol na frente da câmera. Texto: 'arder ≠ funcionar'."
+            "fala": "Vaselina com bicarbonato? Funciona. Mas deixa eu te falar o que realmente tá acontecendo na tua pele.",
+            "direcao": "Bancada: pote de vaselina e caixa de bicarbonato à mostra. Mãos em cena."
           },
           {
-            "tempo": "4-14s",
-            "fala": "Retinol funciona de verdade: é um dos ativos mais bem estudados pra sinal de envelhecimento. Mas retinol exige cuidado, e o protocolo é chato de propósito. Comece com concentração baixa, tipo zero vírgula três por cento.",
-            "direcao": "Corte pra rótulo mostrando a concentração. Texto: '0,3% pra começar'."
+            "tempo": "4-16s",
+            "fala": "A vaselina é oclusiva: ela sela. Não hidrata sozinha — ela segura a água que já está ali. Ou seja, precisa de água ANTES: pele levemente úmida, ou um creme com ativo hidratante embaixo.",
+            "direcao": "Passa vaselina no dorso da mão úmida. Texto: VASELINA = SELA"
           },
           {
-            "tempo": "14-27s",
-            "fala": "Duas a três vezes na semana, sempre à noite, na pele bem limpa e bem seca. Quantidade de uma ervilha pro rosto inteiro — não é uma ervilha por bochecha. E logo depois, caprichem na hidratação: hidratante em cima evita metade da vermelhidão.",
-            "direcao": "Demonstrar a ervilha no dedo, depois o hidratante por cima. Texto: '2-3x/semana · à noite · pele seca'."
+            "tempo": "16-28s",
+            "fala": "O bicarbonato é abrasivo suave. Ele solta célula morta por atrito. Por isso a pele fica lisinha na hora e você jura que achou o milagre. É esfoliação mecânica — resultado imediato, e superficial.",
+            "direcao": "Close nos grãos entre os dedos. Texto: BICARBONATO = ATRITO"
           },
           {
-            "tempo": "27-39s",
-            "fala": "Timeline pra você não desistir no meio: semana um e dois é adaptação, pode descamar leve. Semana quatro a textura e o poro começam a mudar. Semana doze é quando mancha e linha fina respondem. Retinol é maratona.",
-            "direcao": "Três blocos na tela: 'sem 1-2 · sem 4 · sem 12'. Ritmo mais rápido."
+            "tempo": "28-40s",
+            "fala": "Onde eu uso sem drama: joelho, cotovelo, calcanhar, aquela aspereza de canela no inverno. Onde eu não uso nunca: rosto com acne, rosácea, pele sensível. Ali o bicarbonato irrita, mexe no pH e você troca aspereza por vermelhidão.",
+            "direcao": "Dois planos: mão no cotovelo / mão negando perto do rosto. Texto: SIM no corpo · NÃO no rosto sensível"
           },
           {
-            "tempo": "39-52s",
-            "fala": "Agora o alerta que salva pele: descamação leve e ardência que passa em minutos é adaptação. Vermelhidão com inchaço, coceira, bolinha com líquido é dermatite — para. E usar todo dia no começo pra acelerar não acelera: você fica uma semana sem passar nada pra recuperar e perde o que ganhou. Protetor solar de manhã não é opcional aqui.",
-            "direcao": "Close no rosto, tom firme, sem corte. Texto final: 'adaptação passa. dermatite para.'"
+            "tempo": "40-52s",
+            "fala": "E se você quer o mesmo efeito com menos risco: um AHA em creme faz a esfoliação de forma química, sem esfregar. Não é porque é caro — é porque não depende da força da sua mão.",
+            "direcao": "Mostra frasco de AHA. Texto final: AHA > ESFREGAR"
           }
         ],
         "roteiro_carrossel": {
-          "capa": "Retinol ardendo não é sinal de que funciona.",
+          "capa": "Vaselina com bicarbonato funciona. Só não do jeito que o vídeo disse.",
           "laminas": [
-            "Comece em concentração baixa: 0,3% resolve pra iniciante.",
-            "2 a 3 vezes por semana, sempre à noite, pele bem limpa e bem seca.",
-            "Quantidade de uma ervilha para o rosto inteiro. Não é uma por bochecha.",
-            "Hidratante depois do retinol evita metade da vermelhidão.",
-            "Semana 1-2: adaptação. Semana 4: textura e poro. Semana 12: mancha e linha fina.",
-            "Adaptação = descamação leve e ardência passageira. Dermatite = inchaço, coceira, bolinha com líquido → para.",
-            "Usar todo dia pra acelerar atrasa: você para uma semana pra recuperar e perde o ganho."
+            "Vaselina é oclusiva: sela a água que já está na pele. Precisa de umidade ANTES.",
+            "Bicarbonato é abrasivo: solta célula morta por atrito. É esfoliação mecânica.",
+            "Por isso parece milagre: a pele fica lisa na hora. Efeito real, efeito superficial.",
+            "Bicarbonato é abrasivo — usar com calma pra não irritar.",
+            "Onde vale: joelho, cotovelo, calcanhar, canela áspera.",
+            "Onde não vale: rosto com acne, rosácea, pele sensível. Ali vira vermelhidão.",
+            "Quer o mesmo efeito sem esfregar? AHA em creme faz a esfoliação quimicamente."
           ],
-          "cta_final": "Salva esse protocolo e volta aqui na semana 4 me contar o que mudou."
+          "cta_final": "Se você já usou essa receita no rosto e ficou vermelha, comenta — essa parte o vídeo original não contou."
         },
-        "legenda_post": "Retinol é um dos ativos mais bem estudados que existem — e o mais mal usado. O protocolo é simples e chato: 0,3%, duas a três vezes na semana, à noite, pele limpa e seca, hidratante por cima, protetor de manhã. Ardência que passa em minutos é adaptação; inchaço, coceira e bolinhas com líquido são dermatite e pedem pausa. Quem usa todo dia no começo pra acelerar acaba perdendo semanas de progresso.",
+        "legenda_post": "Receita caseira não é burrice: vaselina sela a hidratação e bicarbonato solta célula morta, então a pele fica lisa de verdade. O problema é o lugar. No joelho e no calcanhar, tudo bem. No rosto com acne ou rosácea, o bicarbonato irrita e você troca aspereza por vermelhidão. E vaselina em pele seca sem água antes só lacra a secura dentro.",
         "duracao_estimada_seg": 52,
         "plataforma_origem_da_tendencia": "tiktok",
-        "padrao_aplicado": "Educação com aviso crítico (padrão 3): 'retinol exige cuidado' — estrutura ganha porque reconhece risco e oferece protocolo.",
+        "padrao_aplicado": "Desmontagem educada de 'remédio caseiro' + uso apropriado (padrão: respeita sabedoria popular, adiciona ciência)",
         "voz": {
-          "registro": "Educadora de skincare em modo protocolo, firme e sem sensacionalismo, tratando o ativo com respeito",
-          "de_onde_veio": "jardeledebran (8.2M): imitei o miolo do script — 'retinol exige cuidado', 'comecem devagar, duas a três vezes na semana, sempre à noite, pele limpa e seca', 'caprichem na hidratação depois' — e o uso de plural instrutivo no meio do roteiro."
+          "registro": "Educadora colaborativa que respeita a sabedoria popular e completa com ciência — 'não é errado, é incompleto'",
+          "de_onde_veio": "Do viral do daddykady com #cuidadodelapiel (10.9M, vaselina e bicarbonato): imitei o formato de método simples demonstrado na bancada e a promessa de 'sensação de suavidade', mas encaixando o mecanismo e o limite de uso."
         },
         "virais_origem": [
           {
-            "url": "https://www.tiktok.com/@jardeledebran/video/7530660092178402616",
-            "autor": "jardeledebran",
-            "metrica": "8.2M views, 0.58% engajamento (alcance alto por busca da palavra 'retinol')",
-            "por_que_viralizou": "Retinol é procurado por todos e usado errado pela maioria; instrução correta de frequência e hidratação capta a busca pela palavra-chave."
+            "url": "https://www.tiktok.com/@daddykady/video/7598242071366929686",
+            "autor": "daddykady",
+            "metrica": "10.9M views, 3.25% engaj",
+            "por_que_viralizou": "Origem 'hashtag' (#cuidadodelapiel), método simples e demistificador, voz de médico educador em espanhol. A descrição vende 'sensação de suavidade' — resultado tátil imediato."
           }
         ],
-        "embasamento_viral": "O alcance vem da palavra-chave 'retinol como usar' (8.2M); o engajamento baixo do original abre espaço pra versão com posicionamento e timeline, que é o que gera comentário e salvamento.",
+        "embasamento_viral": "O briefing aponta que o padrão de receita caseira em espanhol está viralizando sem versão consolidada em português; reagir a ele com respeito (em vez de deboche) captura o público do viral original sem perder autoridade.",
         "embasamento_cientifico": [
-          "Retinoids in the Treatment of Skin Aging: An Overview of Clinical Efficacy and Safety — Journal of Cosmetic Dermatology — https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6416841/"
+          "Post-inflammatory Hyperpigmentation Treatment — Skin of Color Society: https://skinofcolorsociety.org/discover-patients-public/public-education/pih"
         ],
-        "cta": "Salva o protocolo e me marca na semana 4 pra contar o que mudou na textura.",
+        "cta": "Antes de repetir a receita, me diz onde você ia passar. Se a resposta for 'rosto', lê a lâmina 6 de novo.",
         "hashtags": [
-          "#retinol",
-          "#retinoide",
-          "#antienvelhecimento",
+          "#vaselina",
+          "#bicarbonato",
+          "#receitacaseira",
+          "#cuidadocomapele",
+          "#dermatologia"
+        ]
+      },
+      {
+        "titulo": "Esse pontinho no nariz não é cravo. É sebácea — e ela não sai",
+        "pilar": "Educação sobre procedimentos",
+        "formato": "talking head com espelho de aumento, tom de alívio",
+        "ganchos_3s": [
+          "Esse ponto escurinho que você aperta no nariz desde os quinze anos não é cravo. É sebácea. E ela não sai.",
+          "Você não tem o nariz sujo. Você tem poro funcionando.",
+          "Pare de comprar aspirador de poro. Você tá tentando extrair um órgão."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-4s",
+            "fala": "Esse ponto escurinho que você aperta no nariz desde os quinze anos não é cravo. É sebácea. E ela não sai.",
+            "direcao": "Espelho de aumento na frente do rosto, close no nariz. Texto: NÃO É CRAVO"
+          },
+          {
+            "tempo": "4-15s",
+            "fala": "Sebácea é gordura da sua pele sendo expelida normalmente. O poro é aberto, o sebo encosta no ar e escurece — oxidação. Isso é fisiologia, não é infecção e não é sujeira.",
+            "direcao": "Ilustração de poro aberto com sebo. Texto: OXIDAÇÃO"
+          },
+          {
+            "tempo": "15-27s",
+            "fala": "Cravo é diferente: é obstrução. Tem uma rolha ali dentro, dá pra extrair, e depois do procedimento o poro esvazia. Sebácea você espreme, sai um filetinho e em dois dias ela tá lá de novo. Porque a glândula continua produzindo. Ela é sua.",
+            "direcao": "Split screen: cravo extraído / sebácea reaparecendo. Texto: OBSTRUÍDO vs NORMAL"
+          },
+          {
+            "tempo": "27-40s",
+            "fala": "E o preço de ficar apertando: cada vez que você força, você estica a parede do poro. Ficar apertando só dilata mais — e poro dilatado não volta ao tamanho original. Aspirador de poro e extrator em casa fazem exatamente isso, com hematoma de brinde.",
+            "direcao": "Mostra aspirador de poro e coloca de lado com desdém. Texto: DILATA E NÃO VOLTA"
+          },
+          {
+            "tempo": "40-50s",
+            "fala": "O que realmente melhora a aparência: retinoide à noite, niacinamida, e limpeza de pele feita por profissional quando fizer sentido. Não é poro zero. É poro discreto. Poro zero não existe em pele viva.",
+            "direcao": "Close final, sorriso leve. Texto: PORO DISCRETO, NÃO PORO ZERO"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Não é cravo. É sebácea. E ela é sua pra sempre.",
+          "laminas": [
+            "Sebácea é gordura da sua pele sendo expelida normalmente. Fisiologia, não sujeira.",
+            "Escurece porque o sebo encosta no ar e oxida.",
+            "Cravo é obstrução: tem rolha, dá pra extrair, o poro esvazia.",
+            "Sebácea você espreme e em dois dias ela volta. A glândula continua produzindo.",
+            "Ficar apertando só dilata mais o poro — deixa ela em paz.",
+            "Poro dilatado não volta ao tamanho original. Aspirador e extrator em casa pioram isso.",
+            "O que melhora a aparência: retinoide, niacinamida e limpeza profissional. Poro discreto, não poro zero."
+          ],
+          "cta_final": "Guarda esse post pra ler na próxima vez que você travar dez minutos no espelho apertando o nariz."
+        },
+        "legenda_post": "O pontinho escuro do nariz que você aperta desde a adolescência quase sempre não é cravo: é a glândula sebácea fazendo o trabalho dela, com o sebo oxidando na boca do poro. Cravo esvazia depois da extração; sebácea volta em dois dias. E cada aperto estica a parede do poro, que não volta ao tamanho de antes. Poro zero não existe em pele viva.",
+        "duracao_estimada_seg": 50,
+        "plataforma_origem_da_tendencia": "tiktok",
+        "padrao_aplicado": "Educação desmistificadora anatomia + dica prática (padrão: diferencia via observação visual/tátil)",
+        "voz": {
+          "registro": "Educadora anatômica que alivia ansiedade — informa que aquilo é normal e tira a culpa de cena",
+          "de_onde_veio": "Do duet reativo do dermdoctor sobre pimple popping (27M): imitei a mecânica de reagir a um comportamento que todo mundo faz e explicar a anatomia na hora, com tom de alívio em vez de repreensão."
+        },
+        "virais_origem": [
+          {
+            "url": "https://www.tiktok.com/@dermdoctor/video/7010225981252259078",
+            "autor": "dermdoctor",
+            "metrica": "27.0M views, 8.29% engaj",
+            "por_que_viralizou": "Duet + reação educativa (padrão consolidado). Steatocystoma vs espremer espinha — responde uma confusão muito comum em segundos. Origem 'palavra'."
+          }
+        ],
+        "embasamento_viral": "O padrão reação-educativa do dermdoctor é o de maior alcance no briefing (27M, 8,29%). Tema de poro/nariz tem apelo universal e gera comentário confessional ('eu faço isso desde sempre').",
+        "embasamento_cientifico": [],
+        "cta": "Conta aí: quanto tempo você já perdeu apertando esse nariz? Eu leio todos.",
+        "hashtags": [
+          "#poros",
+          "#cravos",
+          "#glandulasebacea",
           "#skincare",
           "#dermatologia"
         ]
       },
       {
-        "titulo": "Assisti a rotina coreana de 10 passos até o fim: 3 fazem o trabalho",
-        "pilar": "Mitos vs verdades",
-        "formato": "reação a rotina viral com tela dividida e contagem dos passos",
+        "titulo": "Calo ou verruga? Dá pra saber em dez segundos olhando as linhas da pele",
+        "pilar": "Educação sobre procedimentos",
+        "formato": "vídeo-dica com close extremo na pele do pé/mão e overlay de setas",
         "ganchos_3s": [
-          "Assisti uma rotina coreana de dez passos inteirinha. Três passos fazem o trabalho. Os outros sete são textura e prazer — o que também tem valor, mas não é resultado.",
-          "Glass skin não é produto. É pele hidratada, sem inflamação e com colágeno preservado. Nenhuma essência faz isso sozinha.",
-          "O passo mais importante da rotina coreana é o que quase nenhum vídeo de glass skin mostra: o protetor solar."
+          "Calo ou verruga? Aqui está como você diferencia em dez segundos, olhando as linhas da sua pele.",
+          "Se a linha da sua pele continua embaixo, é calo. Se ela quebra, é vírus.",
+          "Tem gente lixando verruga todo domingo achando que é calo — e espalhando pro resto do pé."
         ],
         "roteiro_reels": [
           {
-            "tempo": "0-5s",
-            "fala": "Assisti uma rotina coreana de dez passos até o fim, sem pular. Três fazem o trabalho pesado. Vou te dizer quais e o que fazer com os outros sete.",
-            "direcao": "Split screen com vídeo de rotina em loop de um lado, médica do outro. Texto: '10 passos · 3 importam'."
+            "tempo": "0-4s",
+            "fala": "Calo ou verruga? Dá pra diferenciar em dez segundos, olhando as linhas da sua pele.",
+            "direcao": "Close extremo na sola do pé, luz dura pra marcar as linhas. Texto: 10 SEGUNDOS"
           },
           {
-            "tempo": "5-16s",
-            "fala": "Passo que vale: dupla limpeza — mas só se você usa protetor solar resistente, base ou maquiagem à prova d'água. Se você lavou o rosto de manhã e passou hidratante, uma limpeza resolve. Não tem prêmio por lavar duas vezes.",
-            "direcao": "Close no óleo de limpeza e no gel, depois tirar o gel do quadro. Texto: 'dupla limpeza: condicional'."
+            "tempo": "4-16s",
+            "fala": "Regra número um: olha as linhas. Se as linhas da pele continuam passando por cima do carocinho, é calo. Se elas param na borda e desaparecem, é verruga. Verruga é HPV, e o vírus desorganiza o desenho da pele.",
+            "direcao": "Overlay de setas acompanhando as linhas em duas fotos lado a lado. Texto: LINHAS CONTINUAM = CALO"
           },
           {
             "tempo": "16-28s",
-            "fala": "Segundo que vale: hidratação em camada. Essência e sérum aquoso são basicamente água mais umectante, e em pele desidratada isso muda o aspecto de verdade — aquele efeito vidro que você vê é pele cheia de água refletindo luz. Só não precisa de três toners diferentes pra isso.",
-            "direcao": "Mostrar camada fina batendo no rosto com as palmas, gesto igual ao da trend. Texto: 'camadas: sim. três toners: não'."
+            "fala": "Regra número dois: pontinhos escuros. Verruga costuma ter pontinhos preto-marrom dentro — são capilares. Calo é amarelado, homogêneo, sem pontinho nenhum.",
+            "direcao": "Zoom digital nos pontinhos. Texto: PONTINHOS = CAPILARES"
           },
           {
             "tempo": "28-40s",
-            "fala": "Terceiro, e é o que os vídeos de glass skin menos mostram: protetor solar. O que dá aquele aspecto uniforme na pele coreana não é a máscara de folha, é uma cultura de fotoproteção desde criança. Mancha e textura vêm do sol, e nenhuma camada de essência compensa isso.",
-            "direcao": "Corte seco pra close do protetor solar na mão, aplicar dois dedos. Texto: 'o passo que ninguém filma'."
+            "fala": "Regra número três: onde dói. Calo dói quando você pisa em cima, direto. Verruga dói mais quando você aperta dos lados. E calo aparece onde tem pressão e fricção — sapato apertado, jeito de pisar, ferramenta na mão.",
+            "direcao": "Demonstra na própria mão: aperta em cima, aperta de lado. Texto: DÓI EM CIMA vs DÓI DE LADO"
           },
           {
-            "tempo": "40-52s",
-            "fala": "E os sete restantes? Se te faz bem, faz. Rotina longa é autocuidado e eu não vou tirar isso de ninguém. Mas eu não misturo esfoliante com ativo no mesmo dia, e eu não uso máscara de folha todo dia — a barreira reclama. Glass skin não é prateleira cheia, é pele hidratada, sem inflamação e com colágeno preservado.",
-            "direcao": "Voltar pro plano médio, sorrindo, com a bancada cheia atrás. Texto final: 'glass skin não é produto'."
+            "tempo": "40-50s",
+            "fala": "Por que isso muda tudo: calo você resolve tirando a pressão — palmilha, sapato certo, hidratante com ureia. Verruga é contagiosa: lixar no banho espalha pro resto do pé e pra unha. Se quebra a linha, para de lixar.",
+            "direcao": "Corte pro rosto, tom de dica prática. Texto final: QUEBROU A LINHA? PARA DE LIXAR"
           }
         ],
         "roteiro_carrossel": {
-          "capa": "Rotina coreana de 10 passos: 3 fazem o trabalho.",
+          "capa": "Calo ou verruga? Olha as linhas da sua pele.",
           "laminas": [
-            "Dupla limpeza vale se você usa maquiagem ou protetor resistente à água. Senão, uma limpeza basta.",
-            "Hidratação em camadas funciona: essência é água + umectante, e pele cheia de água reflete luz.",
-            "Não precisa de três toners diferentes pra fazer camada.",
-            "O passo decisivo é o que os vídeos não filmam: protetor solar, todo dia.",
-            "O aspecto uniforme da pele coreana vem de fotoproteção desde a infância, não de sheet mask.",
-            "Esfoliante junto com ativo no mesmo dia: não. Máscara de folha todo dia: também não.",
-            "Glass skin é pele hidratada, sem inflamação e com colágeno preservado — não é uma prateleira cheia."
+            "Se a linha da sua pele continua embaixo, é calo.",
+            "Se a verruga QUEBRA a linha, é HPV — e precisa de tratamento diferente.",
+            "Verruga costuma ter pontinhos escuros dentro: são capilares.",
+            "Calo é amarelado, homogêneo, sem pontinho.",
+            "Calo dói quando você pisa em cima. Verruga dói mais quando aperta dos lados.",
+            "Calo nasce de pressão e fricção: sapato, pisada, ferramenta.",
+            "Verruga é contagiosa. Lixar no banho espalha pro resto do pé e pra unha."
           ],
-          "cta_final": "Me manda por DM a sua rotina em ordem que eu digo quais passos dá pra cortar sem perder nada."
+          "cta_final": "Vai no banheiro, acende a luz e olha as linhas. Volta aqui e me diz: continuou ou quebrou?"
         },
-        "legenda_post": "Dos dez passos da rotina coreana, três mudam a sua pele: limpeza adequada (dupla só se tiver maquiagem ou protetor resistente), hidratação em camadas e protetor solar todo dia. O efeito vidro é pele cheia de água refletindo luz somada a anos de fotoproteção — não é a sheet mask. Os outros sete passos podem ficar, se te fazem bem. Só não confunda autocuidado com resultado.",
-        "duracao_estimada_seg": 52,
-        "plataforma_origem_da_tendencia": "multiplataforma",
-        "padrao_aplicado": "Skincare coreano/glass skin com alcance sem barreira de língua (padrão 5) + dermatologista que assiste e qualifica a rotina viral (padrão 1 + 3): 'funciona, mas veja o que realmente faz o trabalho'",
+        "legenda_post": "O teste é o desenho da pele. Calo respeita as linhas naturais; verruga interrompe, porque o HPV desorganiza o tecido e traz capilares — aqueles pontinhos escuros. Calo dói quando você pisa em cima, verruga dói quando você aperta dos lados. E a parte mais importante: lixar verruga no banho espalha o vírus pelo resto do pé.",
+        "duracao_estimada_seg": 50,
+        "plataforma_origem_da_tendencia": "tiktok",
+        "padrao_aplicado": "Educação rápida visual + dica prática (padrão: responde confusão em <30 seg)",
         "voz": {
-          "registro": "Dermatologista curiosa que consome a trend sem esnobar e separa o que é resultado do que é ritual",
-          "de_onde_veio": "georginagio, songofskin, milkydew e chrustal (4.9M a 16.5M views): imitei o vocabulário da bolha kbeauty (essência, camadas, efeito vidro, o gesto de bater com as palmas) e o ritmo da rotina, mas dentro de uma leitura médica dos passos."
+          "registro": "Clínica educadora de dica prática: promete um teste simples no primeiro segundo e entrega três regras verificáveis",
+          "de_onde_veio": "Do viral do denverskindoc 'Callus or wart? Here's how to tell' (15.4M): imitei a abertura em pergunta-e-promessa e o contraste em pares simétricos curtos ('X mantém as linhas / Y interrompe')."
         },
         "virais_origem": [
           {
-            "url": "https://www.tiktok.com/@georginagio",
-            "autor": "georginagio",
-            "metrica": "16.5M views, origem hashtag, rotina noturna em espanhol",
-            "por_que_viralizou": "Rotina longa mostrada passo a passo, sem explicação: alcance amplo porque cuidado de pele não tem barreira de língua, só de abordagem."
-          },
-          {
-            "url": "https://www.tiktok.com/@songofskin",
-            "autor": "songofskin",
-            "metrica": "15.4M views, 7.31% engajamento, #skintok #koreanbeauty",
-            "por_que_viralizou": "Repetição de imagem e estética kbeauty; o público assiste pelo ritual, não pela informação."
-          },
-          {
-            "url": "https://www.tiktok.com/@milkydew",
-            "autor": "milkydew",
-            "metrica": "4.9M views, 'korean skincare routine #glassskin'",
-            "por_que_viralizou": "Palavra-chave glass skin capta busca ativa de quem quer o aspecto de pele de vidro."
+            "url": "https://www.tiktok.com/@denverskindoc/video/7633016955082968351",
+            "autor": "denverskindoc",
+            "metrica": "15.4M views, 2.64% engaj",
+            "por_que_viralizou": "Padrão diferencial educativo em formato stitch, responde confusão coletiva. Origem 'hashtag' (#dermtok)."
           }
         ],
-        "embasamento_viral": "Padrão novo da semana: rotinas kbeauty e em espanhol acumulam de 4.9M a 16.5M views com engajamento alto (7.31%). Entrar na trend com leitura médica aproveita esse tráfego e cria a discordância que gera comentário.",
+        "embasamento_viral": "É o viral de maior alcance do briefing entre os diferenciais (15.4M). O gancho já promete um teste que o espectador pode fazer no próprio corpo em segundos — motor clássico de retenção e salvamento.",
         "embasamento_cientifico": [
-          "Best Skincare Routine for Healthy Skin — American Academy of Dermatology — https://www.aad.org/public/everyday-care/skin-care-basics/best-skincare-routine"
+          "Warts vs Calluses — Differential Diagnosis, American Academy of Dermatology: https://www.aad.org/public/diseases/warts/types"
         ],
-        "cta": "Manda a sua rotina em ordem nos comentários que eu aponto os passos descartáveis.",
+        "cta": "Salva pra fazer o teste da linha antes de pegar a lixa de novo.",
         "hashtags": [
-          "#glassskin",
-          "#kbeauty",
-          "#rotinacoreana",
-          "#skintok",
+          "#verruga",
+          "#calo",
+          "#hpv",
+          "#pes",
           "#dermatologia"
+        ]
+      },
+      {
+        "titulo": "Minha rotina real: 4 passos, nenhum cult",
+        "pilar": "Rotina e prevenção",
+        "formato": "GRWM de banheiro, câmera na pia, sem trilha épica",
+        "ganchos_3s": [
+          "Minha rotina real. 4 passos. Nenhum cult.",
+          "Dermatologista com dez passos de skincare é dermatologista com tempo sobrando. Eu tenho quatro.",
+          "Mais produto não é mais resultado. Deixa eu te mostrar o que eu passo de verdade."
+        ],
+        "roteiro_reels": [
+          {
+            "tempo": "0-3s",
+            "fala": "Minha rotina real. Quatro passos. Nenhum cult.",
+            "direcao": "Câmera apoiada na pia, cabelo preso, cara lavada. Texto: 4 PASSOS"
+          },
+          {
+            "tempo": "3-13s",
+            "fala": "Um: limpeza. Tira óleo, poluição e resto de protetor. Não precisa ser espuma importada — precisa ser um sabonete que não deixe a pele repuxando. Pele limpa absorve melhor, esse é o segredo chato.",
+            "direcao": "Lava o rosto de verdade, água escorrendo. Texto: 1. LIMPEZA"
+          },
+          {
+            "tempo": "13-24s",
+            "fala": "Dois: tônico ou essência. Não é enfeite. Ele reajusta o pH depois da lavagem e entrega a primeira camada de água, pra que o ativo do próximo passo entre numa pele úmida e não numa pele faminta.",
+            "direcao": "Aplica com a mão, tapinha. Texto: 2. pH + ÁGUA"
+          },
+          {
+            "tempo": "24-36s",
+            "fala": "Três: um ativo. UM. Retinol à noite, ou niacinamida, ou ácido — dependendo do que você quer resolver. Empilhar três ativos na mesma noite não acelera nada, só inflama. Quanto mais produto, mais chance de irritar, e pele irritada não melhora.",
+            "direcao": "Segura um único frasco e afasta os outros da bancada. Texto: 3. UM ATIVO"
+          },
+          {
+            "tempo": "36-48s",
+            "fala": "Quatro: hidratante, e de manhã protetor solar em cima. Esse é o passo que decide se os outros três valeram alguma coisa. Sem FPS, retinol é dinheiro jogado fora.",
+            "direcao": "Espalha FPS generosamente, mostra quantidade na mão. Texto: 4. HIDRATANTE + FPS"
+          },
+          {
+            "tempo": "48-56s",
+            "fala": "Rotina de dez passos não é mais avançada. É mais caprichada. Se você faz esses quatro todo dia, você já tá na frente de quase todo mundo.",
+            "direcao": "Olha pra câmera, pele brilhando de produto. Texto final: TODO DIA > PERFEITO"
+          }
+        ],
+        "roteiro_carrossel": {
+          "capa": "Minha rotina real: 4 passos, nenhum cult.",
+          "laminas": [
+            "1. Limpeza. Pele limpa absorve melhor — esse é o segredo chato.",
+            "2. Tônico ou essência. Reajusta o pH e dá a primeira camada de água.",
+            "3. Um ativo. UM. Retinol, niacinamida ou ácido, escolhido pelo objetivo.",
+            "4. Hidratante — e FPS de manhã, em cima de tudo.",
+            "Mais produto não é mais resultado. Cada camada extra é mais chance de irritar.",
+            "Pele irritada não melhora. Ela só fica ocupada se defendendo.",
+            "Rotina de dez passos não é mais avançada. É mais caprichada."
+          ],
+          "cta_final": "Escreve aí quantos passos você faz hoje. Se for mais de cinco, eu te digo quais dá pra cortar."
+        },
+        "legenda_post": "Quatro passos: limpeza, tônico, um ativo e hidratante com FPS. É isso. Tônico não é enfeite (ele reajusta o pH e dá a primeira camada de água) e empilhar três ativos na mesma noite não acelera resultado nenhum — só inflama. Rotina de dez passos não é mais avançada, é só mais caprichada.",
+        "duracao_estimada_seg": 56,
+        "plataforma_origem_da_tendencia": "tiktok",
+        "padrao_aplicado": "Educação simplificadora (padrão: dermatologista mostra SUA rotina real, não vende complexidade)",
+        "voz": {
+          "registro": "Médica pragmática em modo GRWM: preguiça assumida com ciência por trás, sem culpa e sem venda",
+          "de_onde_veio": "Do GRWM educativo do drgazy (5.6M, 8.62%): imitei o formato de rotina mostrada em tempo real na pia, cada passo com um 'por quê' audível, sem drama e sem produto de vitrine."
+        },
+        "virais_origem": [
+          {
+            "url": "https://www.tiktok.com/@drgazy/video/7195028262765022506",
+            "autor": "drgazy",
+            "metrica": "5.6M views, 8.62% engaj",
+            "por_que_viralizou": "Padrão GRWM educativo — dermatologista mostrando a própria rotina, sem drama. Origem 'hashtag' (#dermatologist)."
+          }
+        ],
+        "embasamento_viral": "GRWM de dermatologista tem o maior engajamento relativo entre os virais educativos do briefing (8,62%), e o briefing também aponta o padrão de rotina visual satisfatória como consolidado — aqui ele ganha justificativa científica e opinião contra a rotina de dez passos.",
+        "embasamento_cientifico": [
+          "Efficacy of 1.5% Salicylic Acid Cream — Clinical Study, PubMed: https://pubmed.ncbi.nlm.nih.gov/23331850/"
+        ],
+        "cta": "Quantos passos você faz? Escreve o número — eu respondo quais cortar.",
+        "hashtags": [
+          "#skincare",
+          "#rotinadeskincare",
+          "#grwm",
+          "#retinol",
+          "#protetorsolar"
         ]
       }
     ]
   },
   "sinais": {
     "tiktok_virais": [
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermdoctor/video/6949993329853549829",
-        "descricao": "Sebaceous Filaments Solution #dermdoctor #dermatologist #pimplepopping #reactionvids #learnontiktok #tiktokpartner",
-        "autor": "dermdoctor",
-        "views": 41300000,
-        "likes": 3900000,
-        "comentarios": 10700,
-        "compartilhamentos": 121600,
-        "taxa_engajamento": 0.0976,
-        "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist reacts\""
-      },
       {
         "fonte": "tiktok",
         "url": "https://www.tiktok.com/@natiemkbeauty/video/7483637880817028407",
@@ -831,7 +825,59 @@
         "compartilhamentos": 60300,
         "taxa_engajamento": 0.0687,
         "origem_busca": "hashtag",
-        "origem_termo": "#harmonizacaofacial"
+        "origem_termo": "#skincare"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@drdustinportela/video/7161141570866007338",
+        "descricao": "#duet with @kooshaaa #ad  Hydration routine for winter skin #thayerspartner #thayers #skincare ",
+        "autor": "drdustinportela",
+        "views": 53400000,
+        "likes": 439400,
+        "comentarios": 0,
+        "compartilhamentos": 3538,
+        "taxa_engajamento": 0.0083,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist reacts\""
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dermdoctor/video/7010225981252259078",
+        "descricao": "#duet with @เรื่องมันสิว steatocystoma #dermdoctor #cysr #steatocystoma #pimplepopping",
+        "autor": "dermdoctor",
+        "views": 27000000,
+        "likes": 2200000,
+        "comentarios": 9152,
+        "compartilhamentos": 29600,
+        "taxa_engajamento": 0.0829,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist reacts\""
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dermdoctor/video/6922131754660711686",
+        "descricao": "Pore Vacuum #dermdoctor #skincare #porevacuum #dermatologist #acne",
+        "autor": "dermdoctor",
+        "views": 27900000,
+        "likes": 1500000,
+        "comentarios": 1924,
+        "compartilhamentos": 4266,
+        "taxa_engajamento": 0.054,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist reacts\""
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@jiacupid/video/7210319596409163014",
+        "descricao": "jia skincare 🫧 #송지아 #지아 #free지아 #宋智雅 #freezia #songjia #dearzia #jia #skincare #plumpglowinghydrationboost ",
+        "autor": "jiacupid",
+        "views": 15900000,
+        "likes": 2100000,
+        "comentarios": 3977,
+        "compartilhamentos": 34400,
+        "taxa_engajamento": 0.1345,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -843,8 +889,34 @@
         "comentarios": 2093,
         "compartilhamentos": 4207,
         "taxa_engajamento": 0.0375,
+        "origem_busca": "hashtag",
+        "origem_termo": "#dermtok"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dermdoctor/video/6924456973400427781",
+        "descricao": "#skincare #dermdoctor #learnontiktok",
+        "autor": "dermdoctor",
+        "views": 21700000,
+        "likes": 1100000,
+        "comentarios": 2845,
+        "compartilhamentos": 21400,
+        "taxa_engajamento": 0.0518,
         "origem_busca": "palavra",
         "origem_termo": "\"dermatologist reacts\""
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@amandahvicent/video/7178980976029142278",
+        "descricao": "Kkkkkkk essas coisas só acontecem comigo.   (Lembrando que não foi culpa da profissional, meus lábios que são muitos sensíveis) #foryou #bocainchada #micropigmentaçãolabial #viral #videosengraçados #deuruim #depoisdeubom #meme ",
+        "autor": "amandahvicent",
+        "views": 17000000,
+        "likes": 1400000,
+        "comentarios": 22600,
+        "compartilhamentos": 119800,
+        "taxa_engajamento": 0.0907,
+        "origem_busca": "palavra",
+        "origem_termo": "\"preenchimento deu errado\""
       },
       {
         "fonte": "tiktok",
@@ -865,25 +937,12 @@
         "descricao": "Mi rutina de skincare de noche antes de los grandes eventos siempre incluye productos de @biodance_official  🤍✨ #biodance #collagenmask #jellymist #eyepatch #hydrogelsplash ",
         "autor": "georginagio",
         "views": 16500000,
-        "likes": 738800,
+        "likes": 738900,
         "comentarios": 5816,
         "compartilhamentos": 13900,
         "taxa_engajamento": 0.046,
         "origem_busca": "hashtag",
         "origem_termo": "#cuidadodelapiel"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@thaykr/video/7240549464895655174",
-        "descricao": "#pele #pelesaudavel #skincare #skincareroutine #peleoleosa #acne #espinha #skincarereview #peleperfeita ",
-        "autor": "thaykr",
-        "views": 11800000,
-        "likes": 1200000,
-        "comentarios": 3032,
-        "compartilhamentos": 5227,
-        "taxa_engajamento": 0.1024,
-        "origem_busca": "hashtag",
-        "origem_termo": "#pelesaudavel"
       },
       {
         "fonte": "tiktok",
@@ -896,7 +955,7 @@
         "compartilhamentos": 5489,
         "taxa_engajamento": 0.0127,
         "origem_busca": "palavra",
-        "origem_termo": "\"dermatóloga explica\""
+        "origem_termo": "\"dermatologista responde\""
       },
       {
         "fonte": "tiktok",
@@ -904,10 +963,10 @@
         "descricao": "Pink day!🏄🏼‍♀️✨🌸 #morningroutine #skincare #beauty #grwm #fyp ",
         "autor": "butenk_nataliia",
         "views": 13500000,
-        "likes": 607500,
+        "likes": 608000,
         "comentarios": 11800,
-        "compartilhamentos": 141200,
-        "taxa_engajamento": 0.0563,
+        "compartilhamentos": 141300,
+        "taxa_engajamento": 0.0564,
         "origem_busca": "hashtag",
         "origem_termo": "#skincareroutine"
       },
@@ -930,7 +989,7 @@
         "descricao": "Short shorts are back… and so are some unexpected skin concerns. More exposed skin means more contact with public surfaces. Lately, I’ve been seeing more warts and molluscum, and it might surprise you where it’s showing up. #DermTips #Dermatology #SkinHealth #SummerSkin #dermatologisttips ",
         "autor": "mariwalladermatology",
         "views": 10700000,
-        "likes": 775200,
+        "likes": 775300,
         "comentarios": 5823,
         "compartilhamentos": 109900,
         "taxa_engajamento": 0.0833,
@@ -960,34 +1019,21 @@
         "comentarios": 2384,
         "compartilhamentos": 21700,
         "taxa_engajamento": 0.0264,
-        "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist explains\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dra.lourdesderma/video/7245069519343996165",
-        "descricao": "Con productos que puedes conseguir en cualquier supermercado, recomendados ✨ #evitaestomejorusaesto #dermatologia #dermatologa #doctora #limaperu #tipsdermatologicos #fyp ",
-        "autor": "dra.lourdesderma",
-        "views": 13600000,
-        "likes": 506100,
-        "comentarios": 1785,
-        "compartilhamentos": 31900,
-        "taxa_engajamento": 0.0397,
         "origem_busca": "hashtag",
-        "origem_termo": "#dermatologia"
+        "origem_termo": "#dermtok"
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermdoctor/video/6904122054140775685",
-        "descricao": "Normal #dermatologist #skincare #dermdoctor #pimplepopping #sebaceousfilament #learnontiktok #fyp",
-        "autor": "dermdoctor",
-        "views": 12200000,
-        "likes": 658200,
-        "comentarios": 2602,
-        "compartilhamentos": 6783,
-        "taxa_engajamento": 0.0547,
-        "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist reacts\""
+        "url": "https://www.tiktok.com/@itsdrmax/video/7256047135777377541",
+        "descricao": "Vitiligo #medicine #medical #medtok #vitiligo #skincare #skin ",
+        "autor": "itsdrmax",
+        "views": 15500000,
+        "likes": 371600,
+        "comentarios": 1269,
+        "compartilhamentos": 1588,
+        "taxa_engajamento": 0.0242,
+        "origem_busca": "hashtag",
+        "origem_termo": "#dermatologist"
       },
       {
         "fonte": "tiktok",
@@ -1014,6 +1060,19 @@
         "taxa_engajamento": 0.0962,
         "origem_busca": "hashtag",
         "origem_termo": "#skintok"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dermdoctor/video/6999807891871993094",
+        "descricao": "#duet with @kutzbarbers threading #dermdoctor #learnontiktok #tiktokpartner #threading #eyebrowthreading",
+        "autor": "dermdoctor",
+        "views": 12600000,
+        "likes": 458200,
+        "comentarios": 1031,
+        "compartilhamentos": 1183,
+        "taxa_engajamento": 0.0365,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist reacts\""
       },
       {
         "fonte": "tiktok",
@@ -1056,6 +1115,19 @@
       },
       {
         "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dermarkologist/video/7187423951952448814",
+        "descricao": "Stop this 🛑 Start that ✅ Part 1 from a dermatologist! #chappedlips #acne #dandruff #petrolatum #ketoconazole #stopthisstartthat ",
+        "autor": "dermarkologist",
+        "views": 8700000,
+        "likes": 571100,
+        "comentarios": 1191,
+        "compartilhamentos": 31300,
+        "taxa_engajamento": 0.0694,
+        "origem_busca": "hashtag",
+        "origem_termo": "#dermatologist"
+      },
+      {
+        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@daddykady/video/7598242071366929686",
         "descricao": "Vaselina y bicarbonato: truco casero para la piel Circulan muchos consejos caseros para el cuidado de la piel, como el uso de vaselina y bicarbonato. Estos métodos pueden aportar sensación de suavidad por efecto hidratante u oclusivo, pero no sustituyen tratamientos dermatológicos ni son adecuados para todos los tipos de piel. Antes de aplicarlos, es importante conocer tu piel y consultar con un profesional si tienes dudas o sensibilidad. #salud #piel #cuidadodelapiel #remedioscaseros #doctor",
         "autor": "daddykady",
@@ -1066,19 +1138,6 @@
         "taxa_engajamento": 0.0325,
         "origem_busca": "hashtag",
         "origem_termo": "#cuidadodelapiel"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@ale.barbosam/video/7679442963495144724",
-        "descricao": "Simplesmente MARAVILHOSO e funciona de verdade #cravoa #skincare #pelemadura #tiktokshopbr99 #fyyy ",
-        "autor": "ale.barbosam",
-        "views": 13400000,
-        "likes": 75500,
-        "comentarios": 1250,
-        "compartilhamentos": 14300,
-        "taxa_engajamento": 0.0068,
-        "origem_busca": "hashtag",
-        "origem_termo": "#harmonizacaofacial"
       },
       {
         "fonte": "tiktok",
@@ -1099,25 +1158,12 @@
         "descricao": "⚠️ Si tienes manchas o zonas oscuras en la piel, este vídeo es para ti ✨ #manchas #cuidadodelapiel #aclararlapiel #bellezanatural #cuidadopersonal #pieloscura #pielradiante #tipsdebelleza #fyp ",
         "autor": "doctor.natural09",
         "views": 9500000,
-        "likes": 317000,
+        "likes": 317100,
         "comentarios": 741,
         "compartilhamentos": 150200,
         "taxa_engajamento": 0.0493,
         "origem_busca": "hashtag",
         "origem_termo": "#cuidadodelapiel"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermdoctor/video/7015799693003345158",
-        "descricao": "#duet with @polla.7 sebaceous #dermdoctor #dermatologist #pimpepopping",
-        "autor": "dermdoctor",
-        "views": 9300000,
-        "likes": 472500,
-        "comentarios": 1095,
-        "compartilhamentos": 7609,
-        "taxa_engajamento": 0.0517,
-        "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist reacts\""
       },
       {
         "fonte": "tiktok",
@@ -1147,19 +1193,6 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@drjennyliu/video/7646584708993764622",
-        "descricao": "Zinc is another underrated ingredient but I prefer using barrier creams like @AveneUSA Cicalfate or @LaRochePosayUS Cicaplast formulated for face so reducing chance of breakouts #zincoxide #barrierrepair #barriercream #dermatologist #slugging ",
-        "autor": "drjennyliu",
-        "views": 8300000,
-        "likes": 465200,
-        "comentarios": 2010,
-        "compartilhamentos": 38400,
-        "taxa_engajamento": 0.0609,
-        "origem_busca": "palavra",
-        "origem_termo": "\"skin barrier repair\""
-      },
-      {
-        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@chxrry.glowy/video/7521007839737941255",
         "descricao": "@anua_global #anua #doublecleansing #doublecleanse #anuacleansingoil #cleansingoil #makeupremover #cleansing #skincareroutine #koreanskincare #ulta #ultaskintok #sephora #foryou #skinprep #bumpyskin #acne ",
         "autor": "chxrry.glowy",
@@ -1169,7 +1202,7 @@
         "compartilhamentos": 17500,
         "taxa_engajamento": 0.035,
         "origem_busca": "hashtag",
-        "origem_termo": "#harmonizacaofacial"
+        "origem_termo": "#skintok"
       },
       {
         "fonte": "tiktok",
@@ -1177,12 +1210,12 @@
         "descricao": "Hand eczema? Don't forget to try this one simple tip that can help! #dyshidroticeczema #learnontiktok #handeczema #dermhack ",
         "autor": "denverskindoc",
         "views": 9900000,
-        "likes": 216400,
-        "comentarios": 3430,
+        "likes": 216600,
+        "comentarios": 3437,
         "compartilhamentos": 29100,
-        "taxa_engajamento": 0.0251,
+        "taxa_engajamento": 0.0252,
         "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist reacts\""
+        "origem_termo": "\"dermatologist explains\""
       },
       {
         "fonte": "tiktok",
@@ -1203,7 +1236,7 @@
         "descricao": "Do you have one? #birthmark #vitiligo #dermatologist #physicianassistant #nursepractitioner ",
         "autor": "drsamanthaellis",
         "views": 7000000,
-        "likes": 454800,
+        "likes": 454900,
         "comentarios": 6469,
         "compartilhamentos": 19800,
         "taxa_engajamento": 0.0687,
@@ -1251,6 +1284,19 @@
       },
       {
         "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dermangelo/video/7601279732600130847",
+        "descricao": "NEED #dermreacts  #skincare  #dermatologist #dermangelo  #reactionvideo  ",
+        "autor": "dermangelo",
+        "views": 7100000,
+        "likes": 343700,
+        "comentarios": 1078,
+        "compartilhamentos": 9745,
+        "taxa_engajamento": 0.0499,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist reacts\""
+      },
+      {
+        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@dermangelo/video/7348500031562992938",
         "descricao": "#duet with @Fanny | skincare & ASMR ☁️ #lips The dermatologist was too stunned to speak. #dermreacts #skincare #dermatologist #lipcare #asmr #dermangelo ",
         "autor": "dermangelo",
@@ -1264,6 +1310,19 @@
       },
       {
         "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@juliana.indicaa/video/7615441801658240277",
+        "descricao": "kit SKINCARE❤️ esse é tipo um spa dentro da sua própria casa💋",
+        "autor": "juliana.indicaa",
+        "views": 9900000,
+        "likes": 58400,
+        "comentarios": 476,
+        "compartilhamentos": 5810,
+        "taxa_engajamento": 0.0065,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skincare"
+      },
+      {
+        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@drgazy/video/7195028262765022506",
         "descricao": "Simple skin care routine. #GRWM #dermatologist #skincare #skincareroutine #easyderm ",
         "autor": "drgazy",
@@ -1274,6 +1333,19 @@
         "taxa_engajamento": 0.0862,
         "origem_busca": "hashtag",
         "origem_termo": "#dermatologist"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@lizx.macedo/video/7672972663400303893",
+        "descricao": "",
+        "autor": "lizx.macedo",
+        "views": 3000000,
+        "likes": 693000,
+        "comentarios": 1262,
+        "compartilhamentos": 12000,
+        "taxa_engajamento": 0.2354,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -1325,7 +1397,7 @@
         "compartilhamentos": 19500,
         "taxa_engajamento": 0.0488,
         "origem_busca": "palavra",
-        "origem_termo": "\"dermatóloga explica\""
+        "origem_termo": "\"dermatologista responde\""
       },
       {
         "fonte": "tiktok",
@@ -1335,7 +1407,7 @@
         "views": 8500000,
         "likes": 83600,
         "comentarios": 6822,
-        "compartilhamentos": 7886,
+        "compartilhamentos": 7887,
         "taxa_engajamento": 0.0116,
         "origem_busca": "palavra",
         "origem_termo": "\"melasma tratamento\""
@@ -1364,7 +1436,7 @@
         "compartilhamentos": 7171,
         "taxa_engajamento": 0.109,
         "origem_busca": "hashtag",
-        "origem_termo": "#harmonizacaofacial"
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -1385,25 +1457,12 @@
         "descricao": "power of skincare ⚠️#skincare #skintok #glowuptips #fypシ゚viral #skincareroutine ",
         "autor": "itssephty",
         "views": 3100000,
-        "likes": 561600,
+        "likes": 561700,
         "comentarios": 1881,
         "compartilhamentos": 16400,
         "taxa_engajamento": 0.1871,
         "origem_busca": "hashtag",
         "origem_termo": "#skintok"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@jardeledebran/video/7530660092178402616",
-        "descricao": "LEIA 👇🏻 Hoje eu quero falar com vocês sobre o Retinol Puro 0,3% da Principia, um dos ativos mais eficazes para tratar sinais do envelhecimento, textura irregular e estimular a renovação celular. Ele é 100% puro, dermatologicamente testado e indicado pelos melhores dermatologistas do Brasil, o que já garante muita segurança no uso. Mas como sempre falo aqui, retinol exige cuidado. Comecem devagar, usando duas a três vezes na semana, sempre à noite, com a pele bem limpa e seca. Logo depois, caprichem na hidratação, porque isso vai ajudar muito a evitar irritações e vermelhidão. E no dia seguinte",
-        "autor": "jardeledebran",
-        "views": 8200000,
-        "likes": 43800,
-        "comentarios": 527,
-        "compartilhamentos": 2997,
-        "taxa_engajamento": 0.0058,
-        "origem_busca": "palavra",
-        "origem_termo": "\"retinol como usar\""
       },
       {
         "fonte": "tiktok",
@@ -1433,16 +1492,16 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermdoctor/video/6944501582373326085",
-        "descricao": "#duet with @jamya.nicolee “ sebaceous filaments “ #dermdoctor #dermatologist #skincare #cloggedpores #learnontiktok",
-        "autor": "dermdoctor",
-        "views": 5700000,
-        "likes": 264000,
-        "comentarios": 963,
-        "compartilhamentos": 1822,
-        "taxa_engajamento": 0.0468,
+        "url": "https://www.tiktok.com/@marcotuliodavi/video/7266212748248321286",
+        "descricao": "Vocês já foram? 😂🤌",
+        "autor": "marcotuliodavi",
+        "views": 3500000,
+        "likes": 482100,
+        "comentarios": 2029,
+        "compartilhamentos": 4187,
+        "taxa_engajamento": 0.1395,
         "origem_busca": "hashtag",
-        "origem_termo": "#dermatologist"
+        "origem_termo": "#dermatologia"
       },
       {
         "fonte": "tiktok",
@@ -1459,29 +1518,29 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@milkydew/video/7419384599622585630",
-        "descricao": "This face is expensive 😏 #skincareroutine #koreanskincare #koreanskincareroutine #glassskin #skintok ",
-        "autor": "milkydew",
-        "views": 4900000,
-        "likes": 314000,
-        "comentarios": 2158,
-        "compartilhamentos": 6123,
-        "taxa_engajamento": 0.0658,
+        "url": "https://www.tiktok.com/@ells.bellssssssss/video/7649005654052506910",
+        "descricao": "",
+        "autor": "ells.bellssssssss",
+        "views": 4200000,
+        "likes": 368400,
+        "comentarios": 5483,
+        "compartilhamentos": 2349,
+        "taxa_engajamento": 0.0896,
         "origem_busca": "hashtag",
-        "origem_termo": "#skintok"
+        "origem_termo": "#dermtok"
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@fatimavsb/video/7665359015995657504",
-        "descricao": "Perfected my after shower routine 🌟🧼  Toner @The Ordinary  Ingrown tonic @TOPICALS  Body stick @The INKEY List  Eye patches @rhode skin  Exfoliate @Paula's Choice  Body butter @Naturium @eos Products  Body oil @Vaseline  #bodycare #aftershower #showerroutine #skincare #hygiene ",
-        "autor": "fatimavsb",
-        "views": 3300000,
-        "likes": 448800,
-        "comentarios": 941,
-        "compartilhamentos": 7739,
-        "taxa_engajamento": 0.1386,
-        "origem_busca": "hashtag",
-        "origem_termo": "#skincareroutine"
+        "url": "https://www.tiktok.com/@draemidermatologista/video/7187819331215002886",
+        "descricao": "#dicadadraemi#dicadedermato#skincareroutine #skincare#acne#melasmaskincare #pelesaudavel #dermatotiktoker  ",
+        "autor": "draemidermatologista",
+        "views": 4300000,
+        "likes": 322100,
+        "comentarios": 1613,
+        "compartilhamentos": 6276,
+        "taxa_engajamento": 0.0767,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologista responde\""
       },
       {
         "fonte": "tiktok",
@@ -1508,19 +1567,6 @@
         "taxa_engajamento": 0.0574,
         "origem_busca": "palavra",
         "origem_termo": "\"dermatologist explains\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@niikaveroniika/video/7669761159888784662",
-        "descricao": "morning routine with @Diorbeauty ✨✨ #skincare #luxury #rich #thatgirl #girlythings ",
-        "autor": "niikaveroniika",
-        "views": 2200000,
-        "likes": 476400,
-        "comentarios": 1964,
-        "compartilhamentos": 24400,
-        "taxa_engajamento": 0.2285,
-        "origem_busca": "hashtag",
-        "origem_termo": "#skincareroutine"
       },
       {
         "fonte": "tiktok",
@@ -1563,6 +1609,19 @@
       },
       {
         "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dermatologee/video/7639569481378827550",
+        "descricao": "I think this 93 year old looks amazing! This patient's skin really shows that no matter when you start spf it can make a difference. The sun does slow, subtle damage to the skin and the best time to start sunscreen is NOW.  Sun damage presents differently in different people. Some people have brown spots, some have blood vessels, some get little white acne like balls under the skin, some get leathery changes, some get deep wrinkles... and some get a combination of these things  You can live life and wear sunscreen! They are not mutually exclusive  #suntan #sundamage #countrylife #texas #dermat",
+        "autor": "dermatologee",
+        "views": 5000000,
+        "likes": 180300,
+        "comentarios": 706,
+        "compartilhamentos": 4308,
+        "taxa_engajamento": 0.0371,
+        "origem_busca": "hashtag",
+        "origem_termo": "#dermtok"
+      },
+      {
+        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@jasminnlily_/video/7636424986382716182",
         "descricao": "full evening routine 🪷 @medicube global pdnr whip cleanser  @SKIN1004 US teca soothing toner @anua_global pdrn + hyaluronic acid serum @KSECRET GLOBAL seoul 1988 retinal liposome 2% + black ginseng  @Dr.Reju-All Store advanced ceramide barrier cream ",
         "autor": "jasminnlily_",
@@ -1602,6 +1661,19 @@
       },
       {
         "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@amanda_mituyama/video/7390119619136179461",
+        "descricao": "Você está cuidando da sua pele da forma correta? Siga esses passos com os produtos maravilhosos da @Melu e garanta uma pele saudável, cheirosa e bem cuidada todos os dias 💖 -Publicidade- #melu #melubrasil #skincare #meluskincare #skincareroutine #rotinadeskincare #cuidadoscomapele ",
+        "autor": "amanda_mituyama",
+        "views": 3300000,
+        "likes": 327400,
+        "comentarios": 2055,
+        "compartilhamentos": 10500,
+        "taxa_engajamento": 0.103,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skincare"
+      },
+      {
+        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@espanolchallengee/video/7629018481308028191",
         "descricao": "¡Quién sabe! Puedes mejorar la salud de tu piel con estos alimentos simples #cuidadodelapiel #consejosdesalud #piel ",
         "autor": "espanolchallengee",
@@ -1637,7 +1709,7 @@
         "compartilhamentos": 8869,
         "taxa_engajamento": 0.075,
         "origem_busca": "hashtag",
-        "origem_termo": "#harmonizacaofacial"
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -1647,7 +1719,7 @@
         "views": 3200000,
         "likes": 293500,
         "comentarios": 413,
-        "compartilhamentos": 9849,
+        "compartilhamentos": 9850,
         "taxa_engajamento": 0.0949,
         "origem_busca": "hashtag",
         "origem_termo": "#skintok"
@@ -1686,7 +1758,7 @@
         "views": 2900000,
         "likes": 282800,
         "comentarios": 1006,
-        "compartilhamentos": 8471,
+        "compartilhamentos": 8476,
         "taxa_engajamento": 0.1008,
         "origem_busca": "hashtag",
         "origem_termo": "#skincareroutine"
@@ -1719,6 +1791,19 @@
       },
       {
         "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@alixearle/video/7580085279587962143",
+        "descricao": "Keeping my routine simple and clean to get my skin on track 🤍 always remind myself to have patience w my skin if it’s giving me issues :))",
+        "autor": "alixearle",
+        "views": 3700000,
+        "likes": 190900,
+        "comentarios": 765,
+        "compartilhamentos": 563,
+        "taxa_engajamento": 0.052,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skintok"
+      },
+      {
+        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@drsamanthaellis/video/7649201625491361038",
         "descricao": "If you needed more motivation.  #sunscreen #spf #antiaging #antiagingtips #dermatology ",
         "autor": "drsamanthaellis",
@@ -1745,16 +1830,16 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermguru/video/7462758702815153450",
-        "descricao": "Drugstore skincare is elite #dermguru #dermtok #drugstoreskincare #retinol #skincare101 #affordableskincare ",
-        "autor": "dermguru",
-        "views": 3600000,
-        "likes": 172900,
-        "comentarios": 678,
-        "compartilhamentos": 4300,
-        "taxa_engajamento": 0.0494,
+        "url": "https://www.tiktok.com/@hikarusroom/video/7512089504371559687",
+        "descricao": "pink skincare routine with SKIN1004 💘🫶🏻 @SKIN1004 US  #skincare #skin1004 #centella #centellaskincare #pinkstick #gelcream #nightroutine #glassskin #koreanskincare #tiktokmademebuyit #pinkroutine #skin1004routine #pinkstick #skincare #pore #poreminimizer #skincareroutine #kbeauty #cleangirl ",
+        "autor": "hikarusroom",
+        "views": 3300000,
+        "likes": 198400,
+        "comentarios": 1047,
+        "compartilhamentos": 11600,
+        "taxa_engajamento": 0.064,
         "origem_busca": "hashtag",
-        "origem_termo": "#dermtok"
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -1762,10 +1847,10 @@
         "descricao": "teve gente q comentou que sou SUJAAA por causa da acne 🫪 ",
         "autor": "yayareisz",
         "views": 1700000,
-        "likes": 352700,
+        "likes": 352800,
         "comentarios": 2705,
         "compartilhamentos": 5901,
-        "taxa_engajamento": 0.2125,
+        "taxa_engajamento": 0.2126,
         "origem_busca": "palavra",
         "origem_termo": "\"acne adulta\""
       },
@@ -1775,25 +1860,25 @@
         "descricao": "나이트 케어 루틴 Night Routine 🧖‍♀️🌙🧼🫧🚿🛀✨ #nightroutine #nightcare #skincare #vlog #homecare ",
         "autor": "zeeyeseo",
         "views": 2300000,
-        "likes": 290300,
+        "likes": 290400,
         "comentarios": 1097,
-        "compartilhamentos": 6708,
-        "taxa_engajamento": 0.1296,
+        "compartilhamentos": 6709,
+        "taxa_engajamento": 0.1297,
         "origem_busca": "hashtag",
         "origem_termo": "#skincareroutine"
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@drandremarinho/video/7624257597784493319",
-        "descricao": "A ansiedade não fica só na mente… ela aparece na pele 😔 Disidrose, crise de acne, dermatite, psoríase... tudo pode ser ativado quando o emocional não vai bem. A mente fala… e muitas vezes é a sua pele que responde. E você, já percebeu isso em você? 💭 #ansiedade #saudedapele #dermatologia #estresse #autocuidado",
-        "autor": "drandremarinho",
-        "views": 3500000,
-        "likes": 135000,
-        "comentarios": 2848,
-        "compartilhamentos": 25400,
-        "taxa_engajamento": 0.0466,
-        "origem_busca": "palavra",
-        "origem_termo": "\"dermatóloga explica\""
+        "url": "https://www.tiktok.com/@julieebaby6/video/7495103045701766422",
+        "descricao": "🤍🤍✨ #skincareroutine #koreanskincare ",
+        "autor": "julieebaby6",
+        "views": 2700000,
+        "likes": 248400,
+        "comentarios": 1817,
+        "compartilhamentos": 7520,
+        "taxa_engajamento": 0.0955,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -1836,19 +1921,6 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@vanessamussupapodermato/video/7566975763929419028",
-        "descricao": "Você ainda acredita que protetor solar é só pra praia ou pra dias de sol? Vem comigo que te mostro que não é bem assim!!  #squalsolarlrp #academiaanthelios #squadlrp #larocheposayskincare #publicidade ",
-        "autor": "vanessamussupapodermato",
-        "views": 4600000,
-        "likes": 26700,
-        "comentarios": 187,
-        "compartilhamentos": 237,
-        "taxa_engajamento": 0.0059,
-        "origem_busca": "palavra",
-        "origem_termo": "\"protetor solar mito\""
-      },
-      {
-        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@itamarasilva_esteticista/video/7553992280307256587",
         "descricao": "Nossa quinta começando com esse vídeos satisfatórios pra vocês #limpezasepele #pelesaudavel #cravoseespinhas #viral #estetik ",
         "autor": "itamarasilva_esteticista",
@@ -1862,16 +1934,29 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermangelo/video/7435026686799809834",
-        "descricao": "#duet with @Pimple Relax 💆🏼‍♀️ #blackhead We want LIGHT pressure! #dermreacts #skincare #dermatologist #reaction #reactionvideo #dermangelo #pimplepop ",
-        "autor": "dermangelo",
-        "views": 4300000,
-        "likes": 43500,
-        "comentarios": 1178,
-        "compartilhamentos": 1370,
-        "taxa_engajamento": 0.0107,
+        "url": "https://www.tiktok.com/@dra.heluagazi/video/7639092954094669076",
+        "descricao": "Tem coisa na pele que realmente parece igual… mas não é. Espinha e acne são um exemplo clássico. A espinha pode aparecer de forma isolada, enquanto a acne é uma condição inflamatória que pode envolver cravos, espinhas inflamadas, cistos e até nódulos, dependendo do caso. Poros dilatados também são facilmente confundidos com cicatrizes de acne, mas cada um tem uma causa diferente e, consequentemente, tratamentos diferentes. O mesmo acontece com miliuns e comedões fechados, que são parecidos visualmente, mas não são a mesma alteração. Outra confusão comum é entre rosácea e dermatite perioral. As",
+        "autor": "dra.heluagazi",
+        "views": 2900000,
+        "likes": 177600,
+        "comentarios": 723,
+        "compartilhamentos": 4827,
+        "taxa_engajamento": 0.0632,
         "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist reacts\""
+        "origem_termo": "\"dermatologista responde\""
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dr.davidermato/video/7491413700687957303",
+        "descricao": "Mito ou verdade? Lavar o cabelo todo dia faz mal? Spoiler: não! Se o seu couro cabeludo precisa, pode lavar sim — até todos os dias. E lembra: shampoo é pra couro cabeludo, não pros fios! #cuidadoscomocabelo #cuidadocapilar #mitosdocabelo #dermatologia #dermatologista #cabelosaudavel #shampoo #lavagemdocabelo #saudecapilar #tricos #tricoses #dermatologiatricologica",
+        "autor": "dr.davidermato",
+        "views": 3500000,
+        "likes": 104300,
+        "comentarios": 507,
+        "compartilhamentos": 2675,
+        "taxa_engajamento": 0.0307,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologista responde\""
       },
       {
         "fonte": "tiktok",
@@ -1927,32 +2012,6 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@drandremarinho/video/7432040819537808646",
-        "descricao": "Você sofre com carocinhos no rosto? Essas pequenas irregularidades são causadas pela acne comedonal, popularmente conhecida como cravos e espinhas. Para cuidar da pele texturizada, o ideal é manter uma rotina de cuidados prática e optar por produtos leves que não bloqueiem os poros. Três dicas para ajudar: ✅ Limpador com ácido salicílico: use-o como máscara, deixando-o agir 2 minutos antes de enxaguar. O da Cerave é uma ótima opção. ✅ Gel de adapaleno 0,1%: aplique uma quantidade do tamanho de uma ervilha, 2 a 3x por semana, para ajudar a controlar a oleosidade e melhorar a textura da pele. Ev",
-        "autor": "drandremarinho",
-        "views": 2900000,
-        "likes": 120800,
-        "comentarios": 537,
-        "compartilhamentos": 6309,
-        "taxa_engajamento": 0.044,
-        "origem_busca": "hashtag",
-        "origem_termo": "#dermatologia"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermguru/video/7326207053444222251",
-        "descricao": "#stitch with @alix earle perioral dermatitis is the worst #dermguru #dermreacts #perioralderm #perioraledermatitis #perioraldermatitistreatment #greenscreen ",
-        "autor": "dermguru",
-        "views": 3500000,
-        "likes": 58500,
-        "comentarios": 675,
-        "compartilhamentos": 8089,
-        "taxa_engajamento": 0.0192,
-        "origem_busca": "hashtag",
-        "origem_termo": "#dermtok"
-      },
-      {
-        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@skinbydrazi/video/7387814305070140714",
         "descricao": "What’s on your Skin? Topical or inhaled steroids, fluoride in toothpaste are causes, be sure to cleanse after you brush your teeth. This can also be caused by hormonal fluctuations. One of the best treatments is  Azelaic10 serum @AziMD Skincare it can take  4-6 weeks to improve.  Sometimes it requires an oral prescription💊 Photo Consults: link in Bio 👆#acne #perioraldermatitis #perioraldermatitistreatment #acneskin #azelaicacid ##beautyhacks ",
         "autor": "skinbydrazi",
@@ -1979,42 +2038,29 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@drspf/video/7577118443556670750",
-        "descricao": "Cracked knuckles? Dry winter hands? These are the legit 🏆 dermatologist-approved hand moisturizers of 2025. From barrier-repair urea lotions to cult-favorite balms — here are my top picks 👇🏼🖐️ #HandCare #DermTok #HandDermatitis #DrySkinRelief #drsugaiskincare  ",
-        "autor": "drspf",
-        "views": 3300000,
-        "likes": 64900,
-        "comentarios": 1782,
-        "compartilhamentos": 14600,
-        "taxa_engajamento": 0.0246,
+        "url": "https://www.tiktok.com/@amayacrichton/video/7439364746521988398",
+        "descricao": "So satisfying, so clean #skincareroutine ",
+        "autor": "amayacrichton",
+        "views": 2400000,
+        "likes": 157900,
+        "comentarios": 1384,
+        "compartilhamentos": 7562,
+        "taxa_engajamento": 0.0695,
         "origem_busca": "hashtag",
-        "origem_termo": "#dermtok"
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@denverskindoc/video/7443880643479555358",
-        "descricao": "It's like a hack for your immune system!  #autoimmunedisease #lupus #sle #systemiclupus #lupuswarrior lupus awareness #butterflyrash #dermatologist #science #breakthrough #medicine #rheumatology #cartcelltherapy #creatorsearchinsights ",
-        "autor": "denverskindoc",
-        "views": 2400000,
-        "likes": 128100,
-        "comentarios": 3468,
-        "compartilhamentos": 35800,
-        "taxa_engajamento": 0.0697,
+        "url": "https://www.tiktok.com/@drjennyliu/video/7672199610655378701",
+        "descricao": "Drop your favorite toning shampoo below! #toningshampoo #purpleshampoo #haircaretips #dermatologist #shinyhair ",
+        "autor": "drjennyliu",
+        "views": 3100000,
+        "likes": 73200,
+        "comentarios": 624,
+        "compartilhamentos": 5502,
+        "taxa_engajamento": 0.0256,
         "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist explains\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@aamnaadel/video/7375974269538389280",
-        "descricao": "3 derm HYGIENE HACKS to get rid of stinky sweaty pits this summer ☀️💦🌸 #dermatologist #dradel #hygiene #hygieneproducts #hygienehacks #hygienetips #hygieneroutine #showerroutine #skintok #sweat #smellgood #cleantok #cleangirl #foryou #fyp  ",
-        "autor": "aamnaadel",
-        "views": 2400000,
-        "likes": 155700,
-        "comentarios": 570,
-        "compartilhamentos": 8874,
-        "taxa_engajamento": 0.0688,
-        "origem_busca": "hashtag",
-        "origem_termo": "#dermtok"
+        "origem_termo": "\"dermatologist reacts\""
       },
       {
         "fonte": "tiktok",
@@ -2031,16 +2077,16 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@ingletondermatology/video/7325932323231354154",
-        "descricao": "4 things I would never do to my skin as a Black dermatologist. #dermtok #dermatologist #dermatologistontiktok #skintok #dermatology #skinofcolor ",
-        "autor": "ingletondermatology",
-        "views": 1900000,
-        "likes": 185200,
-        "comentarios": 1793,
-        "compartilhamentos": 3773,
-        "taxa_engajamento": 0.1004,
+        "url": "https://www.tiktok.com/@juliabittencourt.r/video/7666960018482203920",
+        "descricao": "OMG DIFÍCIL TÁ!! #dermato #residentedermatologia #skincaremusthaves #girlsthings ",
+        "autor": "juliabittencourt.r",
+        "views": 1500000,
+        "likes": 223900,
+        "comentarios": 1287,
+        "compartilhamentos": 6524,
+        "taxa_engajamento": 0.1545,
         "origem_busca": "hashtag",
-        "origem_termo": "#dermtok"
+        "origem_termo": "#dermatologia"
       },
       {
         "fonte": "tiktok",
@@ -2057,16 +2103,29 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermguru/video/7439871717570301227",
-        "descricao": "Stitch with @Megha Singh #dermguru #dermtok #dreadshed #minoxidil #rogaine #hairloss #hairregrowth #hairfall #hairshed ",
-        "autor": "dermguru",
-        "views": 2500000,
-        "likes": 108800,
-        "comentarios": 818,
-        "compartilhamentos": 11100,
-        "taxa_engajamento": 0.0483,
+        "url": "https://www.tiktok.com/@laysdealcantara/video/7672916463321140488",
+        "descricao": "Coisas baratinhas que valem cada centavo 💖 #cosmeticos #skincare #dermatologista #bodycare ",
+        "autor": "laysdealcantara",
+        "views": 1500000,
+        "likes": 205000,
+        "comentarios": 1702,
+        "compartilhamentos": 15200,
+        "taxa_engajamento": 0.1479,
         "origem_busca": "hashtag",
-        "origem_termo": "#dermtok"
+        "origem_termo": "#dermatologia"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@drjennyliu/video/7191489986867350826",
+        "descricao": "Part 1 of 4 with @dermguru on #frizzyhair #frizzyhairtips #frizzfree #haircaretips #healthyhair #haircare101 ",
+        "autor": "drjennyliu",
+        "views": 2400000,
+        "likes": 127500,
+        "comentarios": 270,
+        "compartilhamentos": 3889,
+        "taxa_engajamento": 0.0549,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist explains\""
       },
       {
         "fonte": "tiktok",
@@ -2080,19 +2139,6 @@
         "taxa_engajamento": 0.0836,
         "origem_busca": "hashtag",
         "origem_termo": "#skintok"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@oliviabrooks_skincare/video/7630521440202165536",
-        "descricao": "Luminence glow, rebuild your barrier #acne #skincare #viral #acneproneskin #glowup ",
-        "autor": "oliviabrooks_skincare",
-        "views": 2600000,
-        "likes": 98900,
-        "comentarios": 750,
-        "compartilhamentos": 1341,
-        "taxa_engajamento": 0.0388,
-        "origem_busca": "palavra",
-        "origem_termo": "\"skin barrier repair\""
       },
       {
         "fonte": "tiktok",
@@ -2122,6 +2168,19 @@
       },
       {
         "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@jumelon/video/7468133391506951430",
+        "descricao": "O mundo de pertinho é outra coisa! Esse é um nevo composto, uma pintinha do bem mas que muitas pessoas tiram por estética #nevo #nevocomposto #dermatologia #dermatoscopia #fy #fyp #zoom #close ",
+        "autor": "jumelon",
+        "views": 2900000,
+        "likes": 58100,
+        "comentarios": 639,
+        "compartilhamentos": 5580,
+        "taxa_engajamento": 0.0222,
+        "origem_busca": "hashtag",
+        "origem_termo": "#dermatologia"
+      },
+      {
+        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@recetasparati89/video/7628178489711152415",
         "descricao": "Tomate y maicena: el truco casero para una piel más luminosa 🍅✨ #PielRadiante #Manchas #BellezaNatural #CuidadoFacial #GlowUp",
         "autor": "recetasparati89",
@@ -2132,6 +2191,19 @@
         "taxa_engajamento": 0.025,
         "origem_busca": "hashtag",
         "origem_termo": "#cuidadodelapiel"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@dr.tomassian/video/7672494678314339598",
+        "descricao": "Glass skin made simple from a dermatologist #doctor #skincare #dermatologist #glassskin ",
+        "autor": "dr.tomassian",
+        "views": 2000000,
+        "likes": 137200,
+        "comentarios": 1899,
+        "compartilhamentos": 8010,
+        "taxa_engajamento": 0.0736,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist explains\""
       },
       {
         "fonte": "tiktok",
@@ -2154,10 +2226,10 @@
         "views": 1800000,
         "likes": 151100,
         "comentarios": 1899,
-        "compartilhamentos": 7931,
+        "compartilhamentos": 7932,
         "taxa_engajamento": 0.0894,
         "origem_busca": "hashtag",
-        "origem_termo": "#skincareroutine"
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -2192,7 +2264,7 @@
         "autor": "salud.belleza68",
         "views": 2300000,
         "likes": 92300,
-        "comentarios": 339,
+        "comentarios": 340,
         "compartilhamentos": 14200,
         "taxa_engajamento": 0.0465,
         "origem_busca": "hashtag",
@@ -2204,12 +2276,12 @@
         "descricao": "Tried antifungal treatment for light patches with no improvement? The diagnosis might be the problem. #progressivemacularhypomelanosis #skintok #skincaretips #vitiligo #dermatologist ",
         "autor": "drderrickphillips",
         "views": 2300000,
-        "likes": 86300,
+        "likes": 86500,
         "comentarios": 606,
-        "compartilhamentos": 18100,
-        "taxa_engajamento": 0.0457,
-        "origem_busca": "hashtag",
-        "origem_termo": "#dermtok"
+        "compartilhamentos": 18200,
+        "taxa_engajamento": 0.0458,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist explains\""
       },
       {
         "fonte": "tiktok",
@@ -2226,16 +2298,16 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@lafernandesss/video/7656925650053385490",
-        "descricao": "parte 18| suco do GLOW UP ✨🧚🏻 perfeito pra saúde da pele, cabelos e intestino… por aqui nos bebemos pra ter um super glow up 🫰🏻  Receita  2 cenouras  1 laranja  1 limão  Gengibre a gosto  1 colher de curcuma  1/2 colher de azeite  #skincare #dicasdebeleza #alimentacaosaudavel #pelesaudavel #suco ",
-        "autor": "lafernandesss",
-        "views": 1700000,
-        "likes": 145600,
-        "comentarios": 645,
-        "compartilhamentos": 11600,
-        "taxa_engajamento": 0.0929,
-        "origem_busca": "hashtag",
-        "origem_termo": "#pelesaudavel"
+        "url": "https://www.tiktok.com/@dermarkologist/video/7132918978392886571",
+        "descricao": "#duet with @wirecutterdo you really need this much sunsfeen?! #sun #sunprotection #sunscreen #dermatologist ",
+        "autor": "dermarkologist",
+        "views": 2100000,
+        "likes": 114300,
+        "comentarios": 1092,
+        "compartilhamentos": 1656,
+        "taxa_engajamento": 0.0557,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist reacts\""
       },
       {
         "fonte": "tiktok",
@@ -2265,16 +2337,16 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@danarosetta/video/7646537359563033887",
-        "descricao": "cleaning your fyp with a night routine 🕯️🩰🧖🏻‍♀️🧺🦢 || #girlygirl #pink #nightroutine #pinterest #selfcare || @mondayhaircare @Gisou @rhode skin @Emi Jay @Victoria's Secret @LoveShackFancy || pink, baby pink, girlhood, skincare, self care, night routine, shower routine, pinterest, dollette, coquette ",
-        "autor": "danarosetta",
-        "views": 841100,
-        "likes": 212500,
-        "comentarios": 7484,
-        "compartilhamentos": 8196,
-        "taxa_engajamento": 0.2713,
+        "url": "https://www.tiktok.com/@clipsdoxm/video/7561426760080936212",
+        "descricao": "“Ficou lindo”  .. #ruyter #harmonizacaofacial ",
+        "autor": "clipsdoxm",
+        "views": 2800000,
+        "likes": 36200,
+        "comentarios": 995,
+        "compartilhamentos": 1792,
+        "taxa_engajamento": 0.0139,
         "origem_busca": "hashtag",
-        "origem_termo": "#skincareroutine"
+        "origem_termo": "#harmonizacaofacial"
       },
       {
         "fonte": "tiktok",
@@ -2291,16 +2363,29 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@brunakoche/video/7449340649947548934",
-        "descricao": "Para quem reclama que dermato só prescreve produtos caros… #acnezil #saboneteenxofre #acne #roacutan #peroxidodebenzoila ",
-        "autor": "brunakoche",
-        "views": 1900000,
-        "likes": 105900,
-        "comentarios": 1700,
-        "compartilhamentos": 8648,
-        "taxa_engajamento": 0.0612,
+        "url": "https://www.tiktok.com/@bagaceirachique/video/7501796241043508535",
+        "descricao": "PROCEDIMENTOS ESTÉTICOS! Deu a louca no ácido hialurônico (mas agora, com limites)! Gkay contou tudo: exagerou nos procedimentos estéticos e se arrependeu. Quer saber como foi? Ela contou tudinho pra Lu no episódio que sai amanhã às 19h! Nosso podcast está disponível no YouTube e também nas plataformas de áudio Spotify, Deezer, Amazon Music e Apple Podcasts. 🦒 💜 🦒 💜 🦒 #bagaceirachique #lucianagimenez #podcast #gkay",
+        "autor": "bagaceirachique",
+        "views": 2000000,
+        "likes": 108000,
+        "comentarios": 353,
+        "compartilhamentos": 576,
+        "taxa_engajamento": 0.0545,
         "origem_busca": "palavra",
-        "origem_termo": "\"dermatologista responde\""
+        "origem_termo": "\"harmonização facial arrependimento\""
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@gracemayofficial/video/7670006056264682783",
+        "descricao": "Why is having acne so expensive? 🥹🥲  #dermatologist #acne #skit #relateable #clearskin ",
+        "autor": "gracemayofficial",
+        "views": 1400000,
+        "likes": 161300,
+        "comentarios": 635,
+        "compartilhamentos": 4292,
+        "taxa_engajamento": 0.1187,
+        "origem_busca": "hashtag",
+        "origem_termo": "#dermtok"
       },
       {
         "fonte": "tiktok",
@@ -2314,19 +2399,6 @@
         "taxa_engajamento": 0.0453,
         "origem_busca": "hashtag",
         "origem_termo": "#dermtok"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@marceladermatologista/video/7670237717820706069",
-        "descricao": "As manchas roxas que surgem com facilidade na pele do idoso não são normais, mas são muito comuns. Com o envelhecimento, a pele fica mais fina e frágil, tornando os pequenos traumas mais visíveis. Alguns cuidados simples ajudam a preservar essa barreira natural: usar hidratantes com ureia, evitar sabonetes muito agressivos e reduzir a temperatura do banho, já que a água muito quente resseca ainda mais a pele. Pequenas mudanças na rotina podem fazer uma grande diferença na saúde da pele. Dra. Marcela Baraldi CRM: 151733 | RQE 66127 📱 (11) 98849-2170 #PeleDoIdoso #dermatologia #envelhecimentosau",
-        "autor": "marceladermatologista",
-        "views": 2200000,
-        "likes": 51700,
-        "comentarios": 1775,
-        "compartilhamentos": 17000,
-        "taxa_engajamento": 0.032,
-        "origem_busca": "palavra",
-        "origem_termo": "\"dermatóloga explica\""
       },
       {
         "fonte": "tiktok",
@@ -2356,16 +2428,16 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@indiqueiii/video/7585705430035467540",
-        "descricao": "Cuidando das minhas manchas no rosto 🥰  Deixei o link do Sérum no carrinho laranja do video 🧡 #melasma #manchas #skincare #acne #zencial ",
-        "autor": "indiqueiii",
-        "views": 2700000,
-        "likes": 8589,
-        "comentarios": 1024,
-        "compartilhamentos": 1358,
-        "taxa_engajamento": 0.0041,
-        "origem_busca": "palavra",
-        "origem_termo": "\"melasma tratamento\""
+        "url": "https://www.tiktok.com/@lartolla/video/7604671823120239892",
+        "descricao": "Os produtos que usei foram: -Cleansing oil hada labo Gokujyun -cleansing foam Heartleaf quercetinol da Anua Espero que ajude!! #fyp #skincare #selfcare ",
+        "autor": "lartolla",
+        "views": 1300000,
+        "likes": 143200,
+        "comentarios": 752,
+        "compartilhamentos": 4504,
+        "taxa_engajamento": 0.1142,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skincare"
       },
       {
         "fonte": "tiktok",
@@ -2408,16 +2480,16 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@fifatega/video/7632723039657970966",
-        "descricao": "Great skin isn’t luck, it’s science 🔬🧴✨  #skincare #skintok #vlog #comewithme ",
-        "autor": "fifatega",
-        "views": 2100000,
-        "likes": 50200,
-        "comentarios": 188,
-        "compartilhamentos": 454,
-        "taxa_engajamento": 0.0242,
+        "url": "https://www.tiktok.com/@dermangelo/video/7645738229865467166",
+        "descricao": "#onthisday What I do with the hole. #dermreacts  #skincare  #dermatologist #dermangelo    ",
+        "autor": "dermangelo",
+        "views": 1900000,
+        "likes": 61800,
+        "comentarios": 189,
+        "compartilhamentos": 375,
+        "taxa_engajamento": 0.0328,
         "origem_busca": "hashtag",
-        "origem_termo": "#skintok"
+        "origem_termo": "#dermtok"
       },
       {
         "fonte": "tiktok",
@@ -2486,19 +2558,6 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@ivan.dermato/video/7677382583998532872",
-        "descricao": "Produtos que você tem em casa mas que deveria jogar fora: versão médico dermatologista  Todas as cinco funcionam. É exatamente por isso que elas continuam na sua casa. Talco em bebê. Pó ultrafino, com risco real de aspiração e pneumonite química. E não trata assadura: dermatite de fralda é umidade e atrito, e quem resolve é barreira (óxido de zinco, vaselina) mais troca frequente. Não existe assadura por falta de talco. Pomada com neomicina, o Nebacetin da gaveta. A neomicina está entre os alérgenos mais positivos dos testes de contato do mundo inteiro. Quando dá dermatite de contato alérgica,",
-        "autor": "ivan.dermato",
-        "views": 1100000,
-        "likes": 108700,
-        "comentarios": 1837,
-        "compartilhamentos": 8450,
-        "taxa_engajamento": 0.1082,
-        "origem_busca": "hashtag",
-        "origem_termo": "#dermatologia"
-      },
-      {
-        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@danicolexx/video/7370431648573312289",
         "descricao": "All the skincare tips you need for beginners 😌 #skincare #acne #koreanskincare #skintok #skincareforbeginners ",
         "autor": "danicolexx",
@@ -2533,8 +2592,21 @@
         "comentarios": 2727,
         "compartilhamentos": 4626,
         "taxa_engajamento": 0.062,
-        "origem_busca": "palavra",
-        "origem_termo": "\"dermatologista responde\""
+        "origem_busca": "hashtag",
+        "origem_termo": "#dermatologia"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@byzareefa/video/7566088019464195383",
+        "descricao": "#fyp #skintok #diyfacemask #glassskin #athomeskincare ",
+        "autor": "byzareefa",
+        "views": 1600000,
+        "likes": 56900,
+        "comentarios": 288,
+        "compartilhamentos": 5184,
+        "taxa_engajamento": 0.039,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skintok"
       },
       {
         "fonte": "tiktok",
@@ -2590,19 +2662,6 @@
       },
       {
         "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@drapatriciagallii/video/7252456188850277637",
-        "descricao": "Será que deu certo?? 🫣 #harmonizacaofacial #preenchimento #fy #dramilagres ",
-        "autor": "drapatriciagallii",
-        "views": 1400000,
-        "likes": 74700,
-        "comentarios": 213,
-        "compartilhamentos": 170,
-        "taxa_engajamento": 0.0536,
-        "origem_busca": "palavra",
-        "origem_termo": "\"preenchimento deu errado\""
-      },
-      {
-        "fonte": "tiktok",
         "url": "https://www.tiktok.com/@dermangelo/video/7424543590837128491",
         "descricao": "#onthisday That one lil hair sitting there like 👁️👄👁️ #dermreacts #skincare #dermatologist #reaction #reactionvideo #dermangelo #pimplepop #satisfying ",
         "autor": "dermangelo",
@@ -2619,10 +2678,10 @@
         "url": "https://www.tiktok.com/@of.swgmia/video/7651982366956702997",
         "descricao": "skincare with me #skincare #skincareroutine #nightroutine #aesthetic #quietlife ",
         "autor": "of.swgmia",
-        "views": 819700,
+        "views": 819800,
         "likes": 126900,
         "comentarios": 592,
-        "compartilhamentos": 4253,
+        "compartilhamentos": 4254,
         "taxa_engajamento": 0.1607,
         "origem_busca": "hashtag",
         "origem_termo": "#skincareroutine"
@@ -2632,11 +2691,50 @@
         "url": "https://www.tiktok.com/@chrustal/video/7662757426428382471",
         "descricao": "cozy night routine ✨🤍🫧 #nightroutine #cozynight #selfcare #selfcareroutine #kbeauty  @Gisou @Dr.Ceuracle Official @PURCELL US @Dr.Althea US @laneige_us @&honey US ",
         "autor": "chrustal",
-        "views": 707400,
+        "views": 707600,
         "likes": 135500,
         "comentarios": 1468,
-        "compartilhamentos": 3991,
-        "taxa_engajamento": 0.1993,
+        "compartilhamentos": 3992,
+        "taxa_engajamento": 0.1992,
+        "origem_busca": "hashtag",
+        "origem_termo": "#skincareroutine"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@kingoff.usa/video/7659001956437986573",
+        "descricao": "🧴💥 La mezcla que borra manchas y arrugas en días 👩🏻 #salud #consejosdesaludtiktok #consejosdesaludables #usa #mexico ",
+        "autor": "kingoff.usa",
+        "views": 1600000,
+        "likes": 32100,
+        "comentarios": 653,
+        "compartilhamentos": 17600,
+        "taxa_engajamento": 0.0315,
+        "origem_busca": "hashtag",
+        "origem_termo": "#cuidadodelapiel"
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@arffaderm/video/7544837057932184845",
+        "descricao": "#dermatologist reacts to model’s #skincareroutine - we have basically the same skincare routine but one of us won the jawline genetic lottery. . . @Fulop  #skincaretips   ",
+        "autor": "arffaderm",
+        "views": 1300000,
+        "likes": 70100,
+        "comentarios": 372,
+        "compartilhamentos": 1679,
+        "taxa_engajamento": 0.0555,
+        "origem_busca": "palavra",
+        "origem_termo": "\"dermatologist reacts\""
+      },
+      {
+        "fonte": "tiktok",
+        "url": "https://www.tiktok.com/@via..li/video/7603850388357369118",
+        "descricao": "an at home spa day 🛁🧼🫧 pm skincare routine 🪐  @Thayers @rhode skin @anua_global @Caudalie @Meditherapy Global Official @Heveblue.us @Then I Met You @PURCELL US @Dr. Groot Hair #skincare #spaday #grwm #nightroutine #skincareroutine ",
+        "autor": "via..li",
+        "views": 310800,
+        "likes": 165900,
+        "comentarios": 562,
+        "compartilhamentos": 3341,
+        "taxa_engajamento": 0.5463,
         "origem_busca": "hashtag",
         "origem_termo": "#skincareroutine"
       },
@@ -2663,99 +2761,8 @@
         "comentarios": 839,
         "compartilhamentos": 8659,
         "taxa_engajamento": 0.0413,
-        "origem_busca": "hashtag",
-        "origem_termo": "#dermatologia"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@dermangelo/video/7621396784820129055",
-        "descricao": "#onthisday NIGHTMARE FUEL Skincare Routine #dermreacts  #skincare  #dermatologist #dermangelo    ",
-        "autor": "dermangelo",
-        "views": 1500000,
-        "likes": 43200,
-        "comentarios": 478,
-        "compartilhamentos": 516,
-        "taxa_engajamento": 0.0295,
         "origem_busca": "palavra",
-        "origem_termo": "\"dermatologist reacts\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@sasainseoul/video/7669681716176456980",
-        "descricao": "@Rubymeer 님에게 회신 no ad teenager skincare routine! Simple & effective  This video has been requested for long time! I wanted to recommend only the best products, so for the past few months I’ve tested dozens of products and finally found the ones that are gentle, safe, and easy to use without worrying!  This video is not sponsored! If you wanna get those products  Check YesStyle and use my discount code : SASASEOUL44  Cleanser : @Blanc Nature US Store   Moisturizer : @PURITO SEOUL   Sunscreen : @mixsoon global   #skincare #koreanskincare #teenagerskincare #teenskincare #sasaskincare ",
-        "autor": "sasainseoul",
-        "views": 978100,
-        "likes": 91000,
-        "comentarios": 970,
-        "compartilhamentos": 4270,
-        "taxa_engajamento": 0.0984,
-        "origem_busca": "hashtag",
-        "origem_termo": "#skintok"
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@sovisaotoledo/video/7642143021215091989",
-        "descricao": "Filtro Solar: O Perigo que Você Não Sabia (Não Use!) #fypシ #brasil ",
-        "autor": "sovisaotoledo",
-        "views": 903400,
-        "likes": 60500,
-        "comentarios": 1596,
-        "compartilhamentos": 39200,
-        "taxa_engajamento": 0.1121,
-        "origem_busca": "palavra",
-        "origem_termo": "\"protetor solar mito\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@jardeledebran/video/7560270080794316044",
-        "descricao": "RETINAL! Como aplicar da forma correta?  Vem que hoje eu te ensino SKINARMY! Está formulação é única e inovadora. Já testaram?  #celimax #retinal #rugas #skincare #kbeauty ",
-        "autor": "jardeledebran",
-        "views": 1700000,
-        "likes": 19400,
-        "comentarios": 268,
-        "compartilhamentos": 1728,
-        "taxa_engajamento": 0.0126,
-        "origem_busca": "palavra",
-        "origem_termo": "\"retinol como usar\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@daianevian/video/7581536638090644744",
-        "descricao": "Fui buscar um bocão… e quase voltei sem boca! 🤡💋 A saga do meu preenchimento labial que por pouco vira capítulo de terror estético. No fim deu tudo certo — mas olha… fortes emoções! 😂✨ #PreenchimentoLabial #QuaseDeuRuim #PerrengueChique #Bocão #EstéticaReal   ",
-        "autor": "daianevian",
-        "views": 1500000,
-        "likes": 30900,
-        "comentarios": 932,
-        "compartilhamentos": 6316,
-        "taxa_engajamento": 0.0254,
-        "origem_busca": "palavra",
-        "origem_termo": "\"preenchimento deu errado\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@sighlurskin/video/7603435827263196447",
-        "descricao": "👇🏻Products listed below Cleansers - @cocokind Milky-Soft Face and Body Wash - @byoma Milky Moisture Cleanser - @CeraVe Hydrating Foaming Oil Cleanser - @Prequelskin Gleanser Cleanser - @LaRochePosayUS Toleriane Hydrating Gentle Cleanser Toners - Cocokind Calming Magnesium Face Moisturizing Mist  - La Roche Posay Cicaplast B5 Soothing Repair Spray - Byoma Hydrating Milky Toner Serums - @Cetaphil US Ceramide Serum - @DWB Beauty P46™ Peptide + HA Serum - @PURITO SEOUL Wonder Releaf Centella Unscented Serum Moisturizers - CeraVe Moisturizing Cream (rich texture)  - cocokind Electrolyte Water Cream",
-        "autor": "sighlurskin",
-        "views": 1100000,
-        "likes": 71500,
-        "comentarios": 824,
-        "compartilhamentos": 1863,
-        "taxa_engajamento": 0.0674,
-        "origem_busca": "palavra",
-        "origem_termo": "\"skin barrier repair\""
-      },
-      {
-        "fonte": "tiktok",
-        "url": "https://www.tiktok.com/@mikaalliehq/video/7680650927686044959",
-        "descricao": "Mika Abdalla for Vogue’s Beauty Secrets  Vogue India cover star Mika Abdalla takes us through her everyday skincare and beauty routine. The Off Campus star shares why she loves applying skincare with her fingers, opens up about the whirlwind of starring in a show like Off Campus, and reveals how she navigates her beauty routine around her character Allie Hayes’s signature long nails. Along the way, Mika talks about listening to Bon Iver and Sufjan Stevens to get into character, shows off some of her tattoos, and more. #mikaabdalla #offcampus #fyp #vogue #viral ",
-        "autor": "mikaalliehq",
-        "views": 592100,
-        "likes": 119500,
-        "comentarios": 68,
-        "compartilhamentos": 2255,
-        "taxa_engajamento": 0.2057,
-        "origem_busca": "hashtag",
-        "origem_termo": "#skincareroutine"
+        "origem_termo": "\"dermatologista responde\""
       }
     ],
     "youtube_virais": []

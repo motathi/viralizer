@@ -334,6 +334,113 @@
         "#dermreacts",
         "#bellezanatural"
       ]
+    },
+    {
+      "data": "2026-09-17",
+      "termos": {
+        "#cuidadodelapiel": {
+          "coletados": 53,
+          "virais": 16
+        },
+        "\"protetor solar mito\"": {
+          "coletados": 24,
+          "virais": 2
+        },
+        "\"dermatologista responde\"": {
+          "coletados": 15,
+          "virais": 7
+        },
+        "\"melasma tratamento\"": {
+          "coletados": 21,
+          "virais": 4
+        },
+        "#skincare": {
+          "coletados": 60,
+          "virais": 12
+        },
+        "#dermatologist": {
+          "coletados": 60,
+          "virais": 13
+        },
+        "#pelesaudavel": {
+          "coletados": 59,
+          "virais": 5
+        },
+        "#skintok": {
+          "coletados": 55,
+          "virais": 21
+        },
+        "#dermtok": {
+          "coletados": 54,
+          "virais": 13
+        },
+        "\"skincare caro vale a pena\"": {
+          "coletados": 24,
+          "virais": 0
+        },
+        "\"dermatóloga explica\"": {
+          "coletados": 8,
+          "virais": 0
+        },
+        "\"dermatologist explains\"": {
+          "coletados": 19,
+          "virais": 11
+        },
+        "#dermatologista": {
+          "coletados": 0,
+          "virais": 0
+        },
+        "#dermatologia": {
+          "coletados": 57,
+          "virais": 7
+        },
+        "\"preenchimento deu errado\"": {
+          "coletados": 24,
+          "virais": 3
+        },
+        "\"harmonização facial arrependimento\"": {
+          "coletados": 21,
+          "virais": 3
+        },
+        "\"retinol como usar\"": {
+          "coletados": 24,
+          "virais": 1
+        },
+        "\"skin barrier repair\"": {
+          "coletados": 24,
+          "virais": 1
+        },
+        "\"dermatologist reacts\"": {
+          "coletados": 20,
+          "virais": 15
+        },
+        "\"quanto custa preenchimento labial\"": {
+          "coletados": 24,
+          "virais": 0
+        },
+        "#skincareroutine": {
+          "coletados": 48,
+          "virais": 10
+        },
+        "#harmonizacaofacial": {
+          "coletados": 59,
+          "virais": 4
+        },
+        "\"acne adulta\"": {
+          "coletados": 22,
+          "virais": 2
+        }
+      },
+      "sugeridos": [
+        "#duet",
+        "#dermdoctor",
+        "#nightroutine",
+        "#glassskin",
+        "#dermatology",
+        "#bellezanatural",
+        "#koreanskincare",
+        "#skincaretips"
+      ]
     }
   ]
 }
