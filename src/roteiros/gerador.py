@@ -55,11 +55,19 @@ derivam deles, nunca o contrário):
 2. DECIFRE A LINGUAGEM DE CADA VIRAL — esta etapa vale tanto quanto o tema.
    O que faz o vídeo colar não é só o assunto: é COMO ele é dito. Duas
    pessoas dando a mesma informação têm resultados opostos por causa disso.
-   A prova está no campo "descricao" de cada sinal (a legenda e o texto na
-   tela, literais). Use também a busca web quando precisar ouvir mais do
-   vídeo. Para cada viral relevante, registre:
-   - fala_literal: 1 a 3 trechos COPIADOS ao pé da letra. Nunca parafraseie
-     aqui — é a evidência bruta, e é dela que o roteirista tira o ouvido.
+   A prova está no campo "transcricao": é o que a pessoa FALA dentro do
+   vídeo, palavra por palavra. É dela que se tira o ritmo, o vocabulário e
+   a forma de dizer — é a evidência que vale.
+   O campo "descricao" é a legenda, texto de vitrine escrito para o
+   algoritmo. Serve de apoio quando não há transcrição, nunca de
+   substituto: legenda não mostra como a pessoa fala.
+   Quando um sinal vier sem "transcricao" (ou com ela vazia), diga isso em
+   por_que_viralizou e não invente fala que você não leu — use a busca web
+   ou trabalhe com outro viral que tenha. Para cada viral relevante, registre:
+   - fala_literal: 1 a 3 trechos COPIADOS ao pé da letra da "transcricao".
+     Nunca parafraseie aqui — é a evidência bruta, e é dela que o roteirista
+     tira o ouvido. Sem transcrição, deixe vazio em vez de copiar a legenda:
+     legenda não é fala, e passar uma pela outra estraga o roteiro.
    - registro: o papel de quem fala ("amiga que conta segredo", "professora
      irritada", "perita indignada com o mercado", "confissão de bastidor",
      "quem já errou e avisa"). Registro não é tom genérico: é um personagem.

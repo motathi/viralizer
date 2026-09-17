@@ -5,14 +5,60 @@ ranqueia por uma pontuação que combina velocidade de visualização,
 taxa de engajamento e "outlier score" (o quanto o vídeo performou acima
 da média histórica do próprio canal — o melhor indicador de viral real,
 porque separa o vídeo que estourou do canal que já é simplesmente grande).
+
+Dos que passam, baixa a TRANSCRIÇÃO — o que é falado dentro do vídeo. É ela
+que importa: título e descrição são texto de vitrine, escritos para o
+algoritmo, e não dizem como a pessoa fala nem o que ela de fato diz. O
+objetivo da ferramenta é compreender o vídeo, e isso mora na fala.
 """
 
 import os
+import re
 from datetime import datetime, timedelta, timezone
 
 import requests
 
 API_BASE = "https://www.googleapis.com/youtube/v3"
+
+# A transcrição é a evidência principal, então cabe bem mais que os 600
+# caracteres da descrição. Um Short de 60s dá umas 1.500 letras de fala.
+MAX_TRANSCRICAO = 4000
+
+# Ordem de preferência: a legenda no idioma do nicho primeiro, depois as
+# outras duas línguas que dominam o conteúdo de dermatologia.
+IDIOMAS_PADRAO = ("pt", "pt-BR", "en", "es")
+
+
+def _limpar_fala(texto: str) -> str:
+    """Tira as marcações de legenda automática, que não são fala."""
+    texto = re.sub(r"\[[^\]]{0,40}\]", " ", texto)     # [Música], [Aplausos]
+    texto = re.sub(r"\([^)]{0,40}\)", " ", texto)       # (risos)
+    return re.sub(r"\s+", " ", texto).strip()
+
+
+def transcricao(video_id: str, idiomas: tuple[str, ...] = IDIOMAS_PADRAO) -> str:
+    """A fala do vídeo, ou string vazia quando não há legenda disponível.
+
+    Devolver vazio é resposta legítima: vídeo sem legenda existe, e nesse
+    caso o sinal vale pelas métricas. Quem chama decide o que fazer.
+    """
+    try:
+        from youtube_transcript_api import YouTubeTranscriptApi
+    except ImportError:
+        return ""
+    try:
+        api = YouTubeTranscriptApi()
+        if hasattr(api, "fetch"):                    # biblioteca 1.x
+            falas = [t.text for t in api.fetch(video_id, languages=list(idiomas))]
+        else:                                        # biblioteca 0.x
+            falas = [t["text"] for t in
+                     YouTubeTranscriptApi.get_transcript(video_id, languages=list(idiomas))]
+    except Exception:
+        # A biblioteca levanta uma família grande de exceções próprias
+        # (sem legenda, legenda desativada, vídeo privado, bloqueio por IP).
+        # Nenhuma delas justifica derrubar a coleta inteira.
+        return ""
+    return _limpar_fala(" ".join(falas))[:MAX_TRANSCRICAO]
 
 
 def _get(endpoint: str, params: dict) -> dict:
@@ -120,4 +166,17 @@ def descobrir_virais(config: dict) -> list[dict]:
         )
 
     resultado.sort(key=lambda x: x["pontuacao"], reverse=True)
-    return resultado[: cfg["top_n"]]
+    melhores = resultado[: cfg["top_n"]]
+
+    # Só dos que sobraram: baixar transcrição dos descartados é trabalho à toa.
+    idiomas = tuple(cfg.get("idiomas_legenda") or IDIOMAS_PADRAO)
+    com_fala = 0
+    for v in melhores:
+        v["transcricao"] = transcricao(v["video_id"], idiomas)
+        if v["transcricao"]:
+            com_fala += 1
+    print(f"      transcrição: {com_fala} de {len(melhores)} vídeos tinham legenda")
+    if melhores and not com_fala:
+        print("      ⚠️  Nenhuma transcrição veio. Sem a fala, sobra só o texto de "
+              "vitrine — confira se youtube-transcript-api está instalado.")
+    return melhores
